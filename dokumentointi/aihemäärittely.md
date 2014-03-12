@@ -1,0 +1,8 @@
+#### Aihe
+Ohjelma, jolla voidaan muodostaa virtuaaliviivakoodi ja mahdollisesti myös graafinen viivakoodi
+laskutietojen perusteella. Kyseessä voisi ajatella olevan laskutusohjelman alku, joten laajennettavuutta tarvittaessa riittää.
+Sekä virtuaaliviivakoodiin, että graafiseen
+viivakoodiin löytyy tarkat standardit joiden mukaan ne muodostetaan([http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf](http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf)).
+Ensimmäisessä versiossa voisi olla vaikkapa vain logiikka virtuaaliviivakoodin muodostamiseen,
+kun ensin syötetään laskun tiedot. Heti voisi myös tehdä ominaisuuden, joka
+laskee viitteeseen automaattisesti tarkisteen perään. Tai vaihtoehtoisesti pelkkä tarkistin.
