@@ -1,2 +1,3 @@
 - **12.4.2014 8h** Mm. gittiin tutustumista ja uuden NetBeansin lataamista ja asentamista. Ensimmäinen versio aihemäärittelystä tehty.
 - **13.4.2014 1h** Aihemärittelyn ja tuntikirjanpidon viilailua. Aletaan hahmottelemaan, että mistä koodaus kannattaisi aloittaa ja miten.
+- **15.4.2014 8h** Viikon kaksi deadlinen vaatimuksiin tutustumista. NetBeansilla projektiin valmiiksi pakkauksia mm. ohjelmalogiikalle ja käyttöliittymälle. Ohjelman rakenteen miettimistä ja paperille luonnostelua. Ohjelmalogiikan ensimmäisen version koodaamista. Ohjelmalogiikan ensimmäinen versio saatu valmiiksi. Paljon korjailtavaa ja siistimistä.
