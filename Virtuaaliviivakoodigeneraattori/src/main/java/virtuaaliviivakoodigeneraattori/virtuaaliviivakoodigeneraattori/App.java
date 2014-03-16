@@ -14,12 +14,21 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Huraa!" );
-        LaskunSumma summa=new LaskunSumma(99,99);
-        Tilinumero tilinumero=new Tilinumero("FI8617453000169906");
-        Viite viite = new Viite("10024");
-        Date date=new Date(2014, 3, 29);
-        Pankkiviivakoodi pankkiviivakoodi=new Pankkiviivakoodi(tilinumero, summa, viite, date);
-        System.out.println(pankkiviivakoodi.getString());
+//        System.out.println( "Huraa!" );
+//        LaskunSumma summa=new LaskunSumma(999,99);
+//        System.out.println(summa.getEurotStringEtunollillaPituusKuusi());
+//        System.out.println(summa.getSentitStringEtunollillaPituusKaksi());
+//        Tilinumero tilinumero=new Tilinumero("FI8617453000169906");
+//        System.out.println(tilinumero.getTilinumero());
+//        System.out.println(tilinumero.getTilinumeroIlmanMaatunnusta());
+//        System.out.println(tilinumero.getTilinumeroIlmanMaatunnusta().length());
+//        Viite viite = new Viite("10023");
+//        System.out.println(viite.getViite());
+//        System.out.println(viite.getViiteTarkisteellaEtunollillaPituus20());
+//        System.out.println(viite.getViiteTarkisteellaEtunollillaPituus20().length());
+//        Date date=new Date(2014, 3-1, 29);
+//        Pankkiviivakoodi pankkiviivakoodi=new Pankkiviivakoodi(tilinumero, summa, viite, date);
+//        System.out.println(pankkiviivakoodi.getString());
+//        System.out.println(pankkiviivakoodi.getStringIlmanAloitustaJaLopetusta());
     }
 }

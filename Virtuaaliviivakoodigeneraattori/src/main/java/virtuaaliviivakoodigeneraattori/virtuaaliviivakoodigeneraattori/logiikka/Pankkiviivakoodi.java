@@ -14,15 +14,13 @@ import java.util.Date;
  */
 public class Pankkiviivakoodi {
 
-    private final String pankkiviivakoodiIlmanTarkistettaJaLopetusta;
     private final String pankkiviivakoodi;
     private final SimpleDateFormat paivamaaraFormaatti;
 
     public Pankkiviivakoodi(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
 
         this.paivamaaraFormaatti = new SimpleDateFormat("yyMMdd");
-        this.pankkiviivakoodiIlmanTarkistettaJaLopetusta = muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(tilinumero, laskunSumma, viite, erapaiva);
-        this.pankkiviivakoodi = muodostaPankkiviivakoodi(this.pankkiviivakoodiIlmanTarkistettaJaLopetusta);
+        this.pankkiviivakoodi = muodostaPankkiviivakoodi(muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(tilinumero, laskunSumma, viite, erapaiva));
 
     }
 
@@ -56,5 +54,9 @@ public class Pankkiviivakoodi {
     
     public String getString() {
         return this.pankkiviivakoodi;
+    }
+    
+    public String getStringIlmanAloitustaJaLopetusta() {
+        return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length()-3);
     }
 }

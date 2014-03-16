@@ -20,4 +20,7 @@ public class Tilinumero {
     public String getTilinumeroIlmanMaatunnusta() {
         return this.tilinumero.substring(2);
     }
+    public String getTilinumero() {
+        return this.tilinumero;
+    }
 }
