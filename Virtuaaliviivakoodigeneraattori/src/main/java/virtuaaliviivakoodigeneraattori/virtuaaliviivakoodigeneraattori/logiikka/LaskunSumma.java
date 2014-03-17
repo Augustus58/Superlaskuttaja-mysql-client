@@ -37,7 +37,7 @@ public class LaskunSumma {
     }
     
     //Seuraavassa tarkistetaan, että euromäärä täyttää pankkiviivakoodistandardin.
-    public Boolean tarkistaEurot (int eurot) {
+    public Boolean tarkistaEurot (Integer eurot) {
         if (eurot>=0 && eurot<=999999) {
             return true;
         }
@@ -45,11 +45,18 @@ public class LaskunSumma {
     }
     
     //Seuraavassa tarkistetaan, että senttimäärä täyttää pankkiviivakoodistandardin.
-    public Boolean tarkistaSentit (int sentit) {
+    public Boolean tarkistaSentit (Integer sentit) {
         if (sentit>=0 && sentit<=99) {
             return true;
         }
         return false;
+    }
+    public void muutaEurot(Integer eurot) {
+        this.eurot = eurot;
+    }
+    
+    public void muutaSentit(Integer sentit) {
+        this.sentit = sentit;
     }
     
 }
