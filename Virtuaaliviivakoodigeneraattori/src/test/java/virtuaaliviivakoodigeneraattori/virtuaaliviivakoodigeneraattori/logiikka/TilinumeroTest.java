@@ -24,6 +24,7 @@ public class TilinumeroTest {
     String vaaraTilinumero3;
     String vaaraTilinumero4;
     String vaaraTilinumero5;
+    String vaaraTilinumero6;
     String oikeaTilinumero1;
     String oikeaTilinumero2;
     Tilinumero tilinumero;
@@ -46,6 +47,7 @@ public class TilinumeroTest {
         vaaraTilinumero3 = "q34crq3";
         vaaraTilinumero4 = "lkehmrfinhi9o3784yorxm983u4m9u87";
         vaaraTilinumero5 = "FI9780001505084521";
+        vaaraTilinumero6 = "FI973";
         oikeaTilinumero1 = "FI3816603001014664";
         oikeaTilinumero2 = "FI9780001500084521";
         tilinumero = new Tilinumero("FI3816603001014664");
@@ -67,13 +69,13 @@ public class TilinumeroTest {
         assertFalse(tilinumero.tarkistaTilinumero(vaaraTilinumero3));
         assertFalse(tilinumero.tarkistaTilinumero(vaaraTilinumero4));
         assertFalse(tilinumero.tarkistaTilinumero(vaaraTilinumero5));
-        
+        assertFalse(tilinumero.tarkistaTilinumero(vaaraTilinumero6));
     }
     
     @Test
     public void tarkistaTilinumeroToimiiOikeinOikeallaTilinumerolla() {
         assertTrue(tilinumero.tarkistaTilinumero(oikeaTilinumero1));
         assertTrue(tilinumero.tarkistaTilinumero(oikeaTilinumero2));   
-    }        
+    }
     
 }

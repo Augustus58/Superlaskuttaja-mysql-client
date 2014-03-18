@@ -43,9 +43,9 @@ public class Pankkiviivakoodi {
 
     private Integer laskeTarkiste(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         Integer summa = 0;
-        summa = summa + 1 * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(1, 3));
+        summa = summa + 1 * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(0, 3));
         for (int i = 1; i <= 27; i++) {
-            summa = summa + i * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(2 * i + 1, 2 * i + 2));
+            summa = summa + i * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(2 * i + 1, 2 * i + 3));
 
         }
         return (summa % 103);

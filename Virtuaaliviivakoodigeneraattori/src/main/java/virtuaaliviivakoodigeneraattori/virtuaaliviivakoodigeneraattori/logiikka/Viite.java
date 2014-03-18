@@ -14,15 +14,30 @@ import java.util.ArrayList;
 public class Viite {
 
     private final String viiteTarkisteella;
-
+    private final MerkkiTarkistin merkkitarkistin;
+// Konstruktorille tulee antaa viite ilman tarkistetta.
     public Viite(String viite) {
         this.viiteTarkisteella = muodostaTarkisteellinenViite(viite);
+        this.merkkitarkistin = new MerkkiTarkistin();
     }
 
-    private String muodostaTarkisteellinenViite(String viite) {
+    public Boolean onkoViiteKelvollinen(String viiteIlmanTarkistetta) {
+        if (viiteIlmanTarkistetta.length() < 3 || viiteIlmanTarkistetta.length() > 19) {
+            return false;
+        }
+        for (int i = 0; i < viiteIlmanTarkistetta.length(); i++) {
+            if (!this.merkkitarkistin.onkoMerkkiNumero(viiteIlmanTarkistetta.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String muodostaTarkisteellinenViite(String viite) {
         return (viite + laskeTarkiste(viite).toString());
     }
 
+    // Tähän tulee tehdä tarkisteita huonojen syötteiden varalle.
     private Integer laskeTarkiste(String viite) {
         Integer summa = laskeTarkisteenSumma(viite);
         int alasPyoristettyOsamaara;
