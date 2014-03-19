@@ -11,6 +11,9 @@ import java.util.ArrayList;
  *
  * @author Augustus58
  */
+
+// Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
+// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf
 public class Viite {
 
     private final String viiteTarkisteella;

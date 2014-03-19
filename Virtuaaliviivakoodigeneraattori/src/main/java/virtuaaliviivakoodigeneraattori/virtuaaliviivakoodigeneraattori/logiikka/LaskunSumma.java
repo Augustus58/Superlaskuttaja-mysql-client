@@ -10,6 +10,9 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  *
  * @author Augustus58
  */
+
+// Tämän luokan tarkistusmetodien toiminnan perustelut löytyy osoitteesta
+// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
 public class LaskunSumma {
     
     private Integer eurot;

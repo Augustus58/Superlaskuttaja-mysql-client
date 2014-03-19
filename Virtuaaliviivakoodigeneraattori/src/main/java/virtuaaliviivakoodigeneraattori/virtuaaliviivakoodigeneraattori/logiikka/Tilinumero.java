@@ -6,12 +6,14 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 /**
  *
  * @author Augustus58
  */
+
+// Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
+// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
 public class Tilinumero {
 
     private final String tilinumero;

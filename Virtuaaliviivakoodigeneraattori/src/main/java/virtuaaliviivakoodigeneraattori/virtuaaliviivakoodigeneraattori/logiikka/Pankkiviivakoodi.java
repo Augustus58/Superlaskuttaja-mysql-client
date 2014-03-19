@@ -12,6 +12,9 @@ import java.util.Date;
  *
  * @author Augustus58
  */
+
+// Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
+// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
 public class Pankkiviivakoodi {
 
     private final String pankkiviivakoodi;
