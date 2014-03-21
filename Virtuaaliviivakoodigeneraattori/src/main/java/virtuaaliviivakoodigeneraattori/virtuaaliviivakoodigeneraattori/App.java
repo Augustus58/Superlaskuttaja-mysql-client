@@ -1,19 +1,15 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori;
 
-import java.util.Date;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSumma;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Pankkiviivakoodi;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Tilinumero;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Viite;
+import javax.swing.SwingUtilities;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.Kayttoliittyma;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
+     
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        SwingUtilities.invokeLater(kayttoliittyma);
         
     }
 }
