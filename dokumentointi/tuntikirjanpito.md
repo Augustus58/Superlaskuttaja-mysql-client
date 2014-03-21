@@ -5,3 +5,4 @@
 - **17.3.2014 8h** Testien tekemistä ja testaamista. Ei vielä tarpeeksi testejä tähän asti tehdylle ohjelmalogiikalle. Myös jo valmiin logiikan laajentamista tulevaisuutta ajatellen.
 - **18.3.2014 4h** Nyt tarpeeksi testejä tälle viikolle. Liiskattu testauksessa löydettyjä bugeja. Refaktoroitu koodia. Tehty luokkiin metodeja, joilla tutkitaan syötteiden oikeellisuutta. Huomenna varmaankin lisää kommentointia koodiin.
 - **19.3.2014 3h** Lisätty koodiin tarvittavaa kommentointia. Säädetty pitin kanssa ja saatu tehtyä raportti. Myös yksi cobertura-raportti katsottu. Piirrelty määrittelyvaiheen luokkakaavio.
+- **21.3.2014 8h** Aloitettu graafisen käyttöliittymän tekeminen ja lisätty logiikkaan luokkia.
