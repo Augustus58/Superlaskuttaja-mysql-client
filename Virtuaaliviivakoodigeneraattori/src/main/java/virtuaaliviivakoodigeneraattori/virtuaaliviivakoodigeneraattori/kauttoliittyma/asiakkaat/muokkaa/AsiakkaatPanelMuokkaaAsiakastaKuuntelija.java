@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.lisaa;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa.MuokkaaAsiakastaIkkuna;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
@@ -15,18 +16,18 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class AsiakkaatPanelLisaaAsiakasKuuntelija implements ActionListener {
+public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener {
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
 
-    public AsiakkaatPanelLisaaAsiakasKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public AsiakkaatPanelMuokkaaAsiakastaKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        LisaaAsiakasIkkuna lisaaAsiakas = new LisaaAsiakasIkkuna(lataaja, taulukko);
-        SwingUtilities.invokeLater(lisaaAsiakas);
+        MuokkaaAsiakastaIkkuna muokkaaAsiakasta = new MuokkaaAsiakastaIkkuna(lataaja, taulukko);
+        SwingUtilities.invokeLater(muokkaaAsiakasta);
     }
 }

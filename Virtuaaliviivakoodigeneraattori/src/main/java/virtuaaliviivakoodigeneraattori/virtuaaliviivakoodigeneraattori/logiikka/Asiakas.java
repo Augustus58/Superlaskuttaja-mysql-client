@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 /**
@@ -11,6 +10,7 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  * @author Augustus58
  */
 public class Asiakas {
+
     private final String asiakasnumero;
     private final String nimi;
     private final String katuosoite;
@@ -49,5 +49,45 @@ public class Asiakas {
 
     public String getPostinumero() {
         return postinumero;
+    }
+
+    public Object[] getAsiakkaanTiedotTaulukossa() {
+        return (new Object[]{nimi, katuosoite, postinumero, kaupunki, asiakasnumero, laskujaLahetetty});
+    }
+
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        Asiakas verrattava = (Asiakas) olio;
+        if (!this.asiakasnumero.equals(verrattava.asiakasnumero)) {
+            return false;
+        }
+        if (!this.katuosoite.equals(verrattava.katuosoite)) {
+            return false;
+        }
+        if (!this.kaupunki.equals(verrattava.kaupunki)) {
+            return false;
+        }
+        if (!this.laskujaLahetetty.equals(verrattava.laskujaLahetetty)) {
+            return false;
+        }
+        if (!this.nimi.equals(verrattava.nimi)) {
+            return false;
+        }
+        if (!this.postinumero.equals(verrattava.postinumero)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (laskujaLahetetty + asiakasnumero.hashCode() + nimi.hashCode() + katuosoite.hashCode());
     }
 }

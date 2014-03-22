@@ -5,14 +5,17 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa.AsiakkaatPanelMuokkaaAsiakastaKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.lisaa.AsiakkaatPanelLisaaAsiakasKuuntelija;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -20,13 +23,15 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  * @author Augustus58
  */
 public class AsiakkaatPanel extends JPanel {
-    
+
     Lataaja lataaja;
-    
+    AsiakkaatTaulukko taulukko;
+
     public AsiakkaatPanel(Lataaja lataaja) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
+        this.taulukko = new AsiakkaatTaulukko(lataaja);
         luoKomponentit();
 
     }
@@ -47,11 +52,14 @@ public class AsiakkaatPanel extends JPanel {
         kriteerit.setSelectedIndex(0);
         ylaosa.add(kriteerit);
 
-        JTextField kriteeriTekstikentta = new JTextField("Syötä hakuteksti tähän");
+        JTextField kriteeriTekstikentta = new JTextField("Syötä kriteeriteksti tähän");
         ylaosa.add(kriteeriTekstikentta);
 
-        JButton etsiNappi = new JButton("Etsi");
-        ylaosa.add(etsiNappi);
+        JButton naytaKriteerinSisaltavatNappi = new JButton("Näytä kriteeritekstin sisältävät");
+        ylaosa.add(naytaKriteerinSisaltavatNappi);
+        
+        JButton naytaKaikkiNappi = new JButton("Näytä kaikki");
+        ylaosa.add(naytaKaikkiNappi);
 
         return ylaosa;
 
@@ -61,15 +69,13 @@ public class AsiakkaatPanel extends JPanel {
         JPanel keskiosa = new JPanel();
 
         keskiosa.setPreferredSize(new Dimension(5000, 5000));
-
-        String[] sarakkeidenNimet = {"Asiakkaan nimi", "Viite", "Summa", "Laskun numero"};
-        Object[][] data = {
-            {"Kathy", "555", "666", "234"},
-            {"Kathy", "555", "666", "234"}
-        };
-        JTable taulukko = new JTable(data, sarakkeidenNimet);
-        keskiosa.add(taulukko);
-
+        keskiosa.setBorder(new EmptyBorder(20, 20, 20, 20));
+        keskiosa.setLayout(new BoxLayout(keskiosa, BoxLayout.Y_AXIS));
+        
+        taulukko.muodostaAsiakkaatTaulukko();        
+        JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko());        
+        keskiosa.add(scrollPane);                
+        
         return keskiosa;
 
     }
@@ -78,11 +84,12 @@ public class AsiakkaatPanel extends JPanel {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
         JButton lisaaAsiakasNappi = new JButton("Lisää asiakas");
-        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja));
+        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja, taulukko));
         alaosa.add(lisaaAsiakasNappi);
 
-        JButton muokkaaValittuaAsiakasta = new JButton("Muokkaa valittua asiasta");
-        alaosa.add(muokkaaValittuaAsiakasta);
+        JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua asiasta");
+        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko));
+        alaosa.add(muokkaaValittuaAsiakastaNappi);
 
         JButton poistaValittuAsiakas = new JButton("Poista valittu asiakas");
         alaosa.add(poistaValittuAsiakas);

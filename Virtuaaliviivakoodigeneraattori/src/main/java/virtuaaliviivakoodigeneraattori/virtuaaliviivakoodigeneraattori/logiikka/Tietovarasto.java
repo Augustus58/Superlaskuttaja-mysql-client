@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 //Tämän luokan ilmentymässä voi "säilyttää" ohjelmassa esiintyviä olioita, kuten esim. Asiakas -tai Lasku luokkien ilmentymiä.
 public class Tietovarasto {
+
     private ArrayList<Asiakas> asiakkaat;
     private ArrayList<Lasku> laskut;
     private ArrayList<Laskuttaja> laskuttajat;
@@ -34,5 +35,10 @@ public class Tietovarasto {
     public ArrayList<Laskuttaja> getLaskuttajat() {
         return laskuttajat;
     }
-    
+
+    public void poistaAsiakas(Asiakas asiakas) {
+        if (asiakkaat.contains(asiakas)) {
+            asiakkaat.remove(asiakas);
+        }
+    }
 }

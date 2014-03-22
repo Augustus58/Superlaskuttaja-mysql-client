@@ -29,6 +29,7 @@ public class Kayttoliittyma implements Runnable {
     public void run() {
         frame = new JFrame("Superlaskuttaja");
         frame.setPreferredSize(new Dimension(1000, 700));
+        frame.setLocation(100, 60);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
