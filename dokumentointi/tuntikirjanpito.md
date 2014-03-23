@@ -6,4 +6,5 @@
 - **18.3.2014 4h** Nyt tarpeeksi testejä tälle viikolle. Liiskattu testauksessa löydettyjä bugeja. Refaktoroitu koodia. Tehty luokkiin metodeja, joilla tutkitaan syötteiden oikeellisuutta. Huomenna varmaankin lisää kommentointia koodiin.
 - **19.3.2014 3h** Lisätty koodiin tarvittavaa kommentointia. Säädetty pitin kanssa ja saatu tehtyä raportti. Myös yksi cobertura-raportti katsottu. Piirrelty määrittelyvaiheen luokkakaavio.
 - **21.3.2014 8h** Aloitettu graafisen käyttöliittymän tekeminen ja lisätty logiikkaan luokkia.
-_ **22.3.2014 8h** Hiottu käyttöliittymää ja alettu tehdä käyttöliittymään toiminnallisuutta. Paranneltu ja lisätty logiikka-paketin luokkia. Opiskeltu taulukoiden (JTable) käyttöä swingillä. Melkein tehty osa käyttöliittymästä editorilla..
+- **22.3.2014 8h** Hiottu käyttöliittymää ja alettu tehdä käyttöliittymään toiminnallisuutta. Paranneltu ja lisätty logiikka-paketin luokkia. Opiskeltu taulukoiden (JTable) käyttöä swingillä. Melkein tehty osa käyttöliittymästä editorilla..
+- **23.3.2014 8h** Asiakkaat-osio käyttöliittymästä valmis. Tehty kyseiseen osioon poikkeustilanteiden käsittelyä. Tehty luokkaan Asiakas tarvittavat metodit tietojen oikeellisuuden tarkistamista varten. Päivän lopuksi hieman refaktorointia.
