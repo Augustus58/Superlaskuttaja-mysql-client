@@ -5,7 +5,7 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.lisaa;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.lisaa.LisaaAsiakasIkkunaLisaaKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatTaulukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -29,23 +30,27 @@ public class LisaaAsiakasIkkuna implements Runnable {
     private JFrame frame;
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
+    private final NappulaLukko lukko;
 
-    public LisaaAsiakasIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public LisaaAsiakasIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
+        this.lukko = lukko;
     }
 
     @Override
     public void run() {
+        lukko.lukitse();
+        
         frame = new JFrame("Lisää asiakas");
         frame.setLocation(130, 90);
-        
-        frame.setResizable(false);
-
+        frame.setResizable(false);  
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
+        IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
+        frame.addWindowListener(kuuntelija);
 
         luoKomponentit(frame.getContentPane());
-
         frame.pack();
         frame.setVisible(true);
     }
@@ -86,7 +91,7 @@ public class LisaaAsiakasIkkuna implements Runnable {
         laskujaLahetettyKentta.setPreferredSize(new Dimension(300, 0));
            
         JButton lisaa = new JButton("Lisää");
-        LisaaAsiakasIkkunaLisaaKuuntelija kuuntelija = new LisaaAsiakasIkkunaLisaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame);
+        LisaaAsiakasIkkunaLisaaKuuntelija kuuntelija = new LisaaAsiakasIkkunaLisaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame, lukko);
         lisaa.addActionListener(kuuntelija);
         
         panel.add(nimiTeksti);

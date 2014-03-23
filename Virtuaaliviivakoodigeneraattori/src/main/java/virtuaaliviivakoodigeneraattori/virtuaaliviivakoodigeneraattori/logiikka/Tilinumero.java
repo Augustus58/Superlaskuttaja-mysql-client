@@ -17,11 +17,11 @@ import java.math.BigInteger;
 public class Tilinumero {
 
     private final String tilinumero;
-    private final MerkkiTarkistin merkkitarkistin;
+    private final MerkkiJaMerkkijonoTarkistin merkkitarkistin;
 
     public Tilinumero(String tilinumero) {
         this.tilinumero = tilinumero;
-        this.merkkitarkistin = new MerkkiTarkistin();
+        this.merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     public Boolean tarkistaTilinumero(String tilinumero) {

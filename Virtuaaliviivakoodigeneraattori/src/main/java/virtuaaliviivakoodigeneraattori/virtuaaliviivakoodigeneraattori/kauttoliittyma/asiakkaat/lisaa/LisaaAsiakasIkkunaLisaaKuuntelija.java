@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatTaulukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -28,8 +30,9 @@ public class LisaaAsiakasIkkunaLisaaKuuntelija implements ActionListener {
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final JFrame frame;
+    private final NappulaLukko lukko;
 
-    public LisaaAsiakasIkkunaLisaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField asiakasnumeroKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, AsiakkaatTaulukko taulukko, JFrame frame) {
+    public LisaaAsiakasIkkunaLisaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField asiakasnumeroKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, AsiakkaatTaulukko taulukko, JFrame frame, NappulaLukko lukko) {
         this.nimiKentta = nimiKentta;
         this.katuosoiteKentta = katuosoiteKentta;
         this.postinumeroKentta = postinumeroKentta;
@@ -39,18 +42,30 @@ public class LisaaAsiakasIkkunaLisaaKuuntelija implements ActionListener {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.frame = frame;
+        this.lukko = lukko;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        Asiakas asiakas = new Asiakas(asiakasnumeroKentta.getText(), nimiKentta.getText(), katuosoiteKentta.getText(), postinumeroKentta.getText(), kaupunkiKentta.getText(), Integer.parseInt(laskujaLahetettyKentta.getText()));
-        lataaja.getLadattuTietovarasto().getAsiakkaat().add(asiakas);
-        taulukko.addAsiakkaatTaulukkoRivi(asiakas);
-        suljeIkkuna();
+        try {
+            Asiakas asiakas = new Asiakas(asiakasnumeroKentta.getText(), nimiKentta.getText(), katuosoiteKentta.getText(), postinumeroKentta.getText(), kaupunkiKentta.getText(), Integer.parseInt(laskujaLahetettyKentta.getText()));
+            
+            if (!asiakas.onkoTiedotOikeanlaiset()) {
+                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
+            }
+                                             
+            lataaja.getLadattuTietovarasto().getAsiakkaat().add(asiakas);
+            taulukko.addAsiakkaatTaulukkoRivi(asiakas);
+            suljeIkkuna();
+        } catch (Exception e) {
+            LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
+        }
         
     }
     
     private void suljeIkkuna() {
         frame.dispose();
+        lukko.avaa();
     }
 }

@@ -14,9 +14,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.IkkunaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatTaulukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatTaulukkoValintaKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -28,25 +32,37 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
     private JFrame frame;
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
+    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final NappulaLukko lukko;
 
-    public MuokkaaAsiakastaIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public MuokkaaAsiakastaIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko, AsiakkaatTaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
-    }
+        this.kuuntelija = kuuntelija;
+        this.lukko = lukko;
+    }    
 
     @Override
     public void run() {
+        lukko.lukitse();
+        
         frame = new JFrame("Muokkaa asiakasta");
         frame.setLocation(130, 90);
-        
         frame.setResizable(false);
-
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
+        IkkunaKuuntelija ikkinaKuuntelija = new IkkunaKuuntelija(lukko);
+        frame.addWindowListener(ikkinaKuuntelija);
 
-        luoKomponentit(frame.getContentPane());
-
-        frame.pack();
-        frame.setVisible(true);
+        try {
+            luoKomponentit(frame.getContentPane());
+            
+            frame.pack();
+            frame.setVisible(true);
+        } catch (Exception e) {
+            AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna poikkeusIkkuna = new AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
+        }
     }
 
     private void luoKomponentit(Container container) {
@@ -61,44 +77,44 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
         JLabel nimiTeksti = new JLabel("Entinen nimi: ");
-        JLabel nimiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 0).toString());
+        JLabel nimiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 0).toString());
         JLabel nimiTekstiUusi = new JLabel("Uusi nimi: ");
-        JTextField nimiKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 0).toString());
+        JTextField nimiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 0).toString());
 //        nimiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel katuosoiteTeksti = new JLabel("Entinen katuosoite:");
-        JLabel katuosoiteTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 1).toString());
+        JLabel katuosoiteTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 1).toString());
         JLabel katuosoiteTekstiUusi = new JLabel("Uusi katuosoite:");
-        JTextField katuosoiteKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 1).toString());
+        JTextField katuosoiteKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 1).toString());
 //        nimiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel postinumeroTeksti = new JLabel("Entinen postinumero:");
-        JLabel postinumeroTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 2).toString());
+        JLabel postinumeroTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 2).toString());
         JLabel postinumeroTekstiUusi = new JLabel("Uusi postinumero:");
-        JTextField postinumeroKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 2).toString());
+        JTextField postinumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 2).toString());
 //        postinumeroKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel kaupunkiTeksti = new JLabel("Entinen kaupunki:"); 
-        JLabel kaupunkiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 3).toString());
+        JLabel kaupunkiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 3).toString());
         JLabel kaupunkiTekstiUusi = new JLabel("Uusi kaupunki:");
-        JTextField kaupunkiKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 3).toString());
+        JTextField kaupunkiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 3).toString());
 //        kaupunkiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel asiakasnumeroTeksti = new JLabel("Entinen asiakasnumero:");
-        JLabel asiakasnumeroTekstiVanha = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 4).toString());
+        JLabel asiakasnumeroTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 4).toString());
         JLabel asiakasnumeroTekstiUusi = new JLabel("Uusi asiakasnumero:");
-        JTextField asiakasnumeroKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 4).toString());
+        JTextField asiakasnumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 4).toString());
 //        asiakasnumeroKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty entinen:");
-        JLabel laskujaLahetettyTekstiVanha = new JLabel(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 5).toString());
+        JLabel laskujaLahetettyTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 5).toString());
         JLabel laskujaLahetettyTekstiUusi = new JLabel("Laskuja lähetetty uusi:");
-        JTextField laskujaLahetettyKentta = new JTextField(taulukko.getModel().getValueAt(taulukko.getKuuntelijaArvo(), 5).toString());
+        JTextField laskujaLahetettyKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 5).toString());
 //        laskujaLahetettyKentta.setPreferredSize(new Dimension(300, 0));
            
         JButton lisaa = new JButton("Muokkaa");
-        MuokkaaAsiakastaIkkunaMuokkaaKuuntelija kuuntelija = new MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame);
-        lisaa.addActionListener(kuuntelija);
+        MuokkaaAsiakastaIkkunaMuokkaaKuuntelija muokkaaAsiakastaKuuntelija = new MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame, kuuntelija, lukko);
+        lisaa.addActionListener(muokkaaAsiakastaKuuntelija);
         
         panel.add(nimiTeksti);
         panel.add(nimiTekstiEntinen);

@@ -46,20 +46,16 @@ public class Kayttoliittyma implements Runnable {
         JTabbedPane tabbedPane = new JTabbedPane();
         
         JPanel yhteenvetoPanel = new YhteenvetoPanel();
-        tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel,
-                  "Näyttää yhteenvedon");
+        tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel, null);
         
         JPanel laskutPanel = new LaskutPanel();
-        tabbedPane.addTab("Laskut", null, laskutPanel,
-                  "Näyttää laskut");
+        tabbedPane.addTab("Laskut", null, laskutPanel, null);
         
         JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja);
-        tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel,
-                  "Näyttää asiakkaat");
+        tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
         
         JPanel laskuttajatPanel = new LaskuttajatPanel();
-        tabbedPane.addTab("Laskuttajat", null, laskuttajatPanel,
-                  "Näyttää laskuttajat");
+        tabbedPane.addTab("Laskuttajat", null, laskuttajatPanel, null);
         
         container.add(tabbedPane);
     }

@@ -16,7 +16,8 @@ public class Asiakas {
     private final String katuosoite;
     private final String postinumero;
     private final String kaupunki;
-    private Integer laskujaLahetetty;
+    private final Integer laskujaLahetetty;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty) {
         this.asiakasnumero = asiakasnumero;
@@ -25,6 +26,61 @@ public class Asiakas {
         this.postinumero = postinumero;
         this.laskujaLahetetty = laskujaLahetetty;
         this.kaupunki = kaupunki;
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
+    }
+
+    public Boolean onkoTiedotOikeanlaiset() {
+        if (onkoNimiOikeanlainen()
+                && onkoKaupunkiOikeanlainen()
+                && onkoKatuosoiteOikeanlainen()
+                && onkoAsiakasnumeroOikeanlainen()
+                && onkoPostinumeroOikeanlainen()
+                && onkoLaskujaLahetettyOikeanlainen()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean onkoNimiOikeanlainen() {
+        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean onkoKaupunkiOikeanlainen() {
+        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean onkoKatuosoiteOikeanlainen() {
+        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean onkoAsiakasnumeroOikeanlainen() {
+        if (tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean onkoPostinumeroOikeanlainen() {
+        if (tarkistin.koostuukoMerkkijonoNumeroista(postinumero)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean onkoLaskujaLahetettyOikeanlainen() {
+        if (laskujaLahetetty >= 0) {
+            return true;
+        }
+        return false;
     }
 
     public String getAsiakasnumero() {

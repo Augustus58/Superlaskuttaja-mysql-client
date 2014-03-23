@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class MerkkiTarkistinTest {
 
-    MerkkiTarkistin merkkitarkistin;
+    MerkkiJaMerkkijonoTarkistin merkkitarkistin;
     Character merkki1;
     Character merkki2;
     Character merkki3;
@@ -38,7 +38,7 @@ public class MerkkiTarkistinTest {
 
     @Before
     public void setUp() {
-        merkkitarkistin = new MerkkiTarkistin();
+        merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
         merkki1 = new Character('4');
         merkki2 = new Character('A');
         merkki3 = new Character('R');

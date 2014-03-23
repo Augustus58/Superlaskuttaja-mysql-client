@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.TableModelSolujenMuokkaaminenEstetty;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -18,20 +19,18 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
 public class AsiakkaatTaulukko {
 
     private final JTable taulukko;
-    private final DefaultTableModel model;
+    private final TableModelSolujenMuokkaaminenEstetty model;
     private final ListSelectionModel selectionModel;
-    AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
     private final Lataaja lataaja;
 
     public AsiakkaatTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
-        this.model = new DefaultTableModel(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});
+        this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});            
         this.taulukko.setModel(model);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.kuuntelija = new AsiakkaatTaulukkoValintaKuuntelija(this.taulukko);
-        selectionModel.addListSelectionListener(kuuntelija);
+        taulukko.setAutoCreateRowSorter(true);
         muodostaAsiakkaatTaulukko();
     }
 
@@ -42,7 +41,7 @@ public class AsiakkaatTaulukko {
             }
         }
     }
-
+    
     public void addAsiakkaatTaulukkoRivi(Asiakas asiakas) {
         model.addRow(asiakas.getAsiakkaanTiedotTaulukossa());
     }
@@ -58,13 +57,13 @@ public class AsiakkaatTaulukko {
     public ListSelectionModel getSelectionModel() {
         return selectionModel;
     }
-    
-    public Integer getKuuntelijaArvo() {
-        return this.kuuntelija.getArvo();
-    }
-    
+
     public String getValueString(Integer x, Integer y) {
-        return(getModel().getValueAt(x, y).toString());
+        return (getModel().getValueAt(x, y).toString());
+    }
+
+    public void reset() {
+        model.setRowCount(0);
     }
 
 }

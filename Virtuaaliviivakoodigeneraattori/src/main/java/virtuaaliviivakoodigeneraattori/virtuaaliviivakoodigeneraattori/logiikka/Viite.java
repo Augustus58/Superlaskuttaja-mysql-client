@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class Viite {
 
     private final String viiteTarkisteella;
-    private final MerkkiTarkistin merkkitarkistin;
+    private final MerkkiJaMerkkijonoTarkistin merkkitarkistin;
 // Konstruktorille tulee antaa viite ilman tarkistetta.
     public Viite(String viite) {
         this.viiteTarkisteella = muodostaTarkisteellinenViite(viite);
-        this.merkkitarkistin = new MerkkiTarkistin();
+        this.merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     public Boolean onkoViiteKelvollinen(String viiteIlmanTarkistetta) {

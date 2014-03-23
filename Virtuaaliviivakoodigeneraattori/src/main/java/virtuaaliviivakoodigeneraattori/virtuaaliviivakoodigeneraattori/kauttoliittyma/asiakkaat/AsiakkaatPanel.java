@@ -5,6 +5,8 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa.AsiakkaatPanelMuokkaaAsiakastaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.lisaa.AsiakkaatPanelLisaaAsiakasKuuntelija;
 import java.awt.Dimension;
@@ -24,14 +26,18 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  */
 public class AsiakkaatPanel extends JPanel {
 
-    Lataaja lataaja;
-    AsiakkaatTaulukko taulukko;
+    private final Lataaja lataaja;
+    private final AsiakkaatTaulukko taulukko;
+    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final NappulaLukko lukko;
 
     public AsiakkaatPanel(Lataaja lataaja) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
         this.taulukko = new AsiakkaatTaulukko(lataaja);
+        this.kuuntelija = new AsiakkaatTaulukkoValintaKuuntelija(taulukko.getTaulukko());
+        this.lukko = new NappulaLukko();
         luoKomponentit();
 
     }
@@ -47,18 +53,28 @@ public class AsiakkaatPanel extends JPanel {
         JPanel ylaosa = new JPanel(new GridLayout(1, 3));
         ylaosa.setMinimumSize(new Dimension(50, 32));
 
-        String[] vaihtoehdotString = {"Asiakkaan nimi", "Asiakasnumero"};
+        String[] vaihtoehdotString = {"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"};
         JComboBox kriteerit = new JComboBox(vaihtoehdotString);
         kriteerit.setSelectedIndex(0);
+        kriteerit.setEditable(false);
+        kriteerit.setToolTipText("Valitse kriteeri");      
+        ComboBoxKuuntelija comboBoxkuuntelija = new ComboBoxKuuntelija();
+        kriteerit.addActionListener(comboBoxkuuntelija);
         ylaosa.add(kriteerit);
 
-        JTextField kriteeriTekstikentta = new JTextField("Syötä kriteeriteksti tähän");
+        JTextField kriteeriTekstikentta = new JTextField();
+        kriteeriTekstikentta.setToolTipText("Syötä kriteeriteksti tähän");        
         ylaosa.add(kriteeriTekstikentta);
 
         JButton naytaKriteerinSisaltavatNappi = new JButton("Näytä kriteeritekstin sisältävät");
+        naytaKriteerinSisaltavatNappi.setToolTipText("Näyttää kriteeritekstin sisältävät asiakkaat kaikkien asiakkaiden joukosta");
+        AsiakkaatPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new AsiakkaatPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
+        naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
         ylaosa.add(naytaKriteerinSisaltavatNappi);
         
-        JButton naytaKaikkiNappi = new JButton("Näytä kaikki");
+        JButton naytaKaikkiNappi = new JButton("Näytä kaikki asiakkaat");
+        AsiakkaatPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new AsiakkaatPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
+        naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
         ylaosa.add(naytaKaikkiNappi);
 
         return ylaosa;
@@ -72,9 +88,12 @@ public class AsiakkaatPanel extends JPanel {
         keskiosa.setBorder(new EmptyBorder(20, 20, 20, 20));
         keskiosa.setLayout(new BoxLayout(keskiosa, BoxLayout.Y_AXIS));
         
-        taulukko.muodostaAsiakkaatTaulukko();        
-        JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko());        
-        keskiosa.add(scrollPane);                
+        taulukko.muodostaAsiakkaatTaulukko();         
+        taulukko.getSelectionModel().addListSelectionListener(kuuntelija);
+        
+        JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko()); 
+        
+        keskiosa.add(scrollPane);
         
         return keskiosa;
 
@@ -84,14 +103,15 @@ public class AsiakkaatPanel extends JPanel {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
         JButton lisaaAsiakasNappi = new JButton("Lisää asiakas");
-        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja, taulukko));
+        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja, taulukko, lukko));
         alaosa.add(lisaaAsiakasNappi);
 
-        JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua asiasta");
-        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko));
+        JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua asiakasta");
+        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(muokkaaValittuaAsiakastaNappi);
 
         JButton poistaValittuAsiakas = new JButton("Poista valittu asiakas");
+        poistaValittuAsiakas.addActionListener(new AsiakkaatPanelPoistaAsiakasKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(poistaValittuAsiakas);
 
         return alaosa;

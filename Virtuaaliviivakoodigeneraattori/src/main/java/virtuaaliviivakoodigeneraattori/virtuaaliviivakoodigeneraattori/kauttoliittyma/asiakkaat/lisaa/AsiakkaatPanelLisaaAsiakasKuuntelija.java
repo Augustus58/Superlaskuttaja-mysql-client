@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatTaulukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -18,15 +19,19 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
 public class AsiakkaatPanelLisaaAsiakasKuuntelija implements ActionListener {
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
+    private final NappulaLukko lukko;
 
-    public AsiakkaatPanelLisaaAsiakasKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public AsiakkaatPanelLisaaAsiakasKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
+        this.lukko = lukko;
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        LisaaAsiakasIkkuna lisaaAsiakas = new LisaaAsiakasIkkuna(lataaja, taulukko);
-        SwingUtilities.invokeLater(lisaaAsiakas);
+        if (!lukko.onkoLukkoPaalla()) {
+            LisaaAsiakasIkkuna lisaaAsiakas = new LisaaAsiakasIkkuna(lataaja, taulukko, lukko);
+            SwingUtilities.invokeLater(lisaaAsiakas);
+        }
     }
 }
