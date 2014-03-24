@@ -5,6 +5,8 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
+import org.apache.commons.validator.EmailValidator;
+
 /**
  *
  * @author Augustus58
@@ -13,9 +15,13 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
 public class MerkkiJaMerkkijonoTarkistin {
 
     private final String isotAakkosetAZ;
+    private final String numerotValiviivaJaValilyonti;
+    private EmailValidator validator;
 
     public MerkkiJaMerkkijonoTarkistin() {
         this.isotAakkosetAZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        this.numerotValiviivaJaValilyonti = "0123456789- ";
+        this.validator = EmailValidator.getInstance();
     }
 
     public Boolean onkoMerkkiNumero(Character merkki) {
@@ -45,6 +51,27 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return true;
     }
+    
+    public Boolean onkoMerkkiNumeroValiviivaTaiValilyonti(Character merkki) {
+        for (int i = 0; i < this.numerotValiviivaJaValilyonti.length(); i++) {
+            if (merkki.equals(this.numerotValiviivaJaValilyonti.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Boolean koostuukoMerkkijonoNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
+        if (merkkijono.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < merkkijono.length(); i++) {
+            if (!onkoMerkkiNumeroValiviivaTaiValilyonti(merkkijono.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public Boolean onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(String merkkijono) {
         if (merkkijono.isEmpty()) {
@@ -59,6 +86,10 @@ public class MerkkiJaMerkkijonoTarkistin {
             
         }
         return true;
+    }
+    
+    public Boolean onkoEmailOsoiteValidi(String osoite) {
+        return(validator.isValid(osoite));
     }
 
     public String getIsotAakkosetAZ() {

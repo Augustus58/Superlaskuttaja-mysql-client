@@ -5,6 +5,8 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto.YhteenvetoPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.laskut.LaskutPanel;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatPanel;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -45,17 +47,14 @@ public class Kayttoliittyma implements Runnable {
     private void luoKomponentit(Container container, Lataaja lataaja) {
         JTabbedPane tabbedPane = new JTabbedPane();
         
-        JPanel yhteenvetoPanel = new YhteenvetoPanel();
+        JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja);
         tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel, null);
-        
-        JPanel laskutPanel = new LaskutPanel();
-        tabbedPane.addTab("Laskut", null, laskutPanel, null);
-        
+
         JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja);
         tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
         
-        JPanel laskuttajatPanel = new LaskuttajatPanel();
-        tabbedPane.addTab("Laskuttajat", null, laskuttajatPanel, null);
+        JPanel laskutPanel = new LaskutPanel(lataaja);
+        tabbedPane.addTab("Laskut", null, laskutPanel, null);
         
         container.add(tabbedPane);
     }

@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
  *
@@ -18,9 +19,14 @@ import javax.swing.JPanel;
  */
 public class YhteenvetoPanel extends JPanel {
 
-    public YhteenvetoPanel() {
+    private final Lataaja lataaja;
+    private final NappulaLukko lukko;
+
+    public YhteenvetoPanel(Lataaja lataaja) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.lataaja = lataaja;
+        this.lukko = new NappulaLukko();
         luoKomponentit();
 
     }
@@ -42,24 +48,33 @@ public class YhteenvetoPanel extends JPanel {
 
     private JPanel keskiosa() {
         JPanel keskiosa = new JPanel(new GridLayout(0, 1));
-        keskiosa.setPreferredSize(new Dimension(5000, 5000));
+        keskiosa.setPreferredSize(new Dimension(5000, 5000));        
 
-        JLabel laskujenLkmTeksti = new JLabel("Laskujen lkm");
-        keskiosa.add(laskujenLkmTeksti);
-        JLabel asiakkaidenLkmTeksti = new JLabel("Asiakkaiden lkm");
-        keskiosa.add(asiakkaidenLkmTeksti);
-
+        LaskuttajaOsioJPanel frame = new LaskuttajaOsioJPanel(lataaja.getLadattuTietovarasto().isLaskuttajaLisatty(), lataaja, lukko);
+        frame.paivitaSisalto();
+        keskiosa.add(frame);
+        
         return keskiosa;
 
     }
 
     private JPanel alaosa() {
-        JPanel alaosa = new JPanel(new GridLayout(1, 2));
-
+        JPanel alaosa = new JPanel(new GridLayout(1, 0));
+        
+        JButton uusiNappi = new JButton("Uusi");
+//        uusiNappi.setToolTipText("");
+        alaosa.add(uusiNappi);
+        
+        JButton avaaNappi = new JButton("Avaa");
+//        avaaNappi.setToolTipText("");
+        alaosa.add(avaaNappi);
+        
         JButton tallennaNappi = new JButton("Tallenna");
+        tallennaNappi.setToolTipText("Tallenna laskuttaja, asiakkaat ja laskut tiedostoon");
         alaosa.add(tallennaNappi);
 
         JButton tallennaNimellaNappi = new JButton("Tallenna nimellä");
+        tallennaNimellaNappi.setToolTipText("Tallenna laskuttaja, asiakkaat ja laskut tiedostoon");
         alaosa.add(tallennaNimellaNappi);
 
         return alaosa;

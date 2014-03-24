@@ -10,16 +10,13 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  *
  * @author Augustus58
  */
-public class Lataaja {
-    
-    private final Tietovarasto ladattuTietovarasto;
-
-    public Lataaja() {
-        this.ladattuTietovarasto = new Tietovarasto();
-    }
-
-    public Tietovarasto getLadattuTietovarasto() {
-        return ladattuTietovarasto;
-    }
+public class LaskutusRivi {
+    private String kuvaus;
+    private double maara;
+    private String yksikko;
+    private double aHinta;
+    private Integer alvPros; // Esim 24.
+    private double alvEur;
+    private double yhtEur;
     
 }

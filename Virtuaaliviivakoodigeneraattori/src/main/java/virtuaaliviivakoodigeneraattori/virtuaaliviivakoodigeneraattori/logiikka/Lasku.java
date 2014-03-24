@@ -5,6 +5,7 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,17 +14,33 @@ import java.util.Date;
  */
 public class Lasku {
 
-    private final Tilinumero tilinumero;
-    private final Viite viiteTarkisteella;
-    private final LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
+    private final Laskuttaja laskuttaja; //Tilinumero tätä kautta.
+    private final Asiakas asiakas;  
+    
+    private final Date lahetysPaiva;
+    private final Integer laskunNumero; //Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut samalla numeroinnilla.
     private final Date erapaiva;
+    private final Integer viivastyskorko;
+    private final Viite viiteTarkisteella;                
+    private final String maksuehto;          
+    
+    private final ArrayList<LaskutusRivi> laskutusrivit;
+    private final String lisatiedot;
+    private final LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
     private final Pankkiviivakoodi pankkiviivakoodi;
 
-    public Lasku(Tilinumero tilinumero, Viite viiteTarkisteella, LaskunSumma summa, Date erapaiva, Pankkiviivakoodi pankkiviivakoodi) {
-        this.tilinumero = tilinumero;
-        this.viiteTarkisteella = viiteTarkisteella;
-        this.summa = summa;
+    public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, Date lahetysPaiva, Integer laskunNumero, Date erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<LaskutusRivi> laskutusrivit, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
+        this.laskuttaja = laskuttaja;
+        this.asiakas = asiakas;
+        this.lahetysPaiva = lahetysPaiva;
+        this.laskunNumero = laskunNumero;
         this.erapaiva = erapaiva;
+        this.viivastyskorko = viivastyskorko;
+        this.viiteTarkisteella = viiteTarkisteella;
+        this.maksuehto = maksuehto;
+        this.laskutusrivit = laskutusrivit;
+        this.lisatiedot = lisatiedot;
+        this.summa = summa;
         this.pankkiviivakoodi = pankkiviivakoodi;
     }
 }

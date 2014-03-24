@@ -17,11 +17,15 @@ import java.math.BigInteger;
 public class Tilinumero {
 
     private final String tilinumero;
-    private final MerkkiJaMerkkijonoTarkistin merkkitarkistin;
+    private final String pankki;
+    private final String swiftBic;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
-    public Tilinumero(String tilinumero) {
+    public Tilinumero(String tilinumero, String pankki, String swiftBic) {
         this.tilinumero = tilinumero;
-        this.merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
+        this.pankki = pankki;
+        this.swiftBic = swiftBic;
     }
 
     public Boolean tarkistaTilinumero(String tilinumero) {
@@ -46,7 +50,7 @@ public class Tilinumero {
     private BigInteger muunnaTilinumeroMaakoodiJaTarkisteSiirrettyLoppuunKokonaisluvuksi(String tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun) {
         String muunnettuMerkkijono = "";
         for (int i = 0; i < tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.length(); i++) {
-            if (this.merkkitarkistin.onkoMerkkiKirjainAZ(tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.charAt(i))) {
+            if (this.tarkistin.onkoMerkkiKirjainAZ(tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.charAt(i))) {
                 muunnettuMerkkijono = muunnettuMerkkijono + muunnaKirjainKokonaisluvuksi(tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.charAt(i)).toString();
             } else {
                 muunnettuMerkkijono = muunnettuMerkkijono + tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.charAt(i);
@@ -63,7 +67,7 @@ public class Tilinumero {
 
     private Boolean voikoMerkkijononMuuttaaKokonaisluvuksi(String merkkijono) {
         for (int i = 0; i < merkkijono.length(); i++) {
-            if (!this.merkkitarkistin.onkoMerkkiNumero(merkkijono.charAt(i))) {
+            if (!this.tarkistin.onkoMerkkiNumero(merkkijono.charAt(i))) {
                 return false;
             }
         }
@@ -72,8 +76,8 @@ public class Tilinumero {
 
     private Integer muunnaKirjainKokonaisluvuksi(Character kirjain) {
         int k = 0;
-        for (int i = 0; i < this.merkkitarkistin.getIsotAakkosetAZ().length(); i++) {
-            if (this.merkkitarkistin.getIsotAakkosetAZ().substring(i, i+1).equals(kirjain.toString())) {
+        for (int i = 0; i < this.tarkistin.getIsotAakkosetAZ().length(); i++) {
+            if (this.tarkistin.getIsotAakkosetAZ().substring(i, i+1).equals(kirjain.toString())) {
                 k = i + 10;
             }
         }
@@ -86,5 +90,19 @@ public class Tilinumero {
 
     public String getTilinumero() {
         return this.tilinumero;
+    }
+    
+    public Boolean onkoPankkiOikeanlainen() {
+        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(pankki)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public Boolean onkoSwiftBicOikeanlainen() {
+        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(swiftBic)) {
+            return false;
+        }
+        return true;
     }
 }

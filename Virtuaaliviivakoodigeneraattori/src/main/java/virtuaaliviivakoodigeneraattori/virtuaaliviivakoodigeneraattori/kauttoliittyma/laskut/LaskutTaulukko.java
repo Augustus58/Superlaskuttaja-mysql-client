@@ -3,8 +3,9 @@
 // * To change this template file, choose Tools | Templates
 // * and open the template in the editor.
 // */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.laskut;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.*;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -16,14 +17,14 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class AsiakkaatTaulukko {
+public class LaskutTaulukko {
 
     private final JTable taulukko;
     private final TableModelSolujenMuokkaaminenEstetty model;
     private final ListSelectionModel selectionModel;
     private final Lataaja lataaja;
 
-    public AsiakkaatTaulukko(Lataaja lataaja) {
+    public LaskutTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
         this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});            
@@ -31,12 +32,12 @@ public class AsiakkaatTaulukko {
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         taulukko.setAutoCreateRowSorter(true);
-        muodostaAsiakkaatTaulukko();
+        muodostaLaskutTaulukko();
     }
 
-    public final void muodostaAsiakkaatTaulukko() {
-        if (!lataaja.getLadattuTietovarasto().getAsiakkaat().isEmpty()) {
-            for (int i = 0; i < lataaja.getLadattuTietovarasto().getAsiakkaat().size(); i++) {
+    public final void muodostaLaskutTaulukko() {
+        if (!lataaja.getLadattuTietovarasto().getLaskut().isEmpty()) {
+            for (int i = 0; i < lataaja.getLadattuTietovarasto().getLaskut().size(); i++) {
                 model.addRow(lataaja.getLadattuTietovarasto().getAsiakkaat().get(i).getAsiakkaanTiedotTaulukossa());
             }
         }

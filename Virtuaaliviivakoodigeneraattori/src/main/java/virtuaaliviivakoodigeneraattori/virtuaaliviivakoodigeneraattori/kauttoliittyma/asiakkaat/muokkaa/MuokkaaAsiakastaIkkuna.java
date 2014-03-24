@@ -5,10 +5,12 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -67,14 +69,15 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
 
     private void luoKomponentit(Container container) {
         JPanel panel = new JPanel();
-        
-        GridLayout layout = new GridLayout(0, 4);
-        layout.setVgap(10);
-        layout.setHgap(10);
-        
-        panel.setLayout(layout);
-        
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout); 
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        
+        JPanel tiedotPanel = new JPanel();
+        GridLayout tiedotLayout = new GridLayout(0, 4);
+        tiedotLayout.setVgap(10);
+        tiedotLayout.setHgap(10);
+        tiedotPanel.setLayout(tiedotLayout);
         
         JLabel nimiTeksti = new JLabel("Entinen nimi: ");
         JLabel nimiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 0).toString());
@@ -112,42 +115,44 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
         JTextField laskujaLahetettyKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 5).toString());
 //        laskujaLahetettyKentta.setPreferredSize(new Dimension(300, 0));
            
-        JButton lisaa = new JButton("Muokkaa");
+        JButton muokkaa = new JButton("Muokkaa");
+        muokkaa.setAlignmentX( Component.CENTER_ALIGNMENT );
         MuokkaaAsiakastaIkkunaMuokkaaKuuntelija muokkaaAsiakastaKuuntelija = new MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame, kuuntelija, lukko);
-        lisaa.addActionListener(muokkaaAsiakastaKuuntelija);
+        muokkaa.addActionListener(muokkaaAsiakastaKuuntelija);
         
-        panel.add(nimiTeksti);
-        panel.add(nimiTekstiEntinen);
-        panel.add(nimiTekstiUusi);
-        panel.add(nimiKentta);
+        tiedotPanel.add(nimiTeksti);
+        tiedotPanel.add(nimiTekstiEntinen);
+        tiedotPanel.add(nimiTekstiUusi);
+        tiedotPanel.add(nimiKentta);
         
-        panel.add(katuosoiteTeksti);
-        panel.add(katuosoiteTekstiEntinen);
-        panel.add(katuosoiteTekstiUusi);
-        panel.add(katuosoiteKentta);
+        tiedotPanel.add(katuosoiteTeksti);
+        tiedotPanel.add(katuosoiteTekstiEntinen);
+        tiedotPanel.add(katuosoiteTekstiUusi);
+        tiedotPanel.add(katuosoiteKentta);
         
-        panel.add(postinumeroTeksti);
-        panel.add(postinumeroTekstiEntinen);
-        panel.add(postinumeroTekstiUusi);
-        panel.add(postinumeroKentta);
+        tiedotPanel.add(postinumeroTeksti);
+        tiedotPanel.add(postinumeroTekstiEntinen);
+        tiedotPanel.add(postinumeroTekstiUusi);
+        tiedotPanel.add(postinumeroKentta);
         
-        panel.add(kaupunkiTeksti);
-        panel.add(kaupunkiTekstiEntinen);
-        panel.add(kaupunkiTekstiUusi);
-        panel.add(kaupunkiKentta);
+        tiedotPanel.add(kaupunkiTeksti);
+        tiedotPanel.add(kaupunkiTekstiEntinen);
+        tiedotPanel.add(kaupunkiTekstiUusi);
+        tiedotPanel.add(kaupunkiKentta);
         
-        panel.add(asiakasnumeroTeksti);
-        panel.add(asiakasnumeroTekstiVanha);
-        panel.add(asiakasnumeroTekstiUusi);
-        panel.add(asiakasnumeroKentta);
+        tiedotPanel.add(asiakasnumeroTeksti);
+        tiedotPanel.add(asiakasnumeroTekstiVanha);
+        tiedotPanel.add(asiakasnumeroTekstiUusi);
+        tiedotPanel.add(asiakasnumeroKentta);
         
-        panel.add(laskujaLahetettyTeksti);
-        panel.add(laskujaLahetettyTekstiVanha);
-        panel.add(laskujaLahetettyTekstiUusi);
-        panel.add(laskujaLahetettyKentta);
+        tiedotPanel.add(laskujaLahetettyTeksti);
+        tiedotPanel.add(laskujaLahetettyTekstiVanha);
+        tiedotPanel.add(laskujaLahetettyTekstiUusi);
+        tiedotPanel.add(laskujaLahetettyKentta);
         
-        panel.add(Box.createRigidArea(new Dimension(20,0)));
-        panel.add(lisaa);
+        panel.add(tiedotPanel);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(muokkaa);
         
         container.add(panel);
         

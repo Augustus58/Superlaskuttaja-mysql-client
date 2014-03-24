@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.laskut;
 
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.*;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.muokkaa.AsiakkaatPanelMuokkaaAsiakastaKuuntelija;
@@ -24,14 +25,14 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class AsiakkaatPanel extends JPanel {
+public class LaskutPanel extends JPanel {
 
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanel(Lataaja lataaja) {
+    public LaskutPanel(Lataaja lataaja) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;

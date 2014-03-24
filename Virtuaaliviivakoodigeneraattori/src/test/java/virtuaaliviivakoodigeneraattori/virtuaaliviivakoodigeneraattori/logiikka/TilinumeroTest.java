@@ -50,7 +50,7 @@ public class TilinumeroTest {
         vaaraTilinumero6 = "FI973";
         oikeaTilinumero1 = "FI3816603001014664";
         oikeaTilinumero2 = "FI9780001500084521";
-        tilinumero = new Tilinumero("FI3816603001014664");
+        tilinumero = new Tilinumero("FI3816603001014664", "", "");
     }
     
     @After
