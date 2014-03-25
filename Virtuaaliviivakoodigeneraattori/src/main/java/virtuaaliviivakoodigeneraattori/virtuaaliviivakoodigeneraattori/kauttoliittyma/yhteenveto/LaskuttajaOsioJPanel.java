@@ -30,18 +30,29 @@ public class LaskuttajaOsioJPanel extends JPanel {
         this.lataaja = lataaja;
         this.lukko = lukko;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    }   
+    }
 
     public void paivitaSisalto() {
         if (laskuttajaOlemassa) {
             this.removeAll();
 
             this.add(Box.createRigidArea(new Dimension(10, 100)));
-            JLabel tervetuloaTeksti = new JLabel("Tervetuloa!");
+            JLabel tervetuloaTeksti = new JLabel("Tervetuloa " + lataaja.getLadattuTietovarasto().getLaskuttaja().getNimi() + "!");
             tervetuloaTeksti.setAlignmentX(Component.CENTER_ALIGNMENT);
             this.add(tervetuloaTeksti);
-            this.add(Box.createRigidArea(new Dimension(10, 20)));
-
+            this.add(Box.createRigidArea(new Dimension(10, 40)));
+            JLabel yrityksenNimi = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getYrityksenNimi());
+            yrityksenNimi.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(yrityksenNimi);
+            this.add(Box.createRigidArea(new Dimension(10, 10)));
+            JLabel laskujaLahetetty = new JLabel("Laskuja lähetetty " + lataaja.getLadattuTietovarasto().getLaskuttaja().getLaskujaLahetetty().toString());
+            laskujaLahetetty.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(laskujaLahetetty);
+            this.add(Box.createRigidArea(new Dimension(10, 40)));
+            JButton muokkaaLaskuttajanTietoja = new JButton("Muokkaa laskuttajan tietoja");
+            muokkaaLaskuttajanTietoja.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(muokkaaLaskuttajanTietoja);
+            
             this.revalidate();
             this.repaint();
         } else {
@@ -57,7 +68,7 @@ public class LaskuttajaOsioJPanel extends JPanel {
             lisaaLaskuttajanTiedot.addActionListener(lisaaTiedotKuuntelija);
             lisaaLaskuttajanTiedot.setAlignmentX(Component.CENTER_ALIGNMENT);
             this.add(lisaaLaskuttajanTiedot);
-            
+
             this.revalidate();
             this.repaint();
         }
@@ -66,5 +77,5 @@ public class LaskuttajaOsioJPanel extends JPanel {
     public void setLaskuttajaOlemassa(Boolean laskuttajaOlemassa) {
         this.laskuttajaOlemassa = laskuttajaOlemassa;
     }
-    
+
 }
