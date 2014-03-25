@@ -9,3 +9,4 @@
 - **22.3.2014 8h** Hiottu käyttöliittymää ja alettu tehdä käyttöliittymään toiminnallisuutta. Paranneltu ja lisätty logiikka-paketin luokkia. Opiskeltu taulukoiden (JTable) käyttöä swingillä. Melkein tehty osa käyttöliittymästä editorilla..
 - **23.3.2014 8h** Asiakkaat-osio käyttöliittymästä valmis. Tehty kyseiseen osioon poikkeustilanteiden käsittelyä. Tehty luokkaan Asiakas tarvittavat metodit tietojen oikeellisuuden tarkistamista varten. Päivän lopuksi hieman refaktorointia.
 - **24.3.2014 10h** Tehty laskuttajan lisääminen käyttöliittymään. Opeteltu JPanelin sisällön muuttamista kesken ohjelman suorituksen. Tutustuttu Jsoniin tallentamista silmällä pitäen. Tehty iso kasa tietojen tarkistuksia luokkaan laskuttaja. Suunniteltu ja hiottu käyttöliittymän toiminnallisuutta ja ulkoasua.
+- **25.3.2014 1h** Tehty laskuttuja-osiota hieman. Tuumailtu, että suoritteiden (laskutuksessa vaikkapa seinän maalaaminen) käsittely kannattaa ehkä laittaa kokonaan omaan osioonsa..
