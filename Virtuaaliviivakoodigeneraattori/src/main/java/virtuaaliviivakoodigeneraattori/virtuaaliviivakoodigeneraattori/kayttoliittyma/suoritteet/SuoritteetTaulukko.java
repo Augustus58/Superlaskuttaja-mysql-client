@@ -3,13 +3,14 @@
 // * To change this template file, choose Tools | Templates
 // * and open the template in the editor.
 // */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.laskut;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.*;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.laskut.*;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.TableModelSolujenMuokkaaminenEstetty;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -17,14 +18,14 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class LaskutTaulukko {
+public class SuoritteetTaulukko {
 
     private final JTable taulukko;
     private final TableModelSolujenMuokkaaminenEstetty model;
     private final ListSelectionModel selectionModel;
     private final Lataaja lataaja;
 
-    public LaskutTaulukko(Lataaja lataaja) {
+    public SuoritteetTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
         this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});            

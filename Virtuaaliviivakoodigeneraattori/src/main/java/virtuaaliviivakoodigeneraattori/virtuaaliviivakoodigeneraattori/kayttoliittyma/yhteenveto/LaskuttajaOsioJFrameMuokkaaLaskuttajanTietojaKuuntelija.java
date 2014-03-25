@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto.muokkaa.MuokkaaLaskuttajanTietojaIkkuna;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
@@ -15,13 +16,13 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class LaskuttajaOsioJFrameSyotaLaskuttajanTiedotKuuntelija implements ActionListener {
+public class LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija implements ActionListener {
 
     private final Lataaja lataaja;
     private final NappulaLukko lukko;
     private final LaskuttajaOsioJPanel panel;
 
-    public LaskuttajaOsioJFrameSyotaLaskuttajanTiedotKuuntelija(Lataaja lataaja, NappulaLukko lukko, LaskuttajaOsioJPanel panel) {
+    public LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija(Lataaja lataaja, NappulaLukko lukko, LaskuttajaOsioJPanel panel) {
         this.lataaja = lataaja;
         this.lukko = lukko;
         this.panel = panel;
@@ -29,8 +30,8 @@ public class LaskuttajaOsioJFrameSyotaLaskuttajanTiedotKuuntelija implements Act
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        LisaaLaskuttajanTiedotIkkuna syotaTiedot = new LisaaLaskuttajanTiedotIkkuna(lataaja, lukko, panel);
-        SwingUtilities.invokeLater(syotaTiedot);
+        MuokkaaLaskuttajanTietojaIkkuna muokkaaTietoja = new MuokkaaLaskuttajanTietojaIkkuna(lataaja, lukko, panel);
+        SwingUtilities.invokeLater(muokkaaTietoja);
     }
 
 }

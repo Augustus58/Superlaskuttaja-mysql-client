@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto.YhteenvetoPanel;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.laskut.LaskutPanel;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.asiakkaat.AsiakkaatPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto.YhteenvetoPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.laskut.LaskutPanel;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatPanel;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -52,6 +53,9 @@ public class Kayttoliittyma implements Runnable {
 
         JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja);
         tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
+        
+        JPanel suoritteetPanel = new SuoritteetPanel(lataaja);
+        tabbedPane.addTab("Suoritteet", null, suoritteetPanel, null);
         
         JPanel laskutPanel = new LaskutPanel(lataaja);
         tabbedPane.addTab("Laskut", null, laskutPanel, null);

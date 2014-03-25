@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto.muokkaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Laskuttaja;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Tilinumero;
@@ -18,7 +19,7 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class LisaaLaskuttajanTiedotIkkunaLisaaKuuntelija implements ActionListener {
+public class MuokkaaLaskuttajanTietojaIkkunaMuokkaaKuuntelija implements ActionListener {
 
     private JTextField nimiKentta;
     private JTextField katuosoiteKentta;
@@ -37,7 +38,7 @@ public class LisaaLaskuttajanTiedotIkkunaLisaaKuuntelija implements ActionListen
     private final NappulaLukko lukko;
     private final LaskuttajaOsioJPanel panel;
 
-    public LisaaLaskuttajanTiedotIkkunaLisaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField yritykseNimiTeksti, JTextField alvTunnisteKentta, JTextField tilinumeroKentta, JTextField tilinumeronPankkiKentta, JTextField tilinumeronSwiftBicKentta, JTextField puhelinnumeroKentta, JTextField sahkopostiKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, JFrame frame, NappulaLukko lukko, LaskuttajaOsioJPanel panel) {
+    public MuokkaaLaskuttajanTietojaIkkunaMuokkaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField yritykseNimiTeksti, JTextField alvTunnisteKentta, JTextField tilinumeroKentta, JTextField tilinumeronPankkiKentta, JTextField tilinumeronSwiftBicKentta, JTextField puhelinnumeroKentta, JTextField sahkopostiKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, JFrame frame, NappulaLukko lukko, LaskuttajaOsioJPanel panel) {
         this.nimiKentta = nimiKentta;
         this.katuosoiteKentta = katuosoiteKentta;
         this.postinumeroKentta = postinumeroKentta;

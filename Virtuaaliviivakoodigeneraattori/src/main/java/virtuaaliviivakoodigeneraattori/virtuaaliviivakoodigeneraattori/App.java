@@ -1,7 +1,7 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori;
 
 import javax.swing.SwingUtilities;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.Kayttoliittyma;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.Kayttoliittyma;
 
 public class App
 {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.yhteenveto;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.yhteenveto;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -12,7 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kauttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -51,6 +51,8 @@ public class LaskuttajaOsioJPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 40)));
             JButton muokkaaLaskuttajanTietoja = new JButton("Muokkaa laskuttajan tietoja");
             muokkaaLaskuttajanTietoja.setAlignmentX(Component.CENTER_ALIGNMENT);
+            LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija muokkaaTietojaKuuntelija = new LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija(lataaja, lukko, this);
+            muokkaaLaskuttajanTietoja.addActionListener(muokkaaTietojaKuuntelija);
             this.add(muokkaaLaskuttajanTietoja);
             
             this.revalidate();

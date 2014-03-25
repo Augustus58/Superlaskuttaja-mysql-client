@@ -105,4 +105,13 @@ public class Tilinumero {
         }
         return true;
     }
+
+    public String getPankki() {
+        return pankki;
+    }
+
+    public String getSwiftBic() {
+        return swiftBic;
+    }
+    
 }
