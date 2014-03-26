@@ -11,15 +11,15 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  */
 public class Laskuttaja {
 
-    private final String nimi;
-    private final String katuosoite;
-    private final String postinumero;
-    private final String kaupunki;
-    private final String yrityksenNimi;
-    private final String alvTunniste;
-    private final Tilinumero tilinumero;
-    private final String puhelinnumero;
-    private final String sahkopostiOsoite;
+    private String nimi;
+    private String katuosoite;
+    private String postinumero;
+    private String kaupunki;
+    private String yrityksenNimi;
+    private String alvTunniste;
+    private Tilinumero tilinumero;
+    private String puhelinnumero;
+    private String sahkopostiOsoite;
     private Integer laskujaLahetetty;
     private MerkkiJaMerkkijonoTarkistin tarkistin;
 
@@ -37,6 +37,75 @@ public class Laskuttaja {
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
+    public Boolean onkoNimiOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi));
+    }
+
+    public Boolean onkoKatuosoiteOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite));
+    }
+
+    public Boolean onkoPostinumeroOikeanlainen() {
+        return (tarkistin.koostuukoMerkkijonoNumeroista(postinumero));
+    }
+
+    public Boolean onkoKaupunkiOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki));
+    }
+
+    public Boolean onkoYrityksenNimiOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(yrityksenNimi));
+    }
+
+    public Boolean onkoAlvOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(alvTunniste));
+    }
+
+    public Boolean onkoTilinumeroOikeanlainen() {
+        return (tilinumero.tarkistaTilinumero(tilinumero.getTilinumero()));
+    }
+
+    public Boolean onkoPankkiOikeanlainen() {
+        return (tilinumero.onkoPankkiOikeanlainen());
+    }
+
+    public Boolean onkoSwiftBicOikeanlainen() {
+        return (tilinumero.onkoSwiftBicOikeanlainen());
+    }
+
+    public Boolean onkoPuhelinnumeroOikeanlainen() {
+        return (tarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(puhelinnumero));
+    }
+
+    public Boolean onkoSahkopostiOikeanlainen() {
+        return (tarkistin.onkoEmailOsoiteValidi(sahkopostiOsoite));
+    }
+
+    public Boolean onkoLaskujaLahetettyOikeanlainen() {
+        if (laskujaLahetetty >= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean onkoTiedotOikeanlaiset() {
+        if (onkoNimiOikeanlainen()
+                && onkoKatuosoiteOikeanlainen()
+                && onkoPostinumeroOikeanlainen()
+                && onkoKaupunkiOikeanlainen()
+                && onkoYrityksenNimiOikeanlainen()
+                && onkoAlvOikeanlainen()
+                && onkoTilinumeroOikeanlainen()
+                && onkoPankkiOikeanlainen()
+                && onkoSwiftBicOikeanlainen()
+                && onkoPuhelinnumeroOikeanlainen()
+                && onkoSahkopostiOikeanlainen()
+                && onkoLaskujaLahetettyOikeanlainen()) {
+            return true;
+        }
+        return false;
+    }
+    
     public String getNimi() {
         return nimi;
     }
@@ -77,102 +146,43 @@ public class Laskuttaja {
         return laskujaLahetetty;
     }
 
-    public Boolean onkoNimiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi)) {
-            return false;
-        }
-        return true;
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
     }
 
-    public Boolean onkoKatuosoiteOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite)) {
-            return false;
-        }
-        return true;
+    public void setKatuosoite(String katuosoite) {
+        this.katuosoite = katuosoite;
     }
 
-    public Boolean onkoPostinumeroOikeanlainen() {
-        if (tarkistin.koostuukoMerkkijonoNumeroista(postinumero)) {
-            return true;
-        }
-        return false;
+    public void setPostinumero(String postinumero) {
+        this.postinumero = postinumero;
     }
 
-    public Boolean onkoKaupunkiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki)) {
-            return false;
-        }
-        return true;
+    public void setKaupunki(String kaupunki) {
+        this.kaupunki = kaupunki;
     }
 
-    public Boolean onkoYrityksenNimiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(yrityksenNimi)) {
-            return false;
-        }
-        return true;
+    public void setYrityksenNimi(String yrityksenNimi) {
+        this.yrityksenNimi = yrityksenNimi;
     }
 
-    public Boolean onkoAlvOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(alvTunniste)) {
-            return false;
-        }
-        return true;
+    public void setAlv(String alvTunniste) {
+        this.alvTunniste = alvTunniste;
     }
 
-    public Boolean onkoTilinumeroOikeanlainen() {
-        if (tilinumero.tarkistaTilinumero(tilinumero.getTilinumero())) {
-            return true;
-        }
-        return false;
+    public void setTilinumero(Tilinumero tilinumero) {
+        this.tilinumero = tilinumero;
     }
 
-    public Boolean onkoPankkiOikeanlainen() {
-        if (tilinumero.onkoPankkiOikeanlainen()) {
-            return true;
-        }
-        return false;
+    public void setPuhelinnumero(String puhelinnumero) {
+        this.puhelinnumero = puhelinnumero;
     }
 
-    public Boolean onkoSwiftBicOikeanlainen() {
-        if (tilinumero.onkoSwiftBicOikeanlainen()) {
-            return true;
-        }
-        return false;
+    public void setSahkopostiOsoite(String sahkopostiOsoite) {
+        this.sahkopostiOsoite = sahkopostiOsoite;
     }
 
-    public Boolean onkoPuhelinnumeroOikeanlainen() {
-        if (tarkistin.koostuukoMerkkijonoNumeroistaValiviivoistaTaiValilyonneista(puhelinnumero)) {
-            return true;
-        }
-        return false;
-    }
-
-    public Boolean onkoSahkopostiOikeanlainen() {
-        return (tarkistin.onkoEmailOsoiteValidi(sahkopostiOsoite));
-    }
-
-    public Boolean onkoLaskujaLahetettyOikeanlainen() {
-        if (laskujaLahetetty >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean onkoTiedotOikeanlaiset() {
-        if (onkoNimiOikeanlainen()
-                && onkoKatuosoiteOikeanlainen()
-                && onkoPostinumeroOikeanlainen()
-                && onkoKaupunkiOikeanlainen()
-                && onkoYrityksenNimiOikeanlainen()
-                && onkoAlvOikeanlainen()
-                && onkoTilinumeroOikeanlainen()
-                && onkoPankkiOikeanlainen()
-                && onkoSwiftBicOikeanlainen()
-                && onkoPuhelinnumeroOikeanlainen()
-                && onkoSahkopostiOikeanlainen()
-                && onkoLaskujaLahetettyOikeanlainen()) {
-            return true;
-        }
-        return false;
+    public void setLaskujaLahetetty(Integer laskujaLahetetty) {
+        this.laskujaLahetetty = laskujaLahetetty;
     }
 }

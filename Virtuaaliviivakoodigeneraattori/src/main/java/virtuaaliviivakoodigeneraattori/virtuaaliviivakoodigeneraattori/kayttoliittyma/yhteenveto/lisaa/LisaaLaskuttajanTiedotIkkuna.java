@@ -88,7 +88,7 @@ public class LisaaLaskuttajanTiedotIkkuna implements Runnable {
         JTextField alvTunnisteKentta = new JTextField("1");
 
         JLabel tilinumeroTeksti = new JLabel("Tilinumero:");
-        JTextField tilinumeroKentta = new JTextField("FI3816603001014664");
+        JTextField tilinumeroKentta = new JTextField("FI3936363002092492");
 
         JLabel tilinumeronPankkiTeksti = new JLabel("Tilinumeron pankki:");
         JTextField tilinumeronPankkiKentta = new JTextField("1");

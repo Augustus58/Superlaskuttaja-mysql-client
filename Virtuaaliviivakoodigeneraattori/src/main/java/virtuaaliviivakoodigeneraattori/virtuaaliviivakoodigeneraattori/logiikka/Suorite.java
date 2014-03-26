@@ -15,7 +15,7 @@ public class Suorite {
     private double maara;
     private String maaranYksikot;
     private double aHinta;
-    private double alvProsentti;
+    private double alvProsentti; // Esim 0,24.
     private double alv;
     private double yht;
     

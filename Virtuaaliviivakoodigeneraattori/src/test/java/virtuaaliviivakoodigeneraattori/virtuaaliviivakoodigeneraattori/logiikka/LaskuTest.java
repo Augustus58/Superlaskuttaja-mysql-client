@@ -38,9 +38,5 @@ public class LaskuTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    //Testit kannattaa tehdä vasta kun luokalla Lasku on enemmän metodeja.
 }

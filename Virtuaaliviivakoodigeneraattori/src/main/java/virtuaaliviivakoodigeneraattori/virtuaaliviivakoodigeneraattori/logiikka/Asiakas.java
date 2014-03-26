@@ -11,13 +11,13 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  */
 public class Asiakas {
 
-    private final String asiakasnumero;
-    private final String nimi;
-    private final String katuosoite;
-    private final String postinumero;
-    private final String kaupunki;
-    private final Integer laskujaLahetetty;
-    private final MerkkiJaMerkkijonoTarkistin tarkistin;
+    private String asiakasnumero;
+    private String nimi;
+    private String katuosoite;
+    private String postinumero;
+    private String kaupunki;
+    private Integer laskujaLahetetty;
+    private MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty) {
         this.asiakasnumero = asiakasnumero;
@@ -29,6 +29,8 @@ public class Asiakas {
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
+    
+    
     public Boolean onkoTiedotOikeanlaiset() {
         if (onkoNimiOikeanlainen()
                 && onkoKaupunkiOikeanlainen()
@@ -42,38 +44,23 @@ public class Asiakas {
     }
 
     public Boolean onkoNimiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi)) {
-            return false;
-        }
-        return true;
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi));
     }
 
     public Boolean onkoKaupunkiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki)) {
-            return false;
-        }
-        return true;
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki));
     }
 
     public Boolean onkoKatuosoiteOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite)) {
-            return false;
-        }
-        return true;
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite));
     }
 
     public Boolean onkoAsiakasnumeroOikeanlainen() {
-        if (tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero)) {
-            return true;
-        }
-        return false;
+        return (tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero));
     }
 
     public Boolean onkoPostinumeroOikeanlainen() {
-        if (tarkistin.koostuukoMerkkijonoNumeroista(postinumero)) {
-            return true;
-        }
-        return false;
+        return (tarkistin.koostuukoMerkkijonoNumeroista(postinumero));
     }
 
     public Boolean onkoLaskujaLahetettyOikeanlainen() {
@@ -146,4 +133,30 @@ public class Asiakas {
     public int hashCode() {
         return (laskujaLahetetty + asiakasnumero.hashCode() + nimi.hashCode() + katuosoite.hashCode());
     }
+
+    public void setAsiakasnumero(String asiakasnumero) {
+        this.asiakasnumero = asiakasnumero;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public void setKatuosoite(String katuosoite) {
+        this.katuosoite = katuosoite;
+    }
+
+    public void setPostinumero(String postinumero) {
+        this.postinumero = postinumero;
+    }
+
+    public void setKaupunki(String kaupunki) {
+        this.kaupunki = kaupunki;
+    }
+
+    public void setLaskujaLahetetty(Integer laskujaLahetetty) {
+        this.laskujaLahetetty = laskujaLahetetty;
+    }
+    
+    
 }

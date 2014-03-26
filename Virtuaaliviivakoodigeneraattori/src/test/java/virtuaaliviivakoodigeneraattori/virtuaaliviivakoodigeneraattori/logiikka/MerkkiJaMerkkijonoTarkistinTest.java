@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author Augustus58
  */
-public class MerkkiTarkistinTest {
+public class MerkkiJaMerkkijonoTarkistinTest {
 
     MerkkiJaMerkkijonoTarkistin merkkitarkistin;
     Character merkki1;
@@ -25,7 +25,7 @@ public class MerkkiTarkistinTest {
     Character merkki4;
     Character merkki5;
 
-    public MerkkiTarkistinTest() {
+    public MerkkiJaMerkkijonoTarkistinTest() {
     }
 
     @BeforeClass

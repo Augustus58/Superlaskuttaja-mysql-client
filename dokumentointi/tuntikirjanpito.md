@@ -11,3 +11,4 @@
 - **24.3.2014 10h** Tehty laskuttajan lisääminen käyttöliittymään. Opeteltu JPanelin sisällön muuttamista kesken ohjelman suorituksen. Tutustuttu Jsoniin tallentamista silmällä pitäen. Tehty iso kasa tietojen tarkistuksia luokkaan laskuttaja. Suunniteltu ja hiottu käyttöliittymän toiminnallisuutta ja ulkoasua.
 - **25.3.2014 1h** Tehty laskuttuja-osiota hieman. Tuumailtu, että suoritteiden (laskutuksessa vaikkapa seinän maalaaminen) käsittely kannattaa ehkä laittaa kokonaan omaan osioonsa..
 - **25.3.2014 1h** Lisätty laskuttaja-osioon laskuttajan tietojen muokkaaminen. Lisätty logiikkaan luokka suorite.
+- **26.3.2014 4h** Tehty testejä ja liiskattu löytyneitä bugeja.

@@ -102,7 +102,7 @@ public class MuokkaaLaskuttajanTietojaIkkuna implements Runnable {
         JLabel tilinumeroTeksti1 = new JLabel("Vanha tilinumero:");
         JLabel tilinumeroTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getTilinumero());
         JLabel tilinumeroTeksti = new JLabel("Uusi tilinumero:");
-        JTextField tilinumeroKentta = new JTextField("FI3816603001014664");
+        JTextField tilinumeroKentta = new JTextField("FI3936363002092492");
 
         JLabel tilinumeronPankkiTeksti1 = new JLabel("Vanha tilinumeron pankki:");
         JLabel tilinumeronPankkiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getPankki());

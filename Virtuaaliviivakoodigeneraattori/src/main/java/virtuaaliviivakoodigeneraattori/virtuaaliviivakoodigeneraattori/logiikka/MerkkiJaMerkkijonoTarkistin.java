@@ -61,8 +61,11 @@ public class MerkkiJaMerkkijonoTarkistin {
         return false;
     }
     
-    public Boolean koostuukoMerkkijonoNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
+    public Boolean SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
         if (merkkijono.isEmpty()) {
+            return false;
+        }
+        if (!sisaltaakoMerkkijonoVahYhdenNumeron(merkkijono)) {
             return false;
         }
         for (int i = 0; i < merkkijono.length(); i++) {
@@ -71,6 +74,15 @@ public class MerkkiJaMerkkijonoTarkistin {
             }
         }
         return true;
+    }
+    
+    public Boolean sisaltaakoMerkkijonoVahYhdenNumeron(String merkkijono) {
+        for (int i = 0; i < merkkijono.length(); i++) {
+            if (onkoMerkkiNumero(merkkijono.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(String merkkijono) {
