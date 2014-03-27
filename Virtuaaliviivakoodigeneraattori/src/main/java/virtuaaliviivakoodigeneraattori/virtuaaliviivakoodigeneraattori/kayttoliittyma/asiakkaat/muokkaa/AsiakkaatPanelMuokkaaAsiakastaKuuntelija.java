@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -21,10 +21,10 @@ public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener 
 
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
-    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanelMuokkaaAsiakastaKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, AsiakkaatTaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public AsiakkaatPanelMuokkaaAsiakastaKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;

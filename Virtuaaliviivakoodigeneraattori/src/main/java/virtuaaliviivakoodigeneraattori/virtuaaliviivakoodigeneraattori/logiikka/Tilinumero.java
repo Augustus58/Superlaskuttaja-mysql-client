@@ -12,7 +12,7 @@ import java.math.BigInteger;
  * @author Augustus58
  */
 
-// Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
+// Osaan tämän luokan metodeista löytyy toiminnan perustelut osoitteesta
 // http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
 public class Tilinumero {
 
@@ -56,22 +56,13 @@ public class Tilinumero {
                 muunnettuMerkkijono = muunnettuMerkkijono + tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.charAt(i);
             }
         }
-        if (voikoMerkkijononMuuttaaKokonaisluvuksi(muunnettuMerkkijono)) {
+        if (tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi(muunnettuMerkkijono)) {
             BigInteger kokonaisluku = new BigInteger(muunnettuMerkkijono);
             return (kokonaisluku);
         }
         BigInteger nolla = new BigInteger("0");
         return nolla;
 
-    }
-
-    private Boolean voikoMerkkijononMuuttaaKokonaisluvuksi(String merkkijono) {
-        for (int i = 0; i < merkkijono.length(); i++) {
-            if (!this.tarkistin.onkoMerkkiNumero(merkkijono.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private Integer muunnaKirjainKokonaisluvuksi(Character kirjain) {
@@ -84,26 +75,20 @@ public class Tilinumero {
         return k;
     }
 
-    public String getTilinumeroIlmanMaatunnusta() {
-        return this.tilinumero.substring(2);
+    public Boolean onkoPankkiOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(pankki));
     }
-
+    
+    public Boolean onkoSwiftBicOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(swiftBic));
+    }
+    
     public String getTilinumero() {
         return this.tilinumero;
     }
     
-    public Boolean onkoPankkiOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(pankki)) {
-            return false;
-        }
-        return true;
-    }
-    
-    public Boolean onkoSwiftBicOikeanlainen() {
-        if (tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(swiftBic)) {
-            return false;
-        }
-        return true;
+    public String getTilinumeroIlmanMaatunnusta() {
+        return this.tilinumero.substring(2);
     }
 
     public String getPankki() {

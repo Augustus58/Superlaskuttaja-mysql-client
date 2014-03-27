@@ -21,8 +21,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.IkkunaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -34,10 +34,10 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
     private JFrame frame;
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
-    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public MuokkaaAsiakastaIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko, AsiakkaatTaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public MuokkaaAsiakastaIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;

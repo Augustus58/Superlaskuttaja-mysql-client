@@ -14,13 +14,15 @@ import java.util.ArrayList;
 //Tämän luokan ilmentymässä voi "säilyttää" ohjelmassa esiintyviä olioita, kuten esim. Asiakas -tai Lasku luokkien ilmentymiä.
 public class Tietovarasto {
 
-    private ArrayList<Asiakas> asiakkaat;
-    private ArrayList<Lasku> laskut;
     private Laskuttaja laskuttaja;
+    private ArrayList<Asiakas> asiakkaat;
+    private ArrayList<Suorite> suoritteet;
+    private ArrayList<Lasku> laskut;
     private Boolean laskuttajaLisatty;
 
     public Tietovarasto() {
         this.asiakkaat = new ArrayList<>();
+        this.suoritteet = new ArrayList<>();
         this.laskut = new ArrayList<>();     
         this.laskuttajaLisatty = false;
     }
@@ -34,6 +36,14 @@ public class Tietovarasto {
             taulukko[i][3] = asiakkaat.get(i).getKaupunki();
             taulukko[i][4] = asiakkaat.get(i).getLaskujaLahetetty().toString();
             taulukko[i][5] = asiakkaat.get(i).getAsiakasnumero();
+        }
+        return taulukko;
+    }
+    
+    public String[] getAsiakkaidenNimetArrayString() {
+        String[] taulukko = new String[asiakkaat.size()];
+        for (int i = 0; i < taulukko.length; i++) {
+            taulukko[i] = asiakkaat.get(i).getNimi();
         }
         return taulukko;
     }
@@ -55,6 +65,10 @@ public class Tietovarasto {
         return laskuttaja;
     }
 
+    public ArrayList<Suorite> getSuoritteet() {
+        return suoritteet;
+    }
+    
     public Boolean isLaskuttajaLisatty() {
         return laskuttajaLisatty;
     }

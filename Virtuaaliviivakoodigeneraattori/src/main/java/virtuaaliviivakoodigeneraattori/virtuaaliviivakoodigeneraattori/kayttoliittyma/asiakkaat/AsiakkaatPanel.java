@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -28,7 +29,7 @@ public class AsiakkaatPanel extends JPanel {
 
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
-    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
     public AsiakkaatPanel(Lataaja lataaja) {
@@ -36,7 +37,7 @@ public class AsiakkaatPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
         this.taulukko = new AsiakkaatTaulukko(lataaja);
-        this.kuuntelija = new AsiakkaatTaulukkoValintaKuuntelija(taulukko.getTaulukko());
+        this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = new NappulaLukko();
         luoKomponentit();
 

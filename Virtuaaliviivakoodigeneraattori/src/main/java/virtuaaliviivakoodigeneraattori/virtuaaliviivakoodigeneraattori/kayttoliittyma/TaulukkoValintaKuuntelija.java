@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -13,13 +13,13 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Augustus58
  */
-public class AsiakkaatTaulukkoValintaKuuntelija implements ListSelectionListener {
+public class TaulukkoValintaKuuntelija implements ListSelectionListener {
 
     private Integer arvo;
     private Integer paivitettyArvo;
     private final JTable taulukko;
 
-    public AsiakkaatTaulukkoValintaKuuntelija(JTable taulukko) {
+    public TaulukkoValintaKuuntelija(JTable taulukko) {
         this.taulukko = taulukko;
     }
 

@@ -36,7 +36,7 @@ public class AsiakasTest {
     
     @Before
     public void setUp() {
-        // Luodaan asiakas, jonka tietojen pitäisi mennä läpi tarkistuksista.
+        // Luodaan asiakkaat, joiden tietojen pitäisi mennä läpi tarkistuksista.
         asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
         asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
         asiakas2 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000);

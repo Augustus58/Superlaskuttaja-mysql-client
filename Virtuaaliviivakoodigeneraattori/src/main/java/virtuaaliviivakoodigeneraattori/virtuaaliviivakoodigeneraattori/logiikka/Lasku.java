@@ -43,4 +43,8 @@ public class Lasku {
         this.summa = summa;
         this.pankkiviivakoodi = pankkiviivakoodi;
     }
+
+    public Integer getLaskunNumero() {
+        return laskunNumero;
+    }
 }

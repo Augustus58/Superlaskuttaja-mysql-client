@@ -5,16 +5,7 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.laskut.*;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatPanelNaytaKriteerinSisKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatPanelPoistaAsiakasKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatPanelNaytaKaikkiKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukkoValintaKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.muokkaa.AsiakkaatPanelMuokkaaAsiakastaKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.lisaa.AsiakkaatPanelLisaaAsiakasKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaa.SuoritteetPanelLisaaSuoriteKuuntelija;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
@@ -26,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaaValitusta.SuoritteetPanelLisaaSuoriteValitustaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -35,16 +28,16 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
 public class SuoritteetPanel extends JPanel {
 
     private final Lataaja lataaja;
-    private final AsiakkaatTaulukko taulukko;
-    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final SuoritteetTaulukko taulukko;
+    private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
     public SuoritteetPanel(Lataaja lataaja) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
-        this.taulukko = new AsiakkaatTaulukko(lataaja);
-        this.kuuntelija = new AsiakkaatTaulukkoValintaKuuntelija(taulukko.getTaulukko());
+        this.taulukko = new SuoritteetTaulukko(lataaja);
+        this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = new NappulaLukko();
         luoKomponentit();
 
@@ -76,13 +69,13 @@ public class SuoritteetPanel extends JPanel {
 
         JButton naytaKriteerinSisaltavatNappi = new JButton("Näytä kriteeritekstin sisältävät");
         naytaKriteerinSisaltavatNappi.setToolTipText("Näyttää kriteeritekstin sisältävät asiakkaat kaikkien asiakkaiden joukosta");
-        AsiakkaatPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new AsiakkaatPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
-        naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
+//        AsiakkaatPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new AsiakkaatPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
+//        naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
         ylaosa.add(naytaKriteerinSisaltavatNappi);
         
         JButton naytaKaikkiNappi = new JButton("Näytä kaikki asiakkaat");
-        AsiakkaatPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new AsiakkaatPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
-        naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
+//        AsiakkaatPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new AsiakkaatPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
+//        naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
         ylaosa.add(naytaKaikkiNappi);
 
         return ylaosa;
@@ -96,7 +89,10 @@ public class SuoritteetPanel extends JPanel {
         keskiosa.setBorder(new EmptyBorder(20, 20, 20, 20));
         keskiosa.setLayout(new BoxLayout(keskiosa, BoxLayout.Y_AXIS));
         
-        taulukko.muodostaAsiakkaatTaulukko();         
+        // Pidetään suoritetaulukko ja suoritteet tietovarastossa samassa järjestyksessä.
+        // Samaa jätjestystä tarvitaan mm. luokassa LisaaSuoriteValitustaIkkuna.
+        
+        taulukko.muodostaSuoritteetTaulukko();         
         taulukko.getSelectionModel().addListSelectionListener(kuuntelija);
         
         JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko()); 
@@ -110,16 +106,21 @@ public class SuoritteetPanel extends JPanel {
     private JPanel alaosa() {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
-        JButton lisaaAsiakasNappi = new JButton("Lisää asiakas");
-        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja, taulukko, lukko));
-        alaosa.add(lisaaAsiakasNappi);
-
-        JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua asiakasta");
-        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
+        JButton lisaaSuoriteNappi = new JButton("Lisää suorite");
+        lisaaSuoriteNappi.addActionListener(new SuoritteetPanelLisaaSuoriteKuuntelija(lataaja, taulukko, lukko));
+        alaosa.add(lisaaSuoriteNappi);
+        
+        JButton lisaaSuoriteKayttaenValittuaPohjanaNappi = new JButton("Lisää suorite valitusta");
+        lisaaSuoriteKayttaenValittuaPohjanaNappi.setToolTipText("Lisää uusi suorite käyttäen valittua suoritetta pohjana");
+        lisaaSuoriteKayttaenValittuaPohjanaNappi.addActionListener(new SuoritteetPanelLisaaSuoriteValitustaKuuntelija(lataaja, taulukko, lukko, kuuntelija));
+        alaosa.add(lisaaSuoriteKayttaenValittuaPohjanaNappi);
+        
+        JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua suoritetta");
+//        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(muokkaaValittuaAsiakastaNappi);
 
-        JButton poistaValittuAsiakas = new JButton("Poista valittu asiakas");
-        poistaValittuAsiakas.addActionListener(new AsiakkaatPanelPoistaAsiakasKuuntelija(lataaja, taulukko, kuuntelija, lukko));
+        JButton poistaValittuAsiakas = new JButton("Poista valittu suorite");
+//        poistaValittuAsiakas.addActionListener(new AsiakkaatPanelPoistaAsiakasKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(poistaValittuAsiakas);
 
         return alaosa;

@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat.AsiakkaatTaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -31,10 +31,10 @@ public class MuokkaaAsiakastaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final JFrame frame;
-    private final AsiakkaatTaulukkoValintaKuuntelija kuuntelija;
+    private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField asiakasnumeroKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, AsiakkaatTaulukko taulukko, JFrame frame, AsiakkaatTaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField asiakasnumeroKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, AsiakkaatTaulukko taulukko, JFrame frame, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.nimiKentta = nimiKentta;
         this.katuosoiteKentta = katuosoiteKentta;
         this.postinumeroKentta = postinumeroKentta;
