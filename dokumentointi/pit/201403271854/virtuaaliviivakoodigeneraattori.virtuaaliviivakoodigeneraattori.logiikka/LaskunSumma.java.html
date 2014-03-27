@@ -1,0 +1,965 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+border: 1px solid #dddddd;
+padding-top: 10px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>LaskunSumma.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_1'/>
+1
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_1'></a>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_2'/>
+2
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_2'></a>
+</td>
+<td class=''><pre><span  class=''> * To change this license header, choose License Headers in Project Properties.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_3'/>
+3
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_3'></a>
+</td>
+<td class=''><pre><span  class=''> * To change this template file, choose Tools | Templates</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_4'/>
+4
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_4'></a>
+</td>
+<td class=''><pre><span  class=''> * and open the template in the editor.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_5'/>
+5
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_5'></a>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_6'/>
+6
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_6'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_7'/>
+7
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_7'></a>
+</td>
+<td class=''><pre><span  class=''>package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_8'/>
+8
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_8'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_9'/>
+9
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_9'></a>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_10'/>
+10
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_10'></a>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_11'/>
+11
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_11'></a>
+</td>
+<td class=''><pre><span  class=''> * @author Augustus58</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_12'/>
+12
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_12'></a>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_13'/>
+13
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_13'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_14'/>
+14
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_14'></a>
+</td>
+<td class=''><pre><span  class=''>// T&#228;m&#228;n luokan tarkistusmetodien toiminnan perustelut l&#246;ytyy osoitteesta</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_15'/>
+15
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_15'></a>
+</td>
+<td class=''><pre><span  class=''>// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_16'/>
+16
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_16'></a>
+</td>
+<td class=''><pre><span  class=''>public class LaskunSumma {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_17'/>
+17
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_17'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_18'/>
+18
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_18'></a>
+</td>
+<td class=''><pre><span  class=''>    private Integer eurot;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_19'/>
+19
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_19'></a>
+</td>
+<td class=''><pre><span  class=''>    private Integer sentit;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_20'/>
+20
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_20'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_21'/>
+21
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_21'></a>
+</td>
+<td class='covered'><pre><span  class=''>    public LaskunSumma (Integer eurot, Integer sentit) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_22'/>
+22
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_22'></a>
+</td>
+<td class='covered'><pre><span  class=''>        this.eurot=eurot;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_23'/>
+23
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_23'></a>
+</td>
+<td class='covered'><pre><span  class=''>        this.sentit=sentit;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_24'/>
+24
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_24'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_25'/>
+25
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_25'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_26'/>
+26
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_26'></a>
+</td>
+<td class=''><pre><span  class=''>    public String getEurotStringEtunollillaPituusKuusi() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_27'/>
+27
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_27'></a>
+</td>
+<td class='covered'><pre><span  class=''>        String etunollat=&#34;&#34;;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_28'/>
+28
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_28'>2</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        while((etunollat+this.eurot.toString()).length()&#60;6){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_29'/>
+29
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_29'></a>
+</td>
+<td class='covered'><pre><span  class=''>            etunollat=etunollat+&#34;0&#34;;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_30'/>
+30
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_30'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_31'/>
+31
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_31'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (etunollat+this.eurot.toString());</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_32'/>
+32
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_32'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_33'/>
+33
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_33'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_34'/>
+34
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_34'></a>
+</td>
+<td class=''><pre><span  class=''>    public String getSentitStringEtunollillaPituusKaksi() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_35'/>
+35
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_35'></a>
+</td>
+<td class='covered'><pre><span  class=''>        String etunollat=&#34;&#34;;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_36'/>
+36
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_36'>2</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        while((etunollat+this.sentit.toString()).length()&#60;2){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_37'/>
+37
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_37'></a>
+</td>
+<td class='covered'><pre><span  class=''>            etunollat=etunollat+&#34;0&#34;;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_38'/>
+38
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_38'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_39'/>
+39
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_39'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (etunollat+this.sentit.toString());</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_40'/>
+40
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_40'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_41'/>
+41
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_41'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_42'/>
+42
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_42'></a>
+</td>
+<td class=''><pre><span  class=''>    //Seuraavassa tarkistetaan, ett&#228; eurom&#228;&#228;r&#228; t&#228;ytt&#228;&#228; pankkiviivakoodistandardin.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_43'/>
+43
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_43'></a>
+</td>
+<td class=''><pre><span  class=''>    public Boolean tarkistaEurot (Integer eurot) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_44'/>
+44
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_44'>4</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (eurot&#62;=0 &#38;&#38; eurot&#60;=999999) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_45'/>
+45
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_45'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>            return true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_46'/>
+46
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_46'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_47'/>
+47
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_47'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_48'/>
+48
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_48'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_49'/>
+49
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_49'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_50'/>
+50
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_50'></a>
+</td>
+<td class=''><pre><span  class=''>    //Seuraavassa tarkistetaan, ett&#228; senttim&#228;&#228;r&#228; t&#228;ytt&#228;&#228; pankkiviivakoodistandardin.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_51'/>
+51
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_51'></a>
+</td>
+<td class=''><pre><span  class=''>    public Boolean tarkistaSentit (Integer sentit) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_52'/>
+52
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_52'>4</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (sentit&#62;=0 &#38;&#38; sentit&#60;=99) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_53'/>
+53
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_53'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>            return true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_54'/>
+54
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_54'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_55'/>
+55
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_55'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_56'/>
+56
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_56'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_57'/>
+57
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_57'></a>
+</td>
+<td class=''><pre><span  class=''>    public void muutaEurot(Integer eurot) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_58'/>
+58
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_58'></a>
+</td>
+<td class='covered'><pre><span  class=''>        this.eurot = eurot;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_59'/>
+59
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_59'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_60'/>
+60
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_60'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_61'/>
+61
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_61'></a>
+</td>
+<td class=''><pre><span  class=''>    public void muutaSentit(Integer sentit) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_62'/>
+62
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_62'></a>
+</td>
+<td class='covered'><pre><span  class=''>        this.sentit = sentit;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_63'/>
+63
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_63'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_64'/>
+64
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_64'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_65'/>
+65
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_65'></a>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_28'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_31'>31</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_31'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::getEurotStringEtunollillaPituusKuusi to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_36'>36</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_36'/> 
+
+<p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_39'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::getSentitStringEtunollillaPituusKaksi to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_44'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_45'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::tarkistaEurot to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_47'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::tarkistaEurot to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_52'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>negated conditional : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> <p class='KILLED'>changed conditional boundary : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_53'>53</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_53'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::tarkistaSentit to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@61a7c7e7_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@61a7c7e7_55'/> 
+
+<p class='KILLED'>mutated return of Object value for virtuaaliviivakoodigeneraattori/virtuaaliviivakoodigeneraattori/logiikka/LaskunSumma::tarkistaSentit to ( if (x != null) null else throw new RuntimeException ) : KILLED -> virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.LaskunSummaTest (5 ms)</li><li>virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.PankkiviivakoodiTest.virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.PankkiviivakoodiTest (5 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 0.30
+
+</body>
+</html>

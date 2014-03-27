@@ -12,3 +12,7 @@
 - **25.3.2014 1h** Tehty laskuttuja-osiota hieman. Tuumailtu, että suoritteiden (laskutuksessa vaikkapa seinän maalaaminen) käsittely kannattaa ehkä laittaa kokonaan omaan osioonsa..
 - **25.3.2014 1h** Lisätty laskuttaja-osioon laskuttajan tietojen muokkaaminen. Lisätty logiikkaan luokka suorite.
 - **26.3.2014 4h** Tehty testejä ja liiskattu löytyneitä bugeja.
+- **26.3.2014 3h** Tehty testejä.
+- **26.3.2014 1h** Tehty käyttöliittymän suoritteet-osiota.
+- **27.3.2014 4h** Tehty käyttöliittymän suoritteet-osiota.
+- **27.3.2014 1h** Päivitetty luokkakaavio ja generoitu pit-raportti.
