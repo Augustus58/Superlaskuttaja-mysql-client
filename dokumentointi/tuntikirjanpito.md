@@ -16,3 +16,6 @@
 - **26.3.2014 1h** Tehty käyttöliittymän suoritteet-osiota.
 - **27.3.2014 4h** Tehty käyttöliittymän suoritteet-osiota.
 - **27.3.2014 1h** Päivitetty luokkakaavio ja generoitu pit-raportti.
+- **28.3.2014 2h** Tehty käyttöliittymän suoritteet-osiota.
+- **28.3.2014 3h** Opeteltu JTable filtteröintiä ja toteutettu suoritteet-taulukon filtteröinti luokan TableRowSorter<> ilmentymällä.
+- **31.3.2014 1h** Refaktoroitu käyttöliittymän asiakkaat-osion taulukon filtteröinti käyttämään luokan TableRowSorter<> ilmentymää. Koodattu NappulaLukko-luokan ilmentymän toiminta koskemaan myös käyttöliittymän osiota suoritteet. Seuraavaksi vuorossa suoritteet-osion virheidenkäsittely. Virheidenkäsittelyä varten pitää tehdä syötteiden tarkistuksia.
