@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet;
 
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
 import java.awt.event.ActionEvent;
@@ -17,14 +17,14 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class AsiakkaatPanelNaytaKriteerinSisKuuntelija implements ActionListener {
+public class SuoritteetPanelNaytaKriteerinSisKuuntelija implements ActionListener {
 
     private final Lataaja lataaja;
-    private final AsiakkaatTaulukko taulukko;
+    private final SuoritteetTaulukko taulukko;
     private final ComboBoxKuuntelija kuuntelija;
     private final JTextField kriteeriTekstikentta;
 
-    public AsiakkaatPanelNaytaKriteerinSisKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, ComboBoxKuuntelija kuuntelija, JTextField kriteeriTekstikentta) {
+    public SuoritteetPanelNaytaKriteerinSisKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, ComboBoxKuuntelija kuuntelija, JTextField kriteeriTekstikentta) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;

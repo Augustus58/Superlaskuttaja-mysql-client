@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaaValitusta;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.muokkaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
@@ -21,7 +22,7 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListener {
+public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
 
     private final JTextField kuvausKentta;
     private final JTextField pvmKentta;
@@ -33,9 +34,10 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
     private final SuoritteetTaulukko taulukko;
     private final JFrame frame;
     private final NappulaLukko lukko;
-    private final ComboBoxKuuntelija kuuntelija;
+    private final ComboBoxKuuntelija comboBoxKuuntelija;
+    private final TaulukkoValintaKuuntelija taulukkoKuuntelija;
 
-    public LisaaSuoriteValitustaIkkunaLisaaKuuntelija(ComboBoxKuuntelija kuuntelija, JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko) {
+    public MuokkaaValittuaIkkunaMuokkaaKuuntelija(JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko, ComboBoxKuuntelija comboBoxKuuntelija, TaulukkoValintaKuuntelija taulukkoKuuntelija) {
         this.kuvausKentta = kuvausKentta;
         this.pvmKentta = pvmKentta;
         this.maaraKentta = maaraKentta;
@@ -46,14 +48,15 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
         this.taulukko = taulukko;
         this.frame = frame;
         this.lukko = lukko;
-        this.kuuntelija = kuuntelija;
+        this.comboBoxKuuntelija = comboBoxKuuntelija;
+        this.taulukkoKuuntelija = taulukkoKuuntelija;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
 
-            Asiakas suoritteenAsiakas = lataaja.getLadattuTietovarasto().getAsiakkaat().get(kuuntelija.getValinta());
+            Asiakas suoritteenAsiakas = lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta());
             Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
             Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
@@ -70,8 +73,10 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
 //            if (!suorite.onkoTiedotOikeanlaiset()) {
 //                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
 //            }
-            lataaja.getLadattuTietovarasto().getSuoritteet().add(suorite);
-            taulukko.addSuoritteetTaulukkoRivi(suorite);
+            lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getArvoModel());
+            lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getArvoModel(), suorite);
+            taulukko.getModel().insertRow(taulukkoKuuntelija.getArvoModel(), suorite.getSuoritteenTiedotTaulukossa());
+            taulukko.getModel().removeRow(taulukkoKuuntelija.getArvoModel() + 1);
             lukko.avaa();
             suljeIkkuna();
         } catch (Exception e) {

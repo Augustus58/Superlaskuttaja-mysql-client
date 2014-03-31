@@ -8,8 +8,8 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoli
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Suorite;
 
@@ -22,21 +22,23 @@ public class SuoritteetTaulukko {
     private JTable taulukko;
     private TableModelSolujenMuokkaaminenEstetty model;
     private ListSelectionModel selectionModel;
+    private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
     private Lataaja lataaja;
 
     public SuoritteetTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
         this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Asiakas", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"});            
+        this.sorter = new TableRowSorter<>(model);
         this.taulukko.setModel(model);
+        this.taulukko.setRowSorter(sorter);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        taulukko.setAutoCreateRowSorter(true);
         muodostaSuoritteetTaulukko();
     }
 
     public final void muodostaSuoritteetTaulukko() {
-        if (!lataaja.getLadattuTietovarasto().getLaskut().isEmpty()) {
+        if (!lataaja.getLadattuTietovarasto().getSuoritteet().isEmpty()) {
             for (int i = 0; i < lataaja.getLadattuTietovarasto().getSuoritteet().size(); i++) {
                 model.addRow(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getSuoritteenTiedotTaulukossa());
             }
@@ -59,12 +61,12 @@ public class SuoritteetTaulukko {
         return selectionModel;
     }
 
+    public TableRowSorter<TableModelSolujenMuokkaaminenEstetty> getSorter() {
+        return sorter;
+    }
+    
     public String getValueString(Integer x, Integer y) {
         return (getModel().getValueAt(x, y).toString());
-    }
-
-    public void reset() {
-        model.setRowCount(0);
     }
 
 }

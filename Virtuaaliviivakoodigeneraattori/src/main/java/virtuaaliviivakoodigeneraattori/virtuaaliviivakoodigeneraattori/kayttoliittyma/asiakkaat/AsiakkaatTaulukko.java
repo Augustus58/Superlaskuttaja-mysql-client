@@ -8,6 +8,7 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoli
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
@@ -21,16 +22,18 @@ public class AsiakkaatTaulukko {
     private final JTable taulukko;
     private final TableModelSolujenMuokkaaminenEstetty model;
     private final ListSelectionModel selectionModel;
+    private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
     private final Lataaja lataaja;
 
     public AsiakkaatTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
         this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});            
+        this.sorter = new TableRowSorter<>(model);
         this.taulukko.setModel(model);
+        this.taulukko.setRowSorter(sorter);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        taulukko.setAutoCreateRowSorter(true);
         muodostaAsiakkaatTaulukko();
     }
 
@@ -58,12 +61,11 @@ public class AsiakkaatTaulukko {
         return selectionModel;
     }
 
+    public TableRowSorter<TableModelSolujenMuokkaaminenEstetty> getSorter() {
+        return sorter;
+    }
+    
     public String getValueString(Integer x, Integer y) {
         return (getModel().getValueAt(x, y).toString());
     }
-
-    public void reset() {
-        model.setRowCount(0);
-    }
-
 }

@@ -35,36 +35,37 @@ public class Kayttoliittyma implements Runnable {
         frame.setLocation(100, 60);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
-        Lataaja lataaja = new Lataaja();
 
-        luoKomponentit(frame.getContentPane(), lataaja);
+        Lataaja lataaja = new Lataaja();
+        
+        NappulaLukko lukko = new NappulaLukko();
+
+        luoKomponentit(frame.getContentPane(), lataaja, lukko);
 
         frame.pack();
         frame.setVisible(true);
-        
+
     }
 
-    private void luoKomponentit(Container container, Lataaja lataaja) {
+    private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko) {
         JTabbedPane tabbedPane = new JTabbedPane();
-        
+
         JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja);
         tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel, null);
 
-        JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja);
+        JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja, lukko);
         tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
-        
-        JPanel suoritteetPanel = new SuoritteetPanel(lataaja);
+
+        JPanel suoritteetPanel = new SuoritteetPanel(lataaja, lukko);
         tabbedPane.addTab("Suoritteet", null, suoritteetPanel, null);
-        
+
         JPanel laskutPanel = new LaskutPanel(lataaja);
         tabbedPane.addTab("Laskut", null, laskutPanel, null);
-        
+
         container.add(tabbedPane);
     }
 
     public JFrame getFrame() {
         return frame;
     }
-
 }

@@ -50,6 +50,50 @@ public class Suorite {
     public Asiakas getAsiakas() {
         return asiakas;
     }
+
+    public String getKuvaus() {
+        return kuvaus;
+    }
+
+    public Date getPvm() {
+        return pvm;
+    }
+
+    public Boolean isOnkoLaskutettu() {
+        return onkoLaskutettu;
+    }
+
+    public SimpleDateFormat getPvmFormaatti() {
+        return pvmFormaatti;
+    }
+    
+    public Double getMaara() {
+        return maara;
+    }
+
+    public String getMaaranYksikot() {
+        return maaranYksikot;
+    }
+
+    public Double getaHinta() {
+        return aHinta;
+    }
+
+    public Integer getAlvProsentti() {
+        return alvProsentti;
+    }
+
+    public Double getAlv() {
+        return alv;
+    }
+
+    public Double getYht() {
+        return yht;
+    }
+
+    public String getLaskutettuTeksti() {
+        return laskutettuTeksti;
+    }
     
     private void laskeAlv() {
         this.alv = (alvProsentti / 100.0) * aHinta;
@@ -65,6 +109,10 @@ public class Suorite {
         } else {
             laskutettuTeksti = "Ei";
         }
+    }
+
+    public boolean onkoTiedotOikeanlaiset() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

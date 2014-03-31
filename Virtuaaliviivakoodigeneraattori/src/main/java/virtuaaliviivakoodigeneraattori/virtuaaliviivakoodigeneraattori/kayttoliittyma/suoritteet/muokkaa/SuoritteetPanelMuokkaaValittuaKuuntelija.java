@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaa;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.muokkaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -16,24 +17,26 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class SuoritteetPanelLisaaSuoriteKuuntelija implements ActionListener {
+public class SuoritteetPanelMuokkaaValittuaKuuntelija implements ActionListener {
 
     private final Lataaja lataaja;
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
+    private final TaulukkoValintaKuuntelija kuuntelija;
 
-    public SuoritteetPanelLisaaSuoriteKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko) {
+    public SuoritteetPanelMuokkaaValittuaKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
+        this.kuuntelija = kuuntelija;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
             lukko.lukitse();
-            LisaaSuoriteIkkuna lisaaSuorite = new LisaaSuoriteIkkuna(lataaja, taulukko, lukko);
-            SwingUtilities.invokeLater(lisaaSuorite);
+            MuokkaaValittuaIkkuna muokkaaSuoritetta = new MuokkaaValittuaIkkuna(lataaja, taulukko, lukko, kuuntelija);
+            SwingUtilities.invokeLater(muokkaaSuoritetta);
         }
     }
 }

@@ -81,22 +81,22 @@ public class LisaaSuoriteIkkuna implements Runnable {
         asiakas.addActionListener(comboBoxkuuntelija);
 
         JLabel kuvausTeksti = new JLabel("Kuvaus:");
-        JTextField kuvausKentta = new JTextField();
+        JTextField kuvausKentta = new JTextField("1");
 
         JLabel pvmTeksti = new JLabel("Päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField();
+        JTextField pvmKentta = new JTextField("11.11.2011");
 
         JLabel maaraTeksti = new JLabel("Määrä:");
-        JTextField maaraKentta = new JTextField();
+        JTextField maaraKentta = new JTextField("1");
 
         JLabel maaranYksikotTeksti = new JLabel("Yksiköt:");
-        JTextField maaranYksikotKentta = new JTextField();
+        JTextField maaranYksikotKentta = new JTextField("1");
 
         JLabel aHintaTeksti = new JLabel("à hinta:");
-        JTextField aHintaKentta = new JTextField();
+        JTextField aHintaKentta = new JTextField("1");
         
         JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
-        JTextField alvProsKentta = new JTextField();
+        JTextField alvProsKentta = new JTextField("1");
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);

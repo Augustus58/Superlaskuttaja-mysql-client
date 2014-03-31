@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.asiakkaat;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,16 +13,15 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class AsiakkaatPanelNaytaKaikkiKuuntelija implements ActionListener {
-
+public class SuoritteetPanelNaytaKaikkiKuuntelija implements ActionListener {
     private final Lataaja lataaja;
-    private final AsiakkaatTaulukko taulukko;
+    private final SuoritteetTaulukko taulukko;
 
-    public AsiakkaatPanelNaytaKaikkiKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public SuoritteetPanelNaytaKaikkiKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko) {
         this.lataaja = lataaja;
-        this.taulukko = taulukko;
-    }
-
+        this.taulukko = taulukko;        
+    }   
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         taulukko.getSorter().setRowFilter(null);

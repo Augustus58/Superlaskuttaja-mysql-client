@@ -70,22 +70,22 @@ public class LisaaAsiakasIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel nimiTeksti = new JLabel("Nimi:");
-        JTextField nimiKentta = new JTextField();
+        JTextField nimiKentta = new JTextField("1");
 
         JLabel katuosoiteTeksti = new JLabel("Katuosoite:");
-        JTextField katuosoiteKentta = new JTextField();
+        JTextField katuosoiteKentta = new JTextField("1");
 
         JLabel postinumeroTeksti = new JLabel("Postinumero:");
-        JTextField postinumeroKentta = new JTextField();
+        JTextField postinumeroKentta = new JTextField("1");
 
         JLabel kaupunkiTeksti = new JLabel("Kaupunki:");
-        JTextField kaupunkiKentta = new JTextField();
+        JTextField kaupunkiKentta = new JTextField("1");
 
         JLabel asiakasnumeroTeksti = new JLabel("Asiakasnumero:");
-        JTextField asiakasnumeroKentta = new JTextField();
+        JTextField asiakasnumeroKentta = new JTextField("1");
 
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty:");
-        JTextField laskujaLahetettyKentta = new JTextField();
+        JTextField laskujaLahetettyKentta = new JTextField("1");
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);

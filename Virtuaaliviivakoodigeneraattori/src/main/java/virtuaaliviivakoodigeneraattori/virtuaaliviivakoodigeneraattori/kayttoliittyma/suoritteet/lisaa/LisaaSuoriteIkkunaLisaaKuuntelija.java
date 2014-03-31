@@ -7,7 +7,6 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoli
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -68,12 +67,11 @@ public class LisaaSuoriteIkkunaLisaaKuuntelija implements ActionListener {
                     Double.parseDouble(aHintaKentta.getText()),
                     Integer.parseInt(alvProsKentta.getText()));
 
-//            if (!suorite.onkoTiedotOikeanlaiset()) {
-//                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
-//            }
-
+            if (!suorite.onkoTiedotOikeanlaiset()) {
+                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
+            }
             lataaja.getLadattuTietovarasto().getSuoritteet().add(suorite);
-            taulukko.addSuoritteetTaulukkoRivi(suorite);            
+            taulukko.addSuoritteetTaulukkoRivi(suorite);
             suljeIkkuna();
         } catch (Exception e) {
 //            LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna();
@@ -84,6 +82,6 @@ public class LisaaSuoriteIkkunaLisaaKuuntelija implements ActionListener {
 
     private void suljeIkkuna() {
         frame.dispose();
-//        lukko.avaa();
+        lukko.avaa();
     }
 }

@@ -104,7 +104,6 @@ public class MerkkiJaMerkkijonoTarkistin {
                     return false;
                 }
             }
-            
         }
         return true;
     }

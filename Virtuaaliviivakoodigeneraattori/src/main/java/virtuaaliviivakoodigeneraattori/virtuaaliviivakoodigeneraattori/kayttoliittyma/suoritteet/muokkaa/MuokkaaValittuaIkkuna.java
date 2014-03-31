@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaaValitusta;
+package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.muokkaa;
 
 import java.awt.Component;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.IkkunaKuuntelija;
@@ -30,7 +30,7 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  *
  * @author Augustus58
  */
-public class LisaaSuoriteValitustaIkkuna implements Runnable {
+public class MuokkaaValittuaIkkuna implements Runnable {
 
     private JFrame frame;
     private final Lataaja lataaja;
@@ -38,7 +38,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
     private final NappulaLukko lukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
 
-    public LisaaSuoriteValitustaIkkuna(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
+    public MuokkaaValittuaIkkuna(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
@@ -49,7 +49,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
     public void run() {
         lukko.lukitse();
 
-        frame = new JFrame("Lisää suorite");
+        frame = new JFrame("Muokkaa suoritetta");
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,64 +69,98 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JPanel tiedotPanel = new JPanel();
-        GridLayout tiedotLayout = new GridLayout(0, 2);
+        GridLayout tiedotLayout = new GridLayout(0, 4);
         tiedotLayout.setVgap(10);
         tiedotLayout.setHgap(10);
         tiedotPanel.setLayout(tiedotLayout);
 
-        JLabel asiakasTeksti = new JLabel("Valitse asiakas:");
-       
+        kuuntelija.paivitaArvo();
+        JLabel vanhaAsiakasTeksti = new JLabel("Vanha asiakas:");
+        JLabel vanhaAsiakasTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 0));
+        JLabel asiakasTeksti = new JLabel("Uusi asiakas:");
+
         String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().getAsiakkaidenNimetArrayString();
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
-        kuuntelija.paivitaArvo();
+
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.
         asiakasComboBox.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getArvoModel()).getAsiakas()));
-        
         asiakasComboBox.setEditable(false);
         ComboBoxKuuntelija comboBoxkuuntelija = new ComboBoxKuuntelija();
         asiakasComboBox.addActionListener(comboBoxkuuntelija);
 
-        JLabel kuvausTeksti = new JLabel("Kuvaus:");
+        JLabel vanhaKuvausTeksti = new JLabel("Vanha kuvaus:");
+        JLabel vanhaKuvausTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 1));
+        JLabel kuvausTeksti = new JLabel("Uusi kuvaus:");
         JTextField kuvausKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 1));
 
-        JLabel pvmTeksti = new JLabel("Päivämäärä muodossa pp.kk.vvvv:");
+        JLabel vanhaPvmTeksti = new JLabel("Vanha päivämäärä:");
+        JLabel vanhaPvmTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 2));
+        JLabel pvmTeksti = new JLabel("Uusi päivämäärä muodossa pp.kk.vvvv:");
         JTextField pvmKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 2));
 
-        JLabel maaraTeksti = new JLabel("Määrä:");
+        JLabel vanhaMaaraTeksti = new JLabel("Vanha määrä:");
+        JLabel vanhaMaaraTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 3));
+        JLabel maaraTeksti = new JLabel("Uusi määrä:");
         JTextField maaraKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 3));
 
-        JLabel maaranYksikotTeksti = new JLabel("Yksiköt:");
+        JLabel vanhaMaaranYksikotTeksti = new JLabel("Vanhat yksiköt:");
+        JLabel vanhaMaaranYksikotTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 4));
+        JLabel maaranYksikotTeksti = new JLabel("Uudet yksiköt:");
         JTextField maaranYksikotKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 4));
 
-        JLabel aHintaTeksti = new JLabel("à hinta:");
+        JLabel vanhaAHintaTeksti = new JLabel("Vanha à hinta:");
+        JLabel vanhaAHintaTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 5));
+        JLabel aHintaTeksti = new JLabel("Uusi à hinta:");
         JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 5));
-        
-        JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
+
+        JLabel vanhaAlvProsTeksti = new JLabel("Vanha alv prosentti:");
+        JLabel vanhaAlvProsTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 6));
+        JLabel alvProsTeksti = new JLabel("Uusi alv prosentti muodossa nn:");
         JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 6));
 
-        JButton lisaa = new JButton("Lisää");
-        lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
-        LisaaSuoriteValitustaIkkunaLisaaKuuntelija lisaaKuuntelija = new LisaaSuoriteValitustaIkkunaLisaaKuuntelija(comboBoxkuuntelija, kuvausKentta, pvmKentta, maaraKentta, maaranYksikotKentta, aHintaKentta, alvProsKentta, lataaja, taulukko, frame, lukko);
-        lisaa.addActionListener(lisaaKuuntelija);
+        JButton muokkaa = new JButton("Muokkaa");
+        muokkaa.setAlignmentX(Component.CENTER_ALIGNMENT);
+        MuokkaaValittuaIkkunaMuokkaaKuuntelija muokkaaKuuntelija = new MuokkaaValittuaIkkunaMuokkaaKuuntelija(kuvausKentta, pvmKentta, maaraKentta, maaranYksikotKentta, aHintaKentta, alvProsKentta, lataaja, taulukko, frame, lukko, comboBoxkuuntelija, kuuntelija);
+        muokkaa.addActionListener(muokkaaKuuntelija);
 
+        tiedotPanel.add(vanhaAsiakasTeksti);
+        tiedotPanel.add(vanhaAsiakasTeksti2);
         tiedotPanel.add(asiakasTeksti);
-        tiedotPanel.add(asiakasComboBox);        
+        tiedotPanel.add(asiakasComboBox);
+
+        tiedotPanel.add(vanhaKuvausTeksti);
+        tiedotPanel.add(vanhaKuvausTeksti2);
         tiedotPanel.add(kuvausTeksti);
         tiedotPanel.add(kuvausKentta);
+
+        tiedotPanel.add(vanhaPvmTeksti);
+        tiedotPanel.add(vanhaPvmTeksti2);
         tiedotPanel.add(pvmTeksti);
         tiedotPanel.add(pvmKentta);
+
+        tiedotPanel.add(vanhaMaaraTeksti);
+        tiedotPanel.add(vanhaMaaraTeksti2);
         tiedotPanel.add(maaraTeksti);
         tiedotPanel.add(maaraKentta);
+
+        tiedotPanel.add(vanhaMaaranYksikotTeksti);
+        tiedotPanel.add(vanhaMaaranYksikotTeksti2);
         tiedotPanel.add(maaranYksikotTeksti);
         tiedotPanel.add(maaranYksikotKentta);
+
+        tiedotPanel.add(vanhaAHintaTeksti);
+        tiedotPanel.add(vanhaAHintaTeksti2);
         tiedotPanel.add(aHintaTeksti);
         tiedotPanel.add(aHintaKentta);
+
+        tiedotPanel.add(vanhaAlvProsTeksti);
+        tiedotPanel.add(vanhaAlvProsTeksti2);
         tiedotPanel.add(alvProsTeksti);
         tiedotPanel.add(alvProsKentta);
 
         panel.add(tiedotPanel);
         panel.add(Box.createRigidArea(new Dimension(10, 10)));
-        panel.add(lisaa);
+        panel.add(muokkaa);
         panel.add(Box.createRigidArea(new Dimension(600, 0)));
 
         container.add(panel);

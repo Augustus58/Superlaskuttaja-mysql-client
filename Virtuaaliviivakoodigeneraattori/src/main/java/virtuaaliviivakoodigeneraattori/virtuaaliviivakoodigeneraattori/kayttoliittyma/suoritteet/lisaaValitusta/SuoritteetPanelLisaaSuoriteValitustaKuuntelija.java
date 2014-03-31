@@ -34,7 +34,10 @@ public class SuoritteetPanelLisaaSuoriteValitustaKuuntelija implements ActionLis
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        LisaaSuoriteValitustaIkkuna lisaaSuorite = new LisaaSuoriteValitustaIkkuna(lataaja, taulukko, lukko, kuuntelija);
-        SwingUtilities.invokeLater(lisaaSuorite);
+        if (!lukko.onkoLukkoPaalla()) {
+            lukko.lukitse();
+            LisaaSuoriteValitustaIkkuna lisaaSuorite = new LisaaSuoriteValitustaIkkuna(lataaja, taulukko, lukko, kuuntelija);
+            SwingUtilities.invokeLater(lisaaSuorite);
+        }
     }
 }
