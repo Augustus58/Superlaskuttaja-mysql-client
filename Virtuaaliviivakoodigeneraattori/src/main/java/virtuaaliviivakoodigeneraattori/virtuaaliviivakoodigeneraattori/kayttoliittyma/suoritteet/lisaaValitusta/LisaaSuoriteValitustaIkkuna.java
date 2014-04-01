@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
@@ -57,9 +58,15 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
 
-        luoKomponentit(frame.getContentPane());
-        frame.pack();
-        frame.setVisible(true);
+        try {
+            luoKomponentit(frame.getContentPane());
+            frame.pack();
+            frame.setVisible(true);
+        } catch (Exception e) {
+            lukko.avaa();
+            SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
+        }
     }
 
     private void luoKomponentit(Container container) {
@@ -75,13 +82,13 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel asiakasTeksti = new JLabel("Valitse asiakas:");
-       
+
         String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().getAsiakkaidenNimetArrayString();
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
-        kuuntelija.paivitaArvo();
+        
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.
         asiakasComboBox.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getArvoModel()).getAsiakas()));
-        
+
         asiakasComboBox.setEditable(false);
         ComboBoxKuuntelija comboBoxkuuntelija = new ComboBoxKuuntelija();
         asiakasComboBox.addActionListener(comboBoxkuuntelija);
@@ -100,7 +107,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
 
         JLabel aHintaTeksti = new JLabel("à hinta:");
         JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 5));
-        
+
         JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
         JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 6));
 
@@ -110,7 +117,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         lisaa.addActionListener(lisaaKuuntelija);
 
         tiedotPanel.add(asiakasTeksti);
-        tiedotPanel.add(asiakasComboBox);        
+        tiedotPanel.add(asiakasComboBox);
         tiedotPanel.add(kuvausTeksti);
         tiedotPanel.add(kuvausKentta);
         tiedotPanel.add(pvmTeksti);

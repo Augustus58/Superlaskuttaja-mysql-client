@@ -8,9 +8,10 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoli
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Suorite;
 
 /**
  *
@@ -18,32 +19,34 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  */
 public class LaskutTaulukko {
 
-    private final JTable taulukko;
-    private final TableModelSolujenMuokkaaminenEstetty model;
-    private final ListSelectionModel selectionModel;
-    private final Lataaja lataaja;
+    private JTable taulukko;
+    private TableModelSolujenMuokkaaminenEstetty model;
+    private ListSelectionModel selectionModel;
+    private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
+    private Lataaja lataaja;
 
     public LaskutTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
-        this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"});            
+        this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Asiakas", "Asiakasnumero", "Viite", "Laskun numero", "Summa", "Päiväys", "Eräpäivä", "Maksettu"});           
+        this.sorter = new TableRowSorter<>(model);
         this.taulukko.setModel(model);
+        this.taulukko.setRowSorter(sorter);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        taulukko.setAutoCreateRowSorter(true);
         muodostaLaskutTaulukko();
     }
 
     public final void muodostaLaskutTaulukko() {
         if (!lataaja.getLadattuTietovarasto().getLaskut().isEmpty()) {
             for (int i = 0; i < lataaja.getLadattuTietovarasto().getLaskut().size(); i++) {
-                model.addRow(lataaja.getLadattuTietovarasto().getAsiakkaat().get(i).getAsiakkaanTiedotTaulukossa());
+                model.addRow(lataaja.getLadattuTietovarasto().getLaskut().get(i).laskunTiedotTaulukossa());
             }
         }
     }
     
-    public void addAsiakkaatTaulukkoRivi(Asiakas asiakas) {
-        model.addRow(asiakas.getAsiakkaanTiedotTaulukossa());
+    public void addLaskutTaulukkoRivi(Suorite suorite) {
+        model.addRow(suorite.getSuoritteenTiedotTaulukossa());
     }
 
     public JTable getTaulukko() {
@@ -58,12 +61,11 @@ public class LaskutTaulukko {
         return selectionModel;
     }
 
+    public TableRowSorter<TableModelSolujenMuokkaaminenEstetty> getSorter() {
+        return sorter;
+    }
+    
     public String getValueString(Integer x, Integer y) {
         return (getModel().getValueAt(x, y).toString());
     }
-
-    public void reset() {
-        model.setRowCount(0);
-    }
-
 }

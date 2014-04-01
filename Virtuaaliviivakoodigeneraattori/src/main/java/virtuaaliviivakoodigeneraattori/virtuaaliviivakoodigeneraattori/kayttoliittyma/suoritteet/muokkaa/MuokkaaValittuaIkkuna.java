@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
@@ -57,9 +58,15 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
 
-        luoKomponentit(frame.getContentPane());
-        frame.pack();
-        frame.setVisible(true);
+        try {
+            luoKomponentit(frame.getContentPane());
+            frame.pack();
+            frame.setVisible(true);
+        } catch (Exception e) {
+            lukko.avaa();
+            SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
+        }
     }
 
     private void luoKomponentit(Container container) {
@@ -74,7 +81,6 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         tiedotLayout.setHgap(10);
         tiedotPanel.setLayout(tiedotLayout);
 
-        kuuntelija.paivitaArvo();
         JLabel vanhaAsiakasTeksti = new JLabel("Vanha asiakas:");
         JLabel vanhaAsiakasTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 0));
         JLabel asiakasTeksti = new JLabel("Uusi asiakas:");

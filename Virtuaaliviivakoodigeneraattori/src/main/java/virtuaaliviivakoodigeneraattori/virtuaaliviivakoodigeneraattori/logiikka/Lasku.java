@@ -17,10 +17,10 @@ public class Lasku {
     private final Laskuttaja laskuttaja; //Tilinumero tätä kautta.
     private final Asiakas asiakas;  
     
-    private final Date lahetysPaiva;
+    private final Date paivays;
     private final Integer laskunNumero; //Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut samalla numeroinnilla.
     private final Date erapaiva;
-    private final Integer viivastyskorko;
+    private final Integer viivastyskorko; //Esim 8.
     private final Viite viiteTarkisteella;                
     private final String maksuehto;          
     
@@ -28,11 +28,14 @@ public class Lasku {
     private final String lisatiedot;
     private final LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
     private final Pankkiviivakoodi pankkiviivakoodi;
+    
+    private Boolean onkoMaksettu;
+    private String maksettuTeksti;
 
     public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, Date lahetysPaiva, Integer laskunNumero, Date erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
         this.laskuttaja = laskuttaja;
         this.asiakas = asiakas;
-        this.lahetysPaiva = lahetysPaiva;
+        this.paivays = lahetysPaiva;
         this.laskunNumero = laskunNumero;
         this.erapaiva = erapaiva;
         this.viivastyskorko = viivastyskorko;
@@ -42,9 +45,15 @@ public class Lasku {
         this.lisatiedot = lisatiedot;
         this.summa = summa;
         this.pankkiviivakoodi = pankkiviivakoodi;
+        this.onkoMaksettu = false;
+        this.maksettuTeksti = "Ei";
     }
 
     public Integer getLaskunNumero() {
         return laskunNumero;
+    }
+    
+    public Object[] laskunTiedotTaulukossa() {
+        return (new Object[]{asiakas.getNimi(), asiakas.getAsiakasnumero(), viiteTarkisteella, laskunNumero, summa, paivays, erapaiva, maksettuTeksti});
     }
 }

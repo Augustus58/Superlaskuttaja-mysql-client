@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.MerkkiJaMerkkijonoTarkistin;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Suorite;
 
 /**
@@ -36,6 +38,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final NappulaLukko lukko;
     private final ComboBoxKuuntelija comboBoxKuuntelija;
     private final TaulukkoValintaKuuntelija taulukkoKuuntelija;
+    private MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public MuokkaaValittuaIkkunaMuokkaaKuuntelija(JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko, ComboBoxKuuntelija comboBoxKuuntelija, TaulukkoValintaKuuntelija taulukkoKuuntelija) {
         this.kuvausKentta = kuvausKentta;
@@ -50,6 +53,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
         this.lukko = lukko;
         this.comboBoxKuuntelija = comboBoxKuuntelija;
         this.taulukkoKuuntelija = taulukkoKuuntelija;
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     @Override
@@ -57,6 +61,15 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
         try {
 
             Asiakas suoritteenAsiakas = lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta());
+
+            if (!tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(pvmKentta.getText())) {
+                throw new IllegalArgumentException("Syöte päivämäärä on virheellinen.");
+            }
+
+            if (!tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(pvmKentta.getText())) {
+                throw new IllegalArgumentException("Syöte päivämäärä on virheellinen.");
+            }
+
             Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
             Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
@@ -70,24 +83,23 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
                     Double.parseDouble(aHintaKentta.getText()),
                     Integer.parseInt(alvProsKentta.getText()));
 
-//            if (!suorite.onkoTiedotOikeanlaiset()) {
-//                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
-//            }
+            if (!suorite.onkoTiedotOikeanlaisetPaitsiPvm()) {
+                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
+            }
             lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getArvoModel());
             lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getArvoModel(), suorite);
             taulukko.getModel().insertRow(taulukkoKuuntelija.getArvoModel(), suorite.getSuoritteenTiedotTaulukossa());
             taulukko.getModel().removeRow(taulukkoKuuntelija.getArvoModel() + 1);
-            lukko.avaa();
             suljeIkkuna();
         } catch (Exception e) {
-//            LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna();
-//            SwingUtilities.invokeLater(poikkeusIkkuna);
+            MuokkaaValittuaIkkunaMuokkaaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaValittuaIkkunaMuokkaaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
         }
 
     }
 
     private void suljeIkkuna() {
         frame.dispose();
-//        lukko.avaa();
+        lukko.avaa();
     }
 }

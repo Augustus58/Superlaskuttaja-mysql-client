@@ -8,6 +8,7 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoli
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
@@ -37,8 +38,8 @@ public class SuoritteetPanelPoistaSuoriteKuuntelija implements ActionListener {
                 lataaja.getLadattuTietovarasto().getSuoritteet().remove(kuuntelija.getArvoModel());
                 taulukko.getModel().removeRow(kuuntelija.getArvoModel());
             } catch (Exception e) {
-//            AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna poikkeusIkkuna = new AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna();
-//            SwingUtilities.invokeLater(poikkeusIkkuna);
+            SuoritteetPanelPoistaSuoritePoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoritePoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
             }
         }
     }

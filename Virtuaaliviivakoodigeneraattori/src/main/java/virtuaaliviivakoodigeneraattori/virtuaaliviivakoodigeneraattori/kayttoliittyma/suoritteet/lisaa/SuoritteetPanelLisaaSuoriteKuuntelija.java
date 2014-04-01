@@ -31,9 +31,16 @@ public class SuoritteetPanelLisaaSuoriteKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
-            lukko.lukitse();
-            LisaaSuoriteIkkuna lisaaSuorite = new LisaaSuoriteIkkuna(lataaja, taulukko, lukko);
-            SwingUtilities.invokeLater(lisaaSuorite);
+            try {
+                if (lataaja.getLadattuTietovarasto().getAsiakkaat().isEmpty()) {
+                    throw new NullPointerException("Ei asiakkaita.");
+                }
+                LisaaSuoriteIkkuna lisaaSuorite = new LisaaSuoriteIkkuna(lataaja, taulukko, lukko);
+                SwingUtilities.invokeLater(lisaaSuorite);
+            } catch (Exception e) {
+                SuoritteetPanelLisaaSuoritePoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelLisaaSuoritePoikkeusIkkuna();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
+            }
         }
     }
 }

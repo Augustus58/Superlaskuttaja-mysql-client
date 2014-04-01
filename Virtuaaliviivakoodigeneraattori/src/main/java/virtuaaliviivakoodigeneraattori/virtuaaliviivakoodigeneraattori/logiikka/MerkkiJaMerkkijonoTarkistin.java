@@ -5,7 +5,7 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
-import org.apache.commons.validator.EmailValidator;
+import org.apache.commons.validator.GenericValidator;
 
 /**
  *
@@ -16,12 +16,10 @@ public class MerkkiJaMerkkijonoTarkistin {
 
     private final String isotAakkosetAZ;
     private final String numerotValiviivaJaValilyonti;
-    private EmailValidator validator;
 
     public MerkkiJaMerkkijonoTarkistin() {
         this.isotAakkosetAZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         this.numerotValiviivaJaValilyonti = "0123456789- ";
-        this.validator = EmailValidator.getInstance();
     }
 
     public Boolean onkoMerkkiNumero(Character merkki) {
@@ -51,7 +49,7 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return true;
     }
-    
+
     public Boolean onkoMerkkiNumeroValiviivaTaiValilyonti(Character merkki) {
         for (int i = 0; i < this.numerotValiviivaJaValilyonti.length(); i++) {
             if (merkki.equals(this.numerotValiviivaJaValilyonti.charAt(i))) {
@@ -60,7 +58,7 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return false;
     }
-    
+
     public Boolean SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
         if (merkkijono.isEmpty()) {
             return false;
@@ -75,7 +73,7 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return true;
     }
-    
+
     public Boolean sisaltaakoMerkkijonoVahintaanYhdenNumeron(String merkkijono) {
         for (int i = 0; i < merkkijono.length(); i++) {
             if (onkoMerkkiNumero(merkkijono.charAt(i))) {
@@ -84,7 +82,7 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return false;
     }
-    
+
     public Boolean voikoMerkkijononMuuttaaKokonaisluvuksi(String merkkijono) {
         for (int i = 0; i < merkkijono.length(); i++) {
             if (!onkoMerkkiNumero(merkkijono.charAt(i))) {
@@ -100,16 +98,42 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         if (!merkkijono.isEmpty()) {
             for (int i = 0; i < merkkijono.length(); i++) {
-                if (!merkkijono.substring(i, i+1).equals(" ")) {
+                if (!merkkijono.substring(i, i + 1).equals(" ")) {
                     return false;
                 }
             }
         }
         return true;
     }
-    
+
     public Boolean onkoEmailOsoiteValidi(String osoite) {
-        return(validator.isValid(osoite));
+        return (GenericValidator.isEmail(osoite));
+    }
+
+    public Boolean onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(String merkkijono) {
+        if (merkkijono.length() != 10) {
+            return false;
+        }
+        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(0, 2))) {
+            return false;
+        }
+        if (!merkkijono.substring(2, 3).equals(".")) {
+            return false;
+        }
+        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(3, 5))) {
+            return false;
+        }
+        if (!merkkijono.substring(5, 6).equals(".")) {
+            return false;
+        }
+        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(6, 10))) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(String merkkijono) {
+        return(GenericValidator.isDate(merkkijono, "dd.MM.yyyy", true));
     }
 
     public String getIsotAakkosetAZ() {

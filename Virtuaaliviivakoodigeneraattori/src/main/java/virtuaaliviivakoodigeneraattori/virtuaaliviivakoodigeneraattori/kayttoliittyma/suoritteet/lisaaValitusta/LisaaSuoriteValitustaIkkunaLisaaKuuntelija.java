@@ -10,11 +10,13 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.ComboBoxKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.MerkkiJaMerkkijonoTarkistin;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Suorite;
 
 /**
@@ -34,6 +36,7 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
     private final JFrame frame;
     private final NappulaLukko lukko;
     private final ComboBoxKuuntelija kuuntelija;
+    private MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public LisaaSuoriteValitustaIkkunaLisaaKuuntelija(ComboBoxKuuntelija kuuntelija, JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko) {
         this.kuvausKentta = kuvausKentta;
@@ -47,6 +50,7 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
         this.frame = frame;
         this.lukko = lukko;
         this.kuuntelija = kuuntelija;
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     @Override
@@ -54,6 +58,15 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
         try {
 
             Asiakas suoritteenAsiakas = lataaja.getLadattuTietovarasto().getAsiakkaat().get(kuuntelija.getValinta());
+
+            if (!tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(pvmKentta.getText())) {
+                throw new IllegalArgumentException("Syöte päivämäärä on virheellinen.");
+            }
+
+            if (!tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(pvmKentta.getText())) {
+                throw new IllegalArgumentException("Syöte päivämäärä on virheellinen.");
+            }
+
             Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
             Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
@@ -67,22 +80,21 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
                     Double.parseDouble(aHintaKentta.getText()),
                     Integer.parseInt(alvProsKentta.getText()));
 
-//            if (!suorite.onkoTiedotOikeanlaiset()) {
-//                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
-//            }
+            if (!suorite.onkoTiedotOikeanlaisetPaitsiPvm()) {
+                throw new IllegalArgumentException("Jokin muu syöte, kuin päivämäärä on virheellinen.");
+            }
             lataaja.getLadattuTietovarasto().getSuoritteet().add(suorite);
             taulukko.addSuoritteetTaulukkoRivi(suorite);
-            lukko.avaa();
             suljeIkkuna();
         } catch (Exception e) {
-//            LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new LisaaAsiakasIkkunaLisaaKuuntelijaPoikkeusIkkuna();
-//            SwingUtilities.invokeLater(poikkeusIkkuna);
+            LisaaSuoriteValitustaIkkunaLisaaPoikkeusIkkuna poikkeusIkkuna = new LisaaSuoriteValitustaIkkunaLisaaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
         }
 
     }
 
     private void suljeIkkuna() {
         frame.dispose();
-//        lukko.avaa();
+        lukko.avaa();
     }
 }

@@ -80,7 +80,8 @@ public class Viite {
         return (etunollat + this.viiteTarkisteella);
     }
 
-    public String getViite() {
+    @Override
+    public String toString() {
         return this.viiteTarkisteella;
     }
 }

@@ -62,6 +62,7 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
             frame.pack();
             frame.setVisible(true);
         } catch (Exception e) {
+            lukko.avaa();
             AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna poikkeusIkkuna = new AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna();
             SwingUtilities.invokeLater(poikkeusIkkuna);
         }

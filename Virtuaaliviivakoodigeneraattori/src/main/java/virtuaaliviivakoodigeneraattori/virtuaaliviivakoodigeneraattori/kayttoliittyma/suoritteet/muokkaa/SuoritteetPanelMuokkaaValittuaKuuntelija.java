@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.NappulaLukko;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaaValitusta.SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -34,9 +35,14 @@ public class SuoritteetPanelMuokkaaValittuaKuuntelija implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
-            lukko.lukitse();
-            MuokkaaValittuaIkkuna muokkaaSuoritetta = new MuokkaaValittuaIkkuna(lataaja, taulukko, lukko, kuuntelija);
-            SwingUtilities.invokeLater(muokkaaSuoritetta);
+            try {
+                kuuntelija.paivitaArvo();
+                MuokkaaValittuaIkkuna muokkaaSuoritetta = new MuokkaaValittuaIkkuna(lataaja, taulukko, lukko, kuuntelija);
+                SwingUtilities.invokeLater(muokkaaSuoritetta);
+            } catch (Exception e) {
+                SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
+            }
         }
     }
 }

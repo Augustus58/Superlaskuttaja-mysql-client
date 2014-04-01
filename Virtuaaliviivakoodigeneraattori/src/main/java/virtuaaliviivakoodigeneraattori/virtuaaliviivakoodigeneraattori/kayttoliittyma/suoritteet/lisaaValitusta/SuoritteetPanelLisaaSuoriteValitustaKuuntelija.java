@@ -5,7 +5,6 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaaValitusta;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaa.LisaaSuoriteIkkuna;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
@@ -34,10 +33,15 @@ public class SuoritteetPanelLisaaSuoriteValitustaKuuntelija implements ActionLis
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (!lukko.onkoLukkoPaalla()) {
-            lukko.lukitse();
-            LisaaSuoriteValitustaIkkuna lisaaSuorite = new LisaaSuoriteValitustaIkkuna(lataaja, taulukko, lukko, kuuntelija);
-            SwingUtilities.invokeLater(lisaaSuorite);
+        try {
+            if (!lukko.onkoLukkoPaalla()) {
+                kuuntelija.paivitaArvo();
+                LisaaSuoriteValitustaIkkuna lisaaSuorite = new LisaaSuoriteValitustaIkkuna(lataaja, taulukko, lukko, kuuntelija);
+                SwingUtilities.invokeLater(lisaaSuorite);
+            }
+        } catch (Exception e) {
+            SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
         }
     }
 }

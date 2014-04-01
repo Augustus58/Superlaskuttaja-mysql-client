@@ -61,5 +61,9 @@ public class LaskunSumma {
     public void muutaSentit(Integer sentit) {
         this.sentit = sentit;
     }
-    
+
+    @Override
+    public String toString() {
+        return(eurot.toString()+"."+sentit.toString());
+    }
 }

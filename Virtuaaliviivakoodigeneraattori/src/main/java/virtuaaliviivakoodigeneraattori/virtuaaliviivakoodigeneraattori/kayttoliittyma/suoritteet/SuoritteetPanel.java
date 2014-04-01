@@ -55,7 +55,7 @@ public class SuoritteetPanel extends JPanel {
         JPanel ylaosa = new JPanel(new GridLayout(1, 3));
         ylaosa.setMinimumSize(new Dimension(50, 32));
 
-        String[] vaihtoehdotString = {"Asiakkaan nimi", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"};
+        String[] vaihtoehdotString = {"Asiakas", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"};
         JComboBox kriteerit = new JComboBox(vaihtoehdotString);
         kriteerit.setSelectedIndex(0);
         kriteerit.setEditable(false);

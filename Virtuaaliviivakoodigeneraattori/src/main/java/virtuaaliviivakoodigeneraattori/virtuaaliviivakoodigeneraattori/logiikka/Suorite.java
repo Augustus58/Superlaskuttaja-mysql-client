@@ -27,6 +27,7 @@ public class Suorite {
     private String laskutettuTeksti;
     private Lasku lasku;
     private SimpleDateFormat pvmFormaatti;
+    private MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Suorite(Asiakas asiakas, String kuvaus, Date pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti) {
         this.asiakas = asiakas;
@@ -38,11 +39,12 @@ public class Suorite {
         this.alvProsentti = alvProsentti;
         this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
         this.onkoLaskutettu = false;
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
         paivitaLaskutettuTeksti();
         laskeAlv();
         laskeYht();
     }
-    
+
     public Object[] getSuoritteenTiedotTaulukossa() {
         return (new Object[]{asiakas.getNimi(), kuvaus, pvmFormaatti.format(pvm), maara, maaranYksikot, aHinta, alvProsentti, alv, yht, laskutettuTeksti});
     }
@@ -66,7 +68,7 @@ public class Suorite {
     public SimpleDateFormat getPvmFormaatti() {
         return pvmFormaatti;
     }
-    
+
     public Double getMaara() {
         return maara;
     }
@@ -94,15 +96,15 @@ public class Suorite {
     public String getLaskutettuTeksti() {
         return laskutettuTeksti;
     }
-    
+
     private void laskeAlv() {
         this.alv = (alvProsentti / 100.0) * aHinta;
     }
-    
+
     private void laskeYht() {
         this.yht = aHinta + alv;
     }
-    
+
     public final void paivitaLaskutettuTeksti() {
         if (onkoLaskutettu) {
             laskutettuTeksti = "Laskulla " + lasku.getLaskunNumero().toString();
@@ -111,8 +113,43 @@ public class Suorite {
         }
     }
 
-    public boolean onkoTiedotOikeanlaiset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean onkoTiedotOikeanlaisetPaitsiPvm() {
+        if (onkoKuvausOikeanlainen()
+                && onkoMaaraOikeanlainen()
+                && onkoMaaranYksikotOikeanlainen()
+                && onkoAHintaOikeanlainen()
+                && onkoAlvProsenttiOikeanlainen()){
+            return true;
+        }
+        return false;
     }
 
+    public boolean onkoKuvausOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kuvaus));
+    }
+
+    public boolean onkoMaaraOikeanlainen() {
+        if (maara > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean onkoMaaranYksikotOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(maaranYksikot));
+    }
+
+    public boolean onkoAHintaOikeanlainen() {
+        if (aHinta > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean onkoAlvProsenttiOikeanlainen() {
+        if (alvProsentti >= 0 && alvProsentti <= 100) {
+            return true;
+        }
+        return false;
+    }
 }
