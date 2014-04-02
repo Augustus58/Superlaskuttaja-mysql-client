@@ -23,4 +23,4 @@
 - **31.3.2014 0,5h** Käyttöliittymän suoritteet-osion lisää-osio valmis.
 - **31.3.2014 1,5h** Käyttöliittymän suoritteet-osio valmis.
 - **1.4.2014 1,5h** Aloitettu käyttöliittymän laskut-osion tekeminen.
-- **2.4.2014 6h** Tehty tarvittavia equals -ja hashcode-metodeja luokille. Tehty olennaisia testejä luokkien metodeille. Kaikkien luokkien equals -ja hashcode-metodeille ei vielä ole testejä.
+- **2.4.2014 6h** Korjattu logiikan luokkien metodien nimiä, joissa esiintyi get-etuliite yleisten tapojen vastaisesti. Tehty tarvittavia equals -ja hashcode-metodeja luokille. Tehty olennaisia testejä luokkien metodeille. Kaikkien luokkien equals -ja hashcode-metodeille ei vielä ole testejä.
