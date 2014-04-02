@@ -73,7 +73,7 @@ public class LisaaSuoriteIkkuna implements Runnable {
 
         JLabel asiakasTeksti = new JLabel("Valitse asiakas:");
        
-        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().getAsiakkaidenNimetArrayString();
+        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
         JComboBox asiakas = new JComboBox(vaihtoehdotString);
         asiakas.setSelectedIndex(0);
         asiakas.setEditable(false);

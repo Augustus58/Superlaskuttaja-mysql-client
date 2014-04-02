@@ -94,7 +94,7 @@ public class Asiakas {
         return postinumero;
     }
 
-    public Object[] getAsiakkaanTiedotTaulukossa() {
+    public Object[] asiakkaanTiedotTaulukossa() {
         return (new Object[]{nimi, katuosoite, postinumero, kaupunki, asiakasnumero, laskujaLahetetty});
     }
 

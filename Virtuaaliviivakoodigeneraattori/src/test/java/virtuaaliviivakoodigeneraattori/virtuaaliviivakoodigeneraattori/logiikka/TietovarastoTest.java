@@ -25,6 +25,9 @@ public class TietovarastoTest {
 
     Tietovarasto tietovarasto;
     String[][] verrattavaTaulukko;
+    
+    Tilinumero tilinumero;
+    Laskuttaja laskuttaja;
 
     public TietovarastoTest() {
     }
@@ -55,6 +58,9 @@ public class TietovarastoTest {
             {"Elmeri Viitala", "Elmerinkatu 45", "00365", "Elmericity", "1000", "2123"},
             {"Elmeri Kantola", "Katu 75", "00447", "Nuorgam", "10000", "12534"},
             {"Elmeri Eskola", "Katu 12", "00347", "Outokumpu", "12000", "1234"}};
+        
+        tilinumero = new Tilinumero("FI3936363002092492", "Superpankki", "FISUFIHH");
+        laskuttaja = new Laskuttaja("Erkki Laskuttaja", "Laskuttajankatu 17 A 7", "00549", "Laskuttajacity", "Superyhtiöt", "FI2343-34343", tilinumero, "035-5554444", "erkki.laskuttaja@superyhtiot.fi", 50345);
     }
 
     @After
@@ -62,12 +68,43 @@ public class TietovarastoTest {
     }
 
     @Test
-    public void getAsiakkaatArrayStringToimiiOikein() {
-        String[][] taulukko = tietovarasto.getAsiakkaatArrayString();
+    public void asiakkaatArrayStringToimiiOikein() {
+        String[][] taulukko = tietovarasto.asiakkaatArrayString();
         for (int i = 0; i < tietovarasto.getAsiakkaat().size(); i++) {
             for (int j = 0; j < 6; j++) {
                 assertEquals(verrattavaTaulukko[i][j], taulukko[i][j]);
             }
         }
+    }
+    
+    @Test
+    public void asiakkaidenNimetArrayStringToimiiOikein() {
+        String[] lista = tietovarasto.asiakkaidenNimetArrayString();
+        for (int i = 0; i < tietovarasto.getAsiakkaat().size(); i++) {
+            assertEquals(tietovarasto.getAsiakkaat().get(i).getNimi(), lista[i]);
+        }
+    }
+    
+    @Test
+    public void setLaskuttajaToimiiOikein() {
+        assertFalse(tietovarasto.isLaskuttajaLisatty());
+        tietovarasto.setLaskuttaja(laskuttaja);
+        assertTrue(tietovarasto.isLaskuttajaLisatty());
+        assertEquals(laskuttaja, tietovarasto.getLaskuttaja());
+    }
+    
+    @Test
+    public void poistaAsiakasToimiiOikein() {
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas1));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas2));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas3));
+        assertEquals(4, tietovarasto.getAsiakkaat().size());
+        tietovarasto.poistaAsiakas(asiakas);
+        assertFalse(tietovarasto.getAsiakkaat().contains(asiakas));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas1));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas2));
+        assertTrue(tietovarasto.getAsiakkaat().contains(asiakas3));
+        assertEquals(3, tietovarasto.getAsiakkaat().size());
     }
 }

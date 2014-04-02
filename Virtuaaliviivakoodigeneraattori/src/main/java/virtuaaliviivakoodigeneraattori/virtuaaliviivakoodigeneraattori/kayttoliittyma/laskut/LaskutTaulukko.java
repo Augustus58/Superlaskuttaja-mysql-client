@@ -46,7 +46,7 @@ public class LaskutTaulukko {
     }
     
     public void addLaskutTaulukkoRivi(Suorite suorite) {
-        model.addRow(suorite.getSuoritteenTiedotTaulukossa());
+        model.addRow(suorite.suoritteenTiedotTaulukossa());
     }
 
     public JTable getTaulukko() {

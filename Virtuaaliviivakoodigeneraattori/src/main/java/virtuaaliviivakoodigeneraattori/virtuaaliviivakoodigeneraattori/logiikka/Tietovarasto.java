@@ -27,7 +27,7 @@ public class Tietovarasto {
         this.laskuttajaLisatty = false;
     }
 
-    public String[][] getAsiakkaatArrayString() {
+    public String[][] asiakkaatArrayString() {
         String[][] taulukko = new String[asiakkaat.size()][6];
         for (int i = 0; i < asiakkaat.size(); i++) {
             taulukko[i][0] = asiakkaat.get(i).getNimi();
@@ -40,7 +40,7 @@ public class Tietovarasto {
         return taulukko;
     }
     
-    public String[] getAsiakkaidenNimetArrayString() {
+    public String[] asiakkaidenNimetArrayString() {
         String[] taulukko = new String[asiakkaat.size()];
         for (int i = 0; i < taulukko.length; i++) {
             taulukko[i] = asiakkaat.get(i).getNimi();

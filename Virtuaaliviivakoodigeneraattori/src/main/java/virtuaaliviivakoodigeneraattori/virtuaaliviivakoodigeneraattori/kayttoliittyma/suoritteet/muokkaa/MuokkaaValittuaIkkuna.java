@@ -85,7 +85,7 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         JLabel vanhaAsiakasTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getArvoModel(), 0));
         JLabel asiakasTeksti = new JLabel("Uusi asiakas:");
 
-        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().getAsiakkaidenNimetArrayString();
+        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
 
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.

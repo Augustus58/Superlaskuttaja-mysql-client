@@ -40,13 +40,13 @@ public class SuoritteetTaulukko {
     public final void muodostaSuoritteetTaulukko() {
         if (!lataaja.getLadattuTietovarasto().getSuoritteet().isEmpty()) {
             for (int i = 0; i < lataaja.getLadattuTietovarasto().getSuoritteet().size(); i++) {
-                model.addRow(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getSuoritteenTiedotTaulukossa());
+                model.addRow(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).suoritteenTiedotTaulukossa());
             }
         }
     }
     
     public void addSuoritteetTaulukkoRivi(Suorite suorite) {
-        model.addRow(suorite.getSuoritteenTiedotTaulukossa());
+        model.addRow(suorite.suoritteenTiedotTaulukossa());
     }
 
     public JTable getTaulukko() {

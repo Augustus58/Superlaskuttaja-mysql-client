@@ -45,7 +45,7 @@ public class Suorite {
         laskeYht();
     }
 
-    public Object[] getSuoritteenTiedotTaulukossa() {
+    public Object[] suoritteenTiedotTaulukossa() {
         return (new Object[]{asiakas.getNimi(), kuvaus, pvmFormaatti.format(pvm), maara, maaranYksikot, aHinta, alvProsentti, alv, yht, laskutettuTeksti});
     }
 
@@ -61,7 +61,7 @@ public class Suorite {
         return pvm;
     }
 
-    public Boolean isOnkoLaskutettu() {
+    public Boolean getOnkoLaskutettu() {
         return onkoLaskutettu;
     }
 
@@ -97,12 +97,52 @@ public class Suorite {
         return laskutettuTeksti;
     }
 
+    public Lasku getLasku() {
+        if (onkoLaskutettu) {
+            return lasku;
+        }
+        return null;
+    }
+
+    public void setAsiakas(Asiakas asiakas) {
+        this.asiakas = asiakas;
+    }
+
+    public void setKuvaus(String kuvaus) {
+        this.kuvaus = kuvaus;
+    }
+
+    public void setPvm(Date pvm) {
+        this.pvm = pvm;
+    }
+
+    public void setMaara(Double maara) {
+        this.maara = maara;
+    }
+
+    public void setMaaranYksikot(String maaranYksikot) {
+        this.maaranYksikot = maaranYksikot;
+    }
+
+    public void setaHinta(Double aHinta) {
+        this.aHinta = aHinta;
+    }
+
+    public void setAlvProsentti(Integer alvProsentti) {
+        this.alvProsentti = alvProsentti;
+    }
+    
+    public void setLasku(Lasku lasku) {
+        this.lasku = lasku;
+        onkoLaskutettu = true;
+    }
+    
     private void laskeAlv() {
-        this.alv = (alvProsentti / 100.0) * aHinta;
+        this.alv = (alvProsentti / 100.0) * (aHinta * maara);
     }
 
     private void laskeYht() {
-        this.yht = aHinta + alv;
+        this.yht = (aHinta * maara) + alv;
     }
 
     public final void paivitaLaskutettuTeksti() {

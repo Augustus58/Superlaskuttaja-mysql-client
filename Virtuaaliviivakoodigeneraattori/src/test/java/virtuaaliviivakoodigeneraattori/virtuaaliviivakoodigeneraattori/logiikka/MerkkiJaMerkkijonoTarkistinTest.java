@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class MerkkiJaMerkkijonoTarkistinTest {
 
-    MerkkiJaMerkkijonoTarkistin merkkitarkistin;
+    MerkkiJaMerkkijonoTarkistin tarkistin;
     Character merkki1;
     Character merkki2;
     Character merkki3;
@@ -38,7 +38,7 @@ public class MerkkiJaMerkkijonoTarkistinTest {
 
     @Before
     public void setUp() {
-        merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
+        tarkistin = new MerkkiJaMerkkijonoTarkistin();
         merkki1 = new Character('4');
         merkki2 = new Character('A');
         merkki3 = new Character('R');
@@ -52,95 +52,138 @@ public class MerkkiJaMerkkijonoTarkistinTest {
 
     @Test
     public void onkoMerkkiNumeroToimiiOikein() {
-        assertTrue(merkkitarkistin.onkoMerkkiNumero(merkki1));
-        assertFalse(merkkitarkistin.onkoMerkkiNumero(merkki2));
+        assertTrue(tarkistin.onkoMerkkiNumero(merkki1));
+        
+        assertFalse(tarkistin.onkoMerkkiNumero(merkki2));
     }
 
     @Test
     public void onkoMerkkiKirjainAZToimiiOikein() {
-        assertTrue(merkkitarkistin.onkoMerkkiKirjainAZ(merkki3));
-        assertFalse(merkkitarkistin.onkoMerkkiKirjainAZ(merkki4));
-        assertFalse(merkkitarkistin.onkoMerkkiKirjainAZ(merkki5));
+        assertTrue(tarkistin.onkoMerkkiKirjainAZ(merkki3));
+        
+        assertFalse(tarkistin.onkoMerkkiKirjainAZ(merkki4));
+        assertFalse(tarkistin.onkoMerkkiKirjainAZ(merkki5));
     }
 
     @Test
     public void koostuukoMerkkijonoNumeroistaToimiiOikein() {
-        assertTrue(merkkitarkistin.koostuukoMerkkijonoNumeroista("1"));
-        assertTrue(merkkitarkistin.koostuukoMerkkijonoNumeroista("1234567890"));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista(""));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista(" "));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista("      "));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista("123123a45535"));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista("!"));
-        assertFalse(merkkitarkistin.koostuukoMerkkijonoNumeroista("a"));
+        assertTrue(tarkistin.koostuukoMerkkijonoNumeroista("1"));
+        assertTrue(tarkistin.koostuukoMerkkijonoNumeroista("1234567890"));
+        
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista(""));
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista(" "));
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista("      "));
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista("123123a45535"));
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista("!"));
+        assertFalse(tarkistin.koostuukoMerkkijonoNumeroista("a"));
     }
 
     @Test
     public void onkoMerkkiNumeroValiviivaTaiValilyontiToimiiOikein() {
-        assertTrue(merkkitarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('1'));
-        assertTrue(merkkitarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('-'));
-        assertTrue(merkkitarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti(' '));
-        assertFalse(merkkitarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('a'));
-        assertFalse(merkkitarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('+'));
+        assertTrue(tarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('1'));
+        assertTrue(tarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('-'));
+        assertTrue(tarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti(' '));
+        
+        assertFalse(tarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('a'));
+        assertFalse(tarkistin.onkoMerkkiNumeroValiviivaTaiValilyonti('+'));
     }
 
     @Test
     public void SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneistaToimiiOikein() {
-        assertTrue(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1"));
-        assertTrue(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("11   ---2343 3  - 098766- -"));
-        assertTrue(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1-2 4"));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(" -"));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(""));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(" "));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("       "));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1jenkfj"));
-        assertFalse(merkkitarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("2- a878979"));
+        assertTrue(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1"));
+        assertTrue(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("11   ---2343 3  - 098766- -"));
+        assertTrue(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1-2 4"));
+        
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(" -"));
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(""));
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(" "));
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("       "));
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("1jenkfj"));
+        assertFalse(tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista("2- a878979"));
     }
 
     @Test
     public void sisaltaakoMerkkijonoVahintaanYhdenNumeronToimiiOikein() {
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("tyui4"));
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("q4werty"));
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("1"));
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("€!€!€!,.-;;:__::;;9"));
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("5€!€!€!,.-;;:__::;;"));
-        assertTrue(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("3453453"));
-        assertFalse(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron(""));
-        assertFalse(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron(" "));
-        assertFalse(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("      "));
-        assertFalse(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("weferg"));
-        assertFalse(merkkitarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("!!!åäö!"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("tyui4"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("q4werty"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("1"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("€!€!€!,.-;;:__::;;9"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("5€!€!€!,.-;;:__::;;"));
+        assertTrue(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("3453453"));
+        
+        assertFalse(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron(""));
+        assertFalse(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron(" "));
+        assertFalse(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("      "));
+        assertFalse(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("weferg"));
+        assertFalse(tarkistin.sisaltaakoMerkkijonoVahintaanYhdenNumeron("!!!åäö!"));
     }
-    
+
     @Test
     public void voikoMerkkijononMuuttaaKokonaisluvuksiToimiiOikein() {
-        assertTrue(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0008"));
-        assertTrue(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("123"));
-        assertTrue(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0030001020"));
-        assertFalse(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("a0008"));
-        assertFalse(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("12r3"));
-        assertFalse(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0030001020e"));
-        assertFalse(merkkitarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("00300 01020"));
+        assertTrue(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0008"));
+        assertTrue(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("123"));
+        assertTrue(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0030001020"));
+        
+        assertFalse(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("a0008"));
+        assertFalse(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("12r3"));
+        assertFalse(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("0030001020e"));
+        assertFalse(tarkistin.voikoMerkkijononMuuttaaKokonaisluvuksi("00300 01020"));
     }
 
     @Test
     public void onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneistaToimiiOikein() {
-        assertTrue(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(""));
-        assertTrue(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(" "));
-        assertTrue(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("      "));
-        assertFalse(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("a"));
-        assertFalse(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("."));
-        assertFalse(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("         0"));
-        assertFalse(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("å         "));
-        assertFalse(merkkitarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("     5    "));
+        assertTrue(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(""));
+        assertTrue(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(" "));
+        assertTrue(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("      "));
+        
+        assertFalse(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("a"));
+        assertFalse(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("."));
+        assertFalse(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("         0"));
+        assertFalse(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("å         "));
+        assertFalse(tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista("     5    "));
     }
 
     @Test
     public void onkoEmailOsoiteValidiToimiiOikein() {
-        assertTrue(merkkitarkistin.onkoEmailOsoiteValidi("oijdwed@dwjkel.com"));
-        assertTrue(merkkitarkistin.onkoEmailOsoiteValidi("a@b.fi"));
-        assertTrue(merkkitarkistin.onkoEmailOsoiteValidi("ferferferf@ferferf.oijekrferf"));
-        assertFalse(merkkitarkistin.onkoEmailOsoiteValidi("ferferatferferf.oom"));
-        assertFalse(merkkitarkistin.onkoEmailOsoiteValidi("ferferferf@ferferf dot fi"));
+        assertTrue(tarkistin.onkoEmailOsoiteValidi("oijdwed@dwjkel.com"));
+        assertTrue(tarkistin.onkoEmailOsoiteValidi("a@b.fi"));
+        assertTrue(tarkistin.onkoEmailOsoiteValidi("ferferferf@ferferf.oijekrferf"));
+        
+        assertFalse(tarkistin.onkoEmailOsoiteValidi("ferferatferferf.oom"));
+        assertFalse(tarkistin.onkoEmailOsoiteValidi("ferferferf@ferferf dot fi"));
+    }
+
+    @Test
+    public void onkoMerkkijonoMuotoaNnPisteNnPisteNnnnToimiiOikein() {
+        assertTrue(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.00.0000"));
+        assertTrue(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("10.10.1000"));
+        assertTrue(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("01.01.0001"));
+        assertTrue(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("12.12.1212"));
+
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("0.00.0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.0.0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.00.000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.00.a000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.0a.0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("a0.00.0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00,00.0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00.00,0000"));
+        assertFalse(tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn("00000000"));
+    }
+    
+    @Test
+    public void onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidiToimiiOikein() {
+        assertTrue(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("01.01.2011"));
+        assertTrue(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("10.10.2010"));
+        assertTrue(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("02.04.2014"));
+        assertTrue(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("01.04.2014"));
+        
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("00.01.2011"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("32.01.2011"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("01.00.2011"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("01.13.2011"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("30.02.2004"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("29.02.2003"));
+        assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("29.02.2005"));
     }
 }

@@ -72,7 +72,7 @@ public class Viite {
         return numerolista;
     }
 
-    public String getViiteTarkisteellaEtunollillaPituus20() {
+    public String viiteTarkisteellaEtunollillaPituus20() {
         String etunollat = "";
         while ((etunollat + this.viiteTarkisteella).length() < 20) {
             etunollat = etunollat + "0";
@@ -83,5 +83,26 @@ public class Viite {
     @Override
     public String toString() {
         return this.viiteTarkisteella;
+    }
+    
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        Viite verrattava = (Viite) olio;
+        if (!this.viiteTarkisteella.equals(verrattava.viiteTarkisteella)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (viiteTarkisteella.hashCode());
     }
 }

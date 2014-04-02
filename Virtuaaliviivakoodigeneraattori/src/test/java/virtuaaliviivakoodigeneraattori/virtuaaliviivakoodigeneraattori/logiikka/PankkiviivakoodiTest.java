@@ -76,15 +76,15 @@ public class PankkiviivakoodiTest {
     // löytyviä version 4 testilaskuja.
     @Test
     public void muodostaPankkiviivakoodiToimiiOikein() {
-        assertEquals("47944052020036082004883150000000086851625961989710061240", pankkiviivakoodi.getStringIlmanAloitustaJaLopetusta());
-        assertEquals("45810171000000122000482990000000055958224329467112013155", pankkiviivakoodi2.getStringIlmanAloitustaJaLopetusta());
-        assertEquals("40250004640001302000693800000006987567208343536411072414", pankkiviivakoodi3.getStringIlmanAloitustaJaLopetusta());
+        assertEquals("47944052020036082004883150000000086851625961989710061240", pankkiviivakoodi.pankkiviivakoodiIlmanAloitustaJaLopetusta());
+        assertEquals("45810171000000122000482990000000055958224329467112013155", pankkiviivakoodi2.pankkiviivakoodiIlmanAloitustaJaLopetusta());
+        assertEquals("40250004640001302000693800000006987567208343536411072414", pankkiviivakoodi3.pankkiviivakoodiIlmanAloitustaJaLopetusta());
     }
     
     @Test
     public void getStringToimiiOikein() {
-        assertEquals("10547944052020036082004883150000000086851625961989710061240106", pankkiviivakoodi.getString());
-        assertEquals("10545810171000000122000482990000000055958224329467112013155106", pankkiviivakoodi2.getString());
-        assertEquals("10540250004640001302000693800000006987567208343536411072414106", pankkiviivakoodi3.getString());
+        assertEquals("10547944052020036082004883150000000086851625961989710061240106", pankkiviivakoodi.getPankkiviivakoodi());
+        assertEquals("10545810171000000122000482990000000055958224329467112013155106", pankkiviivakoodi2.getPankkiviivakoodi());
+        assertEquals("10540250004640001302000693800000006987567208343536411072414106", pankkiviivakoodi3.getPankkiviivakoodi());
     }
 }

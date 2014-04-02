@@ -40,13 +40,13 @@ public class AsiakkaatTaulukko {
     public final void muodostaAsiakkaatTaulukko() {
         if (!lataaja.getLadattuTietovarasto().getAsiakkaat().isEmpty()) {
             for (int i = 0; i < lataaja.getLadattuTietovarasto().getAsiakkaat().size(); i++) {
-                model.addRow(lataaja.getLadattuTietovarasto().getAsiakkaat().get(i).getAsiakkaanTiedotTaulukossa());
+                model.addRow(lataaja.getLadattuTietovarasto().getAsiakkaat().get(i).asiakkaanTiedotTaulukossa());
             }
         }
     }
     
     public void addAsiakkaatTaulukkoRivi(Asiakas asiakas) {
-        model.addRow(asiakas.getAsiakkaanTiedotTaulukossa());
+        model.addRow(asiakas.asiakkaanTiedotTaulukossa());
     }
 
     public JTable getTaulukko() {

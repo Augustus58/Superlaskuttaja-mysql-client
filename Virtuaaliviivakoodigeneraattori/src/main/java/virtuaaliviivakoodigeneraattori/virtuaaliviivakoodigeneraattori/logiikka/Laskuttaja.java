@@ -74,7 +74,7 @@ public class Laskuttaja {
     }
 
     public Boolean onkoPuhelinnumeroOikeanlainen() {
-        return (tarkistin.SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(puhelinnumero));
+        return (tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(puhelinnumero));
     }
 
     public Boolean onkoSahkopostiOikeanlainen() {
@@ -105,7 +105,7 @@ public class Laskuttaja {
         }
         return false;
     }
-    
+
     public String getNimi() {
         return nimi;
     }
@@ -184,5 +184,53 @@ public class Laskuttaja {
 
     public void setLaskujaLahetetty(Integer laskujaLahetetty) {
         this.laskujaLahetetty = laskujaLahetetty;
+    }
+
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        Laskuttaja verrattava = (Laskuttaja) olio;
+        if (!this.nimi.equals(verrattava.nimi)) {
+            return false;
+        }
+        if (!this.katuosoite.equals(verrattava.katuosoite)) {
+            return false;
+        }
+        if (!this.postinumero.equals(verrattava.postinumero)) {
+            return false;
+        }
+        if (!this.kaupunki.equals(verrattava.kaupunki)) {
+            return false;
+        }
+        if (!this.yrityksenNimi.equals(verrattava.yrityksenNimi)) {
+            return false;
+        }
+        if (!this.alvTunniste.equals(verrattava.alvTunniste)) {
+            return false;
+        }
+        if (!this.tilinumero.equals(verrattava.tilinumero)) {
+            return false;
+        }
+        if (!this.puhelinnumero.equals(verrattava.puhelinnumero)) {
+            return false;
+        }
+        if (!this.sahkopostiOsoite.equals(verrattava.sahkopostiOsoite)) {
+            return false;
+        }
+        if (!this.laskujaLahetetty.equals(verrattava.laskujaLahetetty)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (nimi.hashCode() + katuosoite.hashCode() + postinumero.hashCode() + kaupunki.hashCode() + yrityksenNimi.hashCode() + alvTunniste.hashCode() + tilinumero.hashCode() + puhelinnumero.hashCode() + sahkopostiOsoite.hashCode() + laskujaLahetetty.hashCode());
     }
 }

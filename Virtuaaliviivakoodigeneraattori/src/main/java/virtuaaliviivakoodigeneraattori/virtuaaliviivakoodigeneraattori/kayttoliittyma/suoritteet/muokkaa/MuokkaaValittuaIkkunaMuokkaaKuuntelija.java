@@ -88,7 +88,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
             }
             lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getArvoModel());
             lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getArvoModel(), suorite);
-            taulukko.getModel().insertRow(taulukkoKuuntelija.getArvoModel(), suorite.getSuoritteenTiedotTaulukossa());
+            taulukko.getModel().insertRow(taulukkoKuuntelija.getArvoModel(), suorite.suoritteenTiedotTaulukossa());
             taulukko.getModel().removeRow(taulukkoKuuntelija.getArvoModel() + 1);
             suljeIkkuna();
         } catch (Exception e) {

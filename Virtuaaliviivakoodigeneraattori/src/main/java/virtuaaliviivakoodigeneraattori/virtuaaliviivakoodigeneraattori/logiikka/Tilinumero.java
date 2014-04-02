@@ -87,7 +87,7 @@ public class Tilinumero {
         return this.tilinumero;
     }
     
-    public String getTilinumeroIlmanMaatunnusta() {
+    public String tilinumeroIlmanMaatunnusta() {
         return this.tilinumero.substring(2);
     }
 
@@ -97,6 +97,33 @@ public class Tilinumero {
 
     public String getSwiftBic() {
         return swiftBic;
+    }
+    
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        Tilinumero verrattava = (Tilinumero) olio;
+        if (!this.tilinumero.equals(verrattava.tilinumero)) {
+            return false;
+        }
+        if (!this.pankki.equals(verrattava.pankki)) {
+            return false;
+        }
+        if (!this.swiftBic.equals(verrattava.swiftBic)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (tilinumero.hashCode() + pankki.hashCode() + swiftBic.hashCode());
     }
     
 }

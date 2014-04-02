@@ -83,7 +83,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
 
         JLabel asiakasTeksti = new JLabel("Valitse asiakas:");
 
-        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().getAsiakkaidenNimetArrayString();
+        String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
         
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.

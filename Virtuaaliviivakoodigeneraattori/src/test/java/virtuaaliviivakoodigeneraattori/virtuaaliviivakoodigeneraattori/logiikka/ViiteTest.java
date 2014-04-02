@@ -42,22 +42,32 @@ public class ViiteTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void muodostaTarkisteellinenViiteToimiiOikein() {
         assertEquals(viite.muodostaTarkisteellinenViite("12345"), "123453");
         assertEquals(viite.muodostaTarkisteellinenViite("123"), "1232");
         assertEquals(viite.muodostaTarkisteellinenViite("1234567891011121314"), "12345678910111213142");
     }
-    
+
     @Test
     public void getViiteTarkisteellaEtunollillaPituus20ToimiiOikein() {
-        assertEquals(viite.getViiteTarkisteellaEtunollillaPituus20(), "00000000000000123453");
-        assertEquals(viite2.getViiteTarkisteellaEtunollillaPituus20(), "00000868516259619897");
+        assertEquals(viite.viiteTarkisteellaEtunollillaPituus20(), "00000000000000123453");
+        assertEquals(viite2.viiteTarkisteellaEtunollillaPituus20(), "00000868516259619897");
     }
 
+    @Test
+    public void onkoViiteKelvollinenToimiiOikein() {
+        assertTrue(viite.onkoViiteKelvollinen("123"));
+        assertTrue(viite.onkoViiteKelvollinen("123456"));
+        assertTrue(viite.onkoViiteKelvollinen("1231231231231231231"));
+        
+        assertFalse(viite.onkoViiteKelvollinen("1"));
+        assertFalse(viite.onkoViiteKelvollinen("12"));
+        assertFalse(viite.onkoViiteKelvollinen("12312312312312312312"));
+        assertFalse(viite.onkoViiteKelvollinen("123123123123123123124"));
+        
+        assertFalse(viite.onkoViiteKelvollinen("12a"));
+        assertFalse(viite.onkoViiteKelvollinen("31t234"));
+        assertFalse(viite.onkoViiteKelvollinen("1231231231231231-31"));
+    }
 }

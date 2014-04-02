@@ -11,7 +11,6 @@ import org.apache.commons.validator.GenericValidator;
  *
  * @author Augustus58
  */
-// Tällä tarkistimella voidaan tarkistaa, onko Character-tyyppinen merkki numero tai iso kirjain A-Z.
 public class MerkkiJaMerkkijonoTarkistin {
 
     private final String isotAakkosetAZ;
@@ -59,7 +58,7 @@ public class MerkkiJaMerkkijonoTarkistin {
         return false;
     }
 
-    public Boolean SisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
+    public Boolean sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(String merkkijono) {
         if (merkkijono.isEmpty()) {
             return false;
         }

@@ -12,7 +12,6 @@ import java.util.Date;
  *
  * @author Augustus58
  */
-
 // Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
 // http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
 public class Pankkiviivakoodi {
@@ -30,11 +29,11 @@ public class Pankkiviivakoodi {
     private String muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
         return ("105"
                 + "4"
-                + tilinumero.getTilinumeroIlmanMaatunnusta()
-                + laskunSumma.getEurotStringEtunollillaPituusKuusi()
-                + laskunSumma.getSentitStringEtunollillaPituusKaksi()
+                + tilinumero.tilinumeroIlmanMaatunnusta()
+                + laskunSumma.eurotStringEtunollillaPituusKuusi()
+                + laskunSumma.sentitStringEtunollillaPituusKaksi()
                 + "000"
-                + viite.getViiteTarkisteellaEtunollillaPituus20()
+                + viite.viiteTarkisteellaEtunollillaPituus20()
                 + paivamaaraFormaatti.format(erapaiva));
     }
 
@@ -54,12 +53,33 @@ public class Pankkiviivakoodi {
         return (summa % 103);
 
     }
-    
-    public String getString() {
+
+    public String getPankkiviivakoodi() {
         return this.pankkiviivakoodi;
     }
-    
-    public String getStringIlmanAloitustaJaLopetusta() {
-        return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length()-3);
+
+    public String pankkiviivakoodiIlmanAloitustaJaLopetusta() {
+        return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length() - 3);
+    }
+
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        Pankkiviivakoodi verrattava = (Pankkiviivakoodi) olio;
+        if (!this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (pankkiviivakoodi.hashCode());
     }
 }

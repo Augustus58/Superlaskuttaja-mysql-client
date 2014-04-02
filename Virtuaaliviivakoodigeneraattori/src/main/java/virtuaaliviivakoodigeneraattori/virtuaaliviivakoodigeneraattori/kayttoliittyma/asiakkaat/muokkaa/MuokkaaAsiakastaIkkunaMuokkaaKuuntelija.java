@@ -64,7 +64,7 @@ public class MuokkaaAsiakastaIkkunaMuokkaaKuuntelija implements ActionListener {
                 throw new IllegalArgumentException("Jokin syöte on virheellinen.");
             }
             
-            taulukko.getModel().insertRow(kuuntelija.getArvoModel(), asiakas.getAsiakkaanTiedotTaulukossa());
+            taulukko.getModel().insertRow(kuuntelija.getArvoModel(), asiakas.asiakkaanTiedotTaulukossa());
             taulukko.getModel().removeRow(kuuntelija.getArvoModel() + 1);
             
             lataaja.getLadattuTietovarasto().poistaAsiakas(vanhaAsiakas);
