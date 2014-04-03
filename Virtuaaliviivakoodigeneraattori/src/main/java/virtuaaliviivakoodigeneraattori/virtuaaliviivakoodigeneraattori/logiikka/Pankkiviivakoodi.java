@@ -11,6 +11,9 @@ import java.util.Date;
 /**
  *
  * @author Augustus58
+ *
+ * Luokka tarjoaa tarvittavat metodit pankkiviivakoodien muodostamiseen ja
+ * niiden oikeellisuuden tarkistamiseen
  */
 // Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
 // http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
@@ -26,6 +29,16 @@ public class Pankkiviivakoodi {
 
     }
 
+    /**
+     * Metodi muodostaa pankkiviivakoodin ilman tarkistetta ja lopetusta
+     *
+     * @param tilinumero Oikeaksi todettu tilinumero
+     * @param laskunSumma Laskun summa
+     * @param viite Oikeaksi todettu viite
+     * @param erapaiva Laskun eräpäivä
+     *
+     * @return pankkiviivakoodi ilman aloitusta ja lopetusta
+     */
     private String muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
         return ("105"
                 + "4"
@@ -37,12 +50,26 @@ public class Pankkiviivakoodi {
                 + paivamaaraFormaatti.format(erapaiva));
     }
 
+    /**
+     * Metodi muodostaa pankkiviivakoodin aloituksella ja lopetuksella
+     *
+     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman aloitusta ja lopetusta
+     *
+     * @return pankkiviivakoodi aloituksella ja lopetuksella
+     */
     private String muodostaPankkiviivakoodi(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         return (pankkiviivakoodiIlmanTarkistettaJaLopetusta
                 + laskeTarkiste(pankkiviivakoodiIlmanTarkistettaJaLopetusta).toString()
                 + "106");
     }
 
+    /**
+     * Metodi laskee tarkisteen pankkiviivakoodiin
+     *
+     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman aloitusta ja lopetusta
+     *
+     * @return tarkistenumero
+     */
     private Integer laskeTarkiste(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         Integer summa = 0;
         summa = summa + 1 * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(0, 3));
@@ -58,6 +85,11 @@ public class Pankkiviivakoodi {
         return this.pankkiviivakoodi;
     }
 
+    /**
+     * Metodi antaa jo muodostetun pankkiviivakoodin ilman aloitusta ja lopetusta
+     *
+     * @return pankkiviivakoodi ilman aloitusta lopetusta
+     */
     public String pankkiviivakoodiIlmanAloitustaJaLopetusta() {
         return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length() - 3);
     }
@@ -70,9 +102,9 @@ public class Pankkiviivakoodi {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        return(teeEqualsVertailut(olio));
+        return (teeEqualsVertailut(olio));
     }
-    
+
     private boolean teeEqualsVertailut(Object olio) {
         Pankkiviivakoodi verrattava = (Pankkiviivakoodi) olio;
         if (this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
