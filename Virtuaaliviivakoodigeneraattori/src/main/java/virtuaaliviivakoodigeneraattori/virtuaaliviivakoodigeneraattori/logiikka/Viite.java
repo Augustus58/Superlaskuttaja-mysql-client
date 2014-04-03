@@ -11,14 +11,14 @@ import java.util.ArrayList;
  *
  * @author Augustus58
  */
-
 // Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
 // http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf
 public class Viite {
 
-    private final String viiteTarkisteella;
+    private String viiteTarkisteella;
     private final MerkkiJaMerkkijonoTarkistin merkkitarkistin;
 // Konstruktorille tulee antaa viite ilman tarkistetta.
+
     public Viite(String viite) {
         this.viiteTarkisteella = muodostaTarkisteellinenViite(viite);
         this.merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
@@ -85,6 +85,10 @@ public class Viite {
         return this.viiteTarkisteella;
     }
     
+    public void asetaUusiViiteViitteestaIlmanTarkistetta(String viiteIlmanTarkistetta){
+        viiteTarkisteella = muodostaTarkisteellinenViite(viiteIlmanTarkistetta);
+    }
+
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -93,12 +97,15 @@ public class Viite {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        Viite verrattava = (Viite) olio;
-        if (!this.viiteTarkisteella.equals(verrattava.viiteTarkisteella)) {
-            return false;
-        }
+        return (teeEqualsVertailut(olio));
+    }
 
-        return true;
+    private boolean teeEqualsVertailut(Object olio) {
+        Viite verrattava = (Viite) olio;
+        if (this.viiteTarkisteella.equals(verrattava.viiteTarkisteella)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

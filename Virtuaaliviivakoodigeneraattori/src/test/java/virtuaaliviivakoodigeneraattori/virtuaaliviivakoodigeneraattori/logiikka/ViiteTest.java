@@ -19,7 +19,9 @@ import static org.junit.Assert.*;
 public class ViiteTest {
 
     Viite viite;
+    Viite viite1;
     Viite viite2;
+    Viite viite3;
 
     public ViiteTest() {
     }
@@ -35,7 +37,9 @@ public class ViiteTest {
     @Before
     public void setUp() {
         viite = new Viite("12345");
+        viite1 = new Viite("12345");
         viite2 = new Viite("86851625961989");
+        viite3 = new Viite("86851625961989");
     }
 
     @After
@@ -69,5 +73,23 @@ public class ViiteTest {
         assertFalse(viite.onkoViiteKelvollinen("12a"));
         assertFalse(viite.onkoViiteKelvollinen("31t234"));
         assertFalse(viite.onkoViiteKelvollinen("1231231231231231-31"));
+    }
+    
+    @Test
+    public void equalsToimiiOikein() {
+        assertTrue(viite.equals(viite1));
+        
+        viite.asetaUusiViiteViitteestaIlmanTarkistetta("56756756");
+        assertFalse(viite.equals(viite1));
+        viite.asetaUusiViiteViitteestaIlmanTarkistetta("12345");
+        assertTrue(viite.equals(viite1));
+    }
+    
+    @Test
+    public void hashCodeToimiiOikein() {
+        int expected = viite.hashCode();
+        assertEquals(expected, viite1.hashCode());
+        int expected1 = viite2.hashCode();
+        assertEquals(expected1, viite3.hashCode());
     }
 }

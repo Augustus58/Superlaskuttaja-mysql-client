@@ -21,8 +21,18 @@ import static org.junit.Assert.*;
 public class SuoriteTest {
 
     Asiakas asiakas;
+    Asiakas asiakas1;
     Date date;
+    Date date1;
     Suorite suorite;
+    Suorite suorite1;
+    
+    Asiakas asiakas2;
+    Asiakas asiakas3;
+    Date date2;
+    Date date3;
+    Suorite suorite2;
+    Suorite suorite3;
 
     Tilinumero tilinumero;
     Laskuttaja laskuttaja;
@@ -47,8 +57,18 @@ public class SuoriteTest {
     public void setUp() {
         //Asetetaan suorite-oliolle sellaiset tiedot, joiden pitäisi olla oikeanlaiset.
         asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
+        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
         date = new Date(2014 - 1900, 4 - 1, 2);
+        date1 = new Date(2014 - 1900, 4 - 1, 2);
         suorite = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
+        suorite1 = new Suorite(asiakas1, "Kuvaus", date1, 2.0, "h", 75.0, 24);
+        
+        asiakas2 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
+        asiakas3 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
+        date2 = new Date(2010 - 1900, 4 - 1, 4);
+        date3 = new Date(2010 - 1900, 4 - 1, 4);
+        suorite2 = new Suorite(asiakas2, "Kuvaus", date2, 1.0, "h", 72.0, 25);
+        suorite3 = new Suorite(asiakas3, "Kuvaus", date3, 1.0, "h", 72.0, 25);
 
         tilinumero = new Tilinumero("FI7944052020036082", "Superpankki", "SUPFI");
         laskuttaja = new Laskuttaja("Nimi", "Katuosoite", "00123", "Laskuttajacity", "Superyritys", "123456", tilinumero, "0101234123", "super@super.fi", 5000);
@@ -217,5 +237,65 @@ public class SuoriteTest {
         assertFalse(suorite.onkoTiedotOikeanlaisetPaitsiPvm());
         suorite.setAlvProsentti(5);
         assertTrue(suorite.onkoTiedotOikeanlaisetPaitsiPvm());
+    }
+    
+    @Test
+    public void equalsToimiiOikein() {
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.getAsiakas().setNimi("Toinen nimi");
+        assertFalse(suorite.equals(suorite1));
+        suorite.getAsiakas().setNimi("Elmeri Asiakas");
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setKuvaus("Uusi kuvaus");
+        assertFalse(suorite.equals(suorite1));
+        suorite.setKuvaus("Kuvaus");
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setPvm(date3);
+        assertFalse(suorite.equals(suorite1));
+        suorite.setPvm(date);
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setMaara(45.45);
+        assertFalse(suorite.equals(suorite1));
+        suorite.setMaara(2.0);
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setMaaranYksikot("min");
+        assertFalse(suorite.equals(suorite1));
+        suorite.setMaaranYksikot("h");
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setaHinta(99.99);
+        assertFalse(suorite.equals(suorite1));
+        suorite.setaHinta(75.0);
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setAlvProsentti(56);
+        assertFalse(suorite.equals(suorite1));
+        suorite.setAlvProsentti(24);
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setLasku(lasku);
+        assertFalse(suorite.equals(suorite1));
+        suorite.poistaLasku();
+        assertTrue(suorite.equals(suorite1));
+        
+        suorite.setLasku(lasku);
+        suorite.paivitaLaskutettuTeksti();
+        assertFalse(suorite.equals(suorite1));
+        suorite.poistaLasku();
+        suorite.paivitaLaskutettuTeksti();
+        assertTrue(suorite.equals(suorite1));
+    }
+    
+    @Test
+    public void hashCodeToimiiOikein() {
+        int expected = suorite.hashCode();
+        assertEquals(expected, suorite1.hashCode());
+        int expected1 = suorite2.hashCode();
+        assertEquals(expected1, suorite3.hashCode());
     }
 }

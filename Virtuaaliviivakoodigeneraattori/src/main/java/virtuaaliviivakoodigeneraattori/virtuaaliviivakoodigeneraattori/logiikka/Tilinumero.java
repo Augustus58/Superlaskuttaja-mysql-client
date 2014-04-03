@@ -11,15 +11,14 @@ import java.math.BigInteger;
  *
  * @author Augustus58
  */
-
 // Osaan tämän luokan metodeista löytyy toiminnan perustelut osoitteesta
 // http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
 public class Tilinumero {
 
-    private final String tilinumero;
-    private final String pankki;
-    private final String swiftBic;
-    private final MerkkiJaMerkkijonoTarkistin tarkistin;
+    private String tilinumero;
+    private String pankki;
+    private String swiftBic;
+    private MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Tilinumero(String tilinumero, String pankki, String swiftBic) {
         this.tilinumero = tilinumero;
@@ -46,7 +45,7 @@ public class Tilinumero {
     private String siirraMaakodiJaTarkisteLoppuun(String tilinumero) {
         return (tilinumero.substring(5 - 1) + tilinumero.substring(0, 4));
     }
-    
+
     private BigInteger muunnaTilinumeroMaakoodiJaTarkisteSiirrettyLoppuunKokonaisluvuksi(String tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun) {
         String muunnettuMerkkijono = "";
         for (int i = 0; i < tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.length(); i++) {
@@ -68,7 +67,7 @@ public class Tilinumero {
     private Integer muunnaKirjainKokonaisluvuksi(Character kirjain) {
         int k = 0;
         for (int i = 0; i < this.tarkistin.getIsotAakkosetAZ().length(); i++) {
-            if (this.tarkistin.getIsotAakkosetAZ().substring(i, i+1).equals(kirjain.toString())) {
+            if (this.tarkistin.getIsotAakkosetAZ().substring(i, i + 1).equals(kirjain.toString())) {
                 k = i + 10;
             }
         }
@@ -78,15 +77,15 @@ public class Tilinumero {
     public Boolean onkoPankkiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(pankki));
     }
-    
+
     public Boolean onkoSwiftBicOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(swiftBic));
     }
-    
+
     public String getTilinumero() {
         return this.tilinumero;
     }
-    
+
     public String tilinumeroIlmanMaatunnusta() {
         return this.tilinumero.substring(2);
     }
@@ -98,7 +97,19 @@ public class Tilinumero {
     public String getSwiftBic() {
         return swiftBic;
     }
-    
+
+    public void setTilinumero(String tilinumero) {
+        this.tilinumero = tilinumero;
+    }
+
+    public void setPankki(String pankki) {
+        this.pankki = pankki;
+    }
+
+    public void setSwiftBic(String swiftBic) {
+        this.swiftBic = swiftBic;
+    }
+
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -107,23 +118,22 @@ public class Tilinumero {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        Tilinumero verrattava = (Tilinumero) olio;
-        if (!this.tilinumero.equals(verrattava.tilinumero)) {
-            return false;
-        }
-        if (!this.pankki.equals(verrattava.pankki)) {
-            return false;
-        }
-        if (!this.swiftBic.equals(verrattava.swiftBic)) {
-            return false;
-        }
+        return (teeEqualsVertailut(olio));
+    }
 
-        return true;
+    private boolean teeEqualsVertailut(Object olio) {
+        Tilinumero verrattava = (Tilinumero) olio;
+        if (this.tilinumero.equals(verrattava.tilinumero)
+                && this.pankki.equals(verrattava.pankki)
+                && this.swiftBic.equals(verrattava.swiftBic)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
         return (tilinumero.hashCode() + pankki.hashCode() + swiftBic.hashCode());
     }
-    
+
 }

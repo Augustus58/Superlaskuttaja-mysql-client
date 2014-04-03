@@ -113,26 +113,18 @@ public class MerkkiJaMerkkijonoTarkistin {
         if (merkkijono.length() != 10) {
             return false;
         }
-        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(0, 2))) {
-            return false;
+        if (koostuukoMerkkijonoNumeroista(merkkijono.substring(0, 2))
+                && merkkijono.substring(2, 3).equals(".")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(3, 5))
+                && merkkijono.substring(5, 6).equals(".")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(6, 10))) {
+            return true;
         }
-        if (!merkkijono.substring(2, 3).equals(".")) {
-            return false;
-        }
-        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(3, 5))) {
-            return false;
-        }
-        if (!merkkijono.substring(5, 6).equals(".")) {
-            return false;
-        }
-        if (!koostuukoMerkkijonoNumeroista(merkkijono.substring(6, 10))) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public Boolean onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(String merkkijono) {
-        return(GenericValidator.isDate(merkkijono, "dd.MM.yyyy", true));
+        return (GenericValidator.isDate(merkkijono, "dd.MM.yyyy", true));
     }
 
     public String getIsotAakkosetAZ() {

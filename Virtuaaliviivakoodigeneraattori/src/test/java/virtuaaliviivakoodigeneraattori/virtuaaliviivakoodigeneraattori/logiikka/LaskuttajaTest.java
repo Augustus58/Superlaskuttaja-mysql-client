@@ -19,7 +19,13 @@ import static org.junit.Assert.*;
 public class LaskuttajaTest {
 
     Tilinumero tilinumero;
+    Tilinumero tilinumero1;
+    Tilinumero tilinumero2;
+    Tilinumero tilinumero3;
     Laskuttaja laskuttaja;
+    Laskuttaja laskuttaja1;
+    Laskuttaja laskuttaja2;
+    Laskuttaja laskuttaja3;
 
     public LaskuttajaTest() {
     }
@@ -35,7 +41,14 @@ public class LaskuttajaTest {
     @Before
     public void setUp() {
         tilinumero = new Tilinumero("FI3936363002092492", "Superpankki", "FISUFIHH");
+        tilinumero1 = new Tilinumero("FI3936363002092492", "Superpankki", "FISUFIHH");
+        tilinumero2 = new Tilinumero("FI3936363002092492", "Superpankkikonserni", "FISUFIHHSE");
+        tilinumero3 = new Tilinumero("FI3936363002092492", "Superpankkikonserni", "FISUFIHHSE");
+        
         laskuttaja = new Laskuttaja("Erkki Laskuttaja", "Laskuttajankatu 17 A 7", "00549", "Laskuttajacity", "Superyhtiöt", "FI2343-34343", tilinumero, "035-5554444", "erkki.laskuttaja@superyhtiot.fi", 50345);
+        laskuttaja1 = new Laskuttaja("Erkki Laskuttaja", "Laskuttajankatu 17 A 7", "00549", "Laskuttajacity", "Superyhtiöt", "FI2343-34343", tilinumero1, "035-5554444", "erkki.laskuttaja@superyhtiot.fi", 50345);
+        laskuttaja2 = new Laskuttaja("Erkki Liimatta", "Laskuttajankatu 14 A 7", "00519", "Laskuttajacity-5", "Superyhtiöt", "FI2443-34343", tilinumero2, "035-5556444", "laskuttaja@superyhtiot.fi", 503453);
+        laskuttaja3 = new Laskuttaja("Erkki Liimatta", "Laskuttajankatu 14 A 7", "00519", "Laskuttajacity-5", "Superyhtiöt", "FI2443-34343", tilinumero3, "035-5556444", "laskuttaja@superyhtiot.fi", 503453);
     }
 
     @After
@@ -339,5 +352,68 @@ public class LaskuttajaTest {
         assertFalse(laskuttaja.onkoTiedotOikeanlaiset());
         laskuttaja.setLaskujaLahetetty(300);
         assertTrue(laskuttaja.onkoTiedotOikeanlaiset());
+    }
+    
+    @Test
+    public void equalsToimiiOikein() {
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setNimi("Einari");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setNimi("Erkki Laskuttaja");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setKatuosoite("Superlaskuttajankatu");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setKatuosoite("Laskuttajankatu 17 A 7");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setPostinumero("00000");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setPostinumero("00549");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setKaupunki("K15");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setKaupunki("Laskuttajacity");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setYrityksenNimi("SUPERCO");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setYrityksenNimi("Superyhtiöt");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setAlv("99999");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setAlv("FI2343-34343");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setTilinumero(tilinumero2);
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setTilinumero(tilinumero);
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setPuhelinnumero("234-234");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setPuhelinnumero("035-5554444");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setSahkopostiOsoite("a@b.fi");
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setSahkopostiOsoite("erkki.laskuttaja@superyhtiot.fi");
+        assertTrue(laskuttaja.equals(laskuttaja1));
+        
+        laskuttaja.setLaskujaLahetetty(42);
+        assertFalse(laskuttaja.equals(laskuttaja1));
+        laskuttaja.setLaskujaLahetetty(50345);
+        assertTrue(laskuttaja.equals(laskuttaja1));
+    }
+    
+    @Test
+    public void hashCodeToimiiOikein() {
+        int expected = laskuttaja.hashCode();
+        assertEquals(expected, laskuttaja1.hashCode());
+        int expected1 = laskuttaja2.hashCode();
+        assertEquals(expected1, laskuttaja3.hashCode());
     }
 }

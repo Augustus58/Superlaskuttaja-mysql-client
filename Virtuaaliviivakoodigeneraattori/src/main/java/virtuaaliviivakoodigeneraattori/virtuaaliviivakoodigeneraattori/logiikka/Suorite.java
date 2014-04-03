@@ -40,6 +40,7 @@ public class Suorite {
         this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
         this.onkoLaskutettu = false;
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
+        this.laskutettuTeksti = "Ei";
         paivitaLaskutettuTeksti();
         laskeAlv();
         laskeYht();
@@ -152,6 +153,11 @@ public class Suorite {
             laskutettuTeksti = "Ei";
         }
     }
+    
+    public void poistaLasku() {
+        this.lasku = null;
+        onkoLaskutettu = false;
+    }
 
     public boolean onkoTiedotOikeanlaisetPaitsiPvm() {
         if (onkoKuvausOikeanlainen()
@@ -191,5 +197,49 @@ public class Suorite {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public boolean equals(Object olio) {
+        if (olio == null) {
+            return false;
+        }
+        if (getClass() != olio.getClass()) {
+            return false;
+        }
+        return(teeEqualsVertailut(olio));
+    }
+    
+    private boolean teeEqualsVertailut(Object olio) {
+        Suorite verrattava = (Suorite) olio;
+        if (this.asiakas.equals(verrattava.asiakas)
+                && this.kuvaus.equals(verrattava.kuvaus)
+                && this.pvm.equals(verrattava.pvm)
+                && this.maara.equals(verrattava.maara)
+                && this.maaranYksikot.equals(verrattava.maaranYksikot)
+                && this.aHinta.equals(verrattava.aHinta)
+                && this.alvProsentti.equals(verrattava.alvProsentti)
+                && this.alv.equals(verrattava.alv)
+                && this.yht.equals(verrattava.yht)
+                && this.onkoLaskutettu.equals(verrattava.onkoLaskutettu)
+                && this.laskutettuTeksti.equals(verrattava.laskutettuTeksti)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return (asiakas.hashCode()
+                + kuvaus.hashCode()
+                + pvm.hashCode()
+                + maara.hashCode()
+                + maaranYksikot.hashCode()
+                + aHinta.hashCode()
+                + alvProsentti.hashCode()
+                + alv.hashCode()
+                + yht.hashCode()
+                + onkoLaskutettu.hashCode()
+                + laskutettuTeksti.hashCode());
     }
 }

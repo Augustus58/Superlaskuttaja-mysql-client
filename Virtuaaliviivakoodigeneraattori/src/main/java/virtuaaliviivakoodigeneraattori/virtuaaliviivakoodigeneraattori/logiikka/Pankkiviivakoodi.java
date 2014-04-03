@@ -70,12 +70,15 @@ public class Pankkiviivakoodi {
         if (getClass() != olio.getClass()) {
             return false;
         }
+        return(teeEqualsVertailut(olio));
+    }
+    
+    private boolean teeEqualsVertailut(Object olio) {
         Pankkiviivakoodi verrattava = (Pankkiviivakoodi) olio;
-        if (!this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
-            return false;
+        if (this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     @Override

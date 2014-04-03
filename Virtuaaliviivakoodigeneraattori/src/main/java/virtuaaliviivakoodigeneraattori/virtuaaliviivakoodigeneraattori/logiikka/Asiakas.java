@@ -29,8 +29,6 @@ public class Asiakas {
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
-    
-    
     public Boolean onkoTiedotOikeanlaiset() {
         if (onkoNimiOikeanlainen()
                 && onkoKaupunkiOikeanlainen()
@@ -106,27 +104,23 @@ public class Asiakas {
         if (getClass() != olio.getClass()) {
             return false;
         }
+        
+        return(teeEqualsVertailut(olio));
+    }
+    
+    private boolean teeEqualsVertailut(Object olio) {
         Asiakas verrattava = (Asiakas) olio;
-        if (!this.asiakasnumero.equals(verrattava.asiakasnumero)) {
-            return false;
-        }
-        if (!this.katuosoite.equals(verrattava.katuosoite)) {
-            return false;
-        }
-        if (!this.kaupunki.equals(verrattava.kaupunki)) {
-            return false;
-        }
-        if (!this.laskujaLahetetty.equals(verrattava.laskujaLahetetty)) {
-            return false;
-        }
-        if (!this.nimi.equals(verrattava.nimi)) {
-            return false;
-        }
-        if (!this.postinumero.equals(verrattava.postinumero)) {
-            return false;
+
+        if (this.asiakasnumero.equals(verrattava.asiakasnumero)
+                && this.katuosoite.equals(verrattava.katuosoite)
+                && this.kaupunki.equals(verrattava.kaupunki)
+                && this.laskujaLahetetty.equals(verrattava.laskujaLahetetty)
+                && this.nimi.equals(verrattava.nimi)
+                && this.postinumero.equals(verrattava.postinumero)) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -157,6 +151,5 @@ public class Asiakas {
     public void setLaskujaLahetetty(Integer laskujaLahetetty) {
         this.laskujaLahetetty = laskujaLahetetty;
     }
-    
-    
+
 }

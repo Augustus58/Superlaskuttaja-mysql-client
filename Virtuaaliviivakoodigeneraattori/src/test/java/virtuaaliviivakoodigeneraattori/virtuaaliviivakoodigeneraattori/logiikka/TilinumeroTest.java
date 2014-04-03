@@ -28,6 +28,9 @@ public class TilinumeroTest {
     String oikeaTilinumero1;
     String oikeaTilinumero2;
     Tilinumero tilinumero;
+    Tilinumero tilinumero1;
+    Tilinumero tilinumero2;
+    Tilinumero tilinumero3;
     
     public TilinumeroTest() {
     }
@@ -50,7 +53,10 @@ public class TilinumeroTest {
         vaaraTilinumero6 = "FI973";
         oikeaTilinumero1 = "FI3816603001014664";
         oikeaTilinumero2 = "FI9780001500084521";
-        tilinumero = new Tilinumero("FI3816603001014664", "", "");
+        tilinumero = new Tilinumero("FI3816603001014664", "SUPERPANKKI", "SUPERFIH");
+        tilinumero1 = new Tilinumero("FI3816603001014664", "SUPERPANKKI", "SUPERFIH");
+        tilinumero2 = new Tilinumero("FI7944052020036082", "Pankki", "SUPERFIHC");
+        tilinumero3 = new Tilinumero("FI7944052020036082", "Pankki", "SUPERFIHC");
     }
     
     @After
@@ -74,6 +80,34 @@ public class TilinumeroTest {
     public void tarkistaTilinumeroToimiiOikeinOikeallaTilinumerolla() {
         assertTrue(tilinumero.tarkistaTilinumero(oikeaTilinumero1));
         assertTrue(tilinumero.tarkistaTilinumero(oikeaTilinumero2));   
+    }
+    
+    @Test
+    public void equalsToimiiOikein() {
+        assertTrue(tilinumero.equals(tilinumero1));
+        
+        tilinumero.setTilinumero("FI5810171000000122");
+        assertFalse(tilinumero.equals(tilinumero1));
+        tilinumero.setTilinumero("FI3816603001014664");
+        assertTrue(tilinumero.equals(tilinumero1));
+        
+        tilinumero.setPankki("Uusi pankki");
+        assertFalse(tilinumero.equals(tilinumero1));
+        tilinumero.setPankki("SUPERPANKKI");
+        assertTrue(tilinumero.equals(tilinumero1));
+        
+        tilinumero.setSwiftBic("QWERTY");
+        assertFalse(tilinumero.equals(tilinumero1));
+        tilinumero.setSwiftBic("SUPERFIH");
+        assertTrue(tilinumero.equals(tilinumero1));
+    }
+    
+    @Test
+    public void hashCodeToimiiOikein() {
+        int expected = tilinumero.hashCode();
+        assertEquals(expected, tilinumero1.hashCode());
+        int expected1 = tilinumero2.hashCode();
+        assertEquals(expected1, tilinumero3.hashCode());
     }
     
 }

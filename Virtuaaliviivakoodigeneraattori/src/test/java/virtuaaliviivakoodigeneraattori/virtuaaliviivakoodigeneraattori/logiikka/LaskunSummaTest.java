@@ -20,6 +20,9 @@ import static org.junit.Assert.*;
 public class LaskunSummaTest {
     
     LaskunSumma summa;
+    LaskunSumma summa1;
+    LaskunSumma summa2;
+    LaskunSumma summa3;
     
     public LaskunSummaTest() {
     }
@@ -35,6 +38,9 @@ public class LaskunSummaTest {
     @Before
     public void setUp() {
         summa = new LaskunSumma(0,0);
+        summa1 = new LaskunSumma(0,0);
+        summa2 = new LaskunSumma(5,53);
+        summa3 = new LaskunSumma(5,53);
     }
     
     @After
@@ -110,5 +116,28 @@ public class LaskunSummaTest {
         summa.setEurot(9999);
         summa.setSentit(99);
         assertEquals("9999.99", summa.toString());
+    }
+    
+    @Test
+    public void equalsToimiiOikein() {
+        assertTrue(summa.equals(summa1));
+        
+        summa.setEurot(7);
+        assertFalse(summa.equals(summa1));
+        summa.setEurot(0);
+        assertTrue(summa.equals(summa1));
+        
+        summa.setSentit(7);
+        assertFalse(summa.equals(summa1));
+        summa.setSentit(0);
+        assertTrue(summa.equals(summa1));
+    }
+    
+    @Test
+    public void hashCodeToimiiOikein() {
+        int expected = summa.hashCode();
+        assertEquals(expected, summa1.hashCode());
+        int expected1 = summa2.hashCode();
+        assertEquals(expected1, summa3.hashCode());
     }
 }

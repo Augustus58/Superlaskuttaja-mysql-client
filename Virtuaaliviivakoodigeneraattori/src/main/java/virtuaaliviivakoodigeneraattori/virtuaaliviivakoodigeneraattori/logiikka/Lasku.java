@@ -14,20 +14,20 @@ import java.util.Date;
  */
 public class Lasku {
 
-    private final Laskuttaja laskuttaja; //Tilinumero tätä kautta.
-    private final Asiakas asiakas;
+    private Laskuttaja laskuttaja; //Tilinumero tätä kautta.
+    private Asiakas asiakas;
 
-    private final Date paivays;
-    private final Integer laskunNumero; //Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut samalla numeroinnilla.
-    private final Date erapaiva;
-    private final Integer viivastyskorko; //Esim 8.
-    private final Viite viiteTarkisteella;
-    private final String maksuehto;
+    private Date paivays;
+    private Integer laskunNumero; //Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut samalla numeroinnilla.
+    private Date erapaiva;
+    private Integer viivastyskorko; //Esim 8.
+    private Viite viiteTarkisteella;
+    private String maksuehto;
 
-    private final ArrayList<Suorite> suoritteet;
-    private final String lisatiedot;
-    private final LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
-    private final Pankkiviivakoodi pankkiviivakoodi;
+    private ArrayList<Suorite> suoritteet;
+    private String lisatiedot;
+    private LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
+    private Pankkiviivakoodi pankkiviivakoodi;
 
     private Boolean onkoMaksettu;
     private String maksettuTeksti;
@@ -53,10 +53,120 @@ public class Lasku {
         return laskunNumero;
     }
 
+    public Laskuttaja getLaskuttaja() {
+        return laskuttaja;
+    }
+
+    public Asiakas getAsiakas() {
+        return asiakas;
+    }
+
+    public Date getPaivays() {
+        return paivays;
+    }
+
+    public Date getErapaiva() {
+        return erapaiva;
+    }
+
+    public Integer getViivastyskorko() {
+        return viivastyskorko;
+    }
+
+    public Viite getViiteTarkisteella() {
+        return viiteTarkisteella;
+    }
+
+    public String getMaksuehto() {
+        return maksuehto;
+    }
+
+    public ArrayList<Suorite> getSuoritteet() {
+        return suoritteet;
+    }
+
+    public String getLisatiedot() {
+        return lisatiedot;
+    }
+
+    public LaskunSumma getSumma() {
+        return summa;
+    }
+
+    public Pankkiviivakoodi getPankkiviivakoodi() {
+        return pankkiviivakoodi;
+    }
+
+    public Boolean isOnkoMaksettu() {
+        return onkoMaksettu;
+    }
+
+    public String getMaksettuTeksti() {
+        return maksettuTeksti;
+    }
+    
     public Object[] laskunTiedotTaulukossa() {
         return (new Object[]{asiakas.getNimi(), asiakas.getAsiakasnumero(), viiteTarkisteella, laskunNumero, summa, paivays, erapaiva, maksettuTeksti});
     }
 
+    public void setLaskuttaja(Laskuttaja laskuttaja) {
+        this.laskuttaja = laskuttaja;
+    }
+
+    public void setAsiakas(Asiakas asiakas) {
+        this.asiakas = asiakas;
+    }
+
+    public void setPaivays(Date paivays) {
+        this.paivays = paivays;
+    }
+
+    public void setLaskunNumero(Integer laskunNumero) {
+        this.laskunNumero = laskunNumero;
+    }
+
+    public void setErapaiva(Date erapaiva) {
+        this.erapaiva = erapaiva;
+    }
+
+    public void setViivastyskorko(Integer viivastyskorko) {
+        this.viivastyskorko = viivastyskorko;
+    }
+
+    public void setViiteTarkisteella(Viite viiteTarkisteella) {
+        this.viiteTarkisteella = viiteTarkisteella;
+    }
+
+    public void setMaksuehto(String maksuehto) {
+        this.maksuehto = maksuehto;
+    }
+
+    public void setSuoritteet(ArrayList<Suorite> suoritteet) {
+        this.suoritteet = suoritteet;
+    }
+
+    public void setLisatiedot(String lisatiedot) {
+        this.lisatiedot = lisatiedot;
+    }
+
+    public void setSumma(LaskunSumma summa) {
+        this.summa = summa;
+    }
+
+    public void setPankkiviivakoodi(Pankkiviivakoodi pankkiviivakoodi) {
+        this.pankkiviivakoodi = pankkiviivakoodi;
+    }
+
+    public void setOnkoMaksettu(Boolean onkoMaksettu) {
+        this.onkoMaksettu = onkoMaksettu;
+    }
+
+    public void paivitaMaksettuTeksti() {
+        if (onkoMaksettu) {
+            maksettuTeksti = "Kyllä";
+        } else {maksettuTeksti = "Ei";}
+    }
+    
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -65,45 +175,26 @@ public class Lasku {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        Lasku verrattava = (Lasku) olio;
-        if (!this.laskuttaja.equals(verrattava.laskuttaja)) {
-            return false;
-        }
-        if (!this.asiakas.equals(verrattava.asiakas)) {
-            return false;
-        }
-        if (!this.paivays.equals(verrattava.paivays)) {
-            return false;
-        }
-        if (!this.viivastyskorko.equals(verrattava.viivastyskorko)) {
-            return false;
-        }
-        if (!this.viiteTarkisteella.equals(verrattava.viiteTarkisteella)) {
-            return false;
-        }
-        if (!this.maksuehto.equals(verrattava.maksuehto)) {
-            return false;
-        }
-        if (!this.suoritteet.equals(verrattava.suoritteet)) {
-            return false;
-        }
-        if (!this.lisatiedot.equals(verrattava.lisatiedot)) {
-            return false;
-        }
-        if (!this.summa.equals(verrattava.summa)) {
-            return false;
-        }
-        if (!this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
-            return false;
-        }
-        if (!this.onkoMaksettu.equals(verrattava.onkoMaksettu)) {
-            return false;
-        }
-        if (!this.maksettuTeksti.equals(verrattava.maksettuTeksti)) {
-            return false;
-        }
+        return (teeEqualsVertailut(olio));
+    }
 
-        return true;
+    private boolean teeEqualsVertailut(Object olio) {
+        Lasku verrattava = (Lasku) olio;
+        if (this.laskuttaja.equals(verrattava.laskuttaja)
+                && this.asiakas.equals(verrattava.asiakas)
+                && this.paivays.equals(verrattava.paivays)
+                && this.viivastyskorko.equals(verrattava.viivastyskorko)
+                && this.viiteTarkisteella.equals(verrattava.viiteTarkisteella)
+                && this.maksuehto.equals(verrattava.maksuehto)
+                && this.suoritteet.equals(verrattava.suoritteet)
+                && this.lisatiedot.equals(verrattava.lisatiedot)
+                && this.summa.equals(verrattava.summa)
+                && this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)
+                && this.onkoMaksettu.equals(verrattava.onkoMaksettu)
+                && this.maksettuTeksti.equals(verrattava.maksettuTeksti)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
