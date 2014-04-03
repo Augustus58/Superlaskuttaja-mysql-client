@@ -1,9 +1,9 @@
 ## Aihemäärittely
 ### Aihe
-Laskutusohjelma. Toteutetaan ohjelma, jolla voidaan laskuttaa asiakkaita. Ohjelmaan tulee syöttää laskuttajan ja asiakkaiden tiedot. Kun edelliset tiedot on syötetty voidaan ohjelmaan lisätä asiakaskohtaisia suoritteita. Ohjelmalla voidaan laskuttaja-, asiakas -ja suoritetietojen pohjalta tehdä laskuja. Laskut voidaan viedä pdf-muotoon lähetettäväksi sähköpostilla tai muuten. Ohjelma huolehtii mm.laskujen laskujen numeroinnista kirjanpitoa varten ja viitteiden automaattisesta luomisesta asiakasnumeron ja asiakaskohtaisen laskunumeron perusteella.
+Laskutusohjelma. Toteutetaan ohjelma, jolla voidaan laskuttaa asiakkaita. Ohjelmaan tulee syöttää laskuttajan ja asiakkaiden tiedot. Kun edelliset tiedot on syötetty voidaan ohjelmaan lisätä asiakaskohtaisia suoritteita. Ohjelmalla voidaan laskuttaja-, asiakas -ja suoritetietojen pohjalta tehdä laskuja. Laskut voidaan viedä pdf-muotoon lähetettäväksi sähköpostilla tai muuten. Ohjelma huolehtii mm. laskujen laskujen numeroinnista kirjanpitoa varten ja viitteiden automaattisesta luomisesta asiakasnumeron ja asiakaskohtaisen laskunumeron perusteella.
 
 ### Käyttäjät
-Laskuttaja
+- Laskuttaja
 
 ### Laskuttajan toiminnot
 #### Yhteenveto-osio
