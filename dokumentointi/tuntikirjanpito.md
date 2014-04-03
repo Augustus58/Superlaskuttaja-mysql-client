@@ -26,3 +26,4 @@
 - **2.4.2014 6h** Korjattu logiikan luokkien metodien nimiä, joissa esiintyi get-etuliite yleisten tapojen vastaisesti. Tehty tarvittavia equals -ja hashcode-metodeja luokille. Tehty olennaisia testejä luokkien metodeille. Kaikkien luokkien equals -ja hashcode-metodeille ei vielä ole testejä.
 - **3.4.3014 5h** Refaktoroitu logiikan luokkia, erityisesti equals-metodeja. Tehty testejä erityisesti logiikan luokkien equals -ja hashcode-metodeille. Tutustuttu alustavasti JavaDoc:iin.
 - **3.4.2014 1,5h** Muisteltu sekvenssikaavioiden tekemistä ja tehty kaksi. Tapauksista suoritteen lisääminen ja laskun lisääminen.
+- **3.4.2014 0,25h** Opeteltu pikapikaa lisää JavaDoc-kommentointia ja tehty kommentoinnit luokkaan Pankkiviivakoodi.
