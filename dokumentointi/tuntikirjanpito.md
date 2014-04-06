@@ -27,3 +27,5 @@
 - **3.4.3014 5h** Refaktoroitu logiikan luokkia, erityisesti equals-metodeja. Tehty testejä erityisesti logiikan luokkien equals -ja hashcode-metodeille. Tutustuttu alustavasti JavaDoc:iin.
 - **3.4.2014 1,5h** Muisteltu sekvenssikaavioiden tekemistä ja tehty kaksi. Tapauksista suoritteen lisääminen ja laskun lisääminen.
 - **3.4.2014 0,25h** Opeteltu pikapikaa lisää JavaDoc-kommentointia ja tehty kommentoinnit luokkaan Pankkiviivakoodi.
+- **5.4.2014 1,5h** Opeteltu sekvenssikaavioiden tekemistä ohjelmalla Quick Sequence Diagram Editor ja tehty alustava uusi versio kaaviosta suoritteen lisääminen.
+- **6.4.2014 1h** Tehty v2 sekvenssikaaviosta laskun lisääminen.
