@@ -6,6 +6,8 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 /**
+ * Luokan ilmentymään voi tallettaa yhden asiakkaan tiedot. Luokka tarjoaa
+ * metodit tietojen oikeanlaisuuden tarkistamiseen.
  *
  * @author Augustus58
  */
@@ -29,6 +31,11 @@ public class Asiakas {
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan tiedot oikeanlaiset.
+     *
+     * @return Tieto tietojen oikeellisuudesta.
+     */
     public Boolean onkoTiedotOikeanlaiset() {
         if (onkoNimiOikeanlainen()
                 && onkoKaupunkiOikeanlainen()
@@ -41,26 +48,56 @@ public class Asiakas {
         return false;
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan nimi oikeanlainen.
+     *
+     * @return Tieto nimen oikeanlaisuudesta.
+     */
     public Boolean onkoNimiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi));
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan kaupunki oikeanlainen.
+     *
+     * @return Tieto kaupungin oikeanlaisuudesta.
+     */
     public Boolean onkoKaupunkiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki));
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan katuosoite oikeanlainen.
+     *
+     * @return Tieto katuosoitteen oikeanlaisuudesta.
+     */
     public Boolean onkoKatuosoiteOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite));
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan asiakasnumero oikeanlainen.
+     *
+     * @return Tieto asiakasnumeron oikeanlaisuudesta.
+     */
     public Boolean onkoAsiakasnumeroOikeanlainen() {
         return (tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero));
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan postinumero oikeanlainen.
+     *
+     * @return Tieto postinumeron oikeanlaisuudesta.
+     */
     public Boolean onkoPostinumeroOikeanlainen() {
         return (tarkistin.koostuukoMerkkijonoNumeroista(postinumero));
     }
 
+    /**
+     * Metodi kertoo onko asiakkaan lähetettyjen laskujen lkm oikeanlainen.
+     *
+     * @return Tieto lähetettyjen laskujen lkm:n oikeanlaisuudesta.
+     */
     public Boolean onkoLaskujaLahetettyOikeanlainen() {
         if (laskujaLahetetty >= 0) {
             return true;
@@ -92,10 +129,24 @@ public class Asiakas {
         return postinumero;
     }
 
+    /**
+     * Metodi antaa asiakkaan tiedot taulukossa.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti käyttöliittymän luokan
+     * AsiakkaatTaulukko ilmentymien muodostamiseen.
+     *
+     * @return Asiakkaan tiedot taulukossa.
+     */
     public Object[] asiakkaanTiedotTaulukossa() {
         return (new Object[]{nimi, katuosoite, postinumero, kaupunki, asiakasnumero, laskujaLahetetty});
     }
 
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -104,10 +155,19 @@ public class Asiakas {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        
-        return(teeEqualsVertailut(olio));
+
+        return (teeEqualsVertailut(olio));
     }
-    
+
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Asiakas.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Asiakas verrattava = (Asiakas) olio;
 
@@ -123,6 +183,14 @@ public class Asiakas {
         return false;
     }
 
+    /**
+     * Luokan Asiakas hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan summaamalla attribuuttien laskujaLahetetty,
+     * asiakasnumero, nimi ja katuosoite hashCodet.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
         return (laskujaLahetetty + asiakasnumero.hashCode() + nimi.hashCode() + katuosoite.hashCode());

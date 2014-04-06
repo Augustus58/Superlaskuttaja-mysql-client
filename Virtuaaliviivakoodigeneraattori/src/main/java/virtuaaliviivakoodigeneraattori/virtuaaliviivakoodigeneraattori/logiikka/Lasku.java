@@ -9,24 +9,41 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Luokan ilmentymään voi tallettaa yhden laskun tiedot. Luokka tarjoaa metodit
+ * laskun tietojen oikeanlaisuuden tarkistamiseen.
  *
  * @author Augustus58
  */
 public class Lasku {
 
-    private Laskuttaja laskuttaja; //Tilinumero tätä kautta.
+    /**
+     * Tieto tilinumerosta tulee tätä kautta.
+     */
+    private Laskuttaja laskuttaja;
     private Asiakas asiakas;
 
     private Date paivays;
-    private Integer laskunNumero; //Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut samalla numeroinnilla.
+    /**
+     * Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut
+     * samalla juoksevalla numeroinnilla.
+     */
+    private Integer laskunNumero;
     private Date erapaiva;
-    private Integer viivastyskorko; //Esim 8.
+    /**
+     * Esim. 8.
+     */
+    private Integer viivastyskorko;
     private Viite viiteTarkisteella;
     private String maksuehto;
 
     private ArrayList<Suorite> suoritteet;
     private String lisatiedot;
-    private LaskunSumma summa; //Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
+    /**
+     * Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin
+     * (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja
+     * senteille. 0<=eurot<=999999. 0<=sentit<=99.
+     */
+    private LaskunSumma summa;
     private Pankkiviivakoodi pankkiviivakoodi;
 
     private Boolean onkoMaksettu;
@@ -97,6 +114,11 @@ public class Lasku {
         return pankkiviivakoodi;
     }
 
+    /**
+     * Metodi kertoo onko asiakas maksanut laskun.
+     *
+     * @return Tieto laskun maksamisesta.
+     */
     public Boolean isOnkoMaksettu() {
         return onkoMaksettu;
     }
@@ -104,7 +126,15 @@ public class Lasku {
     public String getMaksettuTeksti() {
         return maksettuTeksti;
     }
-    
+
+    /**
+     * Metodi antaa laskun tiedot taulukossa.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti käyttöliittymän luokan LaskutTaulukko
+     * ilmentymien muodostamiseen.
+     *
+     * @return Laskun tiedot taulukossa.
+     */
     public Object[] laskunTiedotTaulukossa() {
         return (new Object[]{asiakas.getNimi(), asiakas.getAsiakasnumero(), viiteTarkisteella, laskunNumero, summa, paivays, erapaiva, maksettuTeksti});
     }
@@ -161,12 +191,26 @@ public class Lasku {
         this.onkoMaksettu = onkoMaksettu;
     }
 
+    /**
+     * Metodi voidaan päivittää attribuutti maksettuTeksti.
+     * <p>
+     * Attribuutti maksettuTeksti päivitetään attribuuttiin onkoMaksettu
+     * perustuen.
+     */
     public void paivitaMaksettuTeksti() {
         if (onkoMaksettu) {
             maksettuTeksti = "Kyllä";
-        } else {maksettuTeksti = "Ei";}
+        } else {
+            maksettuTeksti = "Ei";
+        }
     }
-    
+
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -178,6 +222,15 @@ public class Lasku {
         return (teeEqualsVertailut(olio));
     }
 
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Lasku.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Lasku verrattava = (Lasku) olio;
         if (this.laskuttaja.equals(verrattava.laskuttaja)
@@ -197,8 +250,25 @@ public class Lasku {
         return false;
     }
 
+    /**
+     * Luokan Lasku hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan summaamalla attribuuttien laskuttaja, asiakas,
+     * paivays, laskunNumero, erapaiva, viiteTarkisteella, lisatiedot, summa ja
+     * pankkiviivakoodi hashCodet.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
-        return (laskuttaja.hashCode() + asiakas.hashCode() + paivays.hashCode() + laskunNumero.hashCode() + erapaiva.hashCode() + viivastyskorko.hashCode() + viiteTarkisteella.hashCode() + maksuehto.hashCode() + suoritteet.hashCode() + lisatiedot.hashCode() + summa.hashCode() + pankkiviivakoodi.hashCode() + onkoMaksettu.hashCode() + maksettuTeksti.hashCode());
+        return (laskuttaja.hashCode()
+                + asiakas.hashCode()
+                + paivays.hashCode()
+                + laskunNumero.hashCode()
+                + erapaiva.hashCode()
+                + viiteTarkisteella.hashCode()
+                + lisatiedot.hashCode()
+                + summa.hashCode()
+                + pankkiviivakoodi.hashCode());
     }
 }

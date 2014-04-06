@@ -6,6 +6,8 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 /**
+ * Luokan ilmentymään voi tallettaa laskuttajan tiedot. Luokka tarjoaa
+ * metodit tietojen oikeanlaisuuden tarkistamiseen.
  *
  * @author Augustus58
  */
@@ -21,7 +23,7 @@ public class Laskuttaja {
     private String puhelinnumero;
     private String sahkopostiOsoite;
     private Integer laskujaLahetetty;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Laskuttaja(String nimi, String katuosoite, String postinumero, String kaupunki, String yrityksenNimi, String alvTunniste, Tilinumero tilinumero, String puhelinnumero, String sahkopostiOsoite, Integer laskujaLahetetty) {
         this.nimi = nimi;
