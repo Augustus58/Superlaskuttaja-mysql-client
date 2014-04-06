@@ -29,3 +29,5 @@
 - **3.4.2014 0,25h** Opeteltu pikapikaa lisää JavaDoc-kommentointia ja tehty kommentoinnit luokkaan Pankkiviivakoodi.
 - **5.4.2014 1,5h** Opeteltu sekvenssikaavioiden tekemistä ohjelmalla Quick Sequence Diagram Editor ja tehty alustava uusi versio kaaviosta suoritteen lisääminen.
 - **6.4.2014 1h** Tehty v2 sekvenssikaaviosta laskun lisääminen.
+- **6.4.2014 1,5h** Tehty JavaDoc-kommentoinnit luokkiin Asiakas, Lasku ja LaskunSumma.
+- **6.4.2014 3h** Tehty JavaDoc-kommentoinnit loppuihin logiikan luokkiin. Kommentointeja voi hioa myöhemmin..
