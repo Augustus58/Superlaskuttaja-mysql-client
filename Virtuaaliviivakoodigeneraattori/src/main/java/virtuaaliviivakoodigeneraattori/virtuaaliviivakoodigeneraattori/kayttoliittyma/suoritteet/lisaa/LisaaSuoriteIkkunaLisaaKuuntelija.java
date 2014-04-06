@@ -66,7 +66,7 @@ public class LisaaSuoriteIkkunaLisaaKuuntelija implements ActionListener {
         if (!tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(pvmKentta.getText())) {
             throw new IllegalArgumentException("Syöte päivämäärä on virheellinen.");
         }
-
+        
         Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
         Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
         Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
