@@ -8,10 +8,11 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
 import java.util.ArrayList;
 
 /**
+ * Tämän luokan ilmentymässä voi "säilyttää" ohjelmassa esiintyvien luokkien
+ * Laskuttaja, Asiakas, Suorite ja Lasku -luokkien ilmentymiä.
  *
  * @author Augustus58
  */
-//Tämän luokan ilmentymässä voi "säilyttää" ohjelmassa esiintyviä olioita, kuten esim. Asiakas -tai Lasku luokkien ilmentymiä.
 public class Tietovarasto {
 
     private Laskuttaja laskuttaja;
@@ -23,10 +24,19 @@ public class Tietovarasto {
     public Tietovarasto() {
         this.asiakkaat = new ArrayList<>();
         this.suoritteet = new ArrayList<>();
-        this.laskut = new ArrayList<>();     
+        this.laskut = new ArrayList<>();
         this.laskuttajaLisatty = false;
     }
 
+    /**
+     * Metodi antaa asiakkaiden tiedot taulukossa.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti ohjelman tietojen tallentamiseen
+     * tiedostoon.
+     *
+     * @return Asiakkaiden tiedot taulukossa, yhden asiakkaan tiedot yhdellä
+     * rivillä jne.
+     */
     public String[][] asiakkaatArrayString() {
         String[][] taulukko = new String[asiakkaat.size()][6];
         for (int i = 0; i < asiakkaat.size(); i++) {
@@ -39,7 +49,14 @@ public class Tietovarasto {
         }
         return taulukko;
     }
-    
+
+    /**
+     * Metodi antaa asiakkaiden nimet taulukossa.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti suoritteiden käsittelyyn.
+     *
+     * @return Asiakkaiden nimet taulukossa.
+     */
     public String[] asiakkaidenNimetArrayString() {
         String[] taulukko = new String[asiakkaat.size()];
         for (int i = 0; i < taulukko.length; i++) {
@@ -47,7 +64,7 @@ public class Tietovarasto {
         }
         return taulukko;
     }
-    
+
     public ArrayList<Asiakas> getAsiakkaat() {
         return asiakkaat;
     }
@@ -68,11 +85,24 @@ public class Tietovarasto {
     public ArrayList<Suorite> getSuoritteet() {
         return suoritteet;
     }
-    
+
+    /**
+     * Metodi kertoo onko laskuttajan tiedot syötetty.
+     * <p>
+     * Tätä metodia tarvitaan, kun halutaan selvittää voiko esim. laskun
+     * muodostaa.
+     *
+     * @return Tieto onko laskuttajan tiedot syötetty.
+     */
     public Boolean isLaskuttajaLisatty() {
         return laskuttajaLisatty;
     }
     
+    /**
+     * Metodilla voi poistaa asiakkaan asiakkaista.
+     *
+     * @param asiakas Poistettava asiakas.
+     */
     public void poistaAsiakas(Asiakas asiakas) {
         if (asiakkaat.contains(asiakas)) {
             asiakkaat.remove(asiakas);

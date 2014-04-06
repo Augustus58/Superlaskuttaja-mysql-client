@@ -39,50 +39,110 @@ public class Laskuttaja {
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan nimi oikeanlainen.
+     *
+     * @return Tieto nimen oikeanlaisuudesta.
+     */
     public Boolean onkoNimiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(nimi));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan katuosoite oikeanlainen.
+     *
+     * @return Tieto katuosoitteen oikeanlaisuudesta.
+     */
     public Boolean onkoKatuosoiteOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(katuosoite));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan postinumero oikeanlainen.
+     *
+     * @return Tieto postinumeron oikeanlaisuudesta.
+     */
     public Boolean onkoPostinumeroOikeanlainen() {
         return (tarkistin.koostuukoMerkkijonoNumeroista(postinumero));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan kaupunki oikeanlainen.
+     *
+     * @return Tieto kaupungin oikeanlaisuudesta.
+     */
     public Boolean onkoKaupunkiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kaupunki));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan yrityksen nimi oikeanlainen.
+     *
+     * @return Tieto yrityksen nimen oikeanlaisuudesta.
+     */
     public Boolean onkoYrityksenNimiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(yrityksenNimi));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan alv-tunniste oikeanlainen.
+     *
+     * @return Tieto alv-tunnisteen oikeanlaisuudesta.
+     */
     public Boolean onkoAlvOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(alvTunniste));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan tilinumero oikeanlainen.
+     *
+     * @return Tieto tilinumeron oikeanlaisuudesta.
+     */
     public Boolean onkoTilinumeroOikeanlainen() {
         return (tilinumero.tarkistaTilinumero(tilinumero.getTilinumero()));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan pankin nimi oikeanlainen.
+     *
+     * @return Tieto pankin nimen oikeanlaisuudesta.
+     */
     public Boolean onkoPankkiOikeanlainen() {
         return (tilinumero.onkoPankkiOikeanlainen());
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan pankin "SWIFT BIC" oikeanlainen.
+     *
+     * @return Tieto pankin "SWIFT BIC"-koodin oikeanlaisuudesta.
+     */
     public Boolean onkoSwiftBicOikeanlainen() {
         return (tilinumero.onkoSwiftBicOikeanlainen());
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan puhelinnumero oikeanlainen.
+     *
+     * @return Tieto puhelinnumeron oikeanlaisuudesta.
+     */
     public Boolean onkoPuhelinnumeroOikeanlainen() {
         return (tarkistin.sisaltaakoMerkkijNumeroitaJaKoostuukoMerkkijNumeroistaValiviivoistaTaiValilyonneista(puhelinnumero));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan sähköpostiosoite oikeanlainen.
+     *
+     * @return Tieto sähköpostiosoitteen oikeanlaisuudesta.
+     */
     public Boolean onkoSahkopostiOikeanlainen() {
         return (tarkistin.onkoEmailOsoiteValidi(sahkopostiOsoite));
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan sähköpostiosoite oikeanlainen.
+     *
+     * @return Tieto sähköpostiosoitteen oikeanlaisuudesta.
+     */
     public Boolean onkoLaskujaLahetettyOikeanlainen() {
         if (laskujaLahetetty >= 0) {
             return true;
@@ -90,6 +150,11 @@ public class Laskuttaja {
         return false;
     }
 
+    /**
+     * Metodi kertoo onko laskuttajan tiedot oikeanlaiset.
+     *
+     * @return Tieto tietojen oikeellisuudesta.
+     */
     public boolean onkoTiedotOikeanlaiset() {
         if (onkoNimiOikeanlainen()
                 && onkoKatuosoiteOikeanlainen()
@@ -188,6 +253,12 @@ public class Laskuttaja {
         this.laskujaLahetetty = laskujaLahetetty;
     }
 
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -199,6 +270,15 @@ public class Laskuttaja {
         return (teeEqualsVertailut(olio));
     }
 
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Laskuttaja.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Laskuttaja verrattava = (Laskuttaja) olio;
         if (this.nimi.equals(verrattava.nimi)
@@ -216,17 +296,20 @@ public class Laskuttaja {
         return false;
     }
 
+    /**
+     * Luokan Laskuttaja hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan summaamalla attribuuttien nimi,
+     * katuosoite, postinumero, kaupunki ja yrityksenNimi hashCodet.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
         return (nimi.hashCode()
                 + katuosoite.hashCode()
                 + postinumero.hashCode()
                 + kaupunki.hashCode()
-                + yrityksenNimi.hashCode()
-                + alvTunniste.hashCode()
-                + tilinumero.hashCode()
-                + puhelinnumero.hashCode()
-                + sahkopostiOsoite.hashCode()
-                + laskujaLahetetty.hashCode());
+                + yrityksenNimi.hashCode());
     }
 }

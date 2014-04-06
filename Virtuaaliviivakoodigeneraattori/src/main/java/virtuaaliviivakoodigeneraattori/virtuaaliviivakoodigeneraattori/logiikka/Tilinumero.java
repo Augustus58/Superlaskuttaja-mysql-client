@@ -8,17 +8,19 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
 import java.math.BigInteger;
 
 /**
+ * Luokan ilmentymään voi tallettaa tilinumeron tiedot sisältäen pankin ja
+ * "SWIFT BIC"-koodin. Osaan tämän luokan metodeista löytyy toiminnan perustelut
+ * osoitteesta
+ * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
  *
  * @author Augustus58
  */
-// Osaan tämän luokan metodeista löytyy toiminnan perustelut osoitteesta
-// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
 public class Tilinumero {
 
     private String tilinumero;
     private String pankki;
     private String swiftBic;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Tilinumero(String tilinumero, String pankki, String swiftBic) {
         this.tilinumero = tilinumero;
@@ -27,6 +29,14 @@ public class Tilinumero {
         this.swiftBic = swiftBic;
     }
 
+    /**
+     * Metodi tarkistaa onko annettu tilinumero validi.
+     * <p>
+     * Luokkakuvauksen linkistä löytyy tarkat perustelut tarkistusalgoritmille.
+     *
+     * @param tilinumero Tarkistettava tilinumero.
+     * @return Tieto tilinumeron validiudesta.
+     */
     public Boolean tarkistaTilinumero(String tilinumero) {
         BigInteger yksi = new BigInteger("1");
         BigInteger yhdeksankymmentaseitseman = new BigInteger("97");
@@ -42,10 +52,27 @@ public class Tilinumero {
 
     }
 
+    /**
+     * Metodi siirtää annetun tilinumeron maakoodin ja tarkisteen tilinumeron
+     * loppuun.
+     *
+     * @param tilinumero Muutettava tilinumero.
+     * @return Tilinumero, jolla siirto on suoritettu.
+     */
     private String siirraMaakodiJaTarkisteLoppuun(String tilinumero) {
-        return (tilinumero.substring(5 - 1) + tilinumero.substring(0, 4));
+        return (tilinumero.substring(4) + tilinumero.substring(0, 4));
     }
 
+    /**
+     * Metodi muuntaa annetun tilinumeron, jonka maakoodi ja tarkiste on
+     * siirretty tilinumeron loppuun kokonaisluvuksi.
+     * <p>
+     * Luokkakuvauksen linkistä löytyy tarkat perustelut muuntoalgoritmille.
+     *
+     * @param tilinumero Muutettava tilinumero, jonka maakoodi ja tarkiste on
+     * siirretty loppuun.
+     * @return Muuntoalgoritmin tulos.
+     */
     private BigInteger muunnaTilinumeroMaakoodiJaTarkisteSiirrettyLoppuunKokonaisluvuksi(String tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun) {
         String muunnettuMerkkijono = "";
         for (int i = 0; i < tilinumeroMaakoodiJaTarkisteSiirrettyLoppuun.length(); i++) {
@@ -64,6 +91,14 @@ public class Tilinumero {
 
     }
 
+    /**
+     * Metodi muuntaa annetun kirjaimen kokonaisluvuksi.
+     * <p>
+     * Luokkakuvauksen linkistä löytyy tarkat perustelut muuntoalgoritmille.
+     * 
+     * @param kirjain Muutettava kirjain.
+     * @return Muuntoalgoritmin tulos.
+     */
     private Integer muunnaKirjainKokonaisluvuksi(Character kirjain) {
         int k = 0;
         for (int i = 0; i < this.tarkistin.getIsotAakkosetAZ().length(); i++) {
@@ -74,10 +109,20 @@ public class Tilinumero {
         return k;
     }
 
+    /**
+     * Metodi kertoo onko tilinumeron pankin nimi oikeanlainen.
+     *
+     * @return Tieto pankin nimen oikeanlaisuudesta.
+     */
     public Boolean onkoPankkiOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(pankki));
     }
 
+    /**
+     * Metodi kertoo onko tilinumeron "SWIFT BIC"-koodi oikeanlainen.
+     *
+     * @return Tieto pankin "SWIFT BIC"-koodin oikeanlaisuudesta.
+     */
     public Boolean onkoSwiftBicOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(swiftBic));
     }
@@ -86,6 +131,11 @@ public class Tilinumero {
         return this.tilinumero;
     }
 
+    /**
+     * Metodi palauttaa tilinumeron ilman maatunnusta.
+     *
+     * @return Tilinumero ilman maatunnusta.
+     */
     public String tilinumeroIlmanMaatunnusta() {
         return this.tilinumero.substring(2);
     }
@@ -110,6 +160,12 @@ public class Tilinumero {
         this.swiftBic = swiftBic;
     }
 
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -121,6 +177,15 @@ public class Tilinumero {
         return (teeEqualsVertailut(olio));
     }
 
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Tilinumero.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Tilinumero verrattava = (Tilinumero) olio;
         if (this.tilinumero.equals(verrattava.tilinumero)
@@ -131,6 +196,14 @@ public class Tilinumero {
         return false;
     }
 
+    /**
+     * Luokan Asiakas hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan summaamalla attribuuttien tilinumero,
+     * pankki ja swiftBic hashCodet.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
         return (tilinumero.hashCode() + pankki.hashCode() + swiftBic.hashCode());

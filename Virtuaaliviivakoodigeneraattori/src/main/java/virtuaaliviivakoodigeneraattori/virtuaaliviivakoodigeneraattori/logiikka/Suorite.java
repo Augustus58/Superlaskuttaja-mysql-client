@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * Luokan ilmentymään voi tallettaa yhden suoritteen tiedot. Luokka tarjoaa
+ * metodit tietojen oikeanlaisuuden tarkistamiseen.
  *
  * @author Augustus58
  */
@@ -26,8 +28,8 @@ public class Suorite {
     private Boolean onkoLaskutettu;
     private String laskutettuTeksti;
     private Lasku lasku;
-    private SimpleDateFormat pvmFormaatti;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final SimpleDateFormat pvmFormaatti;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Suorite(Asiakas asiakas, String kuvaus, Date pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti) {
         this.asiakas = asiakas;
@@ -46,6 +48,14 @@ public class Suorite {
         laskeYht();
     }
 
+    /**
+     * Metodi antaa suoritteen tiedot taulukossa.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti käyttöliittymän luokan
+     * SuoritteetTaulukko ilmentymien muodostamiseen.
+     *
+     * @return Suoritteen tiedot taulukossa.
+     */
     public Object[] suoritteenTiedotTaulukossa() {
         return (new Object[]{asiakas.getNimi(), kuvaus, pvmFormaatti.format(pvm), maara, maaranYksikot, aHinta, alvProsentti, alv, yht, laskutettuTeksti});
     }
@@ -98,6 +108,14 @@ public class Suorite {
         return laskutettuTeksti;
     }
 
+    /**
+     * Metodi luokan ilmentymän attribuutin lasku palauttamiseen.
+     * <p>
+     * attribuutti lasku palautetaa vain, jos attribuutti onkoLaskutettu on
+     * true. Muussa tapauksessa palautetaan null.
+     *
+     * @return Palauttaa attribuutin lasku.
+     */
     public Lasku getLasku() {
         if (onkoLaskutettu) {
             return lasku;
@@ -132,20 +150,34 @@ public class Suorite {
     public void setAlvProsentti(Integer alvProsentti) {
         this.alvProsentti = alvProsentti;
     }
-    
+
     public void setLasku(Lasku lasku) {
         this.lasku = lasku;
         onkoLaskutettu = true;
     }
-    
+
+    /**
+     * Metodi laskee olion attribuutin alv attribuuttien alvProsentti, aHinta ja
+     * maara perusteella.
+     */
     private void laskeAlv() {
         this.alv = (alvProsentti / 100.0) * (aHinta * maara);
     }
 
+    /**
+     * Metodi laskee olion attribuutin yht attribuuttien aHinta, maara ja
+     * alv perusteella.
+     */
     private void laskeYht() {
         this.yht = (aHinta * maara) + alv;
     }
 
+    /**
+     * Metodilla voi päivittää olion attribuutin laskutettuTeksti.
+     * <p>
+     * Jos attribuutti onkoLaskutettu on true, niin teksti päivitetään muotoon
+     * "Laskulla (laskun numero)". Muulloin teksti päivitetään muotoon "Ei".
+     */
     public final void paivitaLaskutettuTeksti() {
         if (onkoLaskutettu) {
             laskutettuTeksti = "Laskulla " + lasku.getLaskunNumero().toString();
@@ -153,27 +185,45 @@ public class Suorite {
             laskutettuTeksti = "Ei";
         }
     }
-    
+
+    /**
+     * Metodilla voi poistaa tiedot suoritteeseen liittyvästä laskusta.
+     */
     public void poistaLasku() {
         this.lasku = null;
         onkoLaskutettu = false;
     }
 
+    /**
+     * Metodi kertoo onko suoritteen tiedot oikeanlaiset.
+     *
+     * @return Tieto tietojen oikeellisuudesta.
+     */
     public boolean onkoTiedotOikeanlaisetPaitsiPvm() {
         if (onkoKuvausOikeanlainen()
                 && onkoMaaraOikeanlainen()
                 && onkoMaaranYksikotOikeanlainen()
                 && onkoAHintaOikeanlainen()
-                && onkoAlvProsenttiOikeanlainen()){
+                && onkoAlvProsenttiOikeanlainen()) {
             return true;
         }
         return false;
     }
 
+    /**
+     * Metodi kertoo onko suoritteen kuvaus oikeanlainen.
+     *
+     * @return Tieto kuvauksen oikeanlaisuudesta.
+     */
     public boolean onkoKuvausOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kuvaus));
     }
-
+    
+    /**
+     * Metodi kertoo onko suoritteen attribuutti maara oikeanlainen.
+     *
+     * @return Tieto attribuutin maara oikeanlaisuudesta.
+     */
     public boolean onkoMaaraOikeanlainen() {
         if (maara > 0) {
             return true;
@@ -181,10 +231,20 @@ public class Suorite {
         return false;
     }
 
+    /**
+     * Metodi kertoo onko suoritteen määrän yksiköt oikeanlainen.
+     *
+     * @return Tieto määrän yksiköiden oikeanlaisuudesta.
+     */
     public boolean onkoMaaranYksikotOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(maaranYksikot));
     }
 
+    /**
+     * Metodi kertoo onko suoritteen à hinta oikeanlainen.
+     *
+     * @return Tieto à hinnan oikeanlaisuudesta.
+     */
     public boolean onkoAHintaOikeanlainen() {
         if (aHinta > 0) {
             return true;
@@ -192,13 +252,24 @@ public class Suorite {
         return false;
     }
 
+    /**
+     * Metodi kertoo onko suoritteen alv-prosentti oikeanlainen.
+     *
+     * @return Tieto alv-prosentin oikeanlaisuudesta.
+     */
     public boolean onkoAlvProsenttiOikeanlainen() {
         if (alvProsentti >= 0 && alvProsentti <= 100) {
             return true;
         }
         return false;
     }
-    
+
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -207,9 +278,18 @@ public class Suorite {
         if (getClass() != olio.getClass()) {
             return false;
         }
-        return(teeEqualsVertailut(olio));
+        return (teeEqualsVertailut(olio));
     }
-    
+
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Suorite.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Suorite verrattava = (Suorite) olio;
         if (this.asiakas.equals(verrattava.asiakas)
@@ -228,18 +308,19 @@ public class Suorite {
         return false;
     }
 
+    /**
+     * Luokan Suorite hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan summaamalla attribuuttien asiakas,
+     * kuvaus, pvm ja maara hashCodet.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
         return (asiakas.hashCode()
                 + kuvaus.hashCode()
                 + pvm.hashCode()
-                + maara.hashCode()
-                + maaranYksikot.hashCode()
-                + aHinta.hashCode()
-                + alvProsentti.hashCode()
-                + alv.hashCode()
-                + yht.hashCode()
-                + onkoLaskutettu.hashCode()
-                + laskutettuTeksti.hashCode());
+                + maara.hashCode());
     }
 }

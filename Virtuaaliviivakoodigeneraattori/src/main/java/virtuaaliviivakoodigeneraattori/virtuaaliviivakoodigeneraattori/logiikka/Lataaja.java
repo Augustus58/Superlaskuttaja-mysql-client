@@ -7,7 +7,9 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 /**
- *
+ * Tämä luokka on tarkoitettu ohjelman tietojen lataamiseen ja tietojen välittämiseen
+ * Tietovarasto-oliolta.
+ * 
  * @author Augustus58
  */
 public class Lataaja {

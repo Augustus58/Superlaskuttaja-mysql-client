@@ -13,10 +13,10 @@ import java.util.Date;
  * @author Augustus58
  *
  * Luokka tarjoaa tarvittavat metodit pankkiviivakoodien muodostamiseen ja
- * niiden oikeellisuuden tarkistamiseen
+ * niiden oikeellisuuden tarkistamiseen. Tämän luokan metodien toiminnan
+ * perustelut löytyvät osoitteesta
+ * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
  */
-// Tämän luokan metodien toiminnan perustelut löytyy osoitteesta
-// http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
 public class Pankkiviivakoodi {
 
     private final String pankkiviivakoodi;
@@ -30,14 +30,14 @@ public class Pankkiviivakoodi {
     }
 
     /**
-     * Metodi muodostaa pankkiviivakoodin ilman tarkistetta ja lopetusta
+     * Metodi muodostaa pankkiviivakoodin ilman tarkistetta ja lopetusta.
      *
-     * @param tilinumero Oikeaksi todettu tilinumero
-     * @param laskunSumma Laskun summa
-     * @param viite Oikeaksi todettu viite
-     * @param erapaiva Laskun eräpäivä
+     * @param tilinumero Oikeaksi todettu tilinumero.
+     * @param laskunSumma Laskun summa.
+     * @param viite Oikeaksi todettu viite.
+     * @param erapaiva Laskun eräpäivä.
      *
-     * @return pankkiviivakoodi ilman aloitusta ja lopetusta
+     * @return pankkiviivakoodi ilman aloitusta ja lopetusta.
      */
     private String muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
         return ("105"
@@ -51,11 +51,12 @@ public class Pankkiviivakoodi {
     }
 
     /**
-     * Metodi muodostaa pankkiviivakoodin aloituksella ja lopetuksella
+     * Metodi muodostaa pankkiviivakoodin aloituksella ja lopetuksella.
      *
-     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman aloitusta ja lopetusta
+     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman
+     * aloitusta ja lopetusta.
      *
-     * @return pankkiviivakoodi aloituksella ja lopetuksella
+     * @return Pankkiviivakoodi aloituksella ja lopetuksella.
      */
     private String muodostaPankkiviivakoodi(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         return (pankkiviivakoodiIlmanTarkistettaJaLopetusta
@@ -64,11 +65,12 @@ public class Pankkiviivakoodi {
     }
 
     /**
-     * Metodi laskee tarkisteen pankkiviivakoodiin
+     * Metodi laskee tarkisteen pankkiviivakoodiin.
      *
-     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman aloitusta ja lopetusta
+     * @param pankkiviivakoodiIlmanTarkistettaJaLopetusta Pankkiviivakoodi ilman
+     * aloitusta ja lopetusta.
      *
-     * @return tarkistenumero
+     * @return Tarkistenumero
      */
     private Integer laskeTarkiste(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         Integer summa = 0;
@@ -86,14 +88,21 @@ public class Pankkiviivakoodi {
     }
 
     /**
-     * Metodi antaa jo muodostetun pankkiviivakoodin ilman aloitusta ja lopetusta
+     * Metodi antaa jo muodostetun pankkiviivakoodin ilman aloitusta ja
+     * lopetusta.
      *
-     * @return pankkiviivakoodi ilman aloitusta lopetusta
+     * @return pankkiviivakoodi ilman aloitusta lopetusta.
      */
     public String pankkiviivakoodiIlmanAloitustaJaLopetusta() {
         return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length() - 3);
     }
 
+    /**
+     * Metodi luokan ilmentymien samuuden selvittämiseen.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion samuudesta.
+     */
     @Override
     public boolean equals(Object olio) {
         if (olio == null) {
@@ -104,7 +113,16 @@ public class Pankkiviivakoodi {
         }
         return (teeEqualsVertailut(olio));
     }
-
+    
+    /**
+     * Metodi jossa tehdään equals-metodin samuusvertailut.
+     * <p>
+     * Ennen tämän metodin käyttöä tulee varmistaa, että argumentti ei ole null
+     * ja että argumentin luokka on Pankkiviivakoodi.
+     *
+     * @param olio Samuusverrattava olio.
+     * @return Tieto verrattavan olion ja kutsujaolion tietojen samuudesta.
+     */
     private boolean teeEqualsVertailut(Object olio) {
         Pankkiviivakoodi verrattava = (Pankkiviivakoodi) olio;
         if (this.pankkiviivakoodi.equals(verrattava.pankkiviivakoodi)) {
@@ -113,6 +131,13 @@ public class Pankkiviivakoodi {
         return false;
     }
 
+    /**
+     * Luokan Pankkiviivakoodi hashCode-metodi.
+     * <p>
+     * HashCode muodostetaan attribuutin pankkiviivakoodi hashCodesta.
+     *
+     * @return Kokonaisluku.
+     */
     @Override
     public int hashCode() {
         return (pankkiviivakoodi.hashCode());

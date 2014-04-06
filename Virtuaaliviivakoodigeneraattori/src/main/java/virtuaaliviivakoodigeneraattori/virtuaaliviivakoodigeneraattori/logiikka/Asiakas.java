@@ -19,7 +19,7 @@ public class Asiakas {
     private String postinumero;
     private String kaupunki;
     private Integer laskujaLahetetty;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty) {
         this.asiakasnumero = asiakasnumero;
