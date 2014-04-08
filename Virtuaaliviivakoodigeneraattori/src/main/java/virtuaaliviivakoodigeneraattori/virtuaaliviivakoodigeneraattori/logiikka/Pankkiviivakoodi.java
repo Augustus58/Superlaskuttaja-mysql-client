@@ -9,13 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author Augustus58
- *
  * Luokka tarjoaa tarvittavat metodit pankkiviivakoodien muodostamiseen ja
  * niiden oikeellisuuden tarkistamiseen. Tämän luokan metodien toiminnan
  * perustelut löytyvät osoitteesta
  * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
+ *
+ * @author Augustus58
  */
 public class Pankkiviivakoodi {
 
@@ -113,7 +112,7 @@ public class Pankkiviivakoodi {
         }
         return (teeEqualsVertailut(olio));
     }
-    
+
     /**
      * Metodi jossa tehdään equals-metodin samuusvertailut.
      * <p>

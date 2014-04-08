@@ -50,7 +50,7 @@ public class Kayttoliittyma implements Runnable {
     private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko) {
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja);
+        JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja, lukko);
         tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel, null);
 
         JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja, lukko);
@@ -59,7 +59,7 @@ public class Kayttoliittyma implements Runnable {
         JPanel suoritteetPanel = new SuoritteetPanel(lataaja, lukko);
         tabbedPane.addTab("Suoritteet", null, suoritteetPanel, null);
 
-        JPanel laskutPanel = new LaskutPanel(lataaja);
+        JPanel laskutPanel = new LaskutPanel(lataaja, lukko);
         tabbedPane.addTab("Laskut", null, laskutPanel, null);
 
         container.add(tabbedPane);

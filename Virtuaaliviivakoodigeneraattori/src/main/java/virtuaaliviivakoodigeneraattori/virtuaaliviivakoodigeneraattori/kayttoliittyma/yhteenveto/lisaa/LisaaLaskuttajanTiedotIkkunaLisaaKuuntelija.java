@@ -86,6 +86,7 @@ public class LisaaLaskuttajanTiedotIkkunaLisaaKuuntelija implements ActionListen
     }
 
     private void suljeIkkuna() {
+        lukko.avaa();
         frame.dispose();
     }
 }

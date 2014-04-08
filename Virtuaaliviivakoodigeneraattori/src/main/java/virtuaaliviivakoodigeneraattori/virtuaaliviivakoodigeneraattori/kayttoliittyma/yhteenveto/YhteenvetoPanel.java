@@ -22,11 +22,11 @@ public class YhteenvetoPanel extends JPanel {
     private final Lataaja lataaja;
     private final NappulaLukko lukko;
 
-    public YhteenvetoPanel(Lataaja lataaja) {
+    public YhteenvetoPanel(Lataaja lataaja, NappulaLukko lukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
-        this.lukko = new NappulaLukko();
+        this.lukko = lukko;
         luoKomponentit();
 
     }

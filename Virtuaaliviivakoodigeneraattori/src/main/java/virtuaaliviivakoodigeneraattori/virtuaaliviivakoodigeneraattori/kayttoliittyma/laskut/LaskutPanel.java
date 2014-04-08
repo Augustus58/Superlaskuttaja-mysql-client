@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.laskut.lisaa.LaskutPanelLisaaLaskuKuuntelija;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -30,13 +31,13 @@ public class LaskutPanel extends JPanel {
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public LaskutPanel(Lataaja lataaja) {
+    public LaskutPanel(Lataaja lataaja, NappulaLukko lukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
         this.taulukko = new LaskutTaulukko(lataaja);
         this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
-        this.lukko = new NappulaLukko();
+        this.lukko = lukko;
         luoKomponentit();
 
     }
@@ -101,9 +102,9 @@ public class LaskutPanel extends JPanel {
     private JPanel alaosa() {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
-        JButton lisaaAsiakasNappi = new JButton("Lisää lasku");
-//        lisaaAsiakasNappi.addActionListener(new AsiakkaatPanelLisaaAsiakasKuuntelija(lataaja, taulukko, lukko));
-        alaosa.add(lisaaAsiakasNappi);
+        JButton lisaaLaskuNappi = new JButton("Lisää lasku");
+        lisaaLaskuNappi.addActionListener(new LaskutPanelLisaaLaskuKuuntelija(lataaja, taulukko, lukko));
+        alaosa.add(lisaaLaskuNappi);
 
         JButton muokkaaValittuaAsiakastaNappi = new JButton("Muokkaa valittua laskua");
 //        muokkaaValittuaAsiakastaNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko, kuuntelija, lukko));

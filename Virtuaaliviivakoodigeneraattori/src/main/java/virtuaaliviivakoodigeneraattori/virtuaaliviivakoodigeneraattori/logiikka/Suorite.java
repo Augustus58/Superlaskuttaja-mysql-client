@@ -123,6 +123,11 @@ public class Suorite {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return (kuvaus + "  " + pvmFormaatti.format(pvm) + "  " + maara + maaranYksikot);
+    }
+
     public void setAsiakas(Asiakas asiakas) {
         this.asiakas = asiakas;
     }
@@ -165,8 +170,8 @@ public class Suorite {
     }
 
     /**
-     * Metodi laskee olion attribuutin yht attribuuttien aHinta, maara ja
-     * alv perusteella.
+     * Metodi laskee olion attribuutin yht attribuuttien aHinta, maara ja alv
+     * perusteella.
      */
     private void laskeYht() {
         this.yht = (aHinta * maara) + alv;
@@ -218,7 +223,7 @@ public class Suorite {
     public boolean onkoKuvausOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(kuvaus));
     }
-    
+
     /**
      * Metodi kertoo onko suoritteen attribuutti maara oikeanlainen.
      *
@@ -311,8 +316,8 @@ public class Suorite {
     /**
      * Luokan Suorite hashCode-metodi.
      * <p>
-     * HashCode muodostetaan summaamalla attribuuttien asiakas,
-     * kuvaus, pvm ja maara hashCodet.
+     * HashCode muodostetaan summaamalla attribuuttien asiakas, kuvaus, pvm ja
+     * maara hashCodet.
      *
      * @return Kokonaisluku.
      */

@@ -86,6 +86,7 @@ public class MuokkaaLaskuttajanTietojaIkkunaMuokkaaKuuntelija implements ActionL
     }
 
     private void suljeIkkuna() {
+        lukko.avaa();
         frame.dispose();
     }
 }
