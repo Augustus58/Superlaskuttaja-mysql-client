@@ -36,3 +36,4 @@
 - **9.4.2014 0,5h** Muutettu JavaDoc-kommentointien linkit sellaisiksi, että JavaDoc:seihin tulee sitten klikattavat hyperlinkit.
 - **10.4.2014 1h** Jatkettu käyttöliittymän laskut-osion lisää-ominaisuuden tekemistä.
 - **10.4.2014 3h** Muokattu käyttöliittymän laskut-osiota ja tehty yksi sekvenssikaavio lisää aiheesta suoritteiden filtteriöinti.
+- **10.4.2014 0,5h** Päivitetty tarkentunutta luokkakaaviota.
