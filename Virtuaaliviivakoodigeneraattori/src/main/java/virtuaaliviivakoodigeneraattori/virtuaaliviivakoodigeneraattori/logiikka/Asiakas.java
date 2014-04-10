@@ -5,8 +5,6 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
-import java.util.ArrayList;
-
 /**
  * Luokan ilmentymään voi tallettaa yhden asiakkaan tiedot. Luokka tarjoaa
  * metodit tietojen oikeanlaisuuden tarkistamiseen.

@@ -33,7 +33,7 @@ public class SuoritteetPanelNaytaKriteerinSisKuuntelija implements ActionListene
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        RowFilter< TableModelSolujenMuokkaaminenEstetty, Object> rf = null;
+        RowFilter<TableModelSolujenMuokkaaminenEstetty, Object> rf = null;
         try {
             rf = RowFilter.regexFilter(kriteeriTekstikentta.getText(), kuuntelija.getValinta());
         } catch (java.util.regex.PatternSyntaxException e) {

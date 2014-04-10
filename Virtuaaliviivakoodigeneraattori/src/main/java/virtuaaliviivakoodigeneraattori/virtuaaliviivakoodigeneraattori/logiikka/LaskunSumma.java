@@ -9,7 +9,8 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  * Luokan ilmentymään voi tallettaa tiedot laskun summasta. Luokka tarjoaa
  * metodit tietojen oikeanlaisuuden tarkistamiseen. Tämän luokan
  * tarkistusmetodien toiminnan perustelut löytyy osoitteesta
- * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
+ * <a
+ * href="http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf">http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf</a>
  *
  * @author Augustus58
  */

@@ -12,7 +12,8 @@ import java.util.Date;
  * Luokka tarjoaa tarvittavat metodit pankkiviivakoodien muodostamiseen ja
  * niiden oikeellisuuden tarkistamiseen. Tämän luokan metodien toiminnan
  * perustelut löytyvät osoitteesta
- * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf
+ * <a
+ * href="http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf">http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi-opas.pdf</a>
  *
  * @author Augustus58
  */

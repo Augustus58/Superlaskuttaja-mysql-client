@@ -11,7 +11,8 @@ import java.math.BigInteger;
  * Luokan ilmentymään voi tallettaa tilinumeron tiedot sisältäen pankin ja
  * "SWIFT BIC"-koodin. Osaan tämän luokan metodeista löytyy toiminnan perustelut
  * osoitteesta
- * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf
+ * <a
+ * href="http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf">http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/IBAN_ja_BIC_maksuliikenteessa.pdf</a>
  *
  * @author Augustus58
  */
@@ -95,7 +96,7 @@ public class Tilinumero {
      * Metodi muuntaa annetun kirjaimen kokonaisluvuksi.
      * <p>
      * Luokkakuvauksen linkistä löytyy tarkat perustelut muuntoalgoritmille.
-     * 
+     *
      * @param kirjain Muutettava kirjain.
      * @return Muuntoalgoritmin tulos.
      */
@@ -199,8 +200,8 @@ public class Tilinumero {
     /**
      * Luokan Asiakas hashCode-metodi.
      * <p>
-     * HashCode muodostetaan summaamalla attribuuttien tilinumero,
-     * pankki ja swiftBic hashCodet.
+     * HashCode muodostetaan summaamalla attribuuttien tilinumero, pankki ja
+     * swiftBic hashCodet.
      *
      * @return Kokonaisluku.
      */

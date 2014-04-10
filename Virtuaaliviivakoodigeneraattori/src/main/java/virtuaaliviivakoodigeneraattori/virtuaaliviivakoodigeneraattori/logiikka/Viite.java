@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * Tämän luokan ilmentymään voi tallentaa viitteen tiedot. Luokka tarjoaa
  * metodit viitteen oikeanlaisuuden tarkistamiseen. ∫Tämän luokan metodien
  * toiminnan perustelut löytyy osoitteesta
- * http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf
+ * <a
+ * href="http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf">http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf</a>
  *
  * @author Augustus58
  */
