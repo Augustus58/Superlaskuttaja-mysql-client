@@ -32,3 +32,7 @@
 - **6.4.2014 1,5h** Tehty JavaDoc-kommentoinnit luokkiin Asiakas, Lasku ja LaskunSumma.
 - **6.4.2014 3h** Tehty JavaDoc-kommentoinnit loppuihin logiikan luokkiin. Kommentointeja voi hioa myöhemmin..
 - **7.4.2014 6h** Aloitetty käyttöliittymän laskut-osion lisää-ominaisuuden tekeminen.
+- **8.4.2014 5h** Jatkettu käyttöliittymän laskut-osion lisää-ominaisuuden tekemistä. Opeteltu mm. JTextField:in sisällön muuttamista, kun toisen JTextField:in sisältö muuttuu. Otettu ensimmmäistä kertaa käyttöön GridBagLayout.
+- **9.4.2014 0,5h** Muutettu JavaDoc-kommentointien linkit sellaisiksi, että JavaDoc:seihin tulee sitten klikattavat hyperlinkit.
+- **10.4.2014 1h** Jatkettu käyttöliittymän laskut-osion lisää-ominaisuuden tekemistä.
+- **10.4.2014 3h** Muokattu käyttöliittymän laskut-osiota ja tehty yksi sekvenssikaavio lisää aiheesta suoritteiden filtteriöinti.
