@@ -6,7 +6,9 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import static java.util.Calendar.DAY_OF_MONTH;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -79,13 +81,13 @@ public class LaskuTest {
         suoritteetList1.add(suorite1);
         summa = new LaskunSumma(5, 5);
         summa1 = new LaskunSumma(5, 5);
-        pankkiviivakoodi = new Pankkiviivakoodi(tilinumero, summa, viite, new Date(2014 - 1900, 4 - 1, 16));
-        pankkiviivakoodi1 = new Pankkiviivakoodi(tilinumero1, summa1, viite1, new Date(2014 - 1900, 4 - 1, 16));
-        pankkiviivakoodi2 = new Pankkiviivakoodi(tilinumero1, summa1, viite1, new Date(2014 - 1900, 4 - 1, 15));
-        lasku = new Lasku(laskuttaja, asiakas, new Date(2014 - 1900, 4 - 1, 2), 5, new Date(2014 - 1900, 4 - 1, 16), 50, viite, "Maksuehto", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
-        lasku1 = new Lasku(laskuttaja1, asiakas1, new Date(2014 - 1900, 4 - 1, 2), 5, new Date(2014 - 1900, 4 - 1, 16), 50, viite1, "Maksuehto", suoritteetList1, "Lisätiedot", summa1, pankkiviivakoodi1);
-        lasku2 = new Lasku(laskuttaja, asiakas, new Date(2013 - 1900, 4 - 3, 2), 5, new Date(2014 - 1900, 4 - 1, 17), 5, viite, "Maksu", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
-        lasku3 = new Lasku(laskuttaja1, asiakas1, new Date(2013 - 1900, 4 - 3, 2), 5, new Date(2014 - 1900, 4 - 1, 17), 5, viite1, "Maksu", suoritteetList1, "Lisätiedot", summa1, pankkiviivakoodi1);
+        pankkiviivakoodi = new Pankkiviivakoodi(tilinumero, summa, viite, new GregorianCalendar(2014, 4 - 1, 16));
+        pankkiviivakoodi1 = new Pankkiviivakoodi(tilinumero1, summa1, viite1, new GregorianCalendar(2014, 4 - 1, 16));
+        pankkiviivakoodi2 = new Pankkiviivakoodi(tilinumero1, summa1, viite1, new GregorianCalendar(2014, 4 - 1, 15));
+        lasku = new Lasku(laskuttaja, asiakas, new GregorianCalendar(2014, 4 - 1, 2), 5, new GregorianCalendar(2014, 4 - 1, 16), 50, viite, "Maksuehto", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
+        lasku1 = new Lasku(laskuttaja1, asiakas1, new GregorianCalendar(2014, 4 - 1, 2), 5, new GregorianCalendar(2014, 4 - 1, 16), 50, viite1, "Maksuehto", suoritteetList1, "Lisätiedot", summa1, pankkiviivakoodi1);
+        lasku2 = new Lasku(laskuttaja, asiakas, new GregorianCalendar(2013, 4 - 3, 2), 5, new GregorianCalendar(2014, 4 - 1, 17), 5, viite, "Maksu", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
+        lasku3 = new Lasku(laskuttaja1, asiakas1, new GregorianCalendar(2013, 4 - 3, 2), 5, new GregorianCalendar(2014, 4 - 1, 17), 5, viite1, "Maksu", suoritteetList1, "Lisätiedot", summa1, pankkiviivakoodi1);
     }
 
     @After
@@ -106,9 +108,9 @@ public class LaskuTest {
         lasku1.getAsiakas().setNimi("Elmeri Asiakas");
         assertTrue(lasku.equals(lasku1));
         
-        lasku1.getPaivays().setMonth(6-1);
+        lasku1.getPaivays().add(DAY_OF_MONTH, 3);
         assertFalse(lasku.equals(lasku1));
-        lasku1.getPaivays().setMonth(4-1);
+        lasku1.getPaivays().add(DAY_OF_MONTH, -3);
         assertTrue(lasku.equals(lasku1));
         
         lasku1.setViivastyskorko(90);

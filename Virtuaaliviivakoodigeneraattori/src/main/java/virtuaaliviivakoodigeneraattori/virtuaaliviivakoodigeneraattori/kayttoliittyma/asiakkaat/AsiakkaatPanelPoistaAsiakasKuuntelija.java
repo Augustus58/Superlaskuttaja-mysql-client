@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TaulukkoValintaKuuntelija;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Asiakas;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
 
 /**
@@ -18,6 +17,7 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  * @author Augustus58
  */
 public class AsiakkaatPanelPoistaAsiakasKuuntelija implements ActionListener {
+
     private final Lataaja lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
@@ -35,14 +35,8 @@ public class AsiakkaatPanelPoistaAsiakasKuuntelija implements ActionListener {
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
-                Asiakas poistettavaAsiakas = new Asiakas(taulukko.getValueString(kuuntelija.getArvoModel(), 4),
-                        taulukko.getValueString(kuuntelija.getArvoModel(), 0),
-                        taulukko.getValueString(kuuntelija.getArvoModel(), 1),
-                        taulukko.getValueString(kuuntelija.getArvoModel(), 2),
-                        taulukko.getValueString(kuuntelija.getArvoModel(), 3),
-                        Integer.parseInt(taulukko.getValueString(kuuntelija.getArvoModel(), 5)));
-                taulukko.getModel().removeRow(kuuntelija.getArvoModel());
-                lataaja.getLadattuTietovarasto().poistaAsiakas(poistettavaAsiakas);
+                lataaja.getLadattuTietovarasto().getAsiakkaat().remove(kuuntelija.getPaivitettyArvo().intValue());
+                taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo());
             } catch (Exception e) {
                 AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna poikkeusIkkuna = new AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna();
                 SwingUtilities.invokeLater(poikkeusIkkuna);

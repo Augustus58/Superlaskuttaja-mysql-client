@@ -35,8 +35,8 @@ public class SuoritteetPanelPoistaSuoriteKuuntelija implements ActionListener {
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
-                lataaja.getLadattuTietovarasto().getSuoritteet().remove(kuuntelija.getArvoModel());
-                taulukko.getModel().removeRow(kuuntelija.getArvoModel());
+                lataaja.getLadattuTietovarasto().getSuoritteet().remove(kuuntelija.getPaivitettyArvo().intValue());
+                taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo());
             } catch (Exception e) {
             SuoritteetPanelPoistaSuoritePoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoritePoikkeusIkkuna();
             SwingUtilities.invokeLater(poikkeusIkkuna);

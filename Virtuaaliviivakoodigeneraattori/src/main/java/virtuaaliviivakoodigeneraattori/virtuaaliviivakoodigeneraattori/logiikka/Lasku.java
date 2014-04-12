@@ -6,7 +6,7 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Luokan ilmentymään voi tallettaa yhden laskun tiedot. Luokka tarjoaa metodit
@@ -22,13 +22,13 @@ public class Lasku {
     private Laskuttaja laskuttaja;
     private Asiakas asiakas;
 
-    private Date paivays;
+    private GregorianCalendar paivays;
     /**
      * Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut
      * samalla juoksevalla numeroinnilla.
      */
     private Integer laskunNumero;
-    private Date erapaiva;
+    private GregorianCalendar erapaiva;
     /**
      * Esim. 8.
      */
@@ -51,7 +51,7 @@ public class Lasku {
 
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
-    public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, Date paivays, Integer laskunNumero, Date erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
+    public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, GregorianCalendar paivays, Integer laskunNumero, GregorianCalendar erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
         this.laskuttaja = laskuttaja;
         this.asiakas = asiakas;
         this.paivays = paivays;
@@ -81,11 +81,11 @@ public class Lasku {
         return asiakas;
     }
 
-    public Date getPaivays() {
+    public GregorianCalendar getPaivays() {
         return paivays;
     }
 
-    public Date getErapaiva() {
+    public GregorianCalendar getErapaiva() {
         return erapaiva;
     }
 
@@ -150,7 +150,7 @@ public class Lasku {
         this.asiakas = asiakas;
     }
 
-    public void setPaivays(Date paivays) {
+    public void setPaivays(GregorianCalendar paivays) {
         this.paivays = paivays;
     }
 
@@ -158,7 +158,7 @@ public class Lasku {
         this.laskunNumero = laskunNumero;
     }
 
-    public void setErapaiva(Date erapaiva) {
+    public void setErapaiva(GregorianCalendar erapaiva) {
         this.erapaiva = erapaiva;
     }
 

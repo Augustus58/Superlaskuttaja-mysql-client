@@ -81,39 +81,39 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
         
         JLabel nimiTeksti = new JLabel("Entinen nimi: ");
-        JLabel nimiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 0).toString());
+        JLabel nimiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 0).toString());
         JLabel nimiTekstiUusi = new JLabel("Uusi nimi: ");
-        JTextField nimiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 0).toString());
+        JTextField nimiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 0).toString());
 //        nimiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel katuosoiteTeksti = new JLabel("Entinen katuosoite:");
-        JLabel katuosoiteTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 1).toString());
+        JLabel katuosoiteTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 1).toString());
         JLabel katuosoiteTekstiUusi = new JLabel("Uusi katuosoite:");
-        JTextField katuosoiteKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 1).toString());
+        JTextField katuosoiteKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 1).toString());
 //        nimiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel postinumeroTeksti = new JLabel("Entinen postinumero:");
-        JLabel postinumeroTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 2).toString());
+        JLabel postinumeroTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 2).toString());
         JLabel postinumeroTekstiUusi = new JLabel("Uusi postinumero:");
-        JTextField postinumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 2).toString());
+        JTextField postinumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 2).toString());
 //        postinumeroKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel kaupunkiTeksti = new JLabel("Entinen kaupunki:"); 
-        JLabel kaupunkiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 3).toString());
+        JLabel kaupunkiTekstiEntinen = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 3).toString());
         JLabel kaupunkiTekstiUusi = new JLabel("Uusi kaupunki:");
-        JTextField kaupunkiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 3).toString());
+        JTextField kaupunkiKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 3).toString());
 //        kaupunkiKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel asiakasnumeroTeksti = new JLabel("Entinen asiakasnumero:");
-        JLabel asiakasnumeroTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 4).toString());
+        JLabel asiakasnumeroTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 4).toString());
         JLabel asiakasnumeroTekstiUusi = new JLabel("Uusi asiakasnumero:");
-        JTextField asiakasnumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 4).toString());
+        JTextField asiakasnumeroKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 4).toString());
 //        asiakasnumeroKentta.setPreferredSize(new Dimension(300, 0));
         
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty entinen:");
-        JLabel laskujaLahetettyTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 5).toString());
+        JLabel laskujaLahetettyTekstiVanha = new JLabel(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 5).toString());
         JLabel laskujaLahetettyTekstiUusi = new JLabel("Laskuja lähetetty uusi:");
-        JTextField laskujaLahetettyKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getArvoModel(), 5).toString());
+        JTextField laskujaLahetettyKentta = new JTextField(taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 5).toString());
 //        laskujaLahetettyKentta.setPreferredSize(new Dimension(300, 0));
            
         JButton muokkaa = new JButton("Muokkaa");

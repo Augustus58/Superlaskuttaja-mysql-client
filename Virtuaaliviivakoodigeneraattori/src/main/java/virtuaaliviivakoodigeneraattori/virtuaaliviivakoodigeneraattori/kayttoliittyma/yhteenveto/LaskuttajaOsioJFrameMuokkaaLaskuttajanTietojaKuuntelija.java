@@ -30,8 +30,10 @@ public class LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija implements 
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        MuokkaaLaskuttajanTietojaIkkuna muokkaaTietoja = new MuokkaaLaskuttajanTietojaIkkuna(lataaja, lukko, panel);
-        SwingUtilities.invokeLater(muokkaaTietoja);
+        if (!lukko.onkoLukkoPaalla()) {
+            MuokkaaLaskuttajanTietojaIkkuna muokkaaTietoja = new MuokkaaLaskuttajanTietojaIkkuna(lataaja, lukko, panel);
+            SwingUtilities.invokeLater(muokkaaTietoja);
+        }
     }
 
 }

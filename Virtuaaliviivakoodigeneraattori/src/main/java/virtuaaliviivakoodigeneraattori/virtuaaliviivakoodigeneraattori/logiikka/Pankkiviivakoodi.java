@@ -6,7 +6,7 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Luokka tarjoaa tarvittavat metodit pankkiviivakoodien muodostamiseen ja
@@ -22,7 +22,7 @@ public class Pankkiviivakoodi {
     private final String pankkiviivakoodi;
     private final SimpleDateFormat paivamaaraFormaatti;
 
-    public Pankkiviivakoodi(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
+    public Pankkiviivakoodi(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, GregorianCalendar erapaiva) {
 
         this.paivamaaraFormaatti = new SimpleDateFormat("yyMMdd");
         this.pankkiviivakoodi = muodostaPankkiviivakoodi(muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(tilinumero, laskunSumma, viite, erapaiva));
@@ -39,7 +39,7 @@ public class Pankkiviivakoodi {
      *
      * @return pankkiviivakoodi ilman aloitusta ja lopetusta.
      */
-    private String muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, Date erapaiva) {
+    private String muodostaPankkiviivakoodiIlmanTarkistettaJaLopetusta(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, GregorianCalendar erapaiva) {
         return ("105"
                 + "4"
                 + tilinumero.tilinumeroIlmanMaatunnusta()
@@ -47,7 +47,7 @@ public class Pankkiviivakoodi {
                 + laskunSumma.sentitStringEtunollillaPituusKaksi()
                 + "000"
                 + viite.viiteTarkisteellaEtunollillaPituus20()
-                + paivamaaraFormaatti.format(erapaiva));
+                + paivamaaraFormaatti.format(erapaiva.getTime()));
     }
 
     /**

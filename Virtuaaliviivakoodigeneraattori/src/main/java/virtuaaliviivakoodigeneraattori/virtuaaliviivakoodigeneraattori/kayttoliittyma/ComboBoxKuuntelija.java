@@ -34,4 +34,7 @@ public class ComboBoxKuuntelija implements ActionListener {
         return valinta;
     }
 
+    public void setValinta(Integer valinta) {
+        this.valinta = valinta;
+    }
 }

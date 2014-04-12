@@ -86,10 +86,10 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
             if (!suorite.onkoTiedotOikeanlaisetPaitsiPvm()) {
                 throw new IllegalArgumentException("Jokin syöte on virheellinen.");
             }
-            lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getArvoModel());
-            lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getArvoModel(), suorite);
-            taulukko.getModel().insertRow(taulukkoKuuntelija.getArvoModel(), suorite.suoritteenTiedotTaulukossa());
-            taulukko.getModel().removeRow(taulukkoKuuntelija.getArvoModel() + 1);
+            lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getPaivitettyArvo().intValue());
+            lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getPaivitettyArvo(), suorite);
+            taulukko.getModel().insertRow(taulukkoKuuntelija.getPaivitettyArvo(), suorite.suoritteenTiedotTaulukossa());
+            taulukko.getModel().removeRow(taulukkoKuuntelija.getPaivitettyArvo() + 1);
             suljeIkkuna();
         } catch (Exception e) {
             MuokkaaValittuaIkkunaMuokkaaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaValittuaIkkunaMuokkaaPoikkeusIkkuna();

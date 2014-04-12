@@ -159,6 +159,7 @@ public class Suorite {
     public void setLasku(Lasku lasku) {
         this.lasku = lasku;
         onkoLaskutettu = true;
+        paivitaLaskutettuTeksti();
     }
 
     /**
@@ -197,6 +198,7 @@ public class Suorite {
     public void poistaLasku() {
         this.lasku = null;
         onkoLaskutettu = false;
+        paivitaLaskutettuTeksti();
     }
 
     /**

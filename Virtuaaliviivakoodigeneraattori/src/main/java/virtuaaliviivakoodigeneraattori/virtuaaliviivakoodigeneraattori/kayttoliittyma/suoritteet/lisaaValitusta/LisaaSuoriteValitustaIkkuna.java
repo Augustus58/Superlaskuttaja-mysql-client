@@ -87,29 +87,30 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
         
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.
-        asiakasComboBox.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getArvoModel()).getAsiakas()));
+        asiakasComboBox.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas()));
 
         asiakasComboBox.setEditable(false);
         ComboBoxKuuntelija comboBoxkuuntelija = new ComboBoxKuuntelija();
+        comboBoxkuuntelija.setValinta(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas()));
         asiakasComboBox.addActionListener(comboBoxkuuntelija);
 
         JLabel kuvausTeksti = new JLabel("Kuvaus:");
-        JTextField kuvausKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 1));
+        JTextField kuvausKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1));
 
         JLabel pvmTeksti = new JLabel("Päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 2));
+        JTextField pvmKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2));
 
         JLabel maaraTeksti = new JLabel("Määrä:");
-        JTextField maaraKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 3));
+        JTextField maaraKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3));
 
         JLabel maaranYksikotTeksti = new JLabel("Yksiköt:");
-        JTextField maaranYksikotKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 4));
+        JTextField maaranYksikotKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4));
 
         JLabel aHintaTeksti = new JLabel("à hinta:");
-        JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 5));
+        JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5));
 
         JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
-        JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getArvoModel(), 6));
+        JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 6));
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);

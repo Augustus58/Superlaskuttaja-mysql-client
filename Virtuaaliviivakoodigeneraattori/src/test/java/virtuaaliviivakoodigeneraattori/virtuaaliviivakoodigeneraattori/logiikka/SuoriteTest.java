@@ -7,6 +7,7 @@ package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -76,8 +77,8 @@ public class SuoriteTest {
         suoritteetList = new ArrayList<>();
         suoritteetList.add(suorite);
         summa = new LaskunSumma(5, 5);
-        pankkiviivakoodi = new Pankkiviivakoodi(tilinumero, summa, viite, new Date(2014 - 1900, 4 - 1, 16));
-        lasku = new Lasku(laskuttaja, asiakas, new Date(2014 - 1900, 4 - 1, 2), 5, new Date(2014 - 1900, 4 - 1, 16), 50, viite, "Maksuehto", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
+        pankkiviivakoodi = new Pankkiviivakoodi(tilinumero, summa, viite, new GregorianCalendar(2014, 4 - 1, 16));
+        lasku = new Lasku(laskuttaja, asiakas, new GregorianCalendar(2014, 4 - 1, 2), 5, new GregorianCalendar(2014, 4 - 1, 16), 50, viite, "Maksuehto", suoritteetList, "Lisätiedot", summa, pankkiviivakoodi);
     }
 
     @After
@@ -87,17 +88,17 @@ public class SuoriteTest {
     @Test
     public void konstruktoriToimiiOikein() {
         //Tässä testataan metodit laskeAlv ja laskeYht.
-        Suorite suorite2 = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
-        assertEquals(new Double(36.0), suorite2.getAlv(), 0.00001);
-        assertEquals(new Double(186.0), suorite2.getYht(), 0.00001);
+        Suorite suorite4 = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
+        assertEquals(new Double(36.0), suorite4.getAlv(), 0.00001);
+        assertEquals(new Double(186.0), suorite4.getYht(), 0.00001);
 
-        Suorite suorite3 = new Suorite(asiakas, "Kuvaus", date, 3.0, "h", 15.0, 12);
-        assertEquals(new Double(5.4), suorite3.getAlv(), 0.00001);
-        assertEquals(new Double(50.4), suorite3.getYht(), 0.00001);
+        Suorite suorite5 = new Suorite(asiakas, "Kuvaus", date, 3.0, "h", 15.0, 12);
+        assertEquals(new Double(5.4), suorite5.getAlv(), 0.00001);
+        assertEquals(new Double(50.4), suorite5.getYht(), 0.00001);
 
-        Suorite suorite4 = new Suorite(asiakas, "Kuvaus", date, 4.0, "h", 30.0, 25);
-        assertEquals(new Double(30.0), suorite4.getAlv(), 0.00001);
-        assertEquals(new Double(150.0), suorite4.getYht(), 0.00001);
+        Suorite suorite6 = new Suorite(asiakas, "Kuvaus", date, 4.0, "h", 30.0, 25);
+        assertEquals(new Double(30.0), suorite6.getAlv(), 0.00001);
+        assertEquals(new Double(150.0), suorite6.getYht(), 0.00001);
     }
 
     @Test

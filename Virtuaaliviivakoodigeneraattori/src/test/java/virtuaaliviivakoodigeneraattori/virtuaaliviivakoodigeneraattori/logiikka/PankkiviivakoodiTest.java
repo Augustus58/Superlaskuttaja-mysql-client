@@ -5,7 +5,7 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,31 +22,31 @@ public class PankkiviivakoodiTest {
     Tilinumero tilinumero;
     LaskunSumma laskunSumma;
     Viite viite;
-    Date erapaiva;
+    GregorianCalendar erapaiva;
     Pankkiviivakoodi pankkiviivakoodi;
 
     Tilinumero tilinumero1;
     LaskunSumma laskunSumma1;
     Viite viite1;
-    Date erapaiva1;
+    GregorianCalendar erapaiva1;
     Pankkiviivakoodi pankkiviivakoodi1;
 
     Tilinumero tilinumero2;
     LaskunSumma laskunSumma2;
     Viite viite2;
-    Date erapaiva2;
+    GregorianCalendar erapaiva2;
     Pankkiviivakoodi pankkiviivakoodi2;
 
     Tilinumero tilinumero3;
     LaskunSumma laskunSumma3;
     Viite viite3;
-    Date erapaiva3;
+    GregorianCalendar erapaiva3;
     Pankkiviivakoodi pankkiviivakoodi3;
 
     Tilinumero tilinumero4;
     LaskunSumma laskunSumma4;
     Viite viite4;
-    Date erapaiva4;
+    GregorianCalendar erapaiva4;
     Pankkiviivakoodi pankkiviivakoodi4;
 
     public PankkiviivakoodiTest() {
@@ -65,31 +65,31 @@ public class PankkiviivakoodiTest {
         tilinumero = new Tilinumero("FI7944052020036082", "", "");
         laskunSumma = new LaskunSumma(4883, 15);
         viite = new Viite("86851625961989"); // Ilman tarkistetta.
-        erapaiva = new Date(2010, 6 - 1, 12);
+        erapaiva = new GregorianCalendar(2010, 6 - 1, 12);
         pankkiviivakoodi = new Pankkiviivakoodi(tilinumero, laskunSumma, viite, erapaiva);
 
         tilinumero1 = new Tilinumero("FI7944052020036082", "", "");
         laskunSumma1 = new LaskunSumma(4883, 15);
         viite1 = new Viite("86851625961989"); // Ilman tarkistetta.
-        erapaiva1 = new Date(2010, 6 - 1, 12);
+        erapaiva1 = new GregorianCalendar(2010, 6 - 1, 12);
         pankkiviivakoodi1 = new Pankkiviivakoodi(tilinumero, laskunSumma, viite, erapaiva);
 
         tilinumero2 = new Tilinumero("FI5810171000000122", "", "");
         laskunSumma2 = new LaskunSumma(482, 99);
         viite2 = new Viite("55958224329467"); // Ilman tarkistetta.
-        erapaiva2 = new Date(2012, 1 - 1, 31);
+        erapaiva2 = new GregorianCalendar(2012, 1 - 1, 31);
         pankkiviivakoodi2 = new Pankkiviivakoodi(tilinumero2, laskunSumma2, viite2, erapaiva2);
 
         tilinumero3 = new Tilinumero("FI0250004640001302", "", "");
         laskunSumma3 = new LaskunSumma(693, 80);
         viite3 = new Viite("6987567208343536"); // Ilman tarkistetta.
-        erapaiva3 = new Date(2011, 7 - 1, 24);
+        erapaiva3 = new GregorianCalendar(2011, 7 - 1, 24);
         pankkiviivakoodi3 = new Pankkiviivakoodi(tilinumero3, laskunSumma3, viite3, erapaiva3);
 
         tilinumero4 = new Tilinumero("FI0250004640001302", "", "");
         laskunSumma4 = new LaskunSumma(693, 80);
         viite4 = new Viite("6987567208343536"); // Ilman tarkistetta.
-        erapaiva4 = new Date(2011, 7 - 1, 24);
+        erapaiva4 = new GregorianCalendar(2011, 7 - 1, 24);
         pankkiviivakoodi4 = new Pankkiviivakoodi(tilinumero3, laskunSumma3, viite3, erapaiva3);
     }
 

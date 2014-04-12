@@ -51,25 +51,23 @@ public class MuokkaaAsiakastaIkkunaMuokkaaKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
-            Asiakas vanhaAsiakas = new Asiakas(taulukko.getValueString(kuuntelija.getArvoModel(), 4),
-                    taulukko.getValueString(kuuntelija.getArvoModel(), 0),
-                    taulukko.getValueString(kuuntelija.getArvoModel(), 1),
-                    taulukko.getValueString(kuuntelija.getArvoModel(), 2),
-                    taulukko.getValueString(kuuntelija.getArvoModel(), 3),
-                    Integer.parseInt(taulukko.getValueString(kuuntelija.getArvoModel(), 5)));
+            Asiakas vanhaAsiakas = new Asiakas(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4),
+                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 0),
+                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1),
+                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2),
+                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3),
+                    Integer.parseInt(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5)));
             
             Asiakas asiakas = new Asiakas(asiakasnumeroKentta.getText(), nimiKentta.getText(), katuosoiteKentta.getText(), postinumeroKentta.getText(), kaupunkiKentta.getText(), Integer.parseInt(laskujaLahetettyKentta.getText()));
             
             if (!asiakas.onkoTiedotOikeanlaiset()) {
                 throw new IllegalArgumentException("Jokin syöte on virheellinen.");
             }
-            
-            taulukko.getModel().insertRow(kuuntelija.getArvoModel(), asiakas.asiakkaanTiedotTaulukossa());
-            taulukko.getModel().removeRow(kuuntelija.getArvoModel() + 1);
-            
-            lataaja.getLadattuTietovarasto().poistaAsiakas(vanhaAsiakas);
-            lataaja.getLadattuTietovarasto().getAsiakkaat().add(asiakas);
-            
+
+            lataaja.getLadattuTietovarasto().getAsiakkaat().remove(kuuntelija.getPaivitettyArvo().intValue());
+            lataaja.getLadattuTietovarasto().getAsiakkaat().add(kuuntelija.getPaivitettyArvo(), asiakas);
+            taulukko.getModel().insertRow(kuuntelija.getPaivitettyArvo(), asiakas.asiakkaanTiedotTaulukossa());
+            taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo() + 1);
             suljeIkkuna();
         } catch (Exception e) {
             MuokkaaAsiakastaIkkunaMuokkaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaAsiakastaIkkunaMuokkaaKuuntelijaPoikkeusIkkuna();

@@ -9,9 +9,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.GregorianCalendarRenderer;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
+import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lasku;
 import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Lataaja;
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.Suorite;
 
 /**
  *
@@ -19,21 +20,25 @@ import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka.
  */
 public class LaskutTaulukko {
 
-    private JTable taulukko;
+    private LaskutTaulukkoJTable taulukko;
     private TableModelSolujenMuokkaaminenEstetty model;
     private ListSelectionModel selectionModel;
     private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
+    private GregorianCalendarRenderer dateRenderer;
     private Lataaja lataaja;
 
     public LaskutTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
-        this.taulukko = new JTable();
+        this.taulukko = new LaskutTaulukkoJTable();
         this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Asiakas", "Asiakasnumero", "Viite", "Laskun numero", "Summa", "Päiväys", "Eräpäivä", "Maksettu"});           
         this.sorter = new TableRowSorter<>(model);
         this.taulukko.setModel(model);
         this.taulukko.setRowSorter(sorter);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.dateRenderer = new GregorianCalendarRenderer();
+        this.taulukko.getColumnModel().getColumn(5).setCellRenderer(dateRenderer);
+        this.taulukko.getColumnModel().getColumn(6).setCellRenderer(dateRenderer);
         muodostaLaskutTaulukko();
     }
 
@@ -45,8 +50,8 @@ public class LaskutTaulukko {
         }
     }
     
-    public void addLaskutTaulukkoRivi(Suorite suorite) {
-        model.addRow(suorite.suoritteenTiedotTaulukossa());
+    public void lisaaLaskutTaulukkoRivi(Lasku lasku) {
+        model.addRow(lasku.laskunTiedotTaulukossa());
     }
 
     public JTable getTaulukko() {

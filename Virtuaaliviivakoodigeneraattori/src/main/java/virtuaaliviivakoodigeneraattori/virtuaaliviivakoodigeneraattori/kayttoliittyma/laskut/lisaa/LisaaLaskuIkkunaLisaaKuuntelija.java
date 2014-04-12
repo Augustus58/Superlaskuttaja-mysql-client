@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -71,22 +71,24 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             if (!tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(paivaysKentta.getText())) {
                 throw new IllegalArgumentException("Syöte päiväys on virheellinen.");
             }
-            Date paivays = pvmFormaatti.parse(paivaysKentta.getText());
-            
+            GregorianCalendar paivays = new GregorianCalendar();
+            paivays.setTime(pvmFormaatti.parse(paivaysKentta.getText()));
+
             Integer maksuaika = Integer.parseInt(maksuaikaKentta.getText());
-            
+
             if (maksuaika < 0 || maksuaika > 365) {
                 throw new IllegalArgumentException("Syöte maksuaika on virheellinen.");
             }
-            
+
             if (!tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(erapaivaKentta.getText())) {
                 throw new IllegalArgumentException("Syöte eräpäivä on virheellinen.");
             }
             if (!tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(erapaivaKentta.getText())) {
                 throw new IllegalArgumentException("Syöte eräpäivä virheellinen.");
             }
-            Date erapaiva = pvmFormaatti.parse(erapaivaKentta.getText());
-            
+            GregorianCalendar erapaiva = new GregorianCalendar();
+            erapaiva.setTime(pvmFormaatti.parse(erapaivaKentta.getText()));
+
             Viite viite = new Viite(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).getAsiakasnumero() + lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).annaLaskujaLahetettyPlusYksi());
 
             ArrayList<Suorite> suoritteet = new ArrayList<>();
@@ -96,7 +98,7 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             if (suoritteet.isEmpty()) {
                 throw new IllegalArgumentException("Ei valittuja suoritteita.");
             }
-            
+
             Double summa = 0.0;
             for (int i = 0; i < suoritteet.size(); i++) {
                 summa = summa + suoritteet.get(i).getYht();
@@ -105,14 +107,14 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             if (!LaskunSumma.tarkistaEurot(eurot)) {
                 throw new IllegalArgumentException("Laskun summa on epäkelpo.");
             }
-            Integer sentit = (int)Math.round((summa - summa.intValue())*100.0);
+            Integer sentit = (int) Math.round((summa - summa.intValue()) * 100.0);
             if (!LaskunSumma.tarkistaSentit(sentit)) {
                 throw new IllegalArgumentException("Laskun summa on epäkelpo.");
             }
             LaskunSumma laskunSumma = new LaskunSumma(eurot, sentit);
-            
+
             Pankkiviivakoodi pankkiviivakoodi = new Pankkiviivakoodi(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero(), laskunSumma, viite, erapaiva);
-            
+
             Lasku lasku = new Lasku(lataaja.getLadattuTietovarasto().getLaskuttaja(),
                     lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()),
                     paivays,
@@ -125,18 +127,21 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
                     lisatiedotKentta.getText(),
                     laskunSumma,
                     pankkiviivakoodi);
-            
+
             if (!lasku.onkoViivastyskorkoOikeanlainen()) {
                 throw new IllegalArgumentException("Syöte viivästyskorko on virheellinen.");
             }
             if (!lasku.onkoMaksuehtoOikeanlainen()) {
                 throw new IllegalArgumentException("Syöte maksuehto on virheellinen.");
             }
-            
+
+            for (int i = 0; i < suoritteet.size(); i++) {
+                suoritteet.get(i).setLasku(lasku);
+            }
             lataaja.getLadattuTietovarasto().getLaskuttaja().kasvataLahetettyjenLaskujenMaaraaYhdella();
             lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).kasvataLahetettyjenLaskujenMaaraaYhdella();
             lataaja.getLadattuTietovarasto().getLaskut().add(lasku);
-            taulukko.getModel().addRow(lasku.laskunTiedotTaulukossa());
+            taulukko.lisaaLaskutTaulukkoRivi(lasku);
 
             suljeIkkuna();
         } catch (Exception e) {

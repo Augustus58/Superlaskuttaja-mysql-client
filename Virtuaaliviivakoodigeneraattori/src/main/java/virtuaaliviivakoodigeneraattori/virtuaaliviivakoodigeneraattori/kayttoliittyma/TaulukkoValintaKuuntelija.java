@@ -34,7 +34,7 @@ public class TaulukkoValintaKuuntelija implements ListSelectionListener {
         paivitettyArvo = taulukko.convertRowIndexToModel(arvo);
     }
 
-    public Integer getArvoModel() {
+    public Integer getPaivitettyArvo() {
         return (paivitettyArvo);
     }
 
