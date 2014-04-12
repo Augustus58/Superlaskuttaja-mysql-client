@@ -37,3 +37,4 @@
 - **10.4.2014 1h** Jatkettu käyttöliittymän laskut-osion lisää-ominaisuuden tekemistä.
 - **10.4.2014 3h** Muokattu käyttöliittymän laskut-osiota ja tehty yksi sekvenssikaavio lisää aiheesta suoritteiden filtteriöinti.
 - **10.4.2014 0,5h** Päivitetty tarkentunutta luokkakaaviota.
+- **11.4.2014 6h** Jatkettu käyttöliittymän laskut-osion lisää-ominaisuuden tekemistä. Se alkaa olla valmis. Tehty tarvittavia syötteentarkistuksia luokkaan Lasku. Tehty luokkaan Pankkiviivakoodi staattinen metodi, jolla voi tarkistaa pankkiviivakoodien validiuden. Tehty luokkaan Viite staattinen metodi, jolla voi tarkistaa viitteen validiuden. Testejä uusille metodeille ei vielä tehty. Muokattu asiakasnumeron tarkistusta niin, että sen tulee olla väh. kaksi merkkiä pitkä ja se ei saa alkaa nollalla.
