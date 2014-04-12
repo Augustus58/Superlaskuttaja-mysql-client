@@ -5,7 +5,6 @@
  */
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.laskut.lisaa;
 
-import virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.kayttoliittyma.suoritteet.lisaa.*;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -51,7 +50,7 @@ public class LisaaLaskuIkkunaLisaaLaskuPoikkeusIkkuna implements Runnable {
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
         JLabel teksti1 = new JLabel("Jokin syöte on virheellinen.");
-        JLabel teksti2 = new JLabel("Yhtään syötettä ei saa jättää tyhjäksi.");
+        JLabel teksti2 = new JLabel("Yhtään syötettä ei saa jättää tyhjäksi, paitsi lisätiedot");
         
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new LisaaLaskuIkkunaLisaaLaskuPoikkeusIkkunaOkKuuntelija(dialog));

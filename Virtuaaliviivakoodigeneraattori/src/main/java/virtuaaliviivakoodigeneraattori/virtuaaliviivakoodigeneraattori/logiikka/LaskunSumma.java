@@ -68,7 +68,7 @@ public class LaskunSumma {
      * @return Tieto argumentin oikeanlaisuudesta pankkiviivakoodistandardia
      * ajatellen.
      */
-    public Boolean tarkistaEurot(Integer eurot) {
+    public static Boolean tarkistaEurot(Integer eurot) {
         if (eurot >= 0 && eurot <= 999999) {
             return true;
         }
@@ -85,7 +85,7 @@ public class LaskunSumma {
      * @return Tieto argumentin oikeanlaisuudesta pankkiviivakoodistandardia
      * ajatellen.
      */
-    public Boolean tarkistaSentit(Integer sentit) {
+    public static Boolean tarkistaSentit(Integer sentit) {
         if (sentit >= 0 && sentit <= 99) {
             return true;
         }

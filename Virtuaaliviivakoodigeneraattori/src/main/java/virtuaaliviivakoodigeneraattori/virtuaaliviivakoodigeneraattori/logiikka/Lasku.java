@@ -49,10 +49,12 @@ public class Lasku {
     private Boolean onkoMaksettu;
     private String maksettuTeksti;
 
-    public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, Date lahetysPaiva, Integer laskunNumero, Date erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
+
+    public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, Date paivays, Integer laskunNumero, Date erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
         this.laskuttaja = laskuttaja;
         this.asiakas = asiakas;
-        this.paivays = lahetysPaiva;
+        this.paivays = paivays;
         this.laskunNumero = laskunNumero;
         this.erapaiva = erapaiva;
         this.viivastyskorko = viivastyskorko;
@@ -64,6 +66,7 @@ public class Lasku {
         this.pankkiviivakoodi = pankkiviivakoodi;
         this.onkoMaksettu = false;
         this.maksettuTeksti = "Ei";
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     public Integer getLaskunNumero() {
@@ -203,6 +206,27 @@ public class Lasku {
         } else {
             maksettuTeksti = "Ei";
         }
+    }
+
+    /**
+     * Metodi kertoo onko laskun viivästyskorko oikeanlainen.
+     *
+     * @return Tieto viivästyskoron oikeanlaisuudesta.
+     */
+    public Boolean onkoViivastyskorkoOikeanlainen() {
+        if (viivastyskorko < 0 || viivastyskorko > 100) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Metodi kertoo onko laskun maksuehto oikeanlainen.
+     *
+     * @return Tieto maksuehdon oikeanlaisuudesta.
+     */
+    public Boolean onkoMaksuehtoOikeanlainen() {
+        return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(maksuehto));
     }
 
     /**

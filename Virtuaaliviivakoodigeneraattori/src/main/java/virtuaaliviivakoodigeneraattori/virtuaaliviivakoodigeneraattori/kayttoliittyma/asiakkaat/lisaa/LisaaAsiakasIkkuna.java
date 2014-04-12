@@ -81,8 +81,8 @@ public class LisaaAsiakasIkkuna implements Runnable {
         JLabel kaupunkiTeksti = new JLabel("Kaupunki:");
         JTextField kaupunkiKentta = new JTextField("1");
 
-        JLabel asiakasnumeroTeksti = new JLabel("Asiakasnumero:");
-        JTextField asiakasnumeroKentta = new JTextField("1");
+        JLabel asiakasnumeroTeksti = new JLabel("Asiakasnumero (ei etunollia ja pit. väh. kaksi):");
+        JTextField asiakasnumeroKentta = new JTextField("14");
 
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty:");
         JTextField laskujaLahetettyKentta = new JTextField("1");

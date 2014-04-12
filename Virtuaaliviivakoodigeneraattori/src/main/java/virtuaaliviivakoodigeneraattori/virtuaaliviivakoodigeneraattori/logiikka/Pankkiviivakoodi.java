@@ -58,7 +58,7 @@ public class Pankkiviivakoodi {
      *
      * @return Pankkiviivakoodi aloituksella ja lopetuksella.
      */
-    private String muodostaPankkiviivakoodi(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
+    private static String muodostaPankkiviivakoodi(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         return (pankkiviivakoodiIlmanTarkistettaJaLopetusta
                 + laskeTarkiste(pankkiviivakoodiIlmanTarkistettaJaLopetusta).toString()
                 + "106");
@@ -72,7 +72,7 @@ public class Pankkiviivakoodi {
      *
      * @return Tarkistenumero
      */
-    private Integer laskeTarkiste(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
+    private static Integer laskeTarkiste(String pankkiviivakoodiIlmanTarkistettaJaLopetusta) {
         Integer summa = 0;
         summa = summa + 1 * Integer.parseInt(pankkiviivakoodiIlmanTarkistettaJaLopetusta.substring(0, 3));
         for (int i = 1; i <= 27; i++) {
@@ -95,6 +95,29 @@ public class Pankkiviivakoodi {
      */
     public String pankkiviivakoodiIlmanAloitustaJaLopetusta() {
         return this.pankkiviivakoodi.substring(3, this.pankkiviivakoodi.length() - 3);
+    }
+
+    /**
+     * Metodi tarkistaa pankkiviivakoodin ilman aloitusta ja lopetusta
+     * validiuden.
+     *
+     * @param pankkiviivakoodiIlmanAloitustaJaLopetusta Pankkiviivakoodi ilman
+     * aloitusta ja lopetusta.
+     * @return Tieto validiudesta.
+     */
+    public static Boolean onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi(String pankkiviivakoodiIlmanAloitustaJaLopetusta) {
+        MerkkiJaMerkkijonoTarkistin tarkistin = new MerkkiJaMerkkijonoTarkistin();
+        if (pankkiviivakoodiIlmanAloitustaJaLopetusta.length() != 54) {
+            return false;
+        }
+        if (!tarkistin.koostuukoMerkkijonoNumeroista(pankkiviivakoodiIlmanAloitustaJaLopetusta)) {
+            return false;
+        }
+        String uudelleenMuodostettuKoodi = muodostaPankkiviivakoodi("105" + pankkiviivakoodiIlmanAloitustaJaLopetusta.substring(0, 56));
+        if (!uudelleenMuodostettuKoodi.substring(3, uudelleenMuodostettuKoodi.length() - 3).equals(pankkiviivakoodiIlmanAloitustaJaLopetusta)) {
+            return false;
+        }
+        return true;
     }
 
     /**

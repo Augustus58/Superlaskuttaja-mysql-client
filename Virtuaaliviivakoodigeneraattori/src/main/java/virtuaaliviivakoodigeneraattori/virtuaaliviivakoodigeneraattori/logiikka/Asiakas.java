@@ -77,11 +77,23 @@ public class Asiakas {
 
     /**
      * Metodi kertoo onko asiakkaan asiakasnumero oikeanlainen.
+     * <p>
+     * Asiakasnumeron tulee olla vähintään kaksi merkkiä pitkä ja siinä ei saa
+     * olla etunollia, koska sitä voidaan käyttää viitteiden muodostamiseen.
      *
      * @return Tieto asiakasnumeron oikeanlaisuudesta.
      */
     public Boolean onkoAsiakasnumeroOikeanlainen() {
-        return (tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero));
+        if (!tarkistin.koostuukoMerkkijonoNumeroista(asiakasnumero)) {
+            return false;
+        }
+        if (asiakasnumero.length() < 2) {
+            return false;
+        }
+        if (tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla(asiakasnumero)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -121,12 +133,30 @@ public class Asiakas {
         return laskujaLahetetty;
     }
 
+    /**
+     * Metodi antaa uuden lähettyjen laskujen määrän.
+     *
+     * @return (laskujaLahetetty + 1).
+     */
+    public Integer annaLaskujaLahetettyPlusYksi() {
+        return (laskujaLahetetty + 1);
+    }
+
     public String getKatuosoite() {
         return katuosoite;
     }
 
     public String getPostinumero() {
         return postinumero;
+    }
+    
+    /**
+     * Metodin suorittaminen kasvattaa attribuutin laskukujaLahetetty arvoa
+     * yhdellä.
+     *
+     */
+    public void kasvataLahetettyjenLaskujenMaaraaYhdella() {
+        laskujaLahetetty++;
     }
 
     /**

@@ -6,8 +6,8 @@
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 /**
- * Luokan ilmentymään voi tallettaa laskuttajan tiedot. Luokka tarjoaa
- * metodit tietojen oikeanlaisuuden tarkistamiseen.
+ * Luokan ilmentymään voi tallettaa laskuttajan tiedot. Luokka tarjoaa metodit
+ * tietojen oikeanlaisuuden tarkistamiseen.
  *
  * @author Augustus58
  */
@@ -213,6 +213,16 @@ public class Laskuttaja {
         return laskujaLahetetty;
     }
 
+    /**
+     * Metodi antaa uuden laskun numeron.
+     *
+     * @return Laskun numero uuteen laskuun. Muodostetaan lisäämällä yksi
+     * attribuuttiin laskujaLahetetty.
+     */
+    public Integer annaUusiLaskunNumero() {
+        return (laskujaLahetetty + 1);
+    }
+
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
@@ -251,6 +261,15 @@ public class Laskuttaja {
 
     public void setLaskujaLahetetty(Integer laskujaLahetetty) {
         this.laskujaLahetetty = laskujaLahetetty;
+    }
+
+    /**
+     * Metodin suorittaminen kasvattaa attribuutin laskukujaLahetetty arvoa
+     * yhdellä.
+     *
+     */
+    public void kasvataLahetettyjenLaskujenMaaraaYhdella() {
+        laskujaLahetetty++;
     }
 
     /**
@@ -299,8 +318,8 @@ public class Laskuttaja {
     /**
      * Luokan Laskuttaja hashCode-metodi.
      * <p>
-     * HashCode muodostetaan summaamalla attribuuttien nimi,
-     * katuosoite, postinumero, kaupunki ja yrityksenNimi hashCodet.
+     * HashCode muodostetaan summaamalla attribuuttien nimi, katuosoite,
+     * postinumero, kaupunki ja yrityksenNimi hashCodet.
      *
      * @return Kokonaisluku.
      */

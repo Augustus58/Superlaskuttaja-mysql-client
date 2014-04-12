@@ -213,8 +213,20 @@ public class LisaaLaskuIkkuna implements Runnable {
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        LisaaLaskuIkkunaLisaaKuuntelija kuuntelija = new LisaaLaskuIkkunaLisaaKuuntelija(comboBoxkuuntelija, kuvausKentta, pvmKentta, maaraKentta, maaranYksikotKentta, aHintaKentta, alvProsKentta, lataaja, taulukko, frame, lukko);
-//        lisaa.addActionListener(kuuntelija);
+        LisaaLaskuIkkunaLisaaKuuntelija kuuntelija = new LisaaLaskuIkkunaLisaaKuuntelija(comboBoxkuuntelija,
+                suoritteetLista,
+                paivaysKentta,
+                maksuaikaKentta,
+                erapaivaKentta,
+                viivastyskorkoKentta,
+                maksuehtoKentta,
+                lisatiedotKentta,
+                lataaja,
+                taulukko,
+                frame,
+                lukko,
+                pvmFormaatti);
+        lisaa.addActionListener(kuuntelija);
 
         panel.add(tiedotPanel);
         panel.add(Box.createRigidArea(new Dimension(10, 10)));

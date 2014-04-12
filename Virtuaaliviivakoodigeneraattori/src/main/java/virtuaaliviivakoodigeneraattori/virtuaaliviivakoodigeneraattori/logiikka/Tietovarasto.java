@@ -73,17 +73,39 @@ public class Tietovarasto {
         return laskut;
     }
 
-    public void setLaskuttaja(Laskuttaja laskuttaja) {
-        this.laskuttaja = laskuttaja;
-        laskuttajaLisatty = true;
-    }
-
     public Laskuttaja getLaskuttaja() {
         return laskuttaja;
     }
 
     public ArrayList<Suorite> getSuoritteet() {
         return suoritteet;
+    }
+
+    /**
+     * Metodi antaa argumentin laskuttamattomat suoritteet.
+     * <p>
+     * Tätä metodia tarvitaan erityisesti käyttöliittymän "lisää lasku" ja
+     * "muokkaa valittua laskua" osioissa.
+     *
+     * @param asiakas Asiakas, jonka laskuttamattomat suoritteet halutaan.
+     * @return Argumenttina annetun asiakkaan laskuttamattomat suoritteet
+     * ArrayList:nä.
+     */
+    public ArrayList<Suorite> asiakkaanLaskuttamattomatSuoritteetArrayList(Asiakas asiakas) {
+        ArrayList<Suorite> laskuttamattomatSuoritteet = new ArrayList<>();
+        for (int i = 0; i < this.getSuoritteet().size(); i++) {
+            if (this.getSuoritteet().get(i).getAsiakas().equals(asiakas)) {
+                if (!this.getSuoritteet().get(i).getOnkoLaskutettu()) {
+                    laskuttamattomatSuoritteet.add(this.getSuoritteet().get(i));
+                }
+            }
+        }
+        return laskuttamattomatSuoritteet;
+    }
+
+    public void setLaskuttaja(Laskuttaja laskuttaja) {
+        this.laskuttaja = laskuttaja;
+        laskuttajaLisatty = true;
     }
 
     /**
@@ -97,7 +119,7 @@ public class Tietovarasto {
     public Boolean isLaskuttajaLisatty() {
         return laskuttajaLisatty;
     }
-    
+
     /**
      * Metodilla voi poistaa asiakkaan asiakkaista.
      *

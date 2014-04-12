@@ -195,7 +195,8 @@ public class MerkkiJaMerkkijonoTarkistin {
     }
 
     /**
-     * Metodi tarkistaa onko merkkijonona annettu päivämäärä muotoa "dd.MM.yyyy" validi.
+     * Metodi tarkistaa onko merkkijonona annettu päivämäärä muotoa "dd.MM.yyyy"
+     * validi.
      * <p>
      * Tarkistukseen käytetään Apache Commons repon validator luokkaa
      * GenericValidator.
@@ -205,6 +206,25 @@ public class MerkkiJaMerkkijonoTarkistin {
      */
     public Boolean onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(String merkkijono) {
         return (GenericValidator.isDate(merkkijono, "dd.MM.yyyy", true));
+    }
+
+    /**
+     * Metodi tarkistaa onko merkkijonon ensimmäinen merkki "0".
+     * <p>
+     * Tätä metodia käytetään erityisesti estämään merkillä "0" alkavat
+     * asiakasnumerot.
+     *
+     * @param merkkijono Tarkistettava merkkijono.
+     * @return Tieto onko merkkijonon ensimmäinen merkki "0".
+     */
+    public Boolean onkoMerkkijononEnsimmainenMerkkiNolla(String merkkijono) {
+        if (merkkijono.isEmpty()) {
+            return false;
+        }
+        if (merkkijono.substring(0, 1).equals("0")) {
+            return true;
+        }
+        return false;
     }
 
     public String getIsotAakkosetAZ() {

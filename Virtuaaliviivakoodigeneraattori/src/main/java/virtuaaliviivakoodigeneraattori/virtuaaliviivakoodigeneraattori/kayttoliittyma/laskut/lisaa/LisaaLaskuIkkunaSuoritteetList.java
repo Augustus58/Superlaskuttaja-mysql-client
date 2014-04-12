@@ -31,12 +31,8 @@ public class LisaaLaskuIkkunaSuoritteetList extends JList {
     
     public void paivitaListanSisalto() {
         model.removeAllElements();
-        for (int i = 0; i < lataaja.getLadattuTietovarasto().getSuoritteet().size(); i++) {
-            if(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getAsiakas().equals(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta()))) {
-                if (!lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getOnkoLaskutettu()) {
-                    model.addElement(lataaja.getLadattuTietovarasto().getSuoritteet().get(i));
-                }
-            }
+        for (int i = 0; i < lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta())).size(); i++) {
+            model.addElement(lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta())).get(i));
         }
     }
 

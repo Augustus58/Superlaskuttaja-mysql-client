@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Tämän luokan ilmentymään voi tallentaa viitteen tiedot. Luokka tarjoaa
- * metodit viitteen oikeanlaisuuden tarkistamiseen. ∫Tämän luokan metodien
+ * metodit viitteen oikeanlaisuuden tarkistamiseen. Tämän luokan metodien
  * toiminnan perustelut löytyy osoitteesta
  * <a
  * href="http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf">http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/kotimaisen_viitteen_rakenneohje.pdf</a>
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Viite {
 
     private String viiteTarkisteella;
-    private final MerkkiJaMerkkijonoTarkistin merkkitarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     /**
      * Muodostaa uuden Luokan Viite olion.
@@ -28,7 +28,7 @@ public class Viite {
      */
     public Viite(String viite) {
         this.viiteTarkisteella = muodostaTarkisteellinenViite(viite);
-        this.merkkitarkistin = new MerkkiJaMerkkijonoTarkistin();
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
 
     /**
@@ -43,9 +43,33 @@ public class Viite {
             return false;
         }
         for (int i = 0; i < viiteIlmanTarkistetta.length(); i++) {
-            if (!this.merkkitarkistin.onkoMerkkiNumero(viiteIlmanTarkistetta.charAt(i))) {
+            if (!this.tarkistin.onkoMerkkiNumero(viiteIlmanTarkistetta.charAt(i))) {
                 return false;
             }
+        }
+        return true;
+    }
+    
+    /**
+     * Metodi kertoo onko tarkisteellinen viite validi.
+     *
+     * @param viiteTarkisteella Tarkisteellinen viite.
+     * @return Tieto tarkisteellisen viitteen validiudesta.
+     */
+    public static Boolean onkoViiteValidi(String viiteTarkisteella) {
+        MerkkiJaMerkkijonoTarkistin tarkistin = new MerkkiJaMerkkijonoTarkistin();
+        if (viiteTarkisteella.isEmpty() || viiteTarkisteella.length() < 4 || viiteTarkisteella.length() > 20) {
+            return false;
+        }
+        if (!tarkistin.koostuukoMerkkijonoNumeroista(viiteTarkisteella)) {
+            return false;
+        }
+        if (tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla(viiteTarkisteella)) {
+            return false;
+        }
+        Viite viite = new Viite(viiteTarkisteella.substring(0, viiteTarkisteella.length() - 1));
+        if (!viite.toString().equals(viiteTarkisteella)) {
+            return false;
         }
         return true;
     }

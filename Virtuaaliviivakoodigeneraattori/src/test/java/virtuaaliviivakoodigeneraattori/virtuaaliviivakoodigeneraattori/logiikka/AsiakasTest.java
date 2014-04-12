@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori.logiikka;
 
 import org.junit.After;
@@ -18,22 +17,23 @@ import static org.junit.Assert.*;
  * @author Augustus58
  */
 public class AsiakasTest {
+
     Asiakas asiakas;
     Asiakas asiakas1;
     Asiakas asiakas2;
     Asiakas asiakas3;
-    
+
     public AsiakasTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         // Luodaan asiakkaat, joiden tietojen pitäisi mennä läpi tarkistuksista.
@@ -42,18 +42,18 @@ public class AsiakasTest {
         asiakas2 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000);
         asiakas3 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000);
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void onkoNimiOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoNimiOikeanlainen());
         asiakas.setNimi("ä");
         assertTrue(asiakas.onkoNimiOikeanlainen());
     }
-    
+
     @Test
     public void onkoNimiOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setNimi("");
@@ -63,14 +63,14 @@ public class AsiakasTest {
         asiakas.setNimi("          ");
         assertFalse(asiakas.onkoNimiOikeanlainen());
     }
-    
+
     @Test
     public void onkoKaupunkiOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoKaupunkiOikeanlainen());
         asiakas.setKaupunki("ä");
         assertTrue(asiakas.onkoKaupunkiOikeanlainen());
     }
-    
+
     @Test
     public void onkoKaupunkiOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setKaupunki("");
@@ -80,14 +80,14 @@ public class AsiakasTest {
         asiakas.setKaupunki("          ");
         assertFalse(asiakas.onkoKaupunkiOikeanlainen());
     }
-    
+
     @Test
     public void onkoKatuosoiteOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoKatuosoiteOikeanlainen());
         asiakas.setKatuosoite("ä");
         assertTrue(asiakas.onkoKatuosoiteOikeanlainen());
     }
-    
+
     @Test
     public void onkoKatuosoiteOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setKatuosoite("");
@@ -97,16 +97,18 @@ public class AsiakasTest {
         asiakas.setKatuosoite("          ");
         assertFalse(asiakas.onkoKatuosoiteOikeanlainen());
     }
-    
+
     @Test
     public void onkoAsiakasnumeroOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoAsiakasnumeroOikeanlainen());
-        asiakas.setAsiakasnumero("0");
+        asiakas.setAsiakasnumero("12");
         assertTrue(asiakas.onkoAsiakasnumeroOikeanlainen());
-        asiakas.setAsiakasnumero("007");
+        asiakas.setAsiakasnumero("30");
+        assertTrue(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("70345345");
         assertTrue(asiakas.onkoAsiakasnumeroOikeanlainen());
     }
-    
+
     @Test
     public void onkoAsiakasnumeroOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setAsiakasnumero("");
@@ -125,15 +127,27 @@ public class AsiakasTest {
         assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
         asiakas.setAsiakasnumero("232-2322");
         assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("7");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("2");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("02");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("002");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("002345353");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
+        asiakas.setAsiakasnumero("02435345");
+        assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
     }
-    
+
     @Test
     public void onkoPostinumeroOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoPostinumeroOikeanlainen());
         asiakas.setPostinumero("0");
         assertTrue(asiakas.onkoPostinumeroOikeanlainen());
     }
-    
+
     @Test
     public void onkoPostinumeroOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setPostinumero("");
@@ -149,7 +163,7 @@ public class AsiakasTest {
         asiakas.setPostinumero("asd");
         assertFalse(asiakas.onkoPostinumeroOikeanlainen());
     }
-    
+
     @Test
     public void onkoLaskujaLahetettyOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoLaskujaLahetettyOikeanlainen());
@@ -158,7 +172,7 @@ public class AsiakasTest {
         asiakas.setLaskujaLahetetty(1);
         assertTrue(asiakas.onkoLaskujaLahetettyOikeanlainen());
     }
-    
+
     @Test
     public void onkoLaskujaLahetettyOikeanlainenToimiiOikeinVaarillaTiedoilla() {
         asiakas.setLaskujaLahetetty(-1);
@@ -173,76 +187,76 @@ public class AsiakasTest {
     public void onkoTiedotOikeanlaisetToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
     }
-    
+
     @Test
     public void onkoTiedotOikeanlaisetToimiiOikeinVaarillaTiedoilla() {
         asiakas.setNimi("");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setNimi("Elmeri");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
-        
+
         asiakas.setKatuosoite("");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setKatuosoite("Katu 1 A 86");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
-        
+
         asiakas.setPostinumero("r4");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setPostinumero("00123");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
-        
+
         asiakas.setKaupunki("");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setKaupunki("Elmericity");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
-        
+
         asiakas.setLaskujaLahetetty(-300);
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setLaskujaLahetetty(300);
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
-        
+
         asiakas.setAsiakasnumero("f");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
-        asiakas.setAsiakasnumero("1");
+        asiakas.setAsiakasnumero("10");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
     }
-    
+
     @Test
     public void equalsToimiiOikein() {
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setNimi("Elmeri Iivola");
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setNimi(asiakas.getNimi());
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setKatuosoite("Helmerinkatu 7");
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setKatuosoite(asiakas.getKatuosoite());
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setPostinumero("00987");
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setPostinumero(asiakas.getPostinumero());
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setKaupunki("Nuorgam");
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setKaupunki(asiakas.getKaupunki());
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setLaskujaLahetetty(700);
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setLaskujaLahetetty(asiakas.getLaskujaLahetetty());
         assertTrue(asiakas.equals(asiakas1));
-        
+
         asiakas1.setAsiakasnumero("1234");
         assertFalse(asiakas.equals(asiakas1));
         asiakas1.setAsiakasnumero(asiakas.getAsiakasnumero());
         assertTrue(asiakas.equals(asiakas1));
-        
+
     }
-    
+
     @Test
     public void hashCodeToimiiOikein() {
         int expected = asiakas.hashCode();
