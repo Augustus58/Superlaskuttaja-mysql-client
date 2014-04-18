@@ -242,6 +242,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
                 lataaja,
                 taulukko,
                 frame,
+                kuuntelija,
                 lukko,
                 pvmFormaatti);
         lisaa.addActionListener(muokkaaKuuntelija);

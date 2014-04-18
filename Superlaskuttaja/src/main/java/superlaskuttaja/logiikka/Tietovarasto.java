@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class Tietovarasto {
 
     private Laskuttaja laskuttaja;
-    private ArrayList<Asiakas> asiakkaat;
-    private ArrayList<Suorite> suoritteet;
-    private ArrayList<Lasku> laskut;
+    private final ArrayList<Asiakas> asiakkaat;
+    private final ArrayList<Suorite> suoritteet;
+    private final ArrayList<Lasku> laskut;
     private Boolean laskuttajaLisatty;
 
     public Tietovarasto() {
@@ -117,15 +117,15 @@ public class Tietovarasto {
      * ArrayList:nä.
      */
     public ArrayList<Suorite> asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(Asiakas asiakas, ArrayList<Suorite> suoritteet) {
-        ArrayList<Suorite> laskuttamattomatSuoritteet = new ArrayList<>();
+        ArrayList<Suorite> palautettavatSuoritteet = new ArrayList<>();
         for (int i = 0; i < this.getSuoritteet().size(); i++) {
             if (this.getSuoritteet().get(i).getAsiakas().equals(asiakas)) {
                 if (!this.getSuoritteet().get(i).getOnkoLaskutettu() || suoritteet.contains(this.getSuoritteet().get(i))) {
-                    laskuttamattomatSuoritteet.add(this.getSuoritteet().get(i));
+                    palautettavatSuoritteet.add(this.getSuoritteet().get(i));
                 }
             }
         }
-        return laskuttamattomatSuoritteet;
+        return palautettavatSuoritteet;
     }
 
     public void setLaskuttaja(Laskuttaja laskuttaja) {
