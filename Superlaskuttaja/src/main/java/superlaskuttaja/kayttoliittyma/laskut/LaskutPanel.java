@@ -69,13 +69,13 @@ public class LaskutPanel extends JPanel {
 
         JButton naytaKriteerinSisaltavatNappi = new JButton("Näytä kriteeritekstin sisältävät");
         naytaKriteerinSisaltavatNappi.setToolTipText("Näyttää kriteeritekstin sisältävät laskut kaikkien laskujen joukosta");
-//        AsiakkaatPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new AsiakkaatPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
-//        naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
+        LaskutPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new LaskutPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
+        naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
         ylaosa.add(naytaKriteerinSisaltavatNappi);
         
         JButton naytaKaikkiNappi = new JButton("Näytä kaikki laskut");
-//        AsiakkaatPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new AsiakkaatPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
-//        naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
+        LaskutPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new LaskutPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
+        naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
         ylaosa.add(naytaKaikkiNappi);
 
         return ylaosa;

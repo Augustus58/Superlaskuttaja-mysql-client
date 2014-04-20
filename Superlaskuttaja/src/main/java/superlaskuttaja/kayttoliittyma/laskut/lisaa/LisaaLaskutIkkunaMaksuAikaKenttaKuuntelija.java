@@ -50,19 +50,21 @@ public class LisaaLaskutIkkunaMaksuAikaKenttaKuuntelija implements DocumentListe
     }
 
     private void paivita(DocumentEvent e) {
-        if (tarkistin.koostuukoMerkkijonoNumeroista(maksuAikaKentta.getText())) {
-            if (tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(paivaysKentta.getText())) {
-                if (tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(paivaysKentta.getText())) {
-                    Calendar c = Calendar.getInstance();
-                    Date paivays = null;
-                    try {
-                        paivays = pvmFormaatti.parse(paivaysKentta.getText());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(LisaaLaskutIkkunaMaksuAikaKenttaKuuntelija.class.getName()).log(Level.SEVERE, null, ex);
+        if (maksuAikaKentta.getText().length() <= 6) {
+            if (tarkistin.koostuukoMerkkijonoNumeroista(maksuAikaKentta.getText())) {
+                if (tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(paivaysKentta.getText())) {
+                    if (tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(paivaysKentta.getText())) {
+                        Calendar c = Calendar.getInstance();
+                        Date paivays = null;
+                        try {
+                            paivays = pvmFormaatti.parse(paivaysKentta.getText());
+                        } catch (ParseException ex) {
+                            Logger.getLogger(LisaaLaskutIkkunaMaksuAikaKenttaKuuntelija.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        c.setTime(paivays);
+                        c.add(Calendar.DATE, Integer.parseInt(maksuAikaKentta.getText()));
+                        erapaivaKentta.setText(pvmFormaatti.format(c.getTime()));
                     }
-                    c.setTime(paivays);
-                    c.add(Calendar.DATE, Integer.parseInt(maksuAikaKentta.getText()));
-                    erapaivaKentta.setText(pvmFormaatti.format(c.getTime()));
                 }
             }
         }

@@ -29,14 +29,14 @@ import superlaskuttaja.logiikka.Viite;
  */
 public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
 
-    private LisaaLaskutIkkunaComboBoxKuuntelija comboBoxkuuntelija;
-    private LisaaLaskuIkkunaSuoritteetList suoritteetLista;
-    private JTextField paivaysKentta;
-    private JTextField maksuaikaKentta;
-    private JTextField erapaivaKentta;
-    private JTextField viivastyskorkoKentta;
-    private JTextField maksuehtoKentta;
-    private JTextField lisatiedotKentta;
+    private final LisaaLaskutIkkunaComboBoxKuuntelija comboBoxkuuntelija;
+    private final LisaaLaskuIkkunaSuoritteetList suoritteetLista;
+    private final JTextField paivaysKentta;
+    private final JTextField maksuaikaKentta;
+    private final JTextField erapaivaKentta;
+    private final JTextField viivastyskorkoKentta;
+    private final JTextField maksuehtoKentta;
+    private final JTextField lisatiedotKentta;
 
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
@@ -99,12 +99,13 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
                 throw new IllegalArgumentException("Ei valittuja suoritteita.");
             }
 
-            Double summa = 0.0;
+            double s = 0.0;
             for (int i = 0; i < suoritteet.size(); i++) {
-                summa = summa + suoritteet.get(i).getYht();
+                s = s + suoritteet.get(i).getYht();
             }
-            Integer eurot = summa.intValue();
-            if (!LaskunSumma.tarkistaEurot(eurot)) {
+            Double summa = s;
+            Integer eurot = summa.intValue(); 
+           if (!LaskunSumma.tarkistaEurot(eurot)) {
                 throw new IllegalArgumentException("Laskun summa on epäkelpo.");
             }
             Integer sentit = (int) Math.round((summa - summa.intValue()) * 100.0);
@@ -134,6 +135,8 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             if (!lasku.onkoMaksuehtoOikeanlainen()) {
                 throw new IllegalArgumentException("Syöte maksuehto on virheellinen.");
             }
+            
+            lasku.setMaksuaika(maksuaika);
 
             for (int i = 0; i < suoritteet.size(); i++) {
                 suoritteet.get(i).setLasku(lasku);

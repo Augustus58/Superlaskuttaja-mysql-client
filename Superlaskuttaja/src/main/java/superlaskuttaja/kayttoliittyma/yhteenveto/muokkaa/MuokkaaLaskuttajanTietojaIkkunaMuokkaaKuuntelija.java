@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
+import superlaskuttaja.kayttoliittyma.yhteenveto.lisaa.LisaaLaskuttajanTiedotIkkunaLisaaPoikkeusIkkuna;
 import superlaskuttaja.logiikka.Laskuttaja;
 import superlaskuttaja.logiikka.Lataaja;
 import superlaskuttaja.logiikka.Tilinumero;
@@ -21,18 +23,18 @@ import superlaskuttaja.logiikka.Tilinumero;
  */
 public class MuokkaaLaskuttajanTietojaIkkunaMuokkaaKuuntelija implements ActionListener {
 
-    private JTextField nimiKentta;
-    private JTextField katuosoiteKentta;
-    private JTextField postinumeroKentta;
-    private JTextField kaupunkiKentta;
-    private JTextField yritykseNimiTeksti;
-    private JTextField alvTunnisteKentta;
-    private JTextField tilinumeroKentta;
-    private JTextField tilinumeronPankkiKentta;
-    private JTextField tilinumeronSwiftBicKentta;
-    private JTextField puhelinnumeroKentta;
-    private JTextField sahkopostiKentta;
-    private JTextField laskujaLahetettyKentta;
+    private final JTextField nimiKentta;
+    private final JTextField katuosoiteKentta;
+    private final JTextField postinumeroKentta;
+    private final JTextField kaupunkiKentta;
+    private final JTextField yritykseNimiTeksti;
+    private final JTextField alvTunnisteKentta;
+    private final JTextField tilinumeroKentta;
+    private final JTextField tilinumeronPankkiKentta;
+    private final JTextField tilinumeronSwiftBicKentta;
+    private final JTextField puhelinnumeroKentta;
+    private final JTextField sahkopostiKentta;
+    private final JTextField laskujaLahetettyKentta;
     private final Lataaja lataaja;
     private final JFrame frame;
     private final NappulaLukko lukko;
@@ -59,30 +61,35 @@ public class MuokkaaLaskuttajanTietojaIkkunaMuokkaaKuuntelija implements ActionL
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        Tilinumero tilinumero = new Tilinumero(tilinumeroKentta.getText(), tilinumeronPankkiKentta.getText(), tilinumeronSwiftBicKentta.getText());
-        if (!tilinumero.tarkistaTilinumero(tilinumero.getTilinumero())) {
-            throw new IllegalArgumentException("Tilinumero on virheellinen.");
-        }
+        try {
+            Tilinumero tilinumero = new Tilinumero(tilinumeroKentta.getText(), tilinumeronPankkiKentta.getText(), tilinumeronSwiftBicKentta.getText());
+            if (!tilinumero.tarkistaTilinumero(tilinumero.getTilinumero())) {
+                throw new IllegalArgumentException("Tilinumero on virheellinen.");
+            }
 
-        Laskuttaja laskuttaja = new Laskuttaja(nimiKentta.getText(),
-                katuosoiteKentta.getText(),
-                postinumeroKentta.getText(),
-                kaupunkiKentta.getText(),
-                yritykseNimiTeksti.getText(),
-                alvTunnisteKentta.getText(),
-                tilinumero,
-                puhelinnumeroKentta.getText(),
-                sahkopostiKentta.getText(),
-                Integer.parseInt(laskujaLahetettyKentta.getText()));
+            Laskuttaja laskuttaja = new Laskuttaja(nimiKentta.getText(),
+                    katuosoiteKentta.getText(),
+                    postinumeroKentta.getText(),
+                    kaupunkiKentta.getText(),
+                    yritykseNimiTeksti.getText(),
+                    alvTunnisteKentta.getText(),
+                    tilinumero,
+                    puhelinnumeroKentta.getText(),
+                    sahkopostiKentta.getText(),
+                    Integer.parseInt(laskujaLahetettyKentta.getText()));
 
-        if (laskuttaja.onkoTiedotOikeanlaiset()) {
-            lataaja.getLadattuTietovarasto().setLaskuttaja(laskuttaja);
-        } else {
-            throw new IllegalArgumentException("Jokin syöte on virheellinen.");
+            if (laskuttaja.onkoTiedotOikeanlaiset()) {
+                lataaja.getLadattuTietovarasto().setLaskuttaja(laskuttaja);
+            } else {
+                throw new IllegalArgumentException("Jokin syöte on virheellinen.");
+            }
+            panel.setLaskuttajaOlemassa(true);
+            panel.paivitaSisalto();
+            suljeIkkuna();
+        } catch (Exception e) {
+            MuokkaaLaskuttajanTietojaIkkunaMuokkaaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaLaskuttajanTietojaIkkunaMuokkaaPoikkeusIkkuna();
+            SwingUtilities.invokeLater(poikkeusIkkuna);
         }
-        panel.setLaskuttajaOlemassa(true);
-        panel.paivitaSisalto();
-        suljeIkkuna();
     }
 
     private void suljeIkkuna() {

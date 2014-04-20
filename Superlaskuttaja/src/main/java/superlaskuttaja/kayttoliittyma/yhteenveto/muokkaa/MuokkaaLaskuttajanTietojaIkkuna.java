@@ -48,7 +48,8 @@ public class MuokkaaLaskuttajanTietojaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        frame.setAlwaysOnTop(true);
+        
         IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(kuuntelija);
 
@@ -72,62 +73,62 @@ public class MuokkaaLaskuttajanTietojaIkkuna implements Runnable {
         JLabel nimiTeksti1 = new JLabel("Vanha nimi:");
         JLabel nimiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getNimi());
         JLabel nimiTeksti = new JLabel("Uusi nimi:");
-        JTextField nimiKentta = new JTextField("1");
+        JTextField nimiKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getNimi());
 
         JLabel katuosoiteTeksti1 = new JLabel("Vanha katuosoite:");
         JLabel katuosoiteTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getKatuosoite());
         JLabel katuosoiteTeksti = new JLabel("Uusi katuosoite:");
-        JTextField katuosoiteKentta = new JTextField("1");
+        JTextField katuosoiteKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getKatuosoite());
 
         JLabel postinumeroTeksti1 = new JLabel("Vanha postinumero:");
         JLabel postinumeroTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getPostinumero());
         JLabel postinumeroTeksti = new JLabel("Uusi postinumero:");
-        JTextField postinumeroKentta = new JTextField("1");
+        JTextField postinumeroKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getPostinumero());
 
         JLabel kaupunkiTeksti1 = new JLabel("Vanha kaupunki:");
         JLabel kaupunkiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getKaupunki());
         JLabel kaupunkiTeksti = new JLabel("Uusi kaupunki");
-        JTextField kaupunkiKentta = new JTextField("1");
+        JTextField kaupunkiKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getKaupunki());
 
         JLabel yritykseNimiTeksti1 = new JLabel("Vanha yrityksen nimi:");
         JLabel yritykseNimiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getYrityksenNimi());
         JLabel yritykseNimiTeksti = new JLabel("Uusi yrityksen nimi:");
-        JTextField yritykseNimiKentta = new JTextField("1");
+        JTextField yritykseNimiKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getYrityksenNimi());
 
         JLabel alvTunnisteTeksti1 = new JLabel("Vanha alv-tunniste:");
         JLabel alvTunnisteTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getAlvTunniste());
         JLabel alvTunnisteTeksti = new JLabel("Uusi alv-tunniste:");
-        JTextField alvTunnisteKentta = new JTextField("1");
+        JTextField alvTunnisteKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getAlvTunniste());
 
         JLabel tilinumeroTeksti1 = new JLabel("Vanha tilinumero:");
         JLabel tilinumeroTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getTilinumero());
         JLabel tilinumeroTeksti = new JLabel("Uusi tilinumero:");
-        JTextField tilinumeroKentta = new JTextField("FI3936363002092492");
+        JTextField tilinumeroKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getTilinumero());
 
         JLabel tilinumeronPankkiTeksti1 = new JLabel("Vanha tilinumeron pankki:");
         JLabel tilinumeronPankkiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getPankki());
         JLabel tilinumeronPankkiTeksti = new JLabel("Uusi tilinumeron pankki:");
-        JTextField tilinumeronPankkiKentta = new JTextField("1");
+        JTextField tilinumeronPankkiKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getPankki());
 
         JLabel tilinumeronSwiftBicTeksti1 = new JLabel("Vanha tilinumeron Swift/BIC:");
         JLabel tilinumeronSwiftBicTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getSwiftBic());
         JLabel tilinumeronSwiftBicTeksti = new JLabel("Uusi tilinumeron Swift/BIC:");
-        JTextField tilinumeronSwiftBicKentta = new JTextField("1");
+        JTextField tilinumeronSwiftBicKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getTilinumero().getSwiftBic());
 
         JLabel puhelinnumeroTeksti1 = new JLabel("Vanha puhelinnumero:");
         JLabel puhelinnumeroTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getPuhelinnumero());
         JLabel puhelinnumeroTeksti = new JLabel("Uusi puhelinnumero:");
-        JTextField puhelinnumeroKentta = new JTextField("1");
+        JTextField puhelinnumeroKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getPostinumero());
 
         JLabel sahkopostiTeksti1 = new JLabel("Vanha sähköposti:");
         JLabel sahkopostiTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getSahkopostiOsoite());
         JLabel sahkopostiTeksti = new JLabel("Uusi sähköposti:");
-        JTextField sahkopostiKentta = new JTextField("asdasd@rfrf.com");
+        JTextField sahkopostiKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getSahkopostiOsoite());
 
-        JLabel laskujaLahetettyTeksti1 = new JLabel("Uusi laskuja lähetetty yht:");
+        JLabel laskujaLahetettyTeksti1 = new JLabel("Vanha laskuja lähetetty yht:");
         JLabel laskujaLahetettyTeksti2 = new JLabel(lataaja.getLadattuTietovarasto().getLaskuttaja().getLaskujaLahetetty().toString());
         JLabel laskujaLahetettyTeksti = new JLabel("Uusi laskuja lähetetty yht:");
-        JTextField laskujaLahetettyKentta = new JTextField("1");
+        JTextField laskujaLahetettyKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskuttaja().getLaskujaLahetetty().toString());
 
         JButton muokkaa = new JButton("Muokkaa");
         muokkaa.setAlignmentX(Component.CENTER_ALIGNMENT);

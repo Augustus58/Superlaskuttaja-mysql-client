@@ -61,7 +61,8 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        frame.setAlwaysOnTop(true);
+        
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
 
@@ -144,7 +145,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.insets = (new Insets(5, 5, 5, 0));
-        JTextField maksuaikaKentta = new JTextField("14", 20);
+        JTextField maksuaikaKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getMaksuaika().toString(), 20);
         MuokkaaLaskuaIkkunaMaksuAikaKenttaKuuntelija maksuAikaKenttaKuuntelija = new MuokkaaLaskuaIkkunaMaksuAikaKenttaKuuntelija();
         maksuaikaKentta.getDocument().addDocumentListener(maksuAikaKenttaKuuntelija);
         maksuAikaKenttaKuuntelija.setPaivaysKentta(paivaysKentta);

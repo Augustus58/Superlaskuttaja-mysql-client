@@ -31,15 +31,15 @@ import superlaskuttaja.logiikka.Viite;
  */
 public class MuokkaaLaskuaMuokkaaKuuntelija implements ActionListener {
 
-    private MuokkaaLaskuaIkkunaComboBoxKuuntelija comboBoxkuuntelija;
-    private MuokkaaLaskuaIkkunaSuoritteetList suoritteetLista;
-    private JTextField paivaysKentta;
-    private JTextField maksuaikaKentta;
-    private JTextField erapaivaKentta;
-    private JTextField viivastyskorkoKentta;
-    private JTextField maksuehtoKentta;
-    private JTextField lisatiedotKentta;
-    private JCheckBox onkoMaksettu;
+    private final MuokkaaLaskuaIkkunaComboBoxKuuntelija comboBoxkuuntelija;
+    private final MuokkaaLaskuaIkkunaSuoritteetList suoritteetLista;
+    private final JTextField paivaysKentta;
+    private final JTextField maksuaikaKentta;
+    private final JTextField erapaivaKentta;
+    private final JTextField viivastyskorkoKentta;
+    private final JTextField maksuehtoKentta;
+    private final JTextField lisatiedotKentta;
+    private final JCheckBox onkoMaksettu;
 
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
@@ -170,6 +170,8 @@ public class MuokkaaLaskuaMuokkaaKuuntelija implements ActionListener {
             } else {
                 lasku.setOnkoMaksettu(false);
             }
+            
+            lasku.setMaksuaika(maksuaika);
             
             lataaja.getLadattuTietovarasto().getLaskut().remove(kuuntelija.getPaivitettyArvo().intValue());
             lataaja.getLadattuTietovarasto().getLaskut().add(kuuntelija.getPaivitettyArvo(), lasku);

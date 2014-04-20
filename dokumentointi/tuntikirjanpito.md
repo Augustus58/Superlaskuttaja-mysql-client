@@ -41,3 +41,5 @@
 - **12.4.2014 6h** Käyttöliitymän bugien liiskaamista. Käyttöliittymän laskut-osion hiomista. Huomattu, että Date ei ole hyvä tyyppi, jos haluaa sorttailla päivämääriä kunnolla taulukoissa. Vaihdettu tyyppi Date tyyppiin GregorianCalendar mm. luokassa Lasku. Refaktoroitu testejä. Refaktoroitu koodia sieltä täältä.
 - **18.4.2014 6h** Uudelleennimetty projekti nimellä Superlaskuttaja. Uudelleennimetty paketit muotoa "virtuaaliviivakoodigeneraattori.virtuaaliviivakoodigeneraattori" muotoon "superlaskuttaja". Aloitettu laskut-osion muokkaa-ominaisuuden tekeminen.
 - **18.4.2014 2h** Tehty ensimmäinen versio käyttöliittymän laskut-osion muokkaa-ominaisuudesta valmiiksi.
+- **19.4.2014 6h** Käyttöliittymän bugien liiskaamista ja kehittämistä.
+- **20.4.2014 0,1h** Luokan LaskunSumma ToString-metodin bugin korjaaminen. Antoi vääränlaisen merkkijonon, jos senttejä oli vähemmän kuin 10.

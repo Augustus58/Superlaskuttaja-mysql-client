@@ -24,6 +24,10 @@ public class Lasku {
 
     private GregorianCalendar paivays;
     /**
+     * Maksuaika päivissä.
+     */
+    private Integer maksuaika;
+    /**
      * Tämä numerointi koskee kaikkia laskuja. Eli kaikkien asiakkaiden laskut
      * samalla juoksevalla numeroinnilla.
      */
@@ -130,6 +134,10 @@ public class Lasku {
         return maksettuTeksti;
     }
 
+    public Integer getMaksuaika() {
+        return maksuaika;
+    }
+    
     /**
      * Metodi antaa laskun tiedot taulukossa.
      * <p>
@@ -154,6 +162,10 @@ public class Lasku {
         this.paivays = paivays;
     }
 
+    public void setMaksuaika(Integer maksuaika) {
+        this.maksuaika = maksuaika;
+    }
+    
     public void setLaskunNumero(Integer laskunNumero) {
         this.laskunNumero = laskunNumero;
     }
@@ -192,6 +204,7 @@ public class Lasku {
 
     public void setOnkoMaksettu(Boolean onkoMaksettu) {
         this.onkoMaksettu = onkoMaksettu;
+        paivitaMaksettuTeksti();
     }
 
     /**

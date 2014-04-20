@@ -52,6 +52,7 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setAlwaysOnTop(true);
         
         IkkunaKuuntelija ikkinaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkinaKuuntelija);
