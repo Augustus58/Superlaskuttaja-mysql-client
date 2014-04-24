@@ -5,16 +5,7 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.Laskuttaja;
-import superlaskuttaja.logiikka.Lasku;
-import superlaskuttaja.logiikka.Viite;
-import superlaskuttaja.logiikka.Pankkiviivakoodi;
-import superlaskuttaja.logiikka.Asiakas;
-import superlaskuttaja.logiikka.Suorite;
-import superlaskuttaja.logiikka.LaskunSumma;
-import superlaskuttaja.logiikka.Tilinumero;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,15 +22,15 @@ public class SuoriteTest {
 
     Asiakas asiakas;
     Asiakas asiakas1;
-    Date date;
-    Date date1;
+    GregorianCalendar date;
+    GregorianCalendar date1;
     Suorite suorite;
     Suorite suorite1;
     
     Asiakas asiakas2;
     Asiakas asiakas3;
-    Date date2;
-    Date date3;
+    GregorianCalendar date2;
+    GregorianCalendar date3;
     Suorite suorite2;
     Suorite suorite3;
 
@@ -67,15 +58,15 @@ public class SuoriteTest {
         //Asetetaan suorite-oliolle sellaiset tiedot, joiden pitäisi olla oikeanlaiset.
         asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
         asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        date = new Date(2014 - 1900, 4 - 1, 2);
-        date1 = new Date(2014 - 1900, 4 - 1, 2);
+        date = new GregorianCalendar(2014, 4 - 1, 2);
+        date1 = new GregorianCalendar(2014, 4 - 1, 2);
         suorite = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
         suorite1 = new Suorite(asiakas1, "Kuvaus", date1, 2.0, "h", 75.0, 24);
         
         asiakas2 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
         asiakas3 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
-        date2 = new Date(2010 - 1900, 4 - 1, 4);
-        date3 = new Date(2010 - 1900, 4 - 1, 4);
+        date2 = new GregorianCalendar(2010, 4 - 1, 4);
+        date3 = new GregorianCalendar(2010, 4 - 1, 4);
         suorite2 = new Suorite(asiakas2, "Kuvaus", date2, 1.0, "h", 72.0, 25);
         suorite3 = new Suorite(asiakas3, "Kuvaus", date3, 1.0, "h", 72.0, 25);
 

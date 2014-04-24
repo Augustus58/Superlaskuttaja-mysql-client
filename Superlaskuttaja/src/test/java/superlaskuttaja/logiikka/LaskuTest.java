@@ -5,14 +5,6 @@ package superlaskuttaja.logiikka;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import superlaskuttaja.logiikka.Laskuttaja;
-import superlaskuttaja.logiikka.Lasku;
-import superlaskuttaja.logiikka.Viite;
-import superlaskuttaja.logiikka.Pankkiviivakoodi;
-import superlaskuttaja.logiikka.Asiakas;
-import superlaskuttaja.logiikka.Suorite;
-import superlaskuttaja.logiikka.LaskunSumma;
-import superlaskuttaja.logiikka.Tilinumero;
 import java.util.ArrayList;
 import static java.util.Calendar.DAY_OF_MONTH;
 import java.util.Date;
@@ -32,8 +24,8 @@ public class LaskuTest {
 
     Asiakas asiakas;
     Asiakas asiakas1;
-    Date date;
-    Date date1;
+    GregorianCalendar date;
+    GregorianCalendar date1;
     Suorite suorite;
     Suorite suorite1;
     Suorite suorite2;
@@ -71,8 +63,8 @@ public class LaskuTest {
     public void setUp() {
         asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
         asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        date = new Date(2014 - 1900, 4 - 1, 2);
-        date1 = new Date(2014 - 1900, 4 - 1, 2);
+        date = new GregorianCalendar(2014, 4 - 1, 2);
+        date1 = new GregorianCalendar(2014, 4 - 1, 2);
         suorite = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
         suorite1 = new Suorite(asiakas1, "Kuvaus", date1, 2.0, "h", 75.0, 24);
         suorite2 = new Suorite(asiakas1, "Eri kuvaus", date1, 2.0, "h", 75.0, 24);

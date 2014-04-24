@@ -43,3 +43,5 @@
 - **18.4.2014 2h** Tehty ensimmäinen versio käyttöliittymän laskut-osion muokkaa-ominaisuudesta valmiiksi.
 - **19.4.2014 6h** Käyttöliittymän bugien liiskaamista ja kehittämistä.
 - **20.4.2014 0,1h** Luokan LaskunSumma ToString-metodin bugin korjaaminen. Antoi vääränlaisen merkkijonon, jos senttejä oli vähemmän kuin 10.
+- **21.4.2014 0,5h** Laskut-osion muokkaa-ominaisuuden bugien metsästystä ja korjaamista. Nyt ei pitäisi pystyä olemaan suoritteita, jotka on merkitty laskutetuiksi mutta jotka eivät ole millään laskulla..
+- **24.4.2014 1h** Debuggaamista ja kovaa yritystä saada tehtyä toimiva jar huomista demoamista varten..

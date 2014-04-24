@@ -107,6 +107,9 @@ public class LaskunSumma {
      */
     @Override
     public String toString() {
+        if (eurot == 0 && sentit == 0) {
+            return ("0.0");
+        }
         if (sentit >= 10) {
             return (eurot.toString() + "." + sentit.toString());
         } else {

@@ -20,12 +20,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class LaskutTaulukko {
 
-    private LaskutTaulukkoJTable taulukko;
-    private TableModelSolujenMuokkaaminenEstetty model;
-    private ListSelectionModel selectionModel;
-    private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
-    private GregorianCalendarRenderer dateRenderer;
-    private Lataaja lataaja;
+    private final LaskutTaulukkoJTable taulukko;
+    private final TableModelSolujenMuokkaaminenEstetty model;
+    private final ListSelectionModel selectionModel;
+    private final TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
+    private final GregorianCalendarRenderer dateRenderer;
+    private final Lataaja lataaja;
 
     public LaskutTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;

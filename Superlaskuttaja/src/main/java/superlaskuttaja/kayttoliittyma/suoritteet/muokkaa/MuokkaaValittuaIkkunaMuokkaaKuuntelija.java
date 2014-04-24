@@ -7,7 +7,7 @@ package superlaskuttaja.kayttoliittyma.suoritteet.muokkaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -38,7 +38,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final NappulaLukko lukko;
     private final ComboBoxKuuntelija comboBoxKuuntelija;
     private final TaulukkoValintaKuuntelija taulukkoKuuntelija;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public MuokkaaValittuaIkkunaMuokkaaKuuntelija(JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko, ComboBoxKuuntelija comboBoxKuuntelija, TaulukkoValintaKuuntelija taulukkoKuuntelija) {
         this.kuvausKentta = kuvausKentta;
@@ -73,7 +73,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
             Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
             Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
-            Date date = new Date(vuosi - 1900, kuukausi - 1, paiva);
+            GregorianCalendar date = new GregorianCalendar(vuosi, kuukausi - 1, paiva);
 
             Suorite suorite = new Suorite(suoritteenAsiakas,
                     kuvausKentta.getText(),

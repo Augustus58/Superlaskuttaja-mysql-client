@@ -141,6 +141,7 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             for (int i = 0; i < suoritteet.size(); i++) {
                 suoritteet.get(i).setLasku(lasku);
             }
+            
             lataaja.getLadattuTietovarasto().getLaskuttaja().kasvataLahetettyjenLaskujenMaaraaYhdella();
             lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).kasvataLahetettyjenLaskujenMaaraaYhdella();
             lataaja.getLadattuTietovarasto().getLaskut().add(lasku);

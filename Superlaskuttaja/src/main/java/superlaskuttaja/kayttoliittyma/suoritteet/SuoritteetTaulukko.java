@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import superlaskuttaja.kayttoliittyma.GregorianCalendarRenderer;
 import superlaskuttaja.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
 import superlaskuttaja.logiikka.Lataaja;
 import superlaskuttaja.logiikka.Suorite;
@@ -19,11 +20,12 @@ import superlaskuttaja.logiikka.Suorite;
  */
 public class SuoritteetTaulukko {
 
-    private JTable taulukko;
-    private TableModelSolujenMuokkaaminenEstetty model;
-    private ListSelectionModel selectionModel;
-    private TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
-    private Lataaja lataaja;
+    private final JTable taulukko;
+    private final TableModelSolujenMuokkaaminenEstetty model;
+    private final ListSelectionModel selectionModel;
+    private final TableRowSorter<TableModelSolujenMuokkaaminenEstetty> sorter;
+    private final GregorianCalendarRenderer dateRenderer;
+    private final Lataaja lataaja;
 
     public SuoritteetTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
@@ -34,6 +36,8 @@ public class SuoritteetTaulukko {
         this.taulukko.setRowSorter(sorter);
         this.selectionModel = this.taulukko.getSelectionModel();
         this.selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.dateRenderer = new GregorianCalendarRenderer();
+        this.taulukko.getColumnModel().getColumn(2).setCellRenderer(dateRenderer);
         muodostaSuoritteetTaulukko();
     }
 

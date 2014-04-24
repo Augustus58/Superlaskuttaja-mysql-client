@@ -6,7 +6,7 @@
 package superlaskuttaja.logiikka;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Luokan ilmentymään voi tallettaa yhden suoritteen tiedot. Luokka tarjoaa
@@ -18,7 +18,7 @@ public class Suorite {
 
     private Asiakas asiakas;
     private String kuvaus;
-    private Date pvm;
+    private GregorianCalendar pvm;
     private Double maara;
     private String maaranYksikot;
     private Double aHinta;
@@ -31,7 +31,7 @@ public class Suorite {
     private final SimpleDateFormat pvmFormaatti;
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
-    public Suorite(Asiakas asiakas, String kuvaus, Date pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti) {
+    public Suorite(Asiakas asiakas, String kuvaus, GregorianCalendar pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti) {
         this.asiakas = asiakas;
         this.kuvaus = kuvaus;
         this.pvm = pvm;
@@ -57,7 +57,7 @@ public class Suorite {
      * @return Suoritteen tiedot taulukossa.
      */
     public Object[] suoritteenTiedotTaulukossa() {
-        return (new Object[]{asiakas.getNimi(), kuvaus, pvmFormaatti.format(pvm), maara, maaranYksikot, aHinta, alvProsentti, alv, yht, laskutettuTeksti});
+        return (new Object[]{asiakas.getNimi(), kuvaus, pvm, maara, maaranYksikot, aHinta, alvProsentti, alv, yht, laskutettuTeksti});
     }
 
     public Asiakas getAsiakas() {
@@ -68,7 +68,7 @@ public class Suorite {
         return kuvaus;
     }
 
-    public Date getPvm() {
+    public GregorianCalendar getPvm() {
         return pvm;
     }
 
@@ -125,7 +125,7 @@ public class Suorite {
 
     @Override
     public String toString() {
-        return (kuvaus + "  " + pvmFormaatti.format(pvm) + "  " + maara + maaranYksikot);
+        return (kuvaus + "  " + pvmFormaatti.format(pvm.getTime()) + "  " + maara + maaranYksikot);
     }
 
     public void setAsiakas(Asiakas asiakas) {
@@ -136,7 +136,7 @@ public class Suorite {
         this.kuvaus = kuvaus;
     }
 
-    public void setPvm(Date pvm) {
+    public void setPvm(GregorianCalendar pvm) {
         this.pvm = pvm;
     }
 

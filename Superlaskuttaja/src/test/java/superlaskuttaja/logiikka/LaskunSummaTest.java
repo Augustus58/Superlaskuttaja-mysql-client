@@ -107,7 +107,7 @@ public class LaskunSummaTest {
         assertEquals("0.0", summa.toString());
         summa.setEurot(5);
         summa.setSentit(5);
-        assertEquals("5.5", summa.toString());
+        assertEquals("5.05", summa.toString());
         summa.setEurot(55);
         summa.setSentit(55);
         assertEquals("55.55", summa.toString());

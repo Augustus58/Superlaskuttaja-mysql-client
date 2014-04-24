@@ -231,7 +231,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
 
         JButton lisaa = new JButton("Muokkaa");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
-        MuokkaaLaskuaMuokkaaKuuntelija muokkaaKuuntelija = new MuokkaaLaskuaMuokkaaKuuntelija(comboBoxkuuntelija,
+        MuokkaaLaskuaIkkunaMuokkaaKuuntelija muokkaaKuuntelija = new MuokkaaLaskuaIkkunaMuokkaaKuuntelija(comboBoxkuuntelija,
                 suoritteetLista,
                 paivaysKentta,
                 maksuaikaKentta,

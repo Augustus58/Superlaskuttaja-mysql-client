@@ -7,7 +7,7 @@ package superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -36,7 +36,7 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
     private final JFrame frame;
     private final NappulaLukko lukko;
     private final ComboBoxKuuntelija kuuntelija;
-    private MerkkiJaMerkkijonoTarkistin tarkistin;
+    private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public LisaaSuoriteValitustaIkkunaLisaaKuuntelija(ComboBoxKuuntelija kuuntelija, JTextField kuvausKentta, JTextField pvmKentta, JTextField maaraKentta, JTextField maaranYksikotKentta, JTextField aHintaKentta, JTextField alvProsKentta, Lataaja lataaja, SuoritteetTaulukko taulukko, JFrame frame, NappulaLukko lukko) {
         this.kuvausKentta = kuvausKentta;
@@ -70,7 +70,7 @@ public class LisaaSuoriteValitustaIkkunaLisaaKuuntelija implements ActionListene
             Integer vuosi = Integer.parseInt(pvmKentta.getText().substring(6, 10));
             Integer kuukausi = Integer.parseInt(pvmKentta.getText().substring(3, 5));
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
-            Date date = new Date(vuosi - 1900, kuukausi - 1, paiva);
+            GregorianCalendar date = new GregorianCalendar(vuosi, kuukausi - 1, paiva);
 
             Suorite suorite = new Suorite(suoritteenAsiakas,
                     kuvausKentta.getText(),
