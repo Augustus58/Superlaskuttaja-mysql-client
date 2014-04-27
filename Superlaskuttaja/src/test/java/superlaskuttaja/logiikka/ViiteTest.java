@@ -5,7 +5,6 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.Viite;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -64,6 +63,8 @@ public class ViiteTest {
     public void onkoViiteKelvollinenToimiiOikein() {
         assertTrue(viite.onkoViiteKelvollinen("123"));
         assertTrue(viite.onkoViiteKelvollinen("123456"));
+        assertTrue(viite.onkoViiteKelvollinen("12304056"));
+        assertTrue(viite.onkoViiteKelvollinen("1200304506"));
         assertTrue(viite.onkoViiteKelvollinen("1231231231231231231"));
         
         assertFalse(viite.onkoViiteKelvollinen("1"));
@@ -71,9 +72,29 @@ public class ViiteTest {
         assertFalse(viite.onkoViiteKelvollinen("12312312312312312312"));
         assertFalse(viite.onkoViiteKelvollinen("123123123123123123124"));
         
+        assertFalse(viite.onkoViiteKelvollinen("01"));
+        assertFalse(viite.onkoViiteKelvollinen("0012"));
+        assertFalse(viite.onkoViiteKelvollinen("0134345"));
+        assertFalse(viite.onkoViiteKelvollinen("00145452"));
+        assertFalse(viite.onkoViiteKelvollinen("0012312312312312312312"));
+        assertFalse(viite.onkoViiteKelvollinen("00123123123123123123124"));
+        
         assertFalse(viite.onkoViiteKelvollinen("12a"));
         assertFalse(viite.onkoViiteKelvollinen("31t234"));
         assertFalse(viite.onkoViiteKelvollinen("1231231231231231-31"));
+    }
+    
+    @Test
+    public void onkoViiteValidiToimiiOikein() {
+        assertTrue(Viite.onkoViiteValidi("123453"));
+        assertTrue(Viite.onkoViiteValidi("1232"));
+        assertTrue(Viite.onkoViiteValidi("12345678910111213142"));
+        assertTrue(Viite.onkoViiteValidi("100832"));
+        
+        assertFalse(Viite.onkoViiteValidi("1234533"));
+        assertFalse(Viite.onkoViiteValidi("1231"));
+        assertFalse(Viite.onkoViiteValidi("12345678917111213142"));
+        assertFalse(Viite.onkoViiteValidi("100812"));
     }
     
     @Test

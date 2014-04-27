@@ -19,7 +19,13 @@ import java.util.GregorianCalendar;
  */
 public class Pankkiviivakoodi {
 
+    /**
+     * Pankkiviivakoodi aloituksella ja lopetuksella ("105" ja "106").
+     */
     private final String pankkiviivakoodi;
+    /**
+     * Pvm-formaatti, jota käytetään pankkiviivakoodin muodostamiseen.
+     */
     private final SimpleDateFormat paivamaaraFormaatti;
 
     public Pankkiviivakoodi(Tilinumero tilinumero, LaskunSumma laskunSumma, Viite viite, GregorianCalendar erapaiva) {
@@ -107,13 +113,13 @@ public class Pankkiviivakoodi {
      */
     public static Boolean onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi(String pankkiviivakoodiIlmanAloitustaJaLopetusta) {
         MerkkiJaMerkkijonoTarkistin tarkistin = new MerkkiJaMerkkijonoTarkistin();
-        if (pankkiviivakoodiIlmanAloitustaJaLopetusta.length() != 54) {
+        if (pankkiviivakoodiIlmanAloitustaJaLopetusta.length() != 56) {
             return false;
         }
         if (!tarkistin.koostuukoMerkkijonoNumeroista(pankkiviivakoodiIlmanAloitustaJaLopetusta)) {
             return false;
         }
-        String uudelleenMuodostettuKoodi = muodostaPankkiviivakoodi("105" + pankkiviivakoodiIlmanAloitustaJaLopetusta.substring(0, 56));
+        String uudelleenMuodostettuKoodi = muodostaPankkiviivakoodi("105" + pankkiviivakoodiIlmanAloitustaJaLopetusta.substring(0, 54));
         if (!uudelleenMuodostettuKoodi.substring(3, uudelleenMuodostettuKoodi.length() - 3).equals(pankkiviivakoodiIlmanAloitustaJaLopetusta)) {
             return false;
         }

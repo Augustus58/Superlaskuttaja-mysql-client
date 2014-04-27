@@ -15,7 +15,14 @@ import org.apache.commons.validator.GenericValidator;
  */
 public class MerkkiJaMerkkijonoTarkistin {
 
+    /**
+     * Isot aakkoset A-Z käytettäväksi mm. metodissa onkoMerkkiKirjainAZ.
+     */
     private final String isotAakkosetAZ;
+    /**
+     * Numerot 0-9 ja välilyönti " " käytettäviksi mm. metodissa
+     * onkoMerkkiNumeroValiviivaTaiValilyonti.
+     */
     private final String numerotValiviivaJaValilyonti;
 
     public MerkkiJaMerkkijonoTarkistin() {

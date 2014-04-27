@@ -5,7 +5,6 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.Asiakas;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -220,6 +219,11 @@ public class AsiakasTest {
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setAsiakasnumero("10");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
+    }
+    
+    @Test
+    public void annaLaskujaLahetettyPlusYksiToimiiOikein() {
+        assertEquals(asiakas.getLaskujaLahetetty().intValue() + 1, asiakas.annaLaskujaLahetettyPlusYksi().intValue());
     }
 
     @Test

@@ -16,7 +16,13 @@ package superlaskuttaja.logiikka;
  */
 public class LaskunSumma {
 
+    /**
+     * Summan eurot. Esim. 456.
+     */
     private Integer eurot;
+    /**
+     * Summan sentit. Esim. 1, 99 tai 55.
+     */
     private Integer sentit;
 
     public LaskunSumma(Integer eurot, Integer sentit) {

@@ -18,7 +18,13 @@ import java.util.ArrayList;
  */
 public class Viite {
 
+    /**
+     * Viitteen viite tarkisteella merkkijonona.
+     */
     private String viiteTarkisteella;
+    /**
+     * Tarkistin, jolla voidaan tarkistaa viitteen tietojen oikeanlaisuuksia.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     /**
@@ -39,7 +45,10 @@ public class Viite {
      * @return Tieto viitteen ilman tarkistetta oikeanlaisuudesta.
      */
     public Boolean onkoViiteKelvollinen(String viiteIlmanTarkistetta) {
-        if (viiteIlmanTarkistetta.length() < 3 || viiteIlmanTarkistetta.length() > 19) {
+        if (viiteIlmanTarkistetta.isEmpty() || viiteIlmanTarkistetta.length() < 3 || viiteIlmanTarkistetta.length() > 19) {
+            return false;
+        }
+        if (this.tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla(viiteIlmanTarkistetta)) {
             return false;
         }
         for (int i = 0; i < viiteIlmanTarkistetta.length(); i++) {
@@ -49,7 +58,7 @@ public class Viite {
         }
         return true;
     }
-    
+
     /**
      * Metodi kertoo onko tarkisteellinen viite validi.
      *

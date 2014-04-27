@@ -14,6 +14,9 @@ package superlaskuttaja.logiikka;
  */
 public class Lataaja {
     
+    /**
+     * Tietovarasto, jonka lataaja voi ladata käytettäväksi ohjelmassa.
+     */
     private final Tietovarasto ladattuTietovarasto;
 
     public Lataaja() {

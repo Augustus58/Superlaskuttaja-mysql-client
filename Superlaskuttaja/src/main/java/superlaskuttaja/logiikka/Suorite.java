@@ -16,19 +16,67 @@ import java.util.GregorianCalendar;
  */
 public class Suorite {
 
+    /**
+     * Suoritteen asiakas.
+     */
     private Asiakas asiakas;
+    /**
+     * Suoritteen kuvaus.
+     */
     private String kuvaus;
+    /**
+     * Suoritteen pvm.
+     */
     private GregorianCalendar pvm;
+    /**
+     * Suoritteen suorituksen määrä.
+     */
     private Double maara;
+    /**
+     * Suoritteen määrän yksiköt.
+     */
     private String maaranYksikot;
+    /**
+     * Yhtä yksikköä vastaava hinta.
+     */
     private Double aHinta;
-    private Integer alvProsentti; // Esim 24.
+    /**
+     * Suoritteen alv-prosentti. Riippuu suoritteen (esim. seinän maalaaminen)
+     * muodostumishetkellä voimassa olevista verolaeista. Esim. 24.
+     */
+    private Integer alvProsentti;
+    /**
+     * Suoritteen alv yht.
+     */
     private Double alv;
+    /**
+     * Suoritteen yhteishinta (alv mukana).
+     */
     private Double yht;
+    /**
+     * Tieto siitä, että onko suorite laskutettu vai ei.
+     */
     private Boolean onkoLaskutettu;
+    /**
+     * laskutettuTeksti riippuu tiedosta, että onko suorite laskutettu vai ei
+     * (eli onko se jollain laskulla). Jos suorite on laskutettu, niin teksti on
+     * "Laskulla (kys. laskun numero)". Jos ei ole laskutettu niin teksti on
+     * "Ei".
+     */
     private String laskutettuTeksti;
+    /**
+     * Suoritteeseen liittyvä lasku. Tämä on tiedossa vain, jos suorite on
+     * laskutettu.
+     */
     private Lasku lasku;
+    /**
+     * Pvm-formaatti, jota tarvitaan mm. suoritteen tietojen esittämiseen.
+     */
     private final SimpleDateFormat pvmFormaatti;
+    /**
+     * Tarkistin, jota käytetään suoritteen tietojen oikeanlaisuuden
+     * tarkistamiseen.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Suorite(Asiakas asiakas, String kuvaus, GregorianCalendar pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti) {
@@ -156,6 +204,14 @@ public class Suorite {
         this.alvProsentti = alvProsentti;
     }
 
+    /**
+     * Tällä metodilla voidaan asettaa suoritteeseen liittyvä lasku.
+     * <p>
+     * Samalla asetetetaan attribuutti onkoLaskutettu todeksi ja suoritetaan
+     * metodi paivitaLaskutettuTeksti.
+     *
+     * @param lasku Lasku, joka halutaan asettaa suoritteeseen liittyväksi.
+     */
     public void setLasku(Lasku lasku) {
         this.lasku = lasku;
         onkoLaskutettu = true;

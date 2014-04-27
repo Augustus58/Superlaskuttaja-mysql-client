@@ -20,8 +20,13 @@ public class Lasku {
      * Tieto tilinumerosta tulee tätä kautta.
      */
     private Laskuttaja laskuttaja;
+    /**
+     * Laskun asiakas.
+     */
     private Asiakas asiakas;
-
+    /**
+     * Laskun päiväys.
+     */
     private GregorianCalendar paivays;
     /**
      * Maksuaika päivissä.
@@ -32,27 +37,52 @@ public class Lasku {
      * samalla juoksevalla numeroinnilla.
      */
     private Integer laskunNumero;
+    /**
+     * Laskun eräpäivä.
+     */
     private GregorianCalendar erapaiva;
     /**
-     * Esim. 8.
+     * Laskun viivästyskorko. Esim. 8.
      */
     private Integer viivastyskorko;
+    /**
+     * Laskun viite tarkisteella.
+     */
     private Viite viiteTarkisteella;
+    /**
+     * Laskun maksuehto. Esim. 14 päivää netto.
+     */
     private String maksuehto;
-
+    /**
+     * Laskuun liittyvät suoritteet.
+     */
     private ArrayList<Suorite> suoritteet;
+    /**
+     * Laskun lisätiedot.
+     */
     private String lisatiedot;
     /**
-     * Käytetty omaa luokkaa (LaskunSumma), koska mm. pankkiviivakoodin
-     * (=virtuaaliviivakoodi) standardit vaativat tietyt rajat euroille ja
-     * senteille. 0<=eurot<=999999. 0<=sentit<=99.
+     * Laskun summa. Käytetty omaa luokkaa (LaskunSumma), koska mm.
+     * pankkiviivakoodin (=virtuaaliviivakoodi) standardit vaativat tietyt rajat
+     * euroille ja senteille. 0<=eurot<=999999. 0<=sentit<=99.
      */
     private LaskunSumma summa;
+    /**
+     * Laskun tietojen pohjalta muodostettu pankkiviivakoodi.
+     */
     private Pankkiviivakoodi pankkiviivakoodi;
-
+    /**
+     * Tieto siitä, että onko laskun asiakas maksanut kys. laskun.
+     */
     private Boolean onkoMaksettu;
+    /**
+     * Maksettuteksti tulee olla "Ei", jos laskua ei ole maksettu ja "Kyllä" jos
+     * on maksettu.
+     */
     private String maksettuTeksti;
-
+    /**
+     * Tarkistin laskun tietojen oikeanlaisuuden varmistamiseen.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Lasku(Laskuttaja laskuttaja, Asiakas asiakas, GregorianCalendar paivays, Integer laskunNumero, GregorianCalendar erapaiva, Integer viivastyskorko, Viite viiteTarkisteella, String maksuehto, ArrayList<Suorite> suoritteet, String lisatiedot, LaskunSumma summa, Pankkiviivakoodi pankkiviivakoodi) {
@@ -137,7 +167,7 @@ public class Lasku {
     public Integer getMaksuaika() {
         return maksuaika;
     }
-    
+
     /**
      * Metodi antaa laskun tiedot taulukossa.
      * <p>
@@ -165,7 +195,7 @@ public class Lasku {
     public void setMaksuaika(Integer maksuaika) {
         this.maksuaika = maksuaika;
     }
-    
+
     public void setLaskunNumero(Integer laskunNumero) {
         this.laskunNumero = laskunNumero;
     }
@@ -202,6 +232,15 @@ public class Lasku {
         this.pankkiviivakoodi = pankkiviivakoodi;
     }
 
+    /**
+     * Metodilla voidaan asettaa tieto siitä, että onko kys. lasku maksettu.
+     * <p>
+     * Kun tämä metodi suoritetaan, niin samalla suoritetaan metodi
+     * paivitaMaksettuTeksti.
+     *
+     * @param onkoMaksettu Haluttu totuusarvo asetettavaksi tiedoksi siitä, että
+     * onko lasku maksettu.
+     */
     public void setOnkoMaksettu(Boolean onkoMaksettu) {
         this.onkoMaksettu = onkoMaksettu;
         paivitaMaksettuTeksti();

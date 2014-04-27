@@ -13,16 +13,49 @@ package superlaskuttaja.logiikka;
  */
 public class Laskuttaja {
 
+    /**
+     * Laskuttajan nimi.
+     */
     private String nimi;
+    /**
+     * Laskuttajan katuosoite.
+     */
     private String katuosoite;
+    /**
+     * Laskuttajan postinumero.
+     */
     private String postinumero;
+    /**
+     * Laskuttajan kaupunki.
+     */
     private String kaupunki;
+    /**
+     * Laskuttajan yrityksen nimi.
+     */
     private String yrityksenNimi;
+    /**
+     * Laskuttajan yrityksen alv-tunniste.
+     */
     private String alvTunniste;
+    /**
+     * Laskuttajan tilinumero.
+     */
     private Tilinumero tilinumero;
+    /**
+     * Laskuttajan puhelinnumero.
+     */
     private String puhelinnumero;
+    /**
+     * Laskuttajan sähköpostiosoite.
+     */
     private String sahkopostiOsoite;
+    /**
+     * Tieto laskuttajan lähetettyjen laskujen määrästä.
+     */
     private Integer laskujaLahetetty;
+    /**
+     * Tarkistin, jolla voidaan tarkistaa laskuttajan tietojen oikeanlaisuus.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Laskuttaja(String nimi, String katuosoite, String postinumero, String kaupunki, String yrityksenNimi, String alvTunniste, Tilinumero tilinumero, String puhelinnumero, String sahkopostiOsoite, Integer laskujaLahetetty) {

@@ -5,7 +5,6 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.MerkkiJaMerkkijonoTarkistin;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -186,5 +185,21 @@ public class MerkkiJaMerkkijonoTarkistinTest {
         assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("30.02.2004"));
         assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("29.02.2003"));
         assertFalse(tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi("29.02.2005"));
+    }
+    
+    @Test
+    public void onkoMerkkijononEnsimmainenMerkkiNollaToimiiOikein() {
+        assertTrue(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("0"));
+        assertTrue(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("00"));
+        assertTrue(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("0i34yjcr8jy"));
+        assertTrue(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("000983j4cr83hy"));
+        
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla(""));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("10"));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("_0k945ctu"));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla(" 0kjeirufxi"));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("111111"));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("kissa"));
+        assertFalse(tarkistin.onkoMerkkijononEnsimmainenMerkkiNolla("koira"));
     }
 }

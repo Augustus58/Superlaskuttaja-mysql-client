@@ -15,10 +15,25 @@ import java.util.ArrayList;
  */
 public class Tietovarasto {
 
+    /**
+     * Tietovarastoon liittyvä laskuttaja.
+     */
     private Laskuttaja laskuttaja;
+    /**
+     * Tietovaraston asiakkaat.
+     */
     private final ArrayList<Asiakas> asiakkaat;
+    /**
+     * Tietovaraston suoritteet.
+     */
     private final ArrayList<Suorite> suoritteet;
+    /**
+     * Tietovaraston laskut.
+     */
     private final ArrayList<Lasku> laskut;
+    /**
+     * Tieto siitä, onko laskuttaja lisätty vai ei.
+     */
     private Boolean laskuttajaLisatty;
 
     public Tietovarasto() {
@@ -128,6 +143,13 @@ public class Tietovarasto {
         return palautettavatSuoritteet;
     }
 
+    /**
+     * Metodilla voidaan asettaa tietovarastoon liittyvä laskuttaja.
+     * <p>
+     * Samalla asetetetaan attribuutti laskuttajaLisatty todeksi.
+     *
+     * @param laskuttaja Tietovarastoon liitettävä laskuttaja.
+     */
     public void setLaskuttaja(Laskuttaja laskuttaja) {
         this.laskuttaja = laskuttaja;
         laskuttajaLisatty = true;

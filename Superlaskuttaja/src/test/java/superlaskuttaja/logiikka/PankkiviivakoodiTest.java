@@ -5,10 +5,6 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.Viite;
-import superlaskuttaja.logiikka.Pankkiviivakoodi;
-import superlaskuttaja.logiikka.LaskunSumma;
-import superlaskuttaja.logiikka.Tilinumero;
 import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -115,6 +111,17 @@ public class PankkiviivakoodiTest {
         assertEquals("10547944052020036082004883150000000086851625961989710061240106", pankkiviivakoodi.getPankkiviivakoodi());
         assertEquals("10545810171000000122000482990000000055958224329467112013155106", pankkiviivakoodi2.getPankkiviivakoodi());
         assertEquals("10540250004640001302000693800000006987567208343536411072414106", pankkiviivakoodi3.getPankkiviivakoodi());
+    }
+    
+    @Test
+    public void onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidiToimiiOikein() {
+        assertTrue(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("47944052020036082004883150000000086851625961989710061240"));
+        assertTrue(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("45810171000000122000482990000000055958224329467112013155"));
+        assertTrue(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("40250004640001302000693800000006987567208343536411072414"));
+        
+        assertFalse(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("47944052020036082004883150500000086851625961989710061240"));
+        assertFalse(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("45810171000000122000482990000000055958224329467112013157"));
+        assertFalse(Pankkiviivakoodi.onkoPankkiviivakoodiIlmanAloitustaJaLopetustaValidi("40250004640001302000693800000006987567208343536911072414"));
     }
 
     @Test

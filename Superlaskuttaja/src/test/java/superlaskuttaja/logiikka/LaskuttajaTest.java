@@ -5,8 +5,6 @@
  */
 package superlaskuttaja.logiikka;
 
-import superlaskuttaja.logiikka.Laskuttaja;
-import superlaskuttaja.logiikka.Tilinumero;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -354,6 +352,11 @@ public class LaskuttajaTest {
         assertFalse(laskuttaja.onkoTiedotOikeanlaiset());
         laskuttaja.setLaskujaLahetetty(300);
         assertTrue(laskuttaja.onkoTiedotOikeanlaiset());
+    }
+    
+    @Test
+    public void annaUusiLaskunNumeroToimiiOikein() {
+        assertEquals(laskuttaja.getLaskujaLahetetty().intValue() + 1, laskuttaja.annaUusiLaskunNumero().intValue());
     }
     
     @Test

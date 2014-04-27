@@ -18,9 +18,21 @@ import java.math.BigInteger;
  */
 public class Tilinumero {
 
+    /**
+     * Tilinumero tilinumero merkkijonona.
+     */
     private String tilinumero;
+    /**
+     * Tilinumeron pankki.
+     */
     private String pankki;
+    /**
+     * Tilinumeroon liittyvä SWIFT/BIC.
+     */
     private String swiftBic;
+    /**
+     * Tarkistin, jolla voidaan tarkistaa tilinumeron tietojen oikeanlaisuuksia.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Tilinumero(String tilinumero, String pankki, String swiftBic) {

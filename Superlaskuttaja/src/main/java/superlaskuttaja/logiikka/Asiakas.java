@@ -13,12 +13,36 @@ package superlaskuttaja.logiikka;
  */
 public class Asiakas {
 
+    /**
+     * Numero asiakkaan yksilöimiseen. Asiakasnumeron tulee olla vähintään kaksi
+     * merkkiä pitkä ja siinä ei saa olla etunollia, koska sitä voidaan käyttää
+     * viitteiden muodostamiseen.
+     */
     private String asiakasnumero;
+    /**
+     * Asiakkaan nimi.
+     */
     private String nimi;
+    /**
+     * Asiakkaan katuosoite.
+     */
     private String katuosoite;
+    /**
+     * Asiakkaan postinumero. Esim. 00180.
+     */
     private String postinumero;
+    /**
+     * Asiakkaan kaupunki. Esim. Helsinki.
+     */
     private String kaupunki;
+    /**
+     * Kokonaisluku, joka kertyy kys. asiakkaalle lähetettyjen laskun
+     * lukumäärän. Tätä tietoa tarvitaan mm. laskujen viitteiden muodostamiseen.
+     */
     private Integer laskujaLahetetty;
+    /**
+     * Tarkistimella voidaan tarkistaa, että asiakkaalle tulee oikeanlaiset tiedot.
+     */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
     public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty) {
@@ -149,7 +173,7 @@ public class Asiakas {
     public String getPostinumero() {
         return postinumero;
     }
-    
+
     /**
      * Metodin suorittaminen kasvattaa attribuutin laskukujaLahetetty arvoa
      * yhdellä.
