@@ -97,6 +97,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
         asiakas.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getAsiakas()));
         asiakas.setEditable(false);
         MuokkaaLaskuaIkkunaComboBoxKuuntelija comboBoxkuuntelija = new MuokkaaLaskuaIkkunaComboBoxKuuntelija();
+        comboBoxkuuntelija.setValinta(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getAsiakas()));
         asiakas.addActionListener(comboBoxkuuntelija);
         tiedotPanel.add(asiakas, gbc);
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package superlaskuttaja.kayttoliittyma.asiakkaat;
+package superlaskuttaja.kayttoliittyma.asiakkaat.poista;
 
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author Augustus58
  */
-public class AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna implements Runnable {
+public class AsiakkaatPanelPoistaAsiakasAsiakkaallaSuoritteitaPoikkeusIkkuna implements Runnable {
 
     private JDialog dialog;
 
@@ -49,10 +49,10 @@ public class AsiakkaatPanelPoistaAsiakasPoikkeusIkkuna implements Runnable {
         
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
-        JLabel teksti1 = new JLabel("Yhtään asiakasta ei ole valittuna.");
+        JLabel teksti1 = new JLabel("Asiakkaalla on suoritteita. Poista asiakkaan suoritteet ensin.");
         
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new AsiakkaatPanelPoistaAsiakasPoikkeusIkkunaOkKuuntelija(dialog));
+        okButton.addActionListener(new AsiakkaatPanelPoistaAsiakasAsiakkaallaSuoritteitaPoikkeusIkkunaOkKuuntelija(dialog));
         
         panel.add(teksti1);
         panel.add(okButton);

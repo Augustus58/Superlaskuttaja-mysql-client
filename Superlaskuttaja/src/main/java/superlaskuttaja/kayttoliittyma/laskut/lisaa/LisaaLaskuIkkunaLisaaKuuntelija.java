@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lasku;
 import superlaskuttaja.logiikka.LaskunSumma;
 import superlaskuttaja.logiikka.Lataaja;
@@ -38,6 +39,7 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
     private final JTextField maksuehtoKentta;
     private final JTextField lisatiedotKentta;
 
+    private final SuoritteetTaulukko suoritteetTaulukko;
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
     private final JFrame frame;
@@ -45,7 +47,7 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
     private final DateFormat pvmFormaatti;
 
-    public LisaaLaskuIkkunaLisaaKuuntelija(LisaaLaskutIkkunaComboBoxKuuntelija comboBoxkuuntelija, LisaaLaskuIkkunaSuoritteetList suoritteetLista, JTextField paivaysKentta, JTextField maksuaikaKentta, JTextField erapaivaKentta, JTextField viivastyskorkoKentta, JTextField maksuehtoKentta, JTextField lisatiedotKentta, Lataaja lataaja, LaskutTaulukko taulukko, JFrame frame, NappulaLukko lukko, DateFormat pvmFormaatti) {
+    public LisaaLaskuIkkunaLisaaKuuntelija(LisaaLaskutIkkunaComboBoxKuuntelija comboBoxkuuntelija, LisaaLaskuIkkunaSuoritteetList suoritteetLista, JTextField paivaysKentta, JTextField maksuaikaKentta, JTextField erapaivaKentta, JTextField viivastyskorkoKentta, JTextField maksuehtoKentta, JTextField lisatiedotKentta, SuoritteetTaulukko suoritteetTaulukko, Lataaja lataaja, LaskutTaulukko taulukko, JFrame frame, NappulaLukko lukko, DateFormat pvmFormaatti) {
         this.comboBoxkuuntelija = comboBoxkuuntelija;
         this.suoritteetLista = suoritteetLista;
         this.paivaysKentta = paivaysKentta;
@@ -54,6 +56,7 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
         this.viivastyskorkoKentta = viivastyskorkoKentta;
         this.maksuehtoKentta = maksuehtoKentta;
         this.lisatiedotKentta = lisatiedotKentta;
+        this.suoritteetTaulukko = suoritteetTaulukko;
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.frame = frame;
@@ -146,6 +149,8 @@ public class LisaaLaskuIkkunaLisaaKuuntelija implements ActionListener {
             lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).kasvataLahetettyjenLaskujenMaaraaYhdella();
             lataaja.getLadattuTietovarasto().getLaskut().add(lasku);
             taulukko.lisaaLaskutTaulukkoRivi(lasku);
+            
+            suoritteetTaulukko.getModel().fireTableDataChanged();
 
             suljeIkkuna();
         } catch (Exception e) {

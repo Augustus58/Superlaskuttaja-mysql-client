@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -21,11 +22,13 @@ public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
     private final NappulaLukko lukko;
+    private final SuoritteetTaulukko suoritteetTaulukko;
 
-    public LaskutPanelLisaaLaskuKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko) {
+    public LaskutPanelLisaaLaskuKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
+        this.suoritteetTaulukko = suoritteetTaulukko;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
                 if (lataaja.getLadattuTietovarasto().getSuoritteet().isEmpty()) {
                     throw new NullPointerException("Ei suoritteita.");
                 }
-                LisaaLaskuIkkuna lisaaSuorite = new LisaaLaskuIkkuna(lataaja, taulukko, lukko);
+                LisaaLaskuIkkuna lisaaSuorite = new LisaaLaskuIkkuna(lataaja, taulukko, lukko, suoritteetTaulukko);
                 SwingUtilities.invokeLater(lisaaSuorite);
             } catch (Exception e) {
                 LaskutPanelLisaaLaskuPoikkeusIkkuna poikkeusIkkuna = new LaskutPanelLisaaLaskuPoikkeusIkkuna();

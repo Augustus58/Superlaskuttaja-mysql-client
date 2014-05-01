@@ -83,7 +83,7 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel vanhaAsiakasTeksti = new JLabel("Vanha asiakas:");
-        JLabel vanhaAsiakasTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 0));
+        JLabel vanhaAsiakasTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 0));
         JLabel asiakasTeksti = new JLabel("Uusi asiakas:");
 
         String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
@@ -96,34 +96,34 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         asiakasComboBox.addActionListener(comboBoxkuuntelija);
 
         JLabel vanhaKuvausTeksti = new JLabel("Vanha kuvaus:");
-        JLabel vanhaKuvausTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1));
+        JLabel vanhaKuvausTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 1));
         JLabel kuvausTeksti = new JLabel("Uusi kuvaus:");
-        JTextField kuvausKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1));
+        JTextField kuvausKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 1));
 
         JLabel vanhaPvmTeksti = new JLabel("Vanha päivämäärä:");
-        JLabel vanhaPvmTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2));
+        JLabel vanhaPvmTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 2));
         JLabel pvmTeksti = new JLabel("Uusi päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2));
+        JTextField pvmKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 2));
 
         JLabel vanhaMaaraTeksti = new JLabel("Vanha määrä:");
-        JLabel vanhaMaaraTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3));
+        JLabel vanhaMaaraTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 3));
         JLabel maaraTeksti = new JLabel("Uusi määrä:");
-        JTextField maaraKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3));
+        JTextField maaraKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 3));
 
         JLabel vanhaMaaranYksikotTeksti = new JLabel("Vanhat yksiköt:");
-        JLabel vanhaMaaranYksikotTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4));
+        JLabel vanhaMaaranYksikotTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 4));
         JLabel maaranYksikotTeksti = new JLabel("Uudet yksiköt:");
-        JTextField maaranYksikotKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4));
+        JTextField maaranYksikotKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 4));
 
         JLabel vanhaAHintaTeksti = new JLabel("Vanha à hinta:");
-        JLabel vanhaAHintaTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5));
+        JLabel vanhaAHintaTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 5));
         JLabel aHintaTeksti = new JLabel("Uusi à hinta:");
-        JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5));
+        JTextField aHintaKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 5));
 
         JLabel vanhaAlvProsTeksti = new JLabel("Vanha alv prosentti:");
-        JLabel vanhaAlvProsTeksti2 = new JLabel(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 6));
+        JLabel vanhaAlvProsTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 6));
         JLabel alvProsTeksti = new JLabel("Uusi alv prosentti muodossa nn:");
-        JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 6));
+        JTextField alvProsKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 6));
 
         JButton muokkaa = new JButton("Muokkaa");
         muokkaa.setAlignmentX(Component.CENTER_ALIGNMENT);

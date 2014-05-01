@@ -5,6 +5,7 @@
  */
 package superlaskuttaja.kayttoliittyma.suoritteet;
 
+import superlaskuttaja.kayttoliittyma.suoritteet.poista.SuoritteetPanelPoistaSuoriteKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.lisaa.SuoritteetPanelLisaaSuoriteKuuntelija;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -33,11 +34,11 @@ public class SuoritteetPanel extends JPanel {
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public SuoritteetPanel(Lataaja lataaja, NappulaLukko lukko) {
+    public SuoritteetPanel(Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
-        this.taulukko = new SuoritteetTaulukko(lataaja);
+        this.taulukko = suoritteetTaulukko;
         this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = lukko;
         luoKomponentit();

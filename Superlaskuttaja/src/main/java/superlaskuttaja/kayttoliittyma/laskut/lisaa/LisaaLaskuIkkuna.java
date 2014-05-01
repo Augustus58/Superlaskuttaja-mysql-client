@@ -29,6 +29,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -41,12 +42,14 @@ public class LisaaLaskuIkkuna implements Runnable {
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
     private final NappulaLukko lukko;
+    private final SuoritteetTaulukko suoritteetTaulukko;
     private final DateFormat pvmFormaatti;
 
-    public LisaaLaskuIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko) {
+    public LisaaLaskuIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
+        this.suoritteetTaulukko = suoritteetTaulukko;
         this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
     }
 
@@ -222,6 +225,7 @@ public class LisaaLaskuIkkuna implements Runnable {
                 viivastyskorkoKentta,
                 maksuehtoKentta,
                 lisatiedotKentta,
+                suoritteetTaulukko,
                 lataaja,
                 taulukko,
                 frame,

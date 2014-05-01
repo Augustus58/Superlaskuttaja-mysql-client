@@ -46,3 +46,5 @@
 - **21.4.2014 0,5h** Laskut-osion muokkaa-ominaisuuden bugien metsästystä ja korjaamista. Nyt ei pitäisi pystyä olemaan suoritteita, jotka on merkitty laskutetuiksi mutta jotka eivät ole millään laskulla..
 - **24.4.2014 1h** Debuggaamista ja kovaa yritystä saada tehtyä toimiva jar huomista demoamista varten..
 - **27.4.2014 5h** Testien tekemistä, dubuggaamista ja JavaDoc-kommentointia.
+- **1.5.2014 1h** Tehty rakennekuvaus ja päivitetty luokkakaaviota.
+- **1.5.2014 2h** Käyttöliittymän bugien korjaamista ja kehittämistä.

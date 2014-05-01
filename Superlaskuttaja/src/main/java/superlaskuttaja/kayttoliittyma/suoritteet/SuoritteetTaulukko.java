@@ -30,7 +30,7 @@ public class SuoritteetTaulukko {
     public SuoritteetTaulukko(Lataaja lataaja) {
         this.lataaja = lataaja;
         this.taulukko = new JTable();
-        this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Asiakas", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"});            
+        this.model = new TableModelSolujenMuokkaaminenEstetty(new Object[][]{}, new Object[]{"Asiakas", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"});
         this.sorter = new TableRowSorter<>(model);
         this.taulukko.setModel(model);
         this.taulukko.setRowSorter(sorter);
@@ -48,7 +48,7 @@ public class SuoritteetTaulukko {
             }
         }
     }
-    
+
     public void addSuoritteetTaulukkoRivi(Suorite suorite) {
         model.addRow(suorite.suoritteenTiedotTaulukossa());
     }
@@ -68,9 +68,12 @@ public class SuoritteetTaulukko {
     public TableRowSorter<TableModelSolujenMuokkaaminenEstetty> getSorter() {
         return sorter;
     }
-    
-    public String getValueString(Integer x, Integer y) {
+
+    public String valueString(Integer x, Integer y) {
         return (getModel().getValueAt(x, y).toString());
     }
 
+    public Object value(Integer x, Integer y) {
+        return (getModel().getValueAt(x, y));
+    }
 }

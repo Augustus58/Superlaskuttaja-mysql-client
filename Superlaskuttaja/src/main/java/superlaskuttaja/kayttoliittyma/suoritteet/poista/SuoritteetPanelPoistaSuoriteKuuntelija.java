@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package superlaskuttaja.kayttoliittyma.suoritteet;
+package superlaskuttaja.kayttoliittyma.suoritteet.poista;
 
-import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
+import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -35,11 +36,19 @@ public class SuoritteetPanelPoistaSuoriteKuuntelija implements ActionListener {
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
+                for (int i = 0; i < lataaja.getLadattuTietovarasto().getLaskut().size(); i++) {
+                    if (lataaja.getLadattuTietovarasto().getLaskut().get(i).equals(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getLasku())) {
+                        throw new IllegalStateException();
+                    }
+                }
                 lataaja.getLadattuTietovarasto().getSuoritteet().remove(kuuntelija.getPaivitettyArvo().intValue());
                 taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo());
+            } catch (IllegalStateException e) {
+                SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
             } catch (Exception e) {
-            SuoritteetPanelPoistaSuoritePoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoritePoikkeusIkkuna();
-            SwingUtilities.invokeLater(poikkeusIkkuna);
+                SuoritteetPanelPoistaSuoritePoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoritePoikkeusIkkuna();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
             }
         }
     }

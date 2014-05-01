@@ -19,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.laskut.lisaa.LaskutPanelLisaaLaskuKuuntelija;
 import superlaskuttaja.kayttoliittyma.laskut.muokkaa.LaskutPanelMuokkaaLaskuaKuuntelija;
+import superlaskuttaja.kayttoliittyma.laskut.poista.LaskutPanelPoistaLaskuKuuntelija;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -31,23 +33,23 @@ public class LaskutPanel extends JPanel {
     private final LaskutTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
+    private final SuoritteetTaulukko suoritteetTaulukko;
 
-    public LaskutPanel(Lataaja lataaja, NappulaLukko lukko) {
+    public LaskutPanel(Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
         this.taulukko = new LaskutTaulukko(lataaja);
         this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = lukko;
+        this.suoritteetTaulukko = suoritteetTaulukko;
         luoKomponentit();
-
     }
 
     private void luoKomponentit() {
         add(ylaosa());
         add(keskiosa());
         add(alaosa());
-
     }
 
     private JPanel ylaosa() {
@@ -58,13 +60,13 @@ public class LaskutPanel extends JPanel {
         JComboBox kriteerit = new JComboBox(vaihtoehdotString);
         kriteerit.setSelectedIndex(0);
         kriteerit.setEditable(false);
-        kriteerit.setToolTipText("Valitse kriteeri");      
+        kriteerit.setToolTipText("Valitse kriteeri");
         ComboBoxKuuntelija comboBoxkuuntelija = new ComboBoxKuuntelija();
         kriteerit.addActionListener(comboBoxkuuntelija);
         ylaosa.add(kriteerit);
 
         JTextField kriteeriTekstikentta = new JTextField();
-        kriteeriTekstikentta.setToolTipText("Syötä kriteeriteksti tähän");        
+        kriteeriTekstikentta.setToolTipText("Syötä kriteeriteksti tähän");
         ylaosa.add(kriteeriTekstikentta);
 
         JButton naytaKriteerinSisaltavatNappi = new JButton("Näytä kriteeritekstin sisältävät");
@@ -72,14 +74,13 @@ public class LaskutPanel extends JPanel {
         LaskutPanelNaytaKriteerinSisKuuntelija naytaKriteeriKuuntelija = new LaskutPanelNaytaKriteerinSisKuuntelija(lataaja, taulukko, comboBoxkuuntelija, kriteeriTekstikentta);
         naytaKriteerinSisaltavatNappi.addActionListener(naytaKriteeriKuuntelija);
         ylaosa.add(naytaKriteerinSisaltavatNappi);
-        
+
         JButton naytaKaikkiNappi = new JButton("Näytä kaikki laskut");
         LaskutPanelNaytaKaikkiKuuntelija nautaKaikkiNappiKuuntelija = new LaskutPanelNaytaKaikkiKuuntelija(lataaja, taulukko);
         naytaKaikkiNappi.addActionListener(nautaKaikkiNappiKuuntelija);
         ylaosa.add(naytaKaikkiNappi);
 
         return ylaosa;
-
     }
 
     private JPanel keskiosa() {
@@ -88,39 +89,36 @@ public class LaskutPanel extends JPanel {
         keskiosa.setPreferredSize(new Dimension(5000, 5000));
         keskiosa.setBorder(new EmptyBorder(20, 20, 20, 20));
         keskiosa.setLayout(new BoxLayout(keskiosa, BoxLayout.Y_AXIS));
-        
+
         taulukko.muodostaLaskutTaulukko();
         taulukko.getSelectionModel().addListSelectionListener(kuuntelija);
-        
-        JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko()); 
-        
-        keskiosa.add(scrollPane);
-        
-        return keskiosa;
 
+        JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko());
+
+        keskiosa.add(scrollPane);
+
+        return keskiosa;
     }
 
     private JPanel alaosa() {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
         JButton lisaaLaskuNappi = new JButton("Lisää lasku");
-        lisaaLaskuNappi.addActionListener(new LaskutPanelLisaaLaskuKuuntelija(lataaja, taulukko, lukko));
+        lisaaLaskuNappi.addActionListener(new LaskutPanelLisaaLaskuKuuntelija(lataaja, taulukko, lukko, suoritteetTaulukko));
         alaosa.add(lisaaLaskuNappi);
 
         JButton muokkaaValittuaLaskuaNappi = new JButton("Muokkaa valittua laskua");
         muokkaaValittuaLaskuaNappi.addActionListener(new LaskutPanelMuokkaaLaskuaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(muokkaaValittuaLaskuaNappi);
-        
+
         JButton vieValittuLaskuPdfNappi = new JButton("Vie valittu lasku pdf");
 //        vieValittuLaskuPdfNappi.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
         alaosa.add(vieValittuLaskuPdfNappi);
 
-        JButton poistaValittuAsiakas = new JButton("Poista valittu lasku");
-//        poistaValittuAsiakas.addActionListener(new AsiakkaatPanelPoistaAsiakasKuuntelija(lataaja, taulukko, kuuntelija, lukko));
-        alaosa.add(poistaValittuAsiakas);
+        JButton poistaValittuLasku = new JButton("Poista valittu lasku");
+        poistaValittuLasku.addActionListener(new LaskutPanelPoistaLaskuKuuntelija(lataaja, taulukko, kuuntelija, lukko));
+        alaosa.add(poistaValittuLasku);
 
         return alaosa;
-
     }
-
 }

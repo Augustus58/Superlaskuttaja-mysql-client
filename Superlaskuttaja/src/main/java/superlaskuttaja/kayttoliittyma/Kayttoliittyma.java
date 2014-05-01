@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -39,15 +40,17 @@ public class Kayttoliittyma implements Runnable {
         Lataaja lataaja = new Lataaja();
         
         NappulaLukko lukko = new NappulaLukko();
+        
+        SuoritteetTaulukko suoritteetTaulukko = new SuoritteetTaulukko(lataaja);
 
-        luoKomponentit(frame.getContentPane(), lataaja, lukko);
+        luoKomponentit(frame.getContentPane(), lataaja, lukko, suoritteetTaulukko);
 
         frame.pack();
         frame.setVisible(true);
 
     }
 
-    private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko) {
+    private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja, lukko);
@@ -56,10 +59,10 @@ public class Kayttoliittyma implements Runnable {
         JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja, lukko);
         tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
 
-        JPanel suoritteetPanel = new SuoritteetPanel(lataaja, lukko);
+        JPanel suoritteetPanel = new SuoritteetPanel(lataaja, lukko, suoritteetTaulukko);
         tabbedPane.addTab("Suoritteet", null, suoritteetPanel, null);
 
-        JPanel laskutPanel = new LaskutPanel(lataaja, lukko);
+        JPanel laskutPanel = new LaskutPanel(lataaja, lukko, suoritteetTaulukko);
         tabbedPane.addTab("Laskut", null, laskutPanel, null);
 
         container.add(tabbedPane);

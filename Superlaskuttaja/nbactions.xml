@@ -16,23 +16,17 @@
     </action>
     <action>
         <actionName>run</actionName>
-        <packagings>
-            <packaging>jar</packaging>
-        </packagings>
         <goals>
             <goal>process-classes</goal>
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-classpath %classpath ${packageClassName}</exec.args>
+            <exec.args>-classpath %classpath superlaskuttaja.App</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
     <action>
         <actionName>debug</actionName>
-        <packagings>
-            <packaging>jar</packaging>
-        </packagings>
         <goals>
             <goal>process-classes</goal>
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
@@ -45,9 +39,6 @@
     </action>
     <action>
         <actionName>profile</actionName>
-        <packagings>
-            <packaging>jar</packaging>
-        </packagings>
         <goals>
             <goal>process-classes</goal>
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>

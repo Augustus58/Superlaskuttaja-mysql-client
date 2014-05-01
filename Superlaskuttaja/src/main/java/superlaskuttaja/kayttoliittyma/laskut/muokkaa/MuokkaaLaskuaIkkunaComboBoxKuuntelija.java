@@ -39,4 +39,8 @@ public class MuokkaaLaskuaIkkunaComboBoxKuuntelija implements ActionListener {
     public void setSuoritteetList(MuokkaaLaskuaIkkunaSuoritteetList suoritteetList) {
         this.suoritteetList = suoritteetList;
     }
+
+    public void setValinta(Integer valinta) {
+        this.valinta = valinta;
+    }
 }

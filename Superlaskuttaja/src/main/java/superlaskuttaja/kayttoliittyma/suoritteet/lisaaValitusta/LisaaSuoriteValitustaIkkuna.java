@@ -10,6 +10,8 @@ import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import sun.java2d.pipe.SpanShapeRenderer;
 import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
@@ -38,12 +41,14 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
+    private final SimpleDateFormat dateFormat;
 
     public LisaaSuoriteValitustaIkkuna(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
         this.kuuntelija = kuuntelija;
+        this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     @Override
@@ -55,7 +60,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setAlwaysOnTop(true);
-        
+
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
 
@@ -86,7 +91,7 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
 
         String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
         JComboBox asiakasComboBox = new JComboBox(vaihtoehdotString);
-        
+
         // Seuraavan toimiminen edellyttää, että taulukon malli ja tietovaraston suoritteet ovan samassa järjestyksessä.
         asiakasComboBox.setSelectedIndex(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas()));
 
@@ -96,22 +101,22 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         asiakasComboBox.addActionListener(comboBoxkuuntelija);
 
         JLabel kuvausTeksti = new JLabel("Kuvaus:");
-        JTextField kuvausKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1));
+        JTextField kuvausKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 1));
 
         JLabel pvmTeksti = new JLabel("Päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2));
+        JTextField pvmKentta = new JTextField(dateFormat.format(((GregorianCalendar)(taulukko.value(kuuntelija.getPaivitettyArvo(), 2))).getTime()));
 
         JLabel maaraTeksti = new JLabel("Määrä:");
-        JTextField maaraKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3));
+        JTextField maaraKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 3));
 
         JLabel maaranYksikotTeksti = new JLabel("Yksiköt:");
-        JTextField maaranYksikotKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4));
+        JTextField maaranYksikotKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 4));
 
         JLabel aHintaTeksti = new JLabel("à hinta:");
-        JTextField aHintaKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5));
+        JTextField aHintaKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 5));
 
         JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
-        JTextField alvProsKentta = new JTextField(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 6));
+        JTextField alvProsKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 6));
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -139,11 +144,9 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         panel.add(Box.createRigidArea(new Dimension(600, 0)));
 
         container.add(panel);
-
     }
 
     public JFrame getFrame() {
         return frame;
     }
-
 }

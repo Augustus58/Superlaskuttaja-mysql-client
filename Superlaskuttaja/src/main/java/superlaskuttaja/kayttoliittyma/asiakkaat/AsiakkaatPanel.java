@@ -5,6 +5,7 @@
  */
 package superlaskuttaja.kayttoliittyma.asiakkaat;
 
+import superlaskuttaja.kayttoliittyma.asiakkaat.poista.AsiakkaatPanelPoistaAsiakasKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
 import superlaskuttaja.kayttoliittyma.asiakkaat.muokkaa.AsiakkaatPanelMuokkaaAsiakastaKuuntelija;
