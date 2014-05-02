@@ -14,7 +14,7 @@ Yhteenveto-osiossa voit
   - Ei tuettu vielä
 - Tallentaa nimellä (paina alhaalta "Tallenna nimellä")
   - Ei Tuettu vielä
-### Asiakkaat-osio
+### Asiakkaat-osio (paina ylhäältä "Asiakkaat")
 Asiakkaat-osiossa voit
 - Hakea eri kriteerien perusteella taulukossa näytettävät asiakkaat (valitse ylhäältä hakukriteeri, syötä hakuteksti ja paina "Näytä kriteeritekstin sisältävät"
 - Näyttää kaikki asiakkaat taulukossa (paina ylhäältä "Näytä kaikki asiakkaat")
@@ -26,7 +26,7 @@ Asiakkaat-osiossa voit
 - Poistaa valitun asiakkaan (valitse poistettava asiakas taulukosta ja paina alhaalta "Poista valittu asiakas")
   - Jos jokin asiakas on valittuna
   - Jos asiakkaalla ei ole suoritteita
-### Suoritteet-osio
+### Suoritteet-osio (paina ylhäältä "Suoritteet")
 Suoritteet-osiossa voit
 - Hakea eri kriteerien perusteella taulukossa näytettävät suoritteet (valitse ylhäältä hakukriteeri, syötä hakuteksti ja paina "Näytä kriteeritekstin sisältävät"
 - Näyttää kaikki suoritteet taulukossa (paina ylhäältä "Näytä kaikki suoritteet")
@@ -40,7 +40,7 @@ Suoritteet-osiossa voit
 - Poistaa valitun suoritteen (valitse poistettava suorites taulukosta ja paina alhaalta "Poista valittu suorite")
   - Jos jokin suorite on valittuna
   - Jos suoritetta ei ole lisätty millekään laskulle
-### Laskut-osio
+### Laskut-osio (paina ylhäältä "Laskut")
 Laskut osiossa voit
 - Hakea eri kriteerien perusteella taulukossa näytettävät laskut (valitse ylhäältä hakukriteeri, syötä hakuteksti ja paina "Näytä kriteeritekstin sisältävät"
 - Näyttää kaikki laskut taulukossa (paina ylhäältä "Näytä kaikki laskut")
