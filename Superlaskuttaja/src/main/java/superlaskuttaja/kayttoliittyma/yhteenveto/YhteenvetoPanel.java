@@ -21,12 +21,14 @@ public class YhteenvetoPanel extends JPanel {
 
     private final Lataaja lataaja;
     private final NappulaLukko lukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public YhteenvetoPanel(Lataaja lataaja, NappulaLukko lukko) {
+    public YhteenvetoPanel(Lataaja lataaja, NappulaLukko lukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
         this.lukko = lukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
         luoKomponentit();
 
     }
@@ -50,9 +52,8 @@ public class YhteenvetoPanel extends JPanel {
         JPanel keskiosa = new JPanel(new GridLayout(0, 1));
         keskiosa.setPreferredSize(new Dimension(5000, 5000));        
 
-        LaskuttajaOsioJPanel frame = new LaskuttajaOsioJPanel(lataaja.getLadattuTietovarasto().isLaskuttajaLisatty(), lataaja, lukko);
-        frame.paivitaSisalto();
-        keskiosa.add(frame);
+        laskuttajaOsioJPanel.paivitaSisalto();
+        keskiosa.add(laskuttajaOsioJPanel);
         
         return keskiosa;
 

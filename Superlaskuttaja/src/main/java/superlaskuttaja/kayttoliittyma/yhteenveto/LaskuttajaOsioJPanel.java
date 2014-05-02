@@ -22,8 +22,8 @@ import superlaskuttaja.logiikka.Lataaja;
 public class LaskuttajaOsioJPanel extends JPanel {
 
     private Boolean laskuttajaOlemassa;
-    private Lataaja lataaja;
-    private NappulaLukko lukko;
+    private final Lataaja lataaja;
+    private final NappulaLukko lukko;
 
     public LaskuttajaOsioJPanel(Boolean laskuttajaOlemassa, Lataaja lataaja, NappulaLukko lukko) {
         this.laskuttajaOlemassa = laskuttajaOlemassa;
@@ -54,7 +54,7 @@ public class LaskuttajaOsioJPanel extends JPanel {
             LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija muokkaaTietojaKuuntelija = new LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija(lataaja, lukko, this);
             muokkaaLaskuttajanTietoja.addActionListener(muokkaaTietojaKuuntelija);
             this.add(muokkaaLaskuttajanTietoja);
-            
+
             this.revalidate();
             this.repaint();
         } else {
@@ -79,5 +79,4 @@ public class LaskuttajaOsioJPanel extends JPanel {
     public void setLaskuttajaOlemassa(Boolean laskuttajaOlemassa) {
         this.laskuttajaOlemassa = laskuttajaOlemassa;
     }
-
 }

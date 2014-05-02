@@ -237,5 +237,4 @@ public class MerkkiJaMerkkijonoTarkistin {
     public String getIsotAakkosetAZ() {
         return this.isotAakkosetAZ;
     }
-
 }

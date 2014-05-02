@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
-import superlaskuttaja.kayttoliittyma.yhteenveto.lisaa.LisaaLaskuttajanTiedotIkkunaLisaaPoikkeusIkkuna;
 import superlaskuttaja.logiikka.Laskuttaja;
 import superlaskuttaja.logiikka.Lataaja;
 import superlaskuttaja.logiikka.Tilinumero;

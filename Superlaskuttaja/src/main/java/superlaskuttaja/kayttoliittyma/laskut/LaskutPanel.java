@@ -5,8 +5,6 @@
  */
 package superlaskuttaja.kayttoliittyma.laskut;
 
-import superlaskuttaja.kayttoliittyma.NappulaLukko;
-import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
@@ -16,11 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
+import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.lisaa.LaskutPanelLisaaLaskuKuuntelija;
 import superlaskuttaja.kayttoliittyma.laskut.muokkaa.LaskutPanelMuokkaaLaskuaKuuntelija;
 import superlaskuttaja.kayttoliittyma.laskut.poista.LaskutPanelPoistaLaskuKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -34,8 +36,10 @@ public class LaskutPanel extends JPanel {
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
     private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public LaskutPanel(Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
+    public LaskutPanel(Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
@@ -43,6 +47,8 @@ public class LaskutPanel extends JPanel {
         this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = lukko;
         this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
         luoKomponentit();
     }
 
@@ -104,11 +110,11 @@ public class LaskutPanel extends JPanel {
         JPanel alaosa = new JPanel(new GridLayout(1, 3));
 
         JButton lisaaLaskuNappi = new JButton("Lisää lasku");
-        lisaaLaskuNappi.addActionListener(new LaskutPanelLisaaLaskuKuuntelija(lataaja, taulukko, lukko, suoritteetTaulukko));
+        lisaaLaskuNappi.addActionListener(new LaskutPanelLisaaLaskuKuuntelija(lataaja, taulukko, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel));
         alaosa.add(lisaaLaskuNappi);
 
         JButton muokkaaValittuaLaskuaNappi = new JButton("Muokkaa valittua laskua");
-        muokkaaValittuaLaskuaNappi.addActionListener(new LaskutPanelMuokkaaLaskuaKuuntelija(lataaja, taulukko, kuuntelija, lukko));
+        muokkaaValittuaLaskuaNappi.addActionListener(new LaskutPanelMuokkaaLaskuaKuuntelija(lataaja, taulukko, kuuntelija, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel));
         alaosa.add(muokkaaValittuaLaskuaNappi);
 
         JButton vieValittuLaskuPdfNappi = new JButton("Vie valittu lasku pdf");
@@ -116,7 +122,7 @@ public class LaskutPanel extends JPanel {
         alaosa.add(vieValittuLaskuPdfNappi);
 
         JButton poistaValittuLasku = new JButton("Poista valittu lasku");
-        poistaValittuLasku.addActionListener(new LaskutPanelPoistaLaskuKuuntelija(lataaja, taulukko, kuuntelija, lukko));
+        poistaValittuLasku.addActionListener(new LaskutPanelPoistaLaskuKuuntelija(lataaja, taulukko, kuuntelija, lukko, suoritteetTaulukko));
         alaosa.add(poistaValittuLasku);
 
         return alaosa;

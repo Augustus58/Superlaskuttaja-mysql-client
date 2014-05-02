@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
-import superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta.SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkuna;
+import superlaskuttaja.kayttoliittyma.suoritteet.poista.SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -37,8 +37,14 @@ public class SuoritteetPanelMuokkaaValittuaKuuntelija implements ActionListener 
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
+                if (lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getOnkoLaskutettu()) {
+                    throw new IllegalStateException();
+                }
                 MuokkaaValittuaIkkuna muokkaaSuoritetta = new MuokkaaValittuaIkkuna(lataaja, taulukko, lukko, kuuntelija);
                 SwingUtilities.invokeLater(muokkaaSuoritetta);
+            } catch (IllegalStateException e) {
+                SuoritteetPanelMuokkaaValittuaPoikkeusIkkunaSuoriteLaskulla poikkeusIkkuna = new SuoritteetPanelMuokkaaValittuaPoikkeusIkkunaSuoriteLaskulla();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
             } catch (Exception e) {
                 SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna();
                 SwingUtilities.invokeLater(poikkeusIkkuna);

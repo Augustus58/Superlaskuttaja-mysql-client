@@ -6,10 +6,11 @@
 package superlaskuttaja.kayttoliittyma.suoritteet.muokkaa;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
@@ -38,12 +40,14 @@ public class MuokkaaValittuaIkkuna implements Runnable {
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
+    private final SimpleDateFormat dateFormat;
 
     public MuokkaaValittuaIkkuna(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
         this.kuuntelija = kuuntelija;
+        this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     @Override
@@ -54,7 +58,6 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
         
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
@@ -101,9 +104,9 @@ public class MuokkaaValittuaIkkuna implements Runnable {
         JTextField kuvausKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 1));
 
         JLabel vanhaPvmTeksti = new JLabel("Vanha päivämäärä:");
-        JLabel vanhaPvmTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 2));
+        JLabel vanhaPvmTeksti2 = new JLabel(dateFormat.format(((GregorianCalendar)(taulukko.value(kuuntelija.getPaivitettyArvo(), 2))).getTime()));
         JLabel pvmTeksti = new JLabel("Uusi päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 2));
+        JTextField pvmKentta = new JTextField(dateFormat.format(((GregorianCalendar)(taulukko.value(kuuntelija.getPaivitettyArvo(), 2))).getTime()));
 
         JLabel vanhaMaaraTeksti = new JLabel("Vanha määrä:");
         JLabel vanhaMaaraTeksti2 = new JLabel(taulukko.valueString(kuuntelija.getPaivitettyArvo(), 3));

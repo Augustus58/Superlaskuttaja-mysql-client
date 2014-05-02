@@ -6,10 +6,12 @@
 package superlaskuttaja.kayttoliittyma.suoritteet.lisaa;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
@@ -35,11 +38,13 @@ public class LisaaSuoriteIkkuna implements Runnable {
     private final Lataaja lataaja;
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
+    private final DateFormat pvmFormaatti;
 
     public LisaaSuoriteIkkuna(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
+        this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     @Override
@@ -50,8 +55,7 @@ public class LisaaSuoriteIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
-        
+
         IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(kuuntelija);
 
@@ -73,7 +77,7 @@ public class LisaaSuoriteIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel asiakasTeksti = new JLabel("Valitse asiakas:");
-       
+
         String[] vaihtoehdotString = lataaja.getLadattuTietovarasto().asiakkaidenNimetArrayString();
         JComboBox asiakas = new JComboBox(vaihtoehdotString);
         asiakas.setSelectedIndex(0);
@@ -82,22 +86,23 @@ public class LisaaSuoriteIkkuna implements Runnable {
         asiakas.addActionListener(comboBoxkuuntelija);
 
         JLabel kuvausTeksti = new JLabel("Kuvaus:");
-        JTextField kuvausKentta = new JTextField("1");
+        JTextField kuvausKentta = new JTextField();
 
         JLabel pvmTeksti = new JLabel("Päivämäärä muodossa pp.kk.vvvv:");
-        JTextField pvmKentta = new JTextField("11.11.2011");
+        Date paivamaaraTanaan = new Date();
+        JTextField pvmKentta = new JTextField(pvmFormaatti.format(paivamaaraTanaan));
 
         JLabel maaraTeksti = new JLabel("Määrä:");
-        JTextField maaraKentta = new JTextField("1");
+        JTextField maaraKentta = new JTextField();
 
         JLabel maaranYksikotTeksti = new JLabel("Yksiköt:");
-        JTextField maaranYksikotKentta = new JTextField("1");
+        JTextField maaranYksikotKentta = new JTextField("h");
 
         JLabel aHintaTeksti = new JLabel("à hinta:");
-        JTextField aHintaKentta = new JTextField("1");
-        
+        JTextField aHintaKentta = new JTextField();
+
         JLabel alvProsTeksti = new JLabel("Alv prosentti muodossa nn:");
-        JTextField alvProsKentta = new JTextField("1");
+        JTextField alvProsKentta = new JTextField("24");
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,7 +110,7 @@ public class LisaaSuoriteIkkuna implements Runnable {
         lisaa.addActionListener(kuuntelija);
 
         tiedotPanel.add(asiakasTeksti);
-        tiedotPanel.add(asiakas);        
+        tiedotPanel.add(asiakas);
         tiedotPanel.add(kuvausTeksti);
         tiedotPanel.add(kuvausKentta);
         tiedotPanel.add(pvmTeksti);
@@ -131,5 +136,4 @@ public class LisaaSuoriteIkkuna implements Runnable {
     public JFrame getFrame() {
         return frame;
     }
-
 }

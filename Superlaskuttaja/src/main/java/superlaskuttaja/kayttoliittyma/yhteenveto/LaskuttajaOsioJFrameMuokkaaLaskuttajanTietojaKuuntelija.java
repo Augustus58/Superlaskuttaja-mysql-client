@@ -5,11 +5,12 @@
  */
 package superlaskuttaja.kayttoliittyma.yhteenveto;
 
-import superlaskuttaja.kayttoliittyma.yhteenveto.muokkaa.MuokkaaLaskuttajanTietojaIkkuna;
-import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
+import superlaskuttaja.kayttoliittyma.NappulaLukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.poista.SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna;
+import superlaskuttaja.kayttoliittyma.yhteenveto.muokkaa.MuokkaaLaskuttajanTietojaIkkuna;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -31,9 +32,16 @@ public class LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaKuuntelija implements 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
-            MuokkaaLaskuttajanTietojaIkkuna muokkaaTietoja = new MuokkaaLaskuttajanTietojaIkkuna(lataaja, lukko, panel);
-            SwingUtilities.invokeLater(muokkaaTietoja);
+            try {
+                if (!lataaja.getLadattuTietovarasto().getLaskut().isEmpty()) {
+                    throw new IllegalStateException();
+                }
+                MuokkaaLaskuttajanTietojaIkkuna muokkaaTietoja = new MuokkaaLaskuttajanTietojaIkkuna(lataaja, lukko, panel);
+                SwingUtilities.invokeLater(muokkaaTietoja);
+            } catch (IllegalStateException e) {
+                LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaLaskuttajallaLaskujaPoikkeusIkkuna poikkeusIkkuna = new LaskuttajaOsioJFrameMuokkaaLaskuttajanTietojaLaskuttajallaLaskujaPoikkeusIkkuna();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
+            }
         }
     }
-
 }

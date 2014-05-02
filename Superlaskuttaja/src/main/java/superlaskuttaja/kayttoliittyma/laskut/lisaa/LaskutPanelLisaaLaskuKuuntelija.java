@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -23,12 +25,16 @@ public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
     private final LaskutTaulukko taulukko;
     private final NappulaLukko lukko;
     private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public LaskutPanelLisaaLaskuKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
+    public LaskutPanelLisaaLaskuKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
         this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
     }
 
     @Override
@@ -44,7 +50,7 @@ public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
                 if (lataaja.getLadattuTietovarasto().getSuoritteet().isEmpty()) {
                     throw new NullPointerException("Ei suoritteita.");
                 }
-                LisaaLaskuIkkuna lisaaSuorite = new LisaaLaskuIkkuna(lataaja, taulukko, lukko, suoritteetTaulukko);
+                LisaaLaskuIkkuna lisaaSuorite = new LisaaLaskuIkkuna(lataaja, taulukko, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel);
                 SwingUtilities.invokeLater(lisaaSuorite);
             } catch (Exception e) {
                 LaskutPanelLisaaLaskuPoikkeusIkkuna poikkeusIkkuna = new LaskutPanelLisaaLaskuPoikkeusIkkuna();

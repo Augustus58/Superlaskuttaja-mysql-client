@@ -6,7 +6,6 @@
 package superlaskuttaja.kayttoliittyma.laskut.muokkaa;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -27,9 +26,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -44,13 +47,19 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
     private final DateFormat pvmFormaatti;
+    private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public MuokkaaLaskuaIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public MuokkaaLaskuaIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;
         this.lukko = lukko;
         this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
+        this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
     }
 
     @Override
@@ -61,8 +70,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
-        
+
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);
 
@@ -214,7 +222,7 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
         gbc.insets = (new Insets(5, 5, 5, 0));
         JTextField lisatiedotKentta = new JTextField(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getLisatiedot(), 20);
         tiedotPanel.add(lisatiedotKentta, gbc);
-        
+
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 8;
@@ -241,6 +249,9 @@ public class MuokkaaLaskuaIkkuna implements Runnable {
                 maksuehtoKentta,
                 lisatiedotKentta,
                 onkoMaksettu,
+                suoritteetTaulukko,
+                asiakkaatTaulukko,
+                laskuttajaOsioJPanel,
                 lataaja,
                 taulukko,
                 frame,

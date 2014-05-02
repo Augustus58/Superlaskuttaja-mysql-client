@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -23,12 +26,18 @@ public class LaskutPanelMuokkaaLaskuaKuuntelija implements ActionListener {
     private final LaskutTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
+    private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public LaskutPanelMuokkaaLaskuaKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public LaskutPanelMuokkaaLaskuaKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;
         this.lukko = lukko;
+        this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
     }
 
     @Override
@@ -39,7 +48,7 @@ public class LaskutPanelMuokkaaLaskuaKuuntelija implements ActionListener {
                 if (lataaja.getLadattuTietovarasto().getLaskut().isEmpty()) {
                     throw new NullPointerException("Ei laskuja.");
                 }
-                MuokkaaLaskuaIkkuna lisaaSuorite = new MuokkaaLaskuaIkkuna(lataaja, taulukko, kuuntelija, lukko);
+                MuokkaaLaskuaIkkuna lisaaSuorite = new MuokkaaLaskuaIkkuna(lataaja, taulukko, kuuntelija, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel);
                 SwingUtilities.invokeLater(lisaaSuorite);
             } catch (Exception e) {
                 LaskutPanelMuokkaaLaskuaPoikkeusIkkuna poikkeusIkkuna = new LaskutPanelMuokkaaLaskuaPoikkeusIkkuna();

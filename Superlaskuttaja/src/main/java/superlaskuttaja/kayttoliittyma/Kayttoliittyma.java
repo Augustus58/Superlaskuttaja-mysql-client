@@ -15,7 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -41,28 +43,31 @@ public class Kayttoliittyma implements Runnable {
         
         NappulaLukko lukko = new NappulaLukko();
         
+        LaskuttajaOsioJPanel laskuttajaOsioJPanel = new LaskuttajaOsioJPanel(lataaja.getLadattuTietovarasto().isLaskuttajaLisatty(), lataaja, lukko);
+        
+        AsiakkaatTaulukko asiakkaatTaulukko = new AsiakkaatTaulukko(lataaja);
         SuoritteetTaulukko suoritteetTaulukko = new SuoritteetTaulukko(lataaja);
 
-        luoKomponentit(frame.getContentPane(), lataaja, lukko, suoritteetTaulukko);
+        luoKomponentit(frame.getContentPane(), lataaja, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel);
 
         frame.pack();
         frame.setVisible(true);
 
     }
 
-    private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
+    private void luoKomponentit(Container container, Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja, lukko);
+        JPanel yhteenvetoPanel = new YhteenvetoPanel(lataaja, lukko, laskuttajaOsioJPanel);
         tabbedPane.addTab("Yhteenveto", null, yhteenvetoPanel, null);
 
-        JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja, lukko);
+        JPanel asiakkaatPanel = new AsiakkaatPanel(lataaja, lukko, asiakkaatTaulukko);
         tabbedPane.addTab("Asiakkaat", null, asiakkaatPanel, null);
 
         JPanel suoritteetPanel = new SuoritteetPanel(lataaja, lukko, suoritteetTaulukko);
         tabbedPane.addTab("Suoritteet", null, suoritteetPanel, null);
 
-        JPanel laskutPanel = new LaskutPanel(lataaja, lukko, suoritteetTaulukko);
+        JPanel laskutPanel = new LaskutPanel(lataaja, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel);
         tabbedPane.addTab("Laskut", null, laskutPanel, null);
 
         container.add(tabbedPane);

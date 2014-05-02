@@ -75,7 +75,9 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
             Integer paiva = Integer.parseInt(pvmKentta.getText().substring(0, 2));
             GregorianCalendar date = new GregorianCalendar(vuosi, kuukausi - 1, paiva);
 
-            Suorite suorite = new Suorite(suoritteenAsiakas,
+            Suorite suorite = null;
+
+            suorite = new Suorite(suoritteenAsiakas,
                     kuvausKentta.getText(),
                     date,
                     Double.parseDouble(maaraKentta.getText()),
@@ -86,6 +88,7 @@ public class MuokkaaValittuaIkkunaMuokkaaKuuntelija implements ActionListener {
             if (!suorite.onkoTiedotOikeanlaisetPaitsiPvm()) {
                 throw new IllegalArgumentException("Jokin syöte on virheellinen.");
             }
+
             lataaja.getLadattuTietovarasto().getSuoritteet().remove(taulukkoKuuntelija.getPaivitettyArvo().intValue());
             lataaja.getLadattuTietovarasto().getSuoritteet().add(taulukkoKuuntelija.getPaivitettyArvo(), suorite);
             taulukko.getModel().insertRow(taulukkoKuuntelija.getPaivitettyArvo(), suorite.suoritteenTiedotTaulukossa());

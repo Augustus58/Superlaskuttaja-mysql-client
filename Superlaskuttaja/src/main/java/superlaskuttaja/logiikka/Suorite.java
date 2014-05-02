@@ -95,6 +95,23 @@ public class Suorite {
         laskeAlv();
         laskeYht();
     }
+    
+    public Suorite(Asiakas asiakas, String kuvaus, GregorianCalendar pvm, Double maara, String maaranYksikot, Double aHinta, Integer alvProsentti, Lasku lasku) {
+        this.asiakas = asiakas;
+        this.kuvaus = kuvaus;
+        this.pvm = pvm;
+        this.maara = maara;
+        this.maaranYksikot = maaranYksikot;
+        this.aHinta = aHinta;
+        this.alvProsentti = alvProsentti;
+        this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
+        this.lasku = lasku;
+        this.onkoLaskutettu = true;
+        this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
+        paivitaLaskutettuTeksti();
+        laskeAlv();
+        laskeYht();
+    }
 
     /**
      * Metodi antaa suoritteen tiedot taulukossa.

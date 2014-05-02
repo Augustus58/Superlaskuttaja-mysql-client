@@ -16,7 +16,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
+import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lasku;
 import superlaskuttaja.logiikka.LaskunSumma;
 import superlaskuttaja.logiikka.Lataaja;
@@ -40,7 +43,9 @@ public class MuokkaaLaskuaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final JTextField maksuehtoKentta;
     private final JTextField lisatiedotKentta;
     private final JCheckBox onkoMaksettu;
-
+    private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
     private final Lataaja lataaja;
     private final LaskutTaulukko taulukko;
     private final JFrame frame;
@@ -49,7 +54,7 @@ public class MuokkaaLaskuaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
     private final DateFormat pvmFormaatti;
 
-    public MuokkaaLaskuaIkkunaMuokkaaKuuntelija(MuokkaaLaskuaIkkunaComboBoxKuuntelija comboBoxkuuntelija, MuokkaaLaskuaIkkunaSuoritteetList suoritteetLista, JTextField paivaysKentta, JTextField maksuaikaKentta, JTextField erapaivaKentta, JTextField viivastyskorkoKentta, JTextField maksuehtoKentta, JTextField lisatiedotKentta, JCheckBox onkoMaksettu, Lataaja lataaja, LaskutTaulukko taulukko, JFrame frame, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko, DateFormat pvmFormaatti) {
+    public MuokkaaLaskuaIkkunaMuokkaaKuuntelija(MuokkaaLaskuaIkkunaComboBoxKuuntelija comboBoxkuuntelija, MuokkaaLaskuaIkkunaSuoritteetList suoritteetLista, JTextField paivaysKentta, JTextField maksuaikaKentta, JTextField erapaivaKentta, JTextField viivastyskorkoKentta, JTextField maksuehtoKentta, JTextField lisatiedotKentta, JCheckBox onkoMaksettu, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel, Lataaja lataaja, LaskutTaulukko taulukko, JFrame frame, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko, DateFormat pvmFormaatti) {
         this.comboBoxkuuntelija = comboBoxkuuntelija;
         this.suoritteetLista = suoritteetLista;
         this.paivaysKentta = paivaysKentta;
@@ -59,6 +64,9 @@ public class MuokkaaLaskuaIkkunaMuokkaaKuuntelija implements ActionListener {
         this.maksuehtoKentta = maksuehtoKentta;
         this.lisatiedotKentta = lisatiedotKentta;
         this.onkoMaksettu = onkoMaksettu;
+        this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.frame = frame;
@@ -152,21 +160,29 @@ public class MuokkaaLaskuaIkkunaMuokkaaKuuntelija implements ActionListener {
                 throw new IllegalArgumentException("Syöte maksuehto on virheellinen.");
             }
 
-            for (int i = 0; i < suoritteet.size(); i++) {
-                suoritteet.get(i).setLasku(lasku);
-            }
             if (comboBoxkuuntelija.getValinta() != lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getAsiakas())) {
                 lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).kasvataLahetettyjenLaskujenMaaraaYhdella();
             }
+
+            for (int i = 0; i < suoritteet.size(); i++) {
+                suoritteet.get(i).setLasku(lasku);
+                suoritteetTaulukko.getModel().insertRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(suoritteet.get(i)), suoritteet.get(i).suoritteenTiedotTaulukossa());
+                suoritteetTaulukko.getModel().removeRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(suoritteet.get(i)) + 1);
+            }
+
             if (comboBoxkuuntelija.getValinta() == lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getAsiakas())) {
                 for (int i = 0; i < lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).size(); i++) {
                     if (!suoritteet.contains(lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).get(i))) {
                         lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).get(i).poistaLasku();
                     }
+                    suoritteetTaulukko.getModel().insertRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).get(i)), lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).get(i).suoritteenTiedotTaulukossa());
+                    suoritteetTaulukko.getModel().removeRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetJaHalututSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet()).get(i)) + 1);
                 }
             } else {
                 for (int i = 0; i < lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet().size(); i++) {
                     lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet().get(i).poistaLasku();
+                    suoritteetTaulukko.getModel().insertRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet().get(i)), lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet().get(i).suoritteenTiedotTaulukossa());
+                    suoritteetTaulukko.getModel().removeRow(lataaja.getLadattuTietovarasto().getSuoritteet().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getSuoritteet().get(i)) + 1);
                 }
             }
             if (onkoMaksettu.isSelected()) {
@@ -177,17 +193,29 @@ public class MuokkaaLaskuaIkkunaMuokkaaKuuntelija implements ActionListener {
 
             lasku.setMaksuaika(maksuaika);
 
+            if (comboBoxkuuntelija.getValinta() == lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getLaskut().get(kuuntelija.getPaivitettyArvo()).getAsiakas())) {
+                asiakkaatTaulukko.getModel().insertRow(comboBoxkuuntelija.getValinta(), lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).asiakkaanTiedotTaulukossa());
+                asiakkaatTaulukko.getModel().removeRow(comboBoxkuuntelija.getValinta() + 1);
+            } else {
+                asiakkaatTaulukko.getModel().insertRow(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas()), lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas().asiakkaanTiedotTaulukossa());
+                asiakkaatTaulukko.getModel().removeRow(lataaja.getLadattuTietovarasto().getAsiakkaat().indexOf(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getAsiakas()) + 1);
+
+                asiakkaatTaulukko.getModel().insertRow(comboBoxkuuntelija.getValinta(), lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxkuuntelija.getValinta()).asiakkaanTiedotTaulukossa());
+                asiakkaatTaulukko.getModel().removeRow(comboBoxkuuntelija.getValinta() + 1);
+            }
+
             lataaja.getLadattuTietovarasto().getLaskut().remove(kuuntelija.getPaivitettyArvo().intValue());
             lataaja.getLadattuTietovarasto().getLaskut().add(kuuntelija.getPaivitettyArvo(), lasku);
             taulukko.getModel().insertRow(kuuntelija.getPaivitettyArvo(), lasku.laskunTiedotTaulukossa());
             taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo() + 1);
+
+            laskuttajaOsioJPanel.paivitaSisalto();
 
             suljeIkkuna();
         } catch (Exception e) {
             MuokkaaLaskuaIkkunaMuokkaaLaskuaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaLaskuaIkkunaMuokkaaLaskuaPoikkeusIkkuna();
             SwingUtilities.invokeLater(poikkeusIkkuna);
         }
-
     }
 
     private void suljeIkkuna() {

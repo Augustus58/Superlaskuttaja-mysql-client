@@ -52,7 +52,7 @@ public class SuoritteetPanelMuokkaaValittuaPoikkeusIkkuna implements Runnable {
         JLabel teksti1 = new JLabel("Yhtään suoritetta ei ole valittuna.");
         
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new SuoritteetPanelLisaaSuoriteValitustaPoikkeusIkkunaOkKuuntelija(dialog));
+        okButton.addActionListener(new SuoritteetPanelMuokkaaValittuaPoikkeusIkkunaOkKuuntelija(dialog));
         
         panel.add(teksti1);
         panel.add(okButton);

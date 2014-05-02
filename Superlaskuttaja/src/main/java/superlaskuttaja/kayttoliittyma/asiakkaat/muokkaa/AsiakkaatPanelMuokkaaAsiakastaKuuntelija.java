@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.poista.AsiakkaatPanelPoistaAsiakasAsiakkaallaSuoritteitaPoikkeusIkkuna;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -36,8 +37,16 @@ public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener 
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
+                for (int i = 0; i < lataaja.getLadattuTietovarasto().getSuoritteet().size(); i++) {
+                    if (lataaja.getLadattuTietovarasto().getAsiakkaat().get(kuuntelija.getPaivitettyArvo()).equals(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getAsiakas())) {
+                        throw new IllegalStateException();
+                    }
+                }
                 MuokkaaAsiakastaIkkuna muokkaaAsiakasta = new MuokkaaAsiakastaIkkuna(lataaja, taulukko, kuuntelija, lukko);
                 SwingUtilities.invokeLater(muokkaaAsiakasta);
+            } catch (IllegalStateException e) {
+                AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkunaAsiakkaallaSuoritteita poikkeusIkkuna = new AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkunaAsiakkaallaSuoritteita();
+                SwingUtilities.invokeLater(poikkeusIkkuna);
             } catch (Exception e) {
                 AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna poikkeusIkkuna = new AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkuna();
                 SwingUtilities.invokeLater(poikkeusIkkuna);

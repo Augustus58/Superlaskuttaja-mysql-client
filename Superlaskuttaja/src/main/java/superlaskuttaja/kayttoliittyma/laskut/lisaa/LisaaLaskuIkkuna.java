@@ -6,7 +6,6 @@
 package superlaskuttaja.kayttoliittyma.laskut.lisaa;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -27,9 +26,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
+import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -43,13 +45,17 @@ public class LisaaLaskuIkkuna implements Runnable {
     private final LaskutTaulukko taulukko;
     private final NappulaLukko lukko;
     private final SuoritteetTaulukko suoritteetTaulukko;
+    private final AsiakkaatTaulukko asiakkaatTaulukko;
+    private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
     private final DateFormat pvmFormaatti;
 
-    public LisaaLaskuIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
+    public LisaaLaskuIkkuna(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
         this.suoritteetTaulukko = suoritteetTaulukko;
+        this.asiakkaatTaulukko = asiakkaatTaulukko;
+        this.laskuttajaOsioJPanel = laskuttajaOsioJPanel;
         this.pvmFormaatti = new SimpleDateFormat("dd.MM.yyyy");
     }
 
@@ -61,7 +67,6 @@ public class LisaaLaskuIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
 
         IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(kuuntelija);
@@ -226,6 +231,8 @@ public class LisaaLaskuIkkuna implements Runnable {
                 maksuehtoKentta,
                 lisatiedotKentta,
                 suoritteetTaulukko,
+                asiakkaatTaulukko,
+                laskuttajaOsioJPanel,
                 lataaja,
                 taulukko,
                 frame,

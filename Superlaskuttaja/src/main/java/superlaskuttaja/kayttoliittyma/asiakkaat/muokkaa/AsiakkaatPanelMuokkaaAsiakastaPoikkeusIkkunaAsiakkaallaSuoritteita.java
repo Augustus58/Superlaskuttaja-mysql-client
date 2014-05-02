@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package superlaskuttaja.kayttoliittyma.suoritteet.poista;
+package superlaskuttaja.kayttoliittyma.asiakkaat.muokkaa;
 
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author Augustus58
  */
-public class SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna implements Runnable {
+public class AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkunaAsiakkaallaSuoritteita implements Runnable {
 
     private JDialog dialog;
 
@@ -49,10 +49,10 @@ public class SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna impleme
         
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
-        JLabel teksti1 = new JLabel("Suorite on jollain laskulla. Poista suoritteen sisältävä lasku ensin.");
+        JLabel teksti1 = new JLabel("Asiakkaalla on suoritteita. Poista suoritteet ensin tai tee uusi versio asiakkaasta.");
         
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkunaOkKuuntelija(dialog));
+        okButton.addActionListener(new AsiakkaatPanelMuokkaaAsiakastaPoikkeusIkkunaAsiakkaallaSuoritteitaOkKuuntelija(dialog));
         
         panel.add(teksti1);
         panel.add(okButton);

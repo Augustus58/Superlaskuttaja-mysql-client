@@ -33,11 +33,11 @@ public class AsiakkaatPanel extends JPanel {
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanel(Lataaja lataaja, NappulaLukko lukko) {
+    public AsiakkaatPanel(Lataaja lataaja, NappulaLukko lukko, AsiakkaatTaulukko asiakkaatTaulukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
-        this.taulukko = new AsiakkaatTaulukko(lataaja);
+        this.taulukko = asiakkaatTaulukko;
         this.kuuntelija = new TaulukkoValintaKuuntelija(taulukko.getTaulukko());
         this.lukko = lukko;
         luoKomponentit();

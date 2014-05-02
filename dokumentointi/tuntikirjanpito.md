@@ -48,3 +48,4 @@
 - **27.4.2014 5h** Testien tekemistä, dubuggaamista ja JavaDoc-kommentointia.
 - **1.5.2014 1h** Tehty rakennekuvaus ja päivitetty luokkakaaviota.
 - **1.5.2014 2h** Käyttöliittymän bugien korjaamista ja kehittämistä.
+- **2.5.2014 10h** Loppurutistus. Käyttöliittymän hiomista. Käyttöohjeiden tekemistä.

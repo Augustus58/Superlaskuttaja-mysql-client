@@ -20,9 +20,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
-import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -52,7 +52,6 @@ public class MuokkaaAsiakastaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
         
         IkkunaKuuntelija ikkinaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkinaKuuntelija);

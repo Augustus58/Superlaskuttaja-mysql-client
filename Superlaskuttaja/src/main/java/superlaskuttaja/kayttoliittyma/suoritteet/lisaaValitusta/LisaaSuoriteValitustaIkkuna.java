@@ -6,7 +6,6 @@
 package superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -23,8 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import sun.java2d.pipe.SpanShapeRenderer;
 import superlaskuttaja.kayttoliittyma.ComboBoxKuuntelija;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
@@ -59,7 +58,6 @@ public class LisaaSuoriteValitustaIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
 
         IkkunaKuuntelija ikkunaKuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(ikkunaKuuntelija);

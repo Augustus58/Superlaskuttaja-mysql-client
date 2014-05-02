@@ -6,7 +6,6 @@
 package superlaskuttaja.kayttoliittyma.asiakkaat.lisaa;
 
 import java.awt.Component;
-import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,8 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
+import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
+import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.logiikka.Lataaja;
 
 /**
@@ -48,7 +48,6 @@ public class LisaaAsiakasIkkuna implements Runnable {
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
         
         IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(kuuntelija);
@@ -71,22 +70,22 @@ public class LisaaAsiakasIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel nimiTeksti = new JLabel("Nimi:");
-        JTextField nimiKentta = new JTextField("1");
+        JTextField nimiKentta = new JTextField();
 
         JLabel katuosoiteTeksti = new JLabel("Katuosoite:");
-        JTextField katuosoiteKentta = new JTextField("1");
+        JTextField katuosoiteKentta = new JTextField();
 
         JLabel postinumeroTeksti = new JLabel("Postinumero:");
-        JTextField postinumeroKentta = new JTextField("1");
+        JTextField postinumeroKentta = new JTextField();
 
         JLabel kaupunkiTeksti = new JLabel("Kaupunki:");
-        JTextField kaupunkiKentta = new JTextField("1");
+        JTextField kaupunkiKentta = new JTextField();
 
         JLabel asiakasnumeroTeksti = new JLabel("Asiakasnumero (ei etunollia ja pit. väh. kaksi):");
-        JTextField asiakasnumeroKentta = new JTextField("14");
+        JTextField asiakasnumeroKentta = new JTextField();
 
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty:");
-        JTextField laskujaLahetettyKentta = new JTextField("1");
+        JTextField laskujaLahetettyKentta = new JTextField();
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
