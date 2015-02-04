@@ -7,13 +7,14 @@ package superlaskuttaja.kayttoliittyma.laskut.lisaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.laskut.LaskutTaulukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
-import superlaskuttaja.kayttoliittyma.yhteenveto.LaskuttajaOsioJPanel;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.kayttoliittyma.laskuttaja.LaskuttajaOsioJPanel;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -21,14 +22,14 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final LaskutTaulukko taulukko;
     private final NappulaLukko lukko;
     private final SuoritteetTaulukko suoritteetTaulukko;
     private final AsiakkaatTaulukko asiakkaatTaulukko;
     private final LaskuttajaOsioJPanel laskuttajaOsioJPanel;
 
-    public LaskutPanelLisaaLaskuKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
+    public LaskutPanelLisaaLaskuKuuntelija(DataDeliver lataaja, LaskutTaulukko taulukko, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko, AsiakkaatTaulukko asiakkaatTaulukko, LaskuttajaOsioJPanel laskuttajaOsioJPanel) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
@@ -41,13 +42,16 @@ public class LaskutPanelLisaaLaskuKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
             try {
-                if (!lataaja.getLadattuTietovarasto().isLaskuttajaLisatty()) {
+                ResultSet rs = lataaja.getDbc().executeQuery("select * from Laskuttaja");
+                if (!rs.first()) {
                     throw new NullPointerException("Laskuttajan tietoja ei ole lisätty.");
                 }
-                if (lataaja.getLadattuTietovarasto().getAsiakkaat().isEmpty()) {
+                rs = lataaja.getDbc().executeQuery("select * from Asiakas");
+                if (!rs.first()) {
                     throw new NullPointerException("Ei asiakkaita.");
                 }
-                if (lataaja.getLadattuTietovarasto().getSuoritteet().isEmpty()) {
+                rs = lataaja.getDbc().executeQuery("select * from Suorite");
+                if (!rs.first()) {
                     throw new NullPointerException("Ei suoritteita.");
                 }
                 LisaaLaskuIkkuna lisaaSuorite = new LisaaLaskuIkkuna(lataaja, taulukko, lukko, suoritteetTaulukko, asiakkaatTaulukko, laskuttajaOsioJPanel);

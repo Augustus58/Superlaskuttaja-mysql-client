@@ -273,12 +273,36 @@ public class Lasku {
     }
 
     /**
+     * Metodi kertoo onko laskun viivästyskorko oikeanlainen.
+     *
+     * @param p Tarkistettava viivastyskorko.
+     * @return Tieto viivästyskoron oikeanlaisuudesta.
+     */
+    public static Boolean onkoViivastyskorkoOikeanlainen(int p) {
+        if (p < 0 || p > 100) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Metodi kertoo onko laskun maksuehto oikeanlainen.
      *
      * @return Tieto maksuehdon oikeanlaisuudesta.
      */
     public Boolean onkoMaksuehtoOikeanlainen() {
         return (!tarkistin.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(maksuehto));
+    }
+    
+    /**
+     * Metodi kertoo onko laskun maksuehto oikeanlainen.
+     *
+     * @param p Tarkistettava maksuehto.
+     * @return Tieto maksuehdon oikeanlaisuudesta.
+     */
+    public static Boolean onkoMaksuehtoOikeanlainen(String p) {
+        MerkkiJaMerkkijonoTarkistin t = new MerkkiJaMerkkijonoTarkistin();
+        return (!t.onkoMerkkijonoTyhjaTaiKoostuukoSeValilyonneista(p));
     }
 
     /**

@@ -1,0 +1,74 @@
+actor:Actor
+kayttoliittyma:Kayttoliittyma
+/lisaaSuoriteKuuntelija:SuoritteetPanelLisaaSuoriteKuuntelija
+/lisaaSuoriteIkkuna:LisaaSuoriteIkkuna
+/lisaaKuuntelija:LisaaSuoriteIkkunaLisaaKuuntelija
+/poikkeusIkkuna:LisaaSuoriteIkkunaLisaaSuoritePoikkeusIkkuna
+/poikkeusIkkunaOkKuuntelija:SuoritteetPanelLisaaSuoritePoikkeusIkkunaOkKuuntelija
+/alunPoikkeusIkkuna:SuoritteetPanelLisaaSuoritePoikkeusIkkuna
+/alunPoikkeusIkkunaOkKuuntelija:SuoritteetPanelLisaaSuoritePoikkeusIkkunaOkKuuntelija
+/suorite:Suorite
+lataaja:Lataaja
+tietovarasto:Tietovarasto
+tarkistin:MerkkiJaMerkkijonoTarkistin
+asiakkaat:ArrayList<Asiakas>
+suoritteet:ArrayList<Suorite>
+taulukko:Taulukko
+lukko:NappulaLukko
+
+kayttoliittyma:lisaaSuoriteKuuntelija.new(lataaja, taulukko, lukko)
+actor:kayttoliittyma.Lisää suorite
+kayttoliittyma:lisaaSuoriteKuuntelija.actionPerformed()
+lisaaSuoriteKuuntelija:onkoLukkoPaalla=lukko.onkoLukkoPaalla()
+
+[c:alt onkoLukkoPaalla == false]
+	lisaaSuoriteKuuntelija:asiakkaat=lataaja.getLadattuTietovarasto()
+	lataaja:asiakkaat=tietovarasto.getAsiakkaat()
+	lisaaSuoriteKuuntelija:asiakkaatTyhja=asiakkaat.isEmpty()
+	[c:alt asiakkaatTyhja == false]
+		lisaaSuoriteKuuntelija:lisaaSuoriteIkkuna.new(lataaja, taulukko, lukko)
+		lisaaSuoriteIkkuna:lisaaKuuntelija.new(comboBoxkuuntelija, \\nkuvausKentta, pvmKentta, maaraKentta, \\nmaaranYksikotKentta, aHintaKentta, \\nalvProsKentta, lataaja, taulukko, \\nframe, lukko)
+		[c:loop while tietoja ei syötetty tai tiedoissa virhe]
+			actor:lisaaSuoriteIkkuna.Käyttäjä valitsee asiakkaan \\nja syöttää tarvittavat suoritteen tiedot
+			actor:lisaaSuoriteIkkuna.Lisää
+			lisaaSuoriteIkkuna:lisaaKuuntelija.actionPerformed()
+			lisaaKuuntelija:suoritteenAsiakas=lataaja.getLadattuTietovarasto()
+			lataaja:suoritteenAsiakas=tietovarasto.getAsiakkaat()
+			tietovarasto:suoritteenAsiakas=asiakkaat.get(kuuntelija.getValinta())
+			lisaaKuuntelija:onkoMerkkijonoMuotoaNnPisteNnPisteNnnn=tarkistin.onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(pvmKentta.getText())
+			[c:alt onkoMerkkijonoMuotoaNnPisteNnPisteNnnn == true]
+				lisaaKuuntelija:onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi=tarkistin.onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(pvmKentta.getText())	
+				[c:alt onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi == true]
+					lisaaKuuntelija:suorite.new(suoritteen tiedot)
+					lisaaKuuntelija:onkoTiedotOikeanlaisetPaitsiPvm=suorite.onkoTiedotOikeanlaisetPaitsiPvm()
+					[c:alt onkoTiedotOikeanlaisetPaitsiPvm == true]
+						lisaaKuuntelija:suoritteet=lataaja.getLadattuTietovarasto()
+						lataaja:suoritteet=tietovarasto.getSuoritteet()
+						lisaaKuuntelija:suoritteet.add(suorite)
+						lisaaKuuntelija:taulukko.addSuoritteetTaulukkoRivi(suorite)
+					--[else]
+						lisaaKuuntelija:poikkeusIkkuna.new()
+						poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.new()
+						actor:poikkeusIkkuna.Käyttäjä lukee virheviestin "Jokin syöte virheellinen" ja kuittaa OK
+						poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.actionPerformed()
+						poikkeusIkkunaOkKuuntelija:Palataan silmukan alkuun
+					[/c]
+				--[else]
+					actor:poikkeusIkkuna.Käyttäjä lukee virheviestin "Jokin syöte virheellinen" ja kuittaa OK
+					poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.actionPerformed()
+					poikkeusIkkunaOkKuuntelija:Palataan silmukan alkuun
+				[/c]
+			--[else]
+				actor:poikkeusIkkuna.Käyttäjä lukee virheviestin "Jokin syöte virheellinen" ja kuittaa OK
+				poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.actionPerformed()
+				poikkeusIkkunaOkKuuntelija:Palataan silmukan alkuun
+			[/c]
+		[/c]
+	--[else]
+		lisaaSuoriteKuuntelija[0,1]:alunPoikkeusIkkuna.new()
+		alunPoikkeusIkkuna:alunPoikkeusIkkunaOkKuuntelija.new()
+		actor:alunPoikkeusIkkuna.Käyttäjä lukee virheviestin "Ei asiakkaita" ja kuittaa OK
+		alunPoikkeusIkkuna:alunPoikkeusIkkunaOkKuuntelija.actionPerformed()
+		alunPoikkeusIkkunaOkKuuntelija:Palataan kaavion alkupisteeseen
+	[/c]
+[/c]

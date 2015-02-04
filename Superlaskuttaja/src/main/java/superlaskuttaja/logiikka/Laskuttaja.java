@@ -71,7 +71,7 @@ public class Laskuttaja {
         this.laskujaLahetetty = laskujaLahetetty;
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
-
+    
     /**
      * Metodi kertoo onko laskuttajan nimi oikeanlainen.
      *

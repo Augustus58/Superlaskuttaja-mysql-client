@@ -37,10 +37,10 @@ public class AsiakasTest {
     @Before
     public void setUp() {
         // Luodaan asiakkaat, joiden tietojen pitäisi mennä läpi tarkistuksista.
-        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        asiakas2 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000);
-        asiakas3 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000);
+        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "testi.testi@helsinki.fi");
+        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "testi.testi@helsinki.fi");
+        asiakas2 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000, "elmeri.kantola@nuorgam.fi");
+        asiakas3 = new Asiakas("1234", "Elmeri Kantola", "Katu 75", "00347", "Nuorgam", 10000, "elmeri.kantola@nuorgam.fi");
     }
 
     @After
@@ -140,7 +140,7 @@ public class AsiakasTest {
         asiakas.setAsiakasnumero("02435345");
         assertFalse(asiakas.onkoAsiakasnumeroOikeanlainen());
     }
-
+    
     @Test
     public void onkoPostinumeroOikeanlainenToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoPostinumeroOikeanlainen());
@@ -182,7 +182,31 @@ public class AsiakasTest {
         asiakas.setLaskujaLahetetty(-5000);
         assertFalse(asiakas.onkoLaskujaLahetettyOikeanlainen());
     }
-
+    
+    @Test
+    public void onkoSahkopostiosoiteOikeanlainenToimiiOikeinOikeillaTiedoilla() {
+        asiakas.setEmail("a.b@c.com");
+        assertTrue(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail("elmeri.mallikas@mallila.fi");
+        assertTrue(asiakas.onkoSahkopostiOikeanlainen());
+    }
+    
+    @Test
+    public void onkoSahkopostiosoiteOikeanlainenToimiiOikeinVaarillaTiedoilla() {
+        asiakas.setEmail("");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail("asd");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail("ffffkk.gr@");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail("346346");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail(" ");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+        asiakas.setEmail("     ");
+        assertFalse(asiakas.onkoSahkopostiOikeanlainen());
+    }
+    
     @Test
     public void onkoTiedotOikeanlaisetToimiiOikeinOikeillaTiedoilla() {
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
@@ -218,6 +242,11 @@ public class AsiakasTest {
         asiakas.setAsiakasnumero("f");
         assertFalse(asiakas.onkoTiedotOikeanlaiset());
         asiakas.setAsiakasnumero("10");
+        assertTrue(asiakas.onkoTiedotOikeanlaiset());
+        
+        asiakas.setEmail("f");
+        assertFalse(asiakas.onkoTiedotOikeanlaiset());
+        asiakas.setEmail("f.g@h.fi");
         assertTrue(asiakas.onkoTiedotOikeanlaiset());
     }
     

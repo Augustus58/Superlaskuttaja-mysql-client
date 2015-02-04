@@ -5,6 +5,8 @@
  */
 package superlaskuttaja.kayttoliittyma.suoritteet.muokkaa;
 
+import superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta.*;
+import superlaskuttaja.kayttoliittyma.suoritteet.lisaa.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JDialog;

@@ -9,6 +9,9 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.IkkunaKuuntelija;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -30,11 +33,11 @@ import superlaskuttaja.logiikka.Lataaja;
 public class LisaaAsiakasIkkuna implements Runnable {
 
     private JFrame frame;
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final NappulaLukko lukko;
 
-    public LisaaAsiakasIkkuna(Lataaja lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
+    public LisaaAsiakasIkkuna(DataDeliver lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
@@ -45,15 +48,23 @@ public class LisaaAsiakasIkkuna implements Runnable {
         lukko.lukitse();
 
         frame = new JFrame("Lisää asiakas");
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
         frame.setLocation(130, 90);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         IkkunaKuuntelija kuuntelija = new IkkunaKuuntelija(lukko);
         frame.addWindowListener(kuuntelija);
 
         luoKomponentit(frame.getContentPane());
         frame.pack();
+
+        Dimension frameSize = frame.getSize();
+        int x = (screenSize.width - frameSize.width) / 2;
+        int y = (screenSize.height - frameSize.height) / 2;
+        frame.setLocation(x, y);
+
         frame.setVisible(true);
     }
 
@@ -81,15 +92,32 @@ public class LisaaAsiakasIkkuna implements Runnable {
         JLabel kaupunkiTeksti = new JLabel("Kaupunki:");
         JTextField kaupunkiKentta = new JTextField();
 
+        JLabel emailTeksti = new JLabel("Sähköposti:");
+        JTextField emailKentta = new JTextField();
+
+        ResultSet rs = lataaja.getDbc().executeQuery("select max(asiakasnumero) from Asiakas");
+        String anro = "";
+        try {
+            rs.first();
+            if (rs.getInt(1) == 0) {
+                anro = "1000";
+            } else {
+                anro = Integer.toString(rs.getInt(1) + 1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+        }
+
         JLabel asiakasnumeroTeksti = new JLabel("Asiakasnumero (ei etunollia ja pit. väh. kaksi):");
-        JTextField asiakasnumeroKentta = new JTextField();
+        JTextField asiakasnumeroKentta = new JTextField(anro);
 
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty:");
         JTextField laskujaLahetettyKentta = new JTextField();
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
-        LisaaAsiakasIkkunaLisaaKuuntelija kuuntelija = new LisaaAsiakasIkkunaLisaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame, lukko);
+        LisaaAsiakasIkkunaLisaaKuuntelija kuuntelija = new LisaaAsiakasIkkunaLisaaKuuntelija(nimiKentta, katuosoiteKentta, postinumeroKentta, kaupunkiKentta, emailKentta, asiakasnumeroKentta, laskujaLahetettyKentta, lataaja, taulukko, frame, lukko);
         lisaa.addActionListener(kuuntelija);
 
         tiedotPanel.add(nimiTeksti);
@@ -100,6 +128,8 @@ public class LisaaAsiakasIkkuna implements Runnable {
         tiedotPanel.add(postinumeroKentta);
         tiedotPanel.add(kaupunkiTeksti);
         tiedotPanel.add(kaupunkiKentta);
+        tiedotPanel.add(emailTeksti);
+        tiedotPanel.add(emailKentta);
         tiedotPanel.add(asiakasnumeroTeksti);
         tiedotPanel.add(asiakasnumeroKentta);
         tiedotPanel.add(laskujaLahetettyTeksti);

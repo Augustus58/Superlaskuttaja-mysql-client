@@ -7,6 +7,8 @@ package superlaskuttaja.kayttoliittyma.asiakkaat.muokkaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -14,7 +16,7 @@ import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.logiikka.Asiakas;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -26,56 +28,79 @@ public class MuokkaaAsiakastaIkkunaMuokkaaKuuntelija implements ActionListener {
     private final JTextField katuosoiteKentta;
     private final JTextField postinumeroKentta;
     private final JTextField kaupunkiKentta;
-    private final JTextField asiakasnumeroKentta;
+    private final JTextField emailKentta;
     private final JTextField laskujaLahetettyKentta;
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final JFrame frame;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField asiakasnumeroKentta, JTextField laskujaLahetettyKentta, Lataaja lataaja, AsiakkaatTaulukko taulukko, JFrame frame, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public MuokkaaAsiakastaIkkunaMuokkaaKuuntelija(JTextField nimiKentta, JTextField katuosoiteKentta, JTextField postinumeroKentta, JTextField kaupunkiKentta, JTextField emailKentta, JTextField laskujaLahetettyKentta, DataDeliver lataaja, AsiakkaatTaulukko taulukko, JFrame frame, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.nimiKentta = nimiKentta;
         this.katuosoiteKentta = katuosoiteKentta;
         this.postinumeroKentta = postinumeroKentta;
         this.kaupunkiKentta = kaupunkiKentta;
-        this.asiakasnumeroKentta = asiakasnumeroKentta;
+        this.emailKentta = emailKentta;
         this.laskujaLahetettyKentta = laskujaLahetettyKentta;
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.frame = frame;
         this.kuuntelija = kuuntelija;
         this.lukko = lukko;
-    }    
+    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
-            Asiakas vanhaAsiakas = new Asiakas(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 4),
-                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 0),
-                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 1),
-                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 2),
-                    taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 3),
-                    Integer.parseInt(taulukko.getValueString(kuuntelija.getPaivitettyArvo(), 5)));
-            
-            Asiakas asiakas = new Asiakas(asiakasnumeroKentta.getText(), nimiKentta.getText(), katuosoiteKentta.getText(), postinumeroKentta.getText(), kaupunkiKentta.getText(), Integer.parseInt(laskujaLahetettyKentta.getText()));
-            
+            String alkupAsiakasnumero = taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 5).toString();
+            Asiakas asiakas = new Asiakas(alkupAsiakasnumero, nimiKentta.getText(), katuosoiteKentta.getText(), postinumeroKentta.getText(), kaupunkiKentta.getText(), Integer.parseInt(laskujaLahetettyKentta.getText()), emailKentta.getText());
+
             if (!asiakas.onkoTiedotOikeanlaiset()) {
                 throw new IllegalArgumentException("Jokin syöte on virheellinen.");
             }
+            
+            ResultSet rs = lataaja.getDbc().executeQuery("select max(versio) from Asiakas\n"
+                    + "where asiakasnumero = " + alkupAsiakasnumero + "\n"
+                    + "");
 
-            lataaja.getLadattuTietovarasto().getAsiakkaat().remove(kuuntelija.getPaivitettyArvo().intValue());
-            lataaja.getLadattuTietovarasto().getAsiakkaat().add(kuuntelija.getPaivitettyArvo(), asiakas);
-            taulukko.getModel().insertRow(kuuntelija.getPaivitettyArvo(), asiakas.asiakkaanTiedotTaulukossa());
+            try {
+                rs.first();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+            }
+
+            int uudenVersio = rs.getInt(1) + 1;
+
+            lataaja.getDbc().executeUpdate("INSERT INTO Asiakas () VALUES ('" + alkupAsiakasnumero + "',\n"
+                    + uudenVersio + ",\n"
+                    + "'" + nimiKentta.getText() + "',\n"
+                    + "'" + katuosoiteKentta.getText() + "',\n"
+                    + "'" + postinumeroKentta.getText() + "',\n"
+                    + "'" + kaupunkiKentta.getText() + "',\n"
+                    + "'" + laskujaLahetettyKentta.getText() + "',\n"
+                    + "'" + emailKentta.getText() + "'\n"
+                    + ")");
+
+            rs = lataaja.getDbc().executeQuery("select distinct nimi, katuosoite, postinumero, kaupunki, email, asiakasnumero, laskujaLahetetty, versio\n"
+                    + "from Asiakas\n"
+                    + "where versio = " + uudenVersio + "\n"
+                    + "and asiakasnumero = " + alkupAsiakasnumero + "\n"
+                    + "");
+
+            taulukko.addAsiakkaatTaulukkoRiviKohtaan(kuuntelija.getPaivitettyArvo(), rs);
             taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo() + 1);
+
             suljeIkkuna();
         } catch (Exception e) {
+//            e.printStackTrace();
             MuokkaaAsiakastaIkkunaMuokkaaKuuntelijaPoikkeusIkkuna poikkeusIkkuna = new MuokkaaAsiakastaIkkunaMuokkaaKuuntelijaPoikkeusIkkuna();
             SwingUtilities.invokeLater(poikkeusIkkuna);
         }
-        
+
     }
-    
+
     private void suljeIkkuna() {
         frame.dispose();
         lukko.avaa();

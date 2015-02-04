@@ -8,34 +8,24 @@ package superlaskuttaja.kayttoliittyma.laskut.lisaa;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 import superlaskuttaja.logiikka.Suorite;
 
 /**
  *
  * @author Augustus58
  */
-public class LisaaLaskuIkkunaSuoritteetList extends JList {
+public class LisaaLaskuIkkunaSuoritteetList extends JList { 
 
     DefaultListModel<Suorite> model;
-    LisaaLaskutIkkunaComboBoxKuuntelija comboBoxKuuntelija;
-    Lataaja lataaja;
+    String[] listaaVastSuoritteet;
     
-    public LisaaLaskuIkkunaSuoritteetList(LisaaLaskutIkkunaComboBoxKuuntelija comboBoxKuuntelija, Lataaja lataaja) {
+    public LisaaLaskuIkkunaSuoritteetList() {
         super();
-        this.comboBoxKuuntelija = comboBoxKuuntelija;
-        this.lataaja = lataaja;
         this.model = new DefaultListModel<>();
         this.setModel(model);
     }
     
-    public void paivitaListanSisalto() {
-        model.removeAllElements();
-        for (int i = 0; i < lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta())).size(); i++) {
-            model.addElement(lataaja.getLadattuTietovarasto().asiakkaanLaskuttamattomatSuoritteetArrayList(lataaja.getLadattuTietovarasto().getAsiakkaat().get(comboBoxKuuntelija.getValinta())).get(i));
-        }
-    }
-
     @Override
     public DefaultListModel getModel() {
         return model;
@@ -44,4 +34,13 @@ public class LisaaLaskuIkkunaSuoritteetList extends JList {
     public int[] valitutRivit() {
         return this.getSelectedIndices();
     }
+
+    public void setListaaVastSuoritteet(String[] listaaVastSuoritteet) {
+        this.listaaVastSuoritteet = listaaVastSuoritteet;
+    }
+
+    public String[] getListaaVastSuoritteet() {
+        return listaaVastSuoritteet;
+    }
+    
 }

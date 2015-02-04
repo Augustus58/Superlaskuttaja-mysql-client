@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import superlaskuttaja.kayttoliittyma.TableModelSolujenMuokkaaminenEstetty;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -19,12 +19,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class LaskutPanelNaytaKriteerinSisKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final LaskutTaulukko taulukko;
     private final ComboBoxKuuntelija kuuntelija;
     private final JTextField kriteeriTekstikentta;
 
-    public LaskutPanelNaytaKriteerinSisKuuntelija(Lataaja lataaja, LaskutTaulukko taulukko, ComboBoxKuuntelija kuuntelija, JTextField kriteeriTekstikentta) {
+    public LaskutPanelNaytaKriteerinSisKuuntelija(DataDeliver lataaja, LaskutTaulukko taulukko, ComboBoxKuuntelija kuuntelija, JTextField kriteeriTekstikentta) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;

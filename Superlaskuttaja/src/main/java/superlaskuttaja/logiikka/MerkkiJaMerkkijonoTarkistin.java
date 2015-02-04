@@ -200,6 +200,30 @@ public class MerkkiJaMerkkijonoTarkistin {
         }
         return false;
     }
+    
+    /**
+     * Metodi tarkistaa onko merkkijono muotoa "nn.nn.nnnn nn.nn".
+     *
+     * @param merkkijono Tarkistettava merkkijono.
+     * @return Tieto onko merkkijono muotoa "nn.nn.nnnn nn.nn".
+     */
+    public Boolean onkoMerkkijonoMuotoaNnPisteNnPisteNnnnValiNnPisteNn(String merkkijono) {
+        if (merkkijono.length() != 16) {
+            return false;
+        }
+        if (koostuukoMerkkijonoNumeroista(merkkijono.substring(0, 2))
+                && merkkijono.substring(2, 3).equals(".")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(3, 5))
+                && merkkijono.substring(5, 6).equals(".")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(6, 10))
+                && merkkijono.substring(10, 11).equals(" ")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(11, 13))
+                && merkkijono.substring(13, 14).equals(".")
+                && koostuukoMerkkijonoNumeroista(merkkijono.substring(14, 16))) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Metodi tarkistaa onko merkkijonona annettu päivämäärä muotoa "dd.MM.yyyy"
@@ -213,6 +237,60 @@ public class MerkkiJaMerkkijonoTarkistin {
      */
     public Boolean onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(String merkkijono) {
         return (GenericValidator.isDate(merkkijono, "dd.MM.yyyy", true));
+    }
+    
+    /**
+     * Metodi tarkistaa onko merkkijonona annettu päivämäärä muotoa "dd.MM.yyyy hh.mm"
+     * validi.
+     * <p>
+     * Tarkistukseen käytetään Apache Commons repon validator luokkaa
+     * GenericValidator.
+     *
+     * @param merkkijono Tarkistettava päivämäärä merkkijonona.
+     * @return Tieto onko merkkijonona annettu päivämäärä validi vai ei.
+     */
+    public Boolean onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValiNnPisteNnValidi(String merkkijono) {
+        return (GenericValidator.isDate(merkkijono, "dd.MM.yyyy HH.mm", true));
+    }
+    
+    /**
+     * Metodi tarkistaa onko merkkijonono muotoa "dd.MM.yyyy hh.mm" oleva
+     * validi päivämäärä.
+     * <p>
+     * Tarkistukseen käytetään mm. Apache Commons repon validator luokkaa
+     * GenericValidator.
+     *
+     * @param merkkijono Tarkistettava merkkijono.
+     * @return Tieto onko merkkijono muotoa "dd.MM.yyyy hh.mm" oleva päivämäärä vai ei.
+     */
+    public Boolean onkoMerkkijonoMuotoaNnPisteNnPisteNnnnValiNnPisteNnOlevaPvm(String merkkijono) {
+        if (!onkoMerkkijonoMuotoaNnPisteNnPisteNnnnValiNnPisteNn(merkkijono)) {
+            return false;
+        }
+        if (!onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValiNnPisteNnValidi(merkkijono)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Metodi tarkistaa onko merkkijonono muotoa "dd.MM.yyyy" oleva
+     * validi päivämäärä.
+     * <p>
+     * Tarkistukseen käytetään mm. Apache Commons repon validator luokkaa
+     * GenericValidator.
+     *
+     * @param merkkijono Tarkistettava merkkijono.
+     * @return Tieto onko merkkijono muotoa "dd.MM.yyyy" oleva päivämäärä vai ei.
+     */
+    public Boolean onkoMerkkijonoMuotoaNnPisteNnPisteNnnnOlevaPvm(String merkkijono) {
+        if (!onkoMerkkijonoMuotoaNnPisteNnPisteNnnn(merkkijono)) {
+            return false;
+        }
+        if (!onkoPvmMerkkijonoMuotoaNnPisteNnPisteNnnnValidi(merkkijono)) {
+            return false;
+        }
+        return true;
     }
 
     /**

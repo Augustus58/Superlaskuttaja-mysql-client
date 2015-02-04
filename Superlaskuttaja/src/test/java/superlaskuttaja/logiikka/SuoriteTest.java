@@ -56,15 +56,15 @@ public class SuoriteTest {
     @Before
     public void setUp() {
         //Asetetaan suorite-oliolle sellaiset tiedot, joiden pitäisi olla oikeanlaiset.
-        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
+        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "elmeri.asiakas@elmericity.fi");
+        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "elmeri.asiakas@elmericity.fi");
         date = new GregorianCalendar(2014, 4 - 1, 2);
         date1 = new GregorianCalendar(2014, 4 - 1, 2);
         suorite = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
         suorite1 = new Suorite(asiakas1, "Kuvaus", date1, 2.0, "h", 75.0, 24);
         
-        asiakas2 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
-        asiakas3 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000);
+        asiakas2 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000, "elmeri.e@gmail.com");
+        asiakas3 = new Asiakas("23", "Elmeri", "katu 17 B 45", "00345", "Elmericity-15", 10000, "elmeri.e@gmail.com");
         date2 = new GregorianCalendar(2010, 4 - 1, 4);
         date3 = new GregorianCalendar(2010, 4 - 1, 4);
         suorite2 = new Suorite(asiakas2, "Kuvaus", date2, 1.0, "h", 72.0, 25);

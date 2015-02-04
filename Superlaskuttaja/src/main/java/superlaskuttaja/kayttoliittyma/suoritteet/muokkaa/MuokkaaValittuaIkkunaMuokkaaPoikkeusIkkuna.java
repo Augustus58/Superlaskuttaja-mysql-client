@@ -5,6 +5,8 @@
  */
 package superlaskuttaja.kayttoliittyma.suoritteet.muokkaa;
 
+import superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta.*;
+import superlaskuttaja.kayttoliittyma.suoritteet.lisaa.*;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JButton;

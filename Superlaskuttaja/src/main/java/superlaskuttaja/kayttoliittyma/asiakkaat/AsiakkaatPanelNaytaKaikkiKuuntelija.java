@@ -7,7 +7,7 @@ package superlaskuttaja.kayttoliittyma.asiakkaat;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -15,10 +15,10 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class AsiakkaatPanelNaytaKaikkiKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
 
-    public AsiakkaatPanelNaytaKaikkiKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko) {
+    public AsiakkaatPanelNaytaKaikkiKuuntelija(DataDeliver lataaja, AsiakkaatTaulukko taulukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
     }

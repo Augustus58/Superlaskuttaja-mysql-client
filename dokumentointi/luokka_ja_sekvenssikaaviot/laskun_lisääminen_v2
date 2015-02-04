@@ -1,0 +1,71 @@
+actor:Actor
+kayttoliittyma:Kayttoliittyma
+/lisaaLaskuKuuntelija:LaskutPanelLisaaLaskuKuuntelija
+/lisaaLaskuIkkuna:LisaaLaskuIkkuna
+/lisaaKuuntelija:LisaaLaskuIkkunaLisaaKuuntelija
+/poikkeusIkkuna:LisaaLaskuIkkunaLisaaLaskuPoikkeusIkkuna
+/poikkeusIkkunaOkKuuntelija:LaskutPanelLisaaLaskuPoikkeusIkkunaOkKuuntelija
+/alunPoikkeusIkkuna:LaskutPanelLisaaLaskuPoikkeusIkkuna
+/alunPoikkeusIkkunaOkKuuntelija:LaskutPanelLisaaLaskuPoikkeusIkkunaOkKuuntelija
+/lasku:Lasku
+lataaja:Lataaja
+tietovarasto:Tietovarasto
+tarkistin:MerkkiJaMerkkijonoTarkistin
+asiakkaat:ArrayList<Asiakas>
+suoritteet:ArrayList<Suorite>
+laskut:ArrayList<Lasku>
+taulukko:Taulukko
+lukko:NappulaLukko
+
+kayttoliittyma:lisaaLaskuKuuntelija.new(lataaja, taulukko, lukko)
+actor:kayttoliittyma.Lisää lasku
+kayttoliittyma:lisaaLaskuKuuntelija.actionPerformed()
+lisaaLaskuKuuntelija:onkoLukkoPaalla=lukko.onkoLukkoPaalla()
+
+[c:alt onkoLukkoPaalla == false]
+	lisaaLaskuKuuntelija:asiakkaat=lataaja.getLadattuTietovarasto()
+	lataaja:asiakkaat=tietovarasto.getAsiakkaat()
+	lisaaLaskuKuuntelija:asiakkaatTyhja=asiakkaat.isEmpty()
+	[c:alt asiakkaatTyhja == false]
+		lisaaLaskuKuuntelija:suoritteet=lataaja.getLadattuTietovarasto()
+		lataaja:suoritteet=tietovarasto.getSuoritteet()
+		lisaaLaskuKuuntelija:suoritteetTyhja=suoritteet.isEmpty()
+		[c:alt suoritteetTyhja == false]
+			lisaaLaskuKuuntelija:lisaaLaskuIkkuna.new(lataaja, taulukko, lukko)
+			lisaaLaskuIkkuna:lisaaKuuntelija.new(comboBoxkuuntelija, valitutSuoritteet, muutTiedot, lataaja, taulukko, frame, lukko)
+			[c:loop while tietoja ei syötetty tai tiedoissa virhe]
+				actor:lisaaLaskuIkkuna.Käyttäjä valitsee asiakkaan, suoritteet \\nja syöttää muut tarvittavat tiedot
+				actor:lisaaLaskuIkkuna.Lisää
+				lisaaLaskuIkkuna:lisaaKuuntelija.actionPerformed()
+				lisaaKuuntelija:laskunAsiakas=lataaja.getLadattuTietovarasto()
+				lataaja:laskunAsiakas=tietovarasto.getAsiakkaat()
+				tietovarasto:laskunAsiakas=asiakkaat.get(comboBoxKuuntelija.getValinta())
+				lisaaKuuntelija:lasku.new(suoritteen tiedot)
+				lisaaKuuntelija:onkoTiedotOikeanlaiset=lasku.onkoTiedotOikeanlaiset()
+				[c:alt onkoTiedotOikeanlaiset == true]
+					lisaaKuuntelija:laskut=lataaja.getLadattuTietovarasto()
+					lataaja:laskut=tietovarasto.getSuoritteet()
+					lisaaKuuntelija:laskut.add(lasku)
+					lisaaKuuntelija:taulukko.addLaskutTaulukkoRivi(lasku)
+				--[else]
+					lisaaKuuntelija:poikkeusIkkuna.new()
+					poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.new()						
+					actor:poikkeusIkkuna.Käyttäjä lukee virheviestin ja kuittaa OK
+					poikkeusIkkuna:poikkeusIkkunaOkKuuntelija.actionPerformed()
+					poikkeusIkkunaOkKuuntelija:Palataan silmukan alkuun
+				[/c]
+			[/c]
+		--[else]
+			lisaaLaskuKuuntelija[0,1]:alunPoikkeusIkkuna.new()
+			alunPoikkeusIkkuna:alunPoikkeusIkkunaOkKuuntelija.new()
+			actor:alunPoikkeusIkkuna.Käyttäjä lukee virheviestin "Ei suoritteita" ja kuittaa OK
+			alunPoikkeusIkkuna:alunPoikkeusIkkunaOkKuuntelija.actionPerformed()
+			alunPoikkeusIkkunaOkKuuntelija:Palataan kaavion alkupisteeseen
+		[/c]
+	
+	--[else]
+		actor:alunPoikkeusIkkuna.Käyttäjä lukee virheviestin "Ei asiakkaita" ja kuittaa OK
+		alunPoikkeusIkkuna:alunPoikkeusIkkunaOkKuuntelija.actionPerformed()
+		alunPoikkeusIkkunaOkKuuntelija:Palataan kaavion alkupisteeseen
+	[/c]
+[/c]

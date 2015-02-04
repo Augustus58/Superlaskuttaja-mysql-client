@@ -10,18 +10,18 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
  * @author Augustus58
  */
 public class AsiakkaatPanelLisaaAsiakasKuuntelija implements ActionListener {
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanelLisaaAsiakasKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
+    public AsiakkaatPanelLisaaAsiakasKuuntelija(DataDeliver lataaja, AsiakkaatTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;

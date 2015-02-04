@@ -6,7 +6,9 @@
 package superlaskuttaja.kayttoliittyma.suoritteet.lisaa;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -25,6 +27,8 @@ public class SuoritteetPanelLisaaSuoritePoikkeusIkkuna implements Runnable {
     @Override
     public void run() {
         dialog = new JDialog();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
         dialog.setLocation(160, 120);
         
         dialog.setResizable(false);
@@ -35,6 +39,12 @@ public class SuoritteetPanelLisaaSuoritePoikkeusIkkuna implements Runnable {
         luoKomponentit(dialog.getContentPane());
 
         dialog.pack();
+        
+        Dimension frameSize = dialog.getSize();
+        int x = (screenSize.width - frameSize.width) / 2;
+        int y = (screenSize.height - frameSize.height) / 2;
+        dialog.setLocation(x, y);
+        
         dialog.setVisible(true);
     }
 

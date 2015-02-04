@@ -11,8 +11,7 @@ import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.asiakkaat.AsiakkaatTaulukko;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
-import superlaskuttaja.kayttoliittyma.asiakkaat.poista.AsiakkaatPanelPoistaAsiakasAsiakkaallaSuoritteitaPoikkeusIkkuna;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -20,12 +19,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanelMuokkaaAsiakastaKuuntelija(Lataaja lataaja, AsiakkaatTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public AsiakkaatPanelMuokkaaAsiakastaKuuntelija(DataDeliver lataaja, AsiakkaatTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;
@@ -37,11 +36,6 @@ public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener 
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
-                for (int i = 0; i < lataaja.getLadattuTietovarasto().getSuoritteet().size(); i++) {
-                    if (lataaja.getLadattuTietovarasto().getAsiakkaat().get(kuuntelija.getPaivitettyArvo()).equals(lataaja.getLadattuTietovarasto().getSuoritteet().get(i).getAsiakas())) {
-                        throw new IllegalStateException();
-                    }
-                }
                 MuokkaaAsiakastaIkkuna muokkaaAsiakasta = new MuokkaaAsiakastaIkkuna(lataaja, taulukko, kuuntelija, lukko);
                 SwingUtilities.invokeLater(muokkaaAsiakasta);
             } catch (IllegalStateException e) {
@@ -52,6 +46,5 @@ public class AsiakkaatPanelMuokkaaAsiakastaKuuntelija implements ActionListener 
                 SwingUtilities.invokeLater(poikkeusIkkuna);
             }
         }
-
     }
 }

@@ -7,11 +7,12 @@ package superlaskuttaja.kayttoliittyma.suoritteet.poista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -19,12 +20,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class SuoritteetPanelPoistaSuoriteKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final SuoritteetTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public SuoritteetPanelPoistaSuoriteKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
+    public SuoritteetPanelPoistaSuoriteKuuntelija(DataDeliver lataaja, SuoritteetTaulukko taulukko, TaulukkoValintaKuuntelija kuuntelija, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.kuuntelija = kuuntelija;
@@ -36,12 +37,19 @@ public class SuoritteetPanelPoistaSuoriteKuuntelija implements ActionListener {
         if (!lukko.onkoLukkoPaalla()) {
             try {
                 kuuntelija.paivitaArvo();
-                for (int i = 0; i < lataaja.getLadattuTietovarasto().getLaskut().size(); i++) {
-                    if (lataaja.getLadattuTietovarasto().getLaskut().get(i).equals(lataaja.getLadattuTietovarasto().getSuoritteet().get(kuuntelija.getPaivitettyArvo()).getLasku())) {
-                        throw new IllegalStateException();
-                    }
+                ResultSet rs = lataaja.getDbc().executeQuery("select distinct *\n"
+                        + "from Suorite\n"
+                        + "where lasku is not null\n"
+                        + "and suoritteenNumero = " + taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 8).toString() + "\n"
+                        + "");
+
+                if (rs.first()) {
+                    throw new IllegalStateException();
                 }
-                lataaja.getLadattuTietovarasto().getSuoritteet().remove(kuuntelija.getPaivitettyArvo().intValue());
+                String valitunSuoritteenNumero = taulukko.getModel().getValueAt(kuuntelija.getPaivitettyArvo(), 8).toString();
+                lataaja.getDbc().executeUpdate("delete from Suorite\n"
+                        + "where suoritteenNumero = " + valitunSuoritteenNumero + "\n"
+                        + "");
                 taulukko.getModel().removeRow(kuuntelija.getPaivitettyArvo());
             } catch (IllegalStateException e) {
                 SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna poikkeusIkkuna = new SuoritteetPanelPoistaSuoriteSuoriteOnLaskullaPoikkeusIkkuna();

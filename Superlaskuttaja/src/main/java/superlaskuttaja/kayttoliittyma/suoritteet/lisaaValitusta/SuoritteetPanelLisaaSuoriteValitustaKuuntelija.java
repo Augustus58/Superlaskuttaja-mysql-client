@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -19,12 +19,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class SuoritteetPanelLisaaSuoriteValitustaKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
 
-    public SuoritteetPanelLisaaSuoriteValitustaKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
+    public SuoritteetPanelLisaaSuoriteValitustaKuuntelija(DataDeliver lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko, TaulukkoValintaKuuntelija kuuntelija) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;

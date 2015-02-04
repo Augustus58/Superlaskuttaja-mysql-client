@@ -7,17 +7,17 @@ package superlaskuttaja.kayttoliittyma.suoritteet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
  * @author Augustus58
  */
 public class SuoritteetPanelNaytaKaikkiKuuntelija implements ActionListener {
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final SuoritteetTaulukko taulukko;
 
-    public SuoritteetPanelNaytaKaikkiKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko) {
+    public SuoritteetPanelNaytaKaikkiKuuntelija(DataDeliver lataaja, SuoritteetTaulukko taulukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;        
     }   

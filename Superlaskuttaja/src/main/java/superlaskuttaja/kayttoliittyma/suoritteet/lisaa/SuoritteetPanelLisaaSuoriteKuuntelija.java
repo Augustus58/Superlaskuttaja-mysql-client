@@ -7,10 +7,11 @@ package superlaskuttaja.kayttoliittyma.suoritteet.lisaa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import javax.swing.SwingUtilities;
 import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.suoritteet.SuoritteetTaulukko;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -18,11 +19,11 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class SuoritteetPanelLisaaSuoriteKuuntelija implements ActionListener {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final SuoritteetTaulukko taulukko;
     private final NappulaLukko lukko;
 
-    public SuoritteetPanelLisaaSuoriteKuuntelija(Lataaja lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko) {
+    public SuoritteetPanelLisaaSuoriteKuuntelija(DataDeliver lataaja, SuoritteetTaulukko taulukko, NappulaLukko lukko) {
         this.lataaja = lataaja;
         this.taulukko = taulukko;
         this.lukko = lukko;
@@ -32,7 +33,11 @@ public class SuoritteetPanelLisaaSuoriteKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (!lukko.onkoLukkoPaalla()) {
             try {
-                if (lataaja.getLadattuTietovarasto().getAsiakkaat().isEmpty()) {
+                //Selvitetään onko tietokannassa asiakkaita.
+                ResultSet rs = lataaja.getDbc().executeQuery("select distinct asiakasnumero\n"
+                        + "from Asiakas\n"
+                        + "");
+                if (!rs.first()) {
                     throw new NullPointerException("Ei asiakkaita.");
                 }
                 LisaaSuoriteIkkuna lisaaSuorite = new LisaaSuoriteIkkuna(lataaja, taulukko, lukko);

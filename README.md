@@ -1,3 +1,13 @@
+## Superlaskuttaja - mysql client
+Ensimmäinen testiversio valmis. Tällä hetkellä käyttöliittymän kuuntelijoissa on logiikkaan kuuluvaa koodia, injektiosuojausta ei ole ja mysql:n mahdollistamaa transaktioiden hallintaa ei ole otettu käyttöön. Edellisiin kohtiin tulee päivitystä jos/kun projektiin liikenee aikaa. Client on kuitenkin tällä hetkellä omassa käytössä ja parantelen sitä pikkuhiljaa.
+## Jos haluat kokeilla clienttiä
+- Jos koneellasi ei ole javan ajoympäristöä eli JRE:tä asennettuna, niin asenna se osoitteesta https://java.com/en/download/
+- Lataa juuressa oleva "Superlaskuttaja-1.0-SNAPSHOT-jar-with-dependencies" - niminen tiedosto
+- Hanki Mysql-tietokanta jossa on jokin käyttäjä ja käyttäjällä on tietokanta jonka nimi on sama kuin käyttäjän. Huolehdi, että käyttäjällä on kaikki oikeudet omiin tietokantoihinsa.
+- Aja lataamasi tiedosto komentoriviltä komennolla: `java -jar Superlaskuttaja-1.0-SNAPSHOT-jar-with-dependencies.jar` tai kaksoisklikkaa lataamaasi tiedostoa
+- Kun client käynnistyy, niin klikkaa "Aseta tietokanta" alhaalta ja syötä palvelimen osoite, käyttäjätunnus ja salasana. Jos valitset "muista", niin ota huomioon, että tunnus ja salasana tallentuu selväkielisenä samaan kansioon, missä itse client on
+- Kokeile clienttiä lisäämällä ensin laskuttajan tiedot, sitten vähintään yksi asiakas jne.
+
 ## Aihemäärittely
 ### Aihe
 Laskutusohjelma. Toteutetaan ohjelma, jolla voidaan laskuttaa asiakkaita. Ohjelmaan tulee syöttää laskuttajan ja asiakkaiden tiedot. Kun edelliset tiedot on syötetty voidaan ohjelmaan lisätä asiakaskohtaisia suoritteita. Ohjelmalla voidaan laskuttaja-, asiakas -ja suoritetietojen pohjalta tehdä laskuja. Laskut voidaan viedä pdf-muotoon lähetettäväksi sähköpostilla tai muuten. Ohjelma huolehtii mm. laskujen laskujen numeroinnista kirjanpitoa varten ja viitteiden automaattisesta luomisesta asiakasnumeron ja asiakaskohtaisen laskunumeron perusteella.

@@ -21,7 +21,7 @@ import superlaskuttaja.kayttoliittyma.NappulaLukko;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.lisaaValitusta.SuoritteetPanelLisaaSuoriteValitustaKuuntelija;
 import superlaskuttaja.kayttoliittyma.suoritteet.muokkaa.SuoritteetPanelMuokkaaValittuaKuuntelija;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -29,12 +29,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class SuoritteetPanel extends JPanel {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final SuoritteetTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public SuoritteetPanel(Lataaja lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
+    public SuoritteetPanel(DataDeliver lataaja, NappulaLukko lukko, SuoritteetTaulukko suoritteetTaulukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
@@ -56,7 +56,7 @@ public class SuoritteetPanel extends JPanel {
         JPanel ylaosa = new JPanel(new GridLayout(1, 3));
         ylaosa.setMinimumSize(new Dimension(50, 32));
 
-        String[] vaihtoehdotString = {"Asiakas", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkö", "à hinta", "Alv %", "Alv €", "Yhteensä", "Laskutettu"};
+        String[] vaihtoehdotString = {"Asiakkaan nimi", "Asiakasnumero", "Kuvaus", "Päivämäärä", "Määrä", "Yksikkkö", "Yhteensä", "Laskutettu"};
         JComboBox kriteerit = new JComboBox(vaihtoehdotString);
         kriteerit.setSelectedIndex(0);
         kriteerit.setEditable(false);
@@ -94,7 +94,6 @@ public class SuoritteetPanel extends JPanel {
         // Pidetään suoritetaulukko ja suoritteet tietovarastossa samassa järjestyksessä.
         // Samaa jätjestystä tarvitaan mm. luokassa LisaaSuoriteValitustaIkkuna.
         
-        taulukko.muodostaSuoritteetTaulukko();         
         taulukko.getSelectionModel().addListSelectionListener(kuuntelija);
         
         JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko()); 

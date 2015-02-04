@@ -41,19 +41,26 @@ public class Asiakas {
      */
     private Integer laskujaLahetetty;
     /**
+     * Asiakkaan sähköpostiosoite.
+     */
+    private String email;
+    /**
      * Tarkistimella voidaan tarkistaa, että asiakkaalle tulee oikeanlaiset tiedot.
      */
     private final MerkkiJaMerkkijonoTarkistin tarkistin;
 
-    public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty) {
+    public Asiakas(String asiakasnumero, String nimi, String katuosoite, String postinumero, String kaupunki, Integer laskujaLahetetty, String email) {
         this.asiakasnumero = asiakasnumero;
         this.nimi = nimi;
         this.katuosoite = katuosoite;
         this.postinumero = postinumero;
-        this.laskujaLahetetty = laskujaLahetetty;
         this.kaupunki = kaupunki;
+        this.laskujaLahetetty = laskujaLahetetty;
+        this.email = email;
         this.tarkistin = new MerkkiJaMerkkijonoTarkistin();
     }
+
+    
 
     /**
      * Metodi kertoo onko asiakkaan tiedot oikeanlaiset.
@@ -66,7 +73,8 @@ public class Asiakas {
                 && onkoKatuosoiteOikeanlainen()
                 && onkoAsiakasnumeroOikeanlainen()
                 && onkoPostinumeroOikeanlainen()
-                && onkoLaskujaLahetettyOikeanlainen()) {
+                && onkoLaskujaLahetettyOikeanlainen()
+                && onkoSahkopostiOikeanlainen()) {
             return true;
         }
         return false;
@@ -140,6 +148,15 @@ public class Asiakas {
         }
         return false;
     }
+    
+    /**
+     * Metodi kertoo onko asiakkaan sähköpostiosoite oikeanlainen.
+     *
+     * @return Tieto sähköpostiosoitteen oikeanlaisuudesta.
+     */
+    public Boolean onkoSahkopostiOikeanlainen() {
+        return (tarkistin.onkoEmailOsoiteValidi(email));
+    }
 
     public String getAsiakasnumero() {
         return asiakasnumero;
@@ -174,6 +191,10 @@ public class Asiakas {
         return postinumero;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    
     /**
      * Metodin suorittaminen kasvattaa attribuutin laskukujaLahetetty arvoa
      * yhdellä.
@@ -230,7 +251,8 @@ public class Asiakas {
                 && this.kaupunki.equals(verrattava.kaupunki)
                 && this.laskujaLahetetty.equals(verrattava.laskujaLahetetty)
                 && this.nimi.equals(verrattava.nimi)
-                && this.postinumero.equals(verrattava.postinumero)) {
+                && this.postinumero.equals(verrattava.postinumero)
+                && this.email.equals(verrattava.email)) {
             return true;
         }
 
@@ -274,4 +296,7 @@ public class Asiakas {
         this.laskujaLahetetty = laskujaLahetetty;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

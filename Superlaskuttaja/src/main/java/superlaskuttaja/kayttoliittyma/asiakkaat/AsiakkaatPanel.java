@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import superlaskuttaja.kayttoliittyma.TaulukkoValintaKuuntelija;
-import superlaskuttaja.logiikka.Lataaja;
+import superlaskuttaja.logiikka.DataDeliver;
 
 /**
  *
@@ -28,12 +28,12 @@ import superlaskuttaja.logiikka.Lataaja;
  */
 public class AsiakkaatPanel extends JPanel {
 
-    private final Lataaja lataaja;
+    private final DataDeliver lataaja;
     private final AsiakkaatTaulukko taulukko;
     private final TaulukkoValintaKuuntelija kuuntelija;
     private final NappulaLukko lukko;
 
-    public AsiakkaatPanel(Lataaja lataaja, NappulaLukko lukko, AsiakkaatTaulukko asiakkaatTaulukko) {
+    public AsiakkaatPanel(DataDeliver lataaja, NappulaLukko lukko, AsiakkaatTaulukko asiakkaatTaulukko) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.lataaja = lataaja;
@@ -55,7 +55,7 @@ public class AsiakkaatPanel extends JPanel {
         JPanel ylaosa = new JPanel(new GridLayout(1, 3));
         ylaosa.setMinimumSize(new Dimension(50, 32));
 
-        String[] vaihtoehdotString = {"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Asiakasnumero", "Laskuja lähetetty"};
+        String[] vaihtoehdotString = {"Nimi", "Katuosoite", "Postinumero", "Kaupunki", "Sähköposti", "Asiakasnumero", "Laskuja lähetetty"};
         JComboBox kriteerit = new JComboBox(vaihtoehdotString);
         kriteerit.setSelectedIndex(0);
         kriteerit.setEditable(false);
@@ -90,7 +90,6 @@ public class AsiakkaatPanel extends JPanel {
         keskiosa.setBorder(new EmptyBorder(20, 20, 20, 20));
         keskiosa.setLayout(new BoxLayout(keskiosa, BoxLayout.Y_AXIS));
         
-        taulukko.muodostaAsiakkaatTaulukko();         
         taulukko.getSelectionModel().addListSelectionListener(kuuntelija);
         
         JScrollPane scrollPane = new JScrollPane(taulukko.getTaulukko()); 

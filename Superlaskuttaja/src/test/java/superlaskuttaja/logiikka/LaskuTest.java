@@ -7,7 +7,6 @@ package superlaskuttaja.logiikka;
  */
 import java.util.ArrayList;
 import static java.util.Calendar.DAY_OF_MONTH;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -61,8 +60,8 @@ public class LaskuTest {
 
     @Before
     public void setUp() {
-        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
-        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000);
+        asiakas = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "elmeri.asiakas@elmericity.fi");
+        asiakas1 = new Asiakas("123", "Elmeri Asiakas", "Elmerinkatu 17 B 45", "00345", "Elmericity", 100000, "elmeri.asiakas@elmericity.fi");
         date = new GregorianCalendar(2014, 4 - 1, 2);
         date1 = new GregorianCalendar(2014, 4 - 1, 2);
         suorite = new Suorite(asiakas, "Kuvaus", date, 2.0, "h", 75.0, 24);
