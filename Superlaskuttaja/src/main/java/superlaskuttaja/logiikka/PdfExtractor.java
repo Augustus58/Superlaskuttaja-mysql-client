@@ -572,6 +572,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             cell = new PdfPCell();
@@ -582,6 +585,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             table1.completeRow();
@@ -604,6 +610,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             cell = new PdfPCell();
@@ -614,6 +623,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             table1.completeRow();
@@ -636,6 +648,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             cell = new PdfPCell();
@@ -646,6 +661,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             table1.completeRow();
@@ -668,6 +686,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             cell = new PdfPCell();
@@ -678,6 +699,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             table1.completeRow();
@@ -700,6 +724,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             cell = new PdfPCell();
@@ -710,6 +737,9 @@ public class PdfExtractor {
             p.setAlignment(Element.ALIGN_RIGHT);
             cell.addElement(p);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(LEFT + BOTTOM + RIGHT + TOP);
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
             table1.addCell(cell);
 
             table1.completeRow();
@@ -934,7 +964,7 @@ public class PdfExtractor {
         table2.completeRow();
 
         rs = lataaja.getDbc().executeQuery("select distinct kuvaus, maara, maaranYksikot, aHintaVeroton, alvProsentti, ((alvProsentti / 100.0) * aHintaVeroton * maara) as alvEuroa,\n"
-                + "((1.0 + alvProsentti / 100.0) * aHintaVeroton * maara) as yht\n"
+                + "((1.0 + alvProsentti / 100.0) * aHintaVeroton * maara) as yht, alkuaika\n"
                 + "from Suorite\n"
                 + "where lasku = " + laskunNumero + "\n"
                 + "");
@@ -943,7 +973,7 @@ public class PdfExtractor {
             cell = new PdfPCell();
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setColspan(1);
-            p = new Paragraph(rs.getString(1), f1);
+            p = new Paragraph(rs.getString(1) + " " + pvmFormaatti1.format(pvmFormaatti3.parse(rs.getTimestamp(8).toString())), f1);
             p.setLeading(0, 1);
             p.setAlignment(Element.ALIGN_LEFT);
             cell.addElement(p);
