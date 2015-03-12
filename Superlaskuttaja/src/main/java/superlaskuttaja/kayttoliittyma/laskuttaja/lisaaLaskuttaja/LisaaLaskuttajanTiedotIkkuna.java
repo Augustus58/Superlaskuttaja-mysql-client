@@ -78,40 +78,40 @@ public class LisaaLaskuttajanTiedotIkkuna implements Runnable {
         tiedotPanel.setLayout(tiedotLayout);
 
         JLabel nimiTeksti = new JLabel("Nimi:");
-        JTextField nimiKentta = new JTextField("Aku Silvennoinen");
+        JTextField nimiKentta = new JTextField();
 
         JLabel katuosoiteTeksti = new JLabel("Katuosoite:");
-        JTextField katuosoiteKentta = new JTextField("Väinö Auerin katu 1 T 71");
+        JTextField katuosoiteKentta = new JTextField();
 
         JLabel postinumeroTeksti = new JLabel("Postinumero:");
-        JTextField postinumeroKentta = new JTextField("00560");
+        JTextField postinumeroKentta = new JTextField();
 
         JLabel kaupunkiTeksti = new JLabel("Kaupunki:");
-        JTextField kaupunkiKentta = new JTextField("Helsinki");
+        JTextField kaupunkiKentta = new JTextField();
 
         JLabel yritykseNimiTeksti = new JLabel("Yrityksen nimi:");
-        JTextField yritykseNimiKentta = new JTextField("Tmi A. Silvennoinen");
+        JTextField yritykseNimiKentta = new JTextField();
 
         JLabel alvTunnisteTeksti = new JLabel("Alv-tunniste:");
-        JTextField alvTunnisteKentta = new JTextField("FI25656874");
+        JTextField alvTunnisteKentta = new JTextField();
 
         JLabel tilinumeroTeksti = new JLabel("Tilinumero:");
-        JTextField tilinumeroKentta = new JTextField("FI8617453000169906");
+        JTextField tilinumeroKentta = new JTextField();
 
         JLabel tilinumeronPankkiTeksti = new JLabel("Tilinumeron pankki:");
-        JTextField tilinumeronPankkiKentta = new JTextField("Nordea");
+        JTextField tilinumeronPankkiKentta = new JTextField();
 
         JLabel tilinumeronSwiftBicTeksti = new JLabel("Tilinumeron Swift/BIC:");
-        JTextField tilinumeronSwiftBicKentta = new JTextField("NDEAFIHH");
+        JTextField tilinumeronSwiftBicKentta = new JTextField();
 
         JLabel puhelinnumeroTeksti = new JLabel("Puhelinnumero:");
-        JTextField puhelinnumeroKentta = new JTextField("0449717067");
+        JTextField puhelinnumeroKentta = new JTextField();
 
         JLabel sahkopostiTeksti = new JLabel("Sähköposti:");
-        JTextField sahkopostiKentta = new JTextField("tmiasilvennoinen@gmail.com");
+        JTextField sahkopostiKentta = new JTextField();
 
         JLabel laskujaLahetettyTeksti = new JLabel("Laskuja lähetetty yht:");
-        JTextField laskujaLahetettyKentta = new JTextField("76");
+        JTextField laskujaLahetettyKentta = new JTextField();
 
         JButton lisaa = new JButton("Lisää");
         lisaa.setAlignmentX(Component.CENTER_ALIGNMENT);
